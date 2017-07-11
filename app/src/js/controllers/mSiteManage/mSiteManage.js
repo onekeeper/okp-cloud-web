@@ -428,7 +428,7 @@ angular.module('myappApp')
                             $scope.apply();
                             return;
                         }
-                        $scope.siteList.init.modalForm.license = data.license;
+                        $scope.siteList.init.modalForm.license = data.data.license;
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = true;
                         $scope.validate.site.license.invalid = false;
