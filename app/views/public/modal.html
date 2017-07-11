@@ -1,0 +1,21 @@
+<div class="modal fade" role="dialog" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content md-modal-content">
+        	<div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			    <h6 class="fs16">{{modalTitle}}</h6>
+			</div>
+			<div class="modal-body">
+				<ng-transclude></ng-transclude>
+                <div class="pull-left error-msg" ng-show="errMsg!=''" ng-bind="errMsg"></div>
+			</div>
+			<div class="modal-footer">
+                <!--
+			    <button class="btn btn-ok pull-right" ng-click="clickOk($event)" title="确认"></button>
+			    -->
+                <button class="btn btn-gray btn-inline" data-text="确定"  type="button"  ng-click="clickOk($event);">确定</button>
+                <button class="btn btn-orange btn-inline" data-text="取消" data-dismiss="modal" aria-hidden="true">取消</button>
+			</div>
+        </div>
+    </div>
+</div>

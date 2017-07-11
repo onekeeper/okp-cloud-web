@@ -1,0 +1,88 @@
+<div class="box box-all" ng-init="init()">
+    <div class="row top-container">
+        <div class="col-lg-9 col-md-9 top-right">
+            <form>
+                <div class="col-lg-4 col-md-4 input-custom">
+                    <input type="text" class="form-control" placeholder="请输入站点名称" ng-model="siteList.query.site_name">
+                </div>
+                <div class="col-lg-1 col-md-1">
+                    <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layout-container">
+        <div class="row box-all">
+            <div class="col-lg-12 col-md-12 box-all box-pading">
+                <div class="ds-panel box-all">
+                    <div class="row table-top-section">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="table-name">站点列表</div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 text-right">
+                            <div class="table-action">
+                                <a role="button" class="btn btn-sm j-insert btn-primary" ng-click="clickAdd()">
+                                    <img class="mgr10" src="src/images/icons/ico-insert.png" />新增
+                                </a>
+                                <!--
+                                <a href="javascript:;" class="icon icon-add" title="新增" ng-click="clickAdd()"></a>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-custom">
+                            <thead>
+                                <tr>
+                                    <th>站点名称</th>
+                                    <th>站点SN</th>
+                                    <th>省</th>
+                                    <th>市</th>
+                                    <th>详细地址</th>
+                                    <th>创建时间</th>
+                                    <th>变更时间</th>
+                                    <th>License有效期</th>
+                                    <th class="col-operate">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-show="siteList.init.loading">
+                                <tr class="tr-loading text-center">
+                                    <td colspan="9"><div class="loading"></div></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-hide="siteList.init.loading">
+                                <tr class="tr-empty text-center" ng-show="siteList.init.tdObj.length==0">
+                                    <td colspan="9" ng-if="siteList.init.getListError!=''">{{getListError}}</td>
+                                    <td colspan="9" ng-if="siteList.init.getListError==''">数据为空</td>
+                                </tr>
+                                <tr ng-repeat="item in siteList.init.tdObj">
+                                    <td ng-bind="item.site_name"></td>
+                                    <td ng-bind="item.sn"></td>
+                                    <td ng-bind="item.province_name"></td>
+                                    <td ng-bind="item.city_name"></td>
+                                    <td ng-bind="item.address"></td>
+                                    <td ng-bind="item.create_at"></td>
+                                    <td ng-bind="item.update_at"></td>
+                                    <td ng-bind="item.license_end"></td>
+                                    <td class="col-operate">
+                                        <a role="button" class="icon icon-edit" title="修改"
+                                           ng-click="clickEdit($index)"></a>
+                                        <a role="button" class="icon icon-del" title="删除"
+                                           ng-click="clickDelete($index)"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pager-directive pager="pager" func="'getList'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="siteList.init.loading || userList.init.tdObj.length==0"></pager-directive>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="J_addcSite" modal-directive>
+        <div ng-include="'views/mSiteManage/addSiteModal.html'"></div>
+    </div>
+    <div id="J_siteConfirm" modal-directive>
+        <div ng-include="'views/public/confirmModal.html'"></div>
+    </div>
+</div>

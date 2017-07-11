@@ -1,0 +1,95 @@
+/* 系统配置 start */
+
+.sys-add-task {
+	cursor: pointer;
+}
+
+/* 任务 task */
+
+.table-task td{
+	padding: 0 5px;
+}
+
+/* 任务 task */
+
+/* 系统配置 end */
+
+/* 监控列表  start */
+.carousel-indicators li {
+	background-color: #dcdcdc;
+	margin:0 5px;
+}
+.carousel-indicators li.active{
+	background-color: #42b6ff;
+}
+.carousel-indicators {
+	bottom: -8px;
+}
+.carousel-inner {
+	height: 80%;
+}
+.mo-table-layout {
+	max-height:95%;
+	padding-top:10px;
+	padding-bottom: 10px;
+    margin-bottom: 0;
+}
+.mo-btn-layout {
+	margin: 0px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	border-radius: 2px;
+	float: left;
+}
+.btn-slide {
+	background-color: #58B8FF;
+    border-color: #68B1EC;
+    padding: 0px 20px;
+    color: #fff;
+}
+/* 监控列表 end */
+
+/* 首页 start */
+
+.home-left {
+	padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.home-right {
+	padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 15px;
+    padding-left: 10px;
+}
+
+.btext-home {
+	font-size: 7rem;
+	color: #34e860;
+}
+.btext-home.err-home{
+	color: #f7b46e;
+}
+.destext-home {
+	font-size: 15px;
+	color: #b3b3b3;
+	white-space: nowrap;
+}
+.animate-home {
+	background: url('../images/trend.gif') center no-repeat;
+}
+.head-text-home {
+	padding: 5px;
+ 	padding-left: 20px;
+ 	font-weight: 500;
+}
+.top-box-home {
+	height: 96%;
+	padding-left: 30px;
+}
+.text-black-home {
+	color: #333;
+}
+/* 首页 end */

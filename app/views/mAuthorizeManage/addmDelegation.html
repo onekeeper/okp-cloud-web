@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">站点<span class="sign-must">*</span></label>
+                <div class="col-lg-7">                    
+                    <select class="form-control" ng-model="initData.modalForm.siteId" ng-options="v.site_id as v.site_name for (k , v) in initData.siteOptions" ng-change="validateForm('site')">
+                         <option value="">--请选择--</option>
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.siteName.dirty && validate.siteName.error.required">
+                            站点不能为空。
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.siteName.dirty && validate.siteName.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.siteName.dirty && validate.siteName.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">合作伙伴<span class="sign-must">*</span></label>
+                <div class="col-lg-7">                    
+                    <select class="form-control" ng-model="initData.modalForm.partnerId" ng-options="v.partner_id as v.partner_name for (k , v) in initData.partnerOptions" ng-change="validateForm('partner')">
+                         <option value="">--请选择--</option>
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.partner.dirty && validate.partner.error.required">
+                            合作伙伴不能为空。
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.partner.dirty && validate.partner.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.partner.dirty && validate.partner.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">授权类型（多选）<span class="sign-must">*</span></label>
+                <div class="col-lg-7">     
+                    <input ng-model="initData.modalForm.moduleId" type="hidden" value="0">               
+                    <label class="checkbox-inline" ng-repeat="item in initData.delegationOptions">
+                        <input ng-model="initData.modalForm.module[item.module_id]" type="checkbox" ng-click="validateForm('module')">{{item.module_name}}
+                    </label>
+                    <div class="validate-container">
+                        <span ng-if="validate.module.dirty && validate.module.error.required">
+                            授权模式不能为空。
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.module.dirty && validate.module.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.module.dirty && validate.module.valid"></i>
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+.md-modal-content{
+    border-radius: 4px;
+    border: 0;
+	background-color: #f5f9fc;
+    top:60px;
+}
+.md-modal-content .modal-header{
+    background: #353638;
+	color: #81807e;
+	border-color: #dbdbdb;
+	border-radius: 4px 4px 0 0;
+}
+.md-modal-content .modal-header h6{
+	text-align: left;
+	font-size: 18px;
+    line-height: 1.5;
+	font-weight: 400;
+	margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+}
+.md-modal-content .modal-header .close{
+	width: 14px;
+	height: 14px;
+	filter: alpha(opacity=100);
+	opacity: 1;
+	margin-top: 10px;
+	background: url(../../images/modal/close-btn.png) no-repeat center center;
+}
+.md-modal-content .modal-header .close:focus,
+.md-modal-content .modal-header .close:hover{
+	filter: alpha(opacity=50);
+    opacity: .5;
+}
+.md-modal-content .form-horizontal .control-label{
+	padding-right: 0;
+	font-weight: 400;
+	text-align: left;
+	color: #808080;
+}
+.md-modal-content .modal-body {
+    padding: 20px;
+}
+
+.md-modal-content .md-modal-body{
+    padding: 20px 20px 20px 50px;
+}
+
+.md-modal-content .modal-footer {
+    padding: 10px;
+    text-align: center;
+    background: #f1f1f1;
+}
+.md-modal-content .btn-modal{
+    width: 265px;
+}
+.md-modal-content .btn-ok{
+    padding: 20px 25px;
+    background: url(../../images/modal/ok-btn.png) no-repeat center;
+    border-left: 1px solid #dedede;
+    border-radius: 0;
+}
+.md-modal-content .btn-ok:focus, .md-modal-content .btn-ok:hover, .md-modal-content .btn-ok:active{
+    padding: 20px 25px;
+    background: url(../../images/modal/ok-btn-active.png) no-repeat center;
+    border: 1px solid #dedede;
+    border-radius: 0;
+}
+.md-modal-content .alert {
+	height: 32px;
+    padding: 0 0 15px;
+    margin-bottom: 0;
+    border: 0;
+}
+.md-modal-content .alert-danger
+{
+	background-color: transparent;
+}

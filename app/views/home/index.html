@@ -1,0 +1,102 @@
+<div class="box box-all" ng-init="init()">
+    <div class="layout-home">
+        <div class="row box-all">
+            <div class="col-lg-8 box-all box-pading home-left">
+                <div class="ds-panel-home box-all no-border">
+                    <div class="row box-all">
+                    	<div class="col-lg-6" style="height: 30%; padding-bottom: 20px;">
+                    		<div class="ds-panel-home box-all">
+                			    <div class="head-text-home">
+                                    <span>正在执行任务</span>
+                                </div>
+                                <div class="col-md-4 top-box-home">
+                					<div class="btext-home">15</div>
+                					<div class="destext-home">任务总数(个)</div>
+                				</div>
+                				<div class="col-md-4 animate-home" style="height: 80%;"></div>
+                				<div class="col-md-4 top-box-home">
+                					<div class="btext-home err-home">15</div>
+                					<div class="destext-home">发生错误(个)</div>
+                				</div>
+                			</div>
+                    	</div>
+                    	<div class="col-lg-6" style="height: 30%; padding-bottom: 20px;">
+                			<div class="ds-panel-home box-all">
+                                <div class="head-text-home">
+                                    <span>任务完成情况(最近7天)</span>
+                                </div>
+                                <div class="col-md-4 top-box-home">
+                                    <table class="box-all" style="height: 80%;">
+                                        <tr><td class="destext-home">任务成功: &nbsp;<span class="text-black-home">20个</span></td></tr>
+                                        <tr><td class="destext-home">平均用时: &nbsp;<span class="text-black-home">1h35min</span></td></tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-4" style="height: 80%;" id="J_task"></div>
+                                <div class="col-md-4 top-box-home">
+                                    <table class="box-all" style="height: 80%;">
+                                        <tr><td class="destext-home">任务失败: &nbsp;<span class="text-black-home">5个</span></td></tr>
+                                        <tr><td class="destext-home">累计错误: &nbsp;<span class="text-black-home">18个</span></td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                    	</div>
+                    	<div class="col-lg-12" style="height: 70%">
+                    		<div class="ds-panel-home box-all">
+                    			<div class="head-text-home">
+                                    <span>正在执行的任务列表</span>
+                                </div>
+                                <div class="top-box-home" style="padding-left: 10px;">
+                        			<div class="table-responsive">
+    			                        <table class="table table-striped table-hover table-custom">
+    			                            <thead>
+    			                                <tr>
+    			                                    <th>任务名称</th>
+    			                                    <th>资源库</th>
+    			                                    <th>资源文件</th>
+    			                                    <th>启动时间</th>
+    			                                    <th>创建人</th>
+    			                                    <th>错误数</th>
+    			                                    <th>处理速度</th>
+    			                                </tr>
+    			                            </thead>
+    			                            <tbody>
+    			                                <tr ng-repeat="item in cache.runningTasks">
+    			                                    <td>{{ item.scheduleName }}</td>
+    			                                    <td>{{ item.library }}</td>
+    			                                    <td>{{ item.file }}</td>
+    			                                    <td>{{ item.startTime }}</td>
+    			                                    <td>{{ item.userName }}</td>
+    			                                    <td>{{ item.errorNum }}</td>
+    			                                    <td>{{ item.frequency }}</td>
+    			                                </tr>
+    			                            </tbody>
+    			                        </table>
+    			                    </div>
+                                </div>
+                    		</div>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 box-all box-pading home-right">
+                <div class="ds-panel-home box-all no-border">
+                    <div class="row box-all">
+                    	<div class="ds-panel-home">
+	                    	<div class="col-lg-12" style="height: 33.33%">
+	                    		<div class="no-border ds-panel-home box-all" id="J_CPU">
+
+	                    		</div>
+	                    	</div>
+	                    	<div class="col-lg-12" style="height: 33.33%">
+	                    		<div class="no-border ds-panel-home box-all" id="J_memory"></div>
+	                    	</div>
+	                    	<div class="col-lg-12" style="height: 33.33%">
+	                    		<div class="no-border ds-panel-home box-all" id="J_disk"></div>
+	                    	</div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

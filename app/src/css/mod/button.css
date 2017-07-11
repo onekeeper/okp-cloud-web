@@ -1,0 +1,45 @@
+.btn-orange,
+.btn-gray{
+    width: 200px;
+    padding: 4px 18px;
+    color: #fff;
+}
+.btn-orange{
+    border-color: #eea236;
+    background-color: #f86f4b;
+}
+.btn-gray{
+    background-color: #8392af;
+    border-color: #66afaf;
+}
+.btn-orange:hover,
+.btn-orange:focus
+{
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+.btn-orange.active,
+.btn-orange:active{
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+.btn-gray:hover,
+.btn-gray:focus
+{
+    color: #fff;
+    border-color: #548796;
+    background-color: #5c7096;
+}
+.btn-gray.active,
+.btn-gray:active{
+    color: #fff;
+    background-color: #8392af;
+    border-color: #66afaf;
+}
+.btn-import{
+    width:60px;
+    margin-top: -5px;
+    margin-left:6px;
+}

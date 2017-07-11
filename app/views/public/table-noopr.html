@@ -1,0 +1,23 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-custom">
+        <thead>
+            <tr>
+                <th ng-repeat="item in thobj">{{ item }}</th>
+            </tr>
+        </thead>
+        <tbody ng-show="loading">
+            <tr class="tr-loading text-center">
+                <td colspan="{{colspan}}"><div class="loading"></div></td>
+            </tr>
+        </tbody>
+        <tbody ng-hide="loading">
+            <tr class="tr-empty text-center" ng-show="tbobj.length==0">
+                <td colspan="{{colspan}}" ng-if="getListError!=''">{{ getListError }}</td>
+                <td colspan="{{colspan}}" ng-if="getListError==''">数据为空</td>
+            </tr>
+            <tr ng-repeat="item in tbobj">
+                <td ng-repeat="n in item">{{ n }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

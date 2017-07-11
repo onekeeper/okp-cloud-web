@@ -1,0 +1,548 @@
+/* version: 1.5.0 */
+/** * 1. 防止元素中「font-family」不能继承 * 2. 西文字体和 OS X 字体写在前面 * 3. Opera 12.1 之前版本不支持中文字体的英文名称 * 4. 微软雅黑「\5FAE\8F6F\96C5\9ED1」,中易宋体「\5B8B\4F53」 */body,button, /* 1 */input, /* 1 */select, /* 1 */textarea /* 1 */{ font-family: 'helvetica neue',arial,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;}
+/* global */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+html,body{
+  position: relative;
+  padding: 0;
+  background:#fff;
+  min-width: 1200px;
+  height: 100%;
+  font-size: 14px;
+  /*overflow-y: hidden;*/
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  min-width: 1200px;
+}
+
+/* Custom page header */
+.header {
+  /*border-bottom: 1px solid #4e504f;*/
+  margin-bottom: 10px;
+  background: #2e3537;
+}
+
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+.header .nav>li>a{
+    font-size: 14px;
+    color: #b2b2b2;
+}
+
+.header .navbar-inverse .navbar-nav>li>span {
+    color: #fbfbfb;
+    padding: 14px;
+    line-height: 1;
+    position: relative;
+    display: block;
+}
+
+.box {
+
+}
+.box-pading {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.box-all {
+  height: 100%;
+  margin: 0;
+}
+.layout-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    padding-top: 100px;
+}
+.layout-home {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    padding-top: 50px;
+}
+.ds-panel {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    height: 100%;
+    padding: 10px;
+}
+.ds-panel-home {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    height: 100%;
+}
+.no-border {
+    border: 0;
+    background: #f9fafc;
+}
+/* Custom page footer */
+.footer {
+  /*padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;*/
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+.main{
+    margin-left: -15px;
+    background-color: #e8edf1;
+    padding: 20px;
+    padding-top: 0;
+    min-height: 650px;
+}
+
+.page-title{
+   color: #444;
+   font-size: 16px;
+   margin:0;
+   padding-left: 10px;
+}
+
+.nav-top-name>li>a, .nav-top-name>li>a:focus, .nav-top-name>li>a:hover {
+    color: #A6A6A6;
+    background-color: #fff;
+    font-size: 16px;
+}
+
+.nav-top-name>li.active>a, .nav-top-name>li.active>a:focus, .nav-top-name>li.active>a:hover {
+    color: #444;
+    background-color: #fff;
+    border-bottom:2px solid #46ADF0;
+    border-radius:0px;
+}
+
+.main .list-top-row{
+    margin-left:-20px;
+    margin-right: -20px;
+    background-color: #FFF;
+    padding-left:8px;
+}
+
+.main .section-panel{
+    margin-bottom:12px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  .navbar-fixed-top .navbar-collapse{
+    padding-right: 15px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 0;
+  }
+
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+  .action-wraper{width:160px;}
+}
+
+
+/* header */
+.md-header,
+.md-login-header{
+	margin-bottom: 0;
+	border-radius: 0;
+    min-height: 48px;
+	background:#2e3537;
+	border:0;
+}
+
+.md-login-header{
+    background-color: #fff;
+}
+
+.header .title{
+  display: inline-block;
+  height: 42px;
+  line-height: 42px;
+  padding-left: 30px;
+  margin: 4px 0;
+  border-left: 1px solid #5b5f60;
+  color: #f9fbfa;
+  font-size: 18px;
+}
+.header .system-logo{
+  display: inline-block;
+  padding: 12px 0;
+}
+
+.header .user-name{
+  color: #33abf9;
+  text-shadow: 0px 0px 0px #26a9ea;
+}
+
+.icon-btn{
+    border: 1px solid #090305;
+    border-radius: 4px;
+    margin: 12px;
+}
+.navbar-inverse .navbar-nav>li>.icon-btn {
+    font-size: 12px;
+    padding: 0;
+    color: #c6c8c9;
+    background-color: #474747;
+    border-color: #090305;
+}
+.navbar-inverse .navbar-nav>li>.icon-btn:hover,
+.navbar-inverse .navbar-nav>li>.icon-btn:focus{
+    color: #ffffff;
+    background-color: #2a2a2a;
+}
+
+.hr-light{
+  display: inline-block;
+  padding: 2px 8px;
+  line-height: 17px;
+  background-color: transparent;
+  border-top: 1px solid #646061;
+  border-radius: 4px;
+}
+
+.header .navbar-right .icon,
+.header .navbar-left .icon{
+  display:inline-block;
+  width: 17px;
+  height: 17px;
+  margin-top: -1px;
+  margin-right: 8px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.header .navbar-right .ico-header-user,
+.header .navbar-right .ico-header-login,
+.header .navbar-left .ico-header-user,
+.header .navbar-left .ico-header-login{
+  width: 21px;
+  height: 21px;
+}
+
+.ico-header-user{
+  background-image:url(../images/ico-header-user.png);
+}
+
+.ico-header-password{
+  background-image:url(../images/ico-header-password.png);
+}
+
+.ico-header-login{
+  background-image:url(../images/ico-header-login.png);
+}
+
+.ico-header-logout{
+  background-image:url(../images/ico-header-logout.png);
+}
+
+/* container */
+.main-content{
+  padding-top: 52px;
+  /* min-height: 760px; */
+  height: 100%;
+  background-color: #f9fafc;
+}
+.main-content .breadcrumb{
+  padding: 5px 25px;
+  background-color: #f9fafc;
+}
+.navbar-self{
+	background: #353638;
+}
+.navbar-self .navbar-left > li > a{
+  color: #b2b2b2;
+  padding: 17px 15px 12px;
+  border-bottom: 2px solid transparent;
+  outline: none;
+}
+.navbar-self .navbar-left > li > a:focus,
+.navbar-self .navbar-left > li > a:hover{
+  color: #fff;
+}
+.navbar-self .navbar-left > li > a:focus,
+.navbar-self .navbar-left > li > a:active,
+.navbar-self .navbar-left > .active > a{
+  border-color: #fff;
+  background-color: transparent;
+}
+.navbar-self .navbar-left > .active > a:hover,
+.navbar-self .navbar-left > .active > a:focus{
+  background-color: transparent;
+}
+
+
+
+/* footer */
+
+
+/* 通用 */
+.fs12{ font-size:12px;}
+.fs14{ font-size:14px;}
+.fs16{ font-size:16px;}
+.fs18{ font-size:18px;}
+.fs20{ font-size:20px;}
+.fs28{ font-size:28px;}
+.fs24{ font-size:24px;}
+
+.mgr10{ margin-right:10px;}
+.mgr15{ margin-right:15px;}
+.mgr20{ margin-right:20px;}
+.mgr22{ margin-right:22px;}
+.mgl10{ margin-left:10px;}
+.mgt5{ margin-top: 5px;}
+.mgt20{ margin-top: 20px;}
+.mgb20{ margin-bottom:20px;}
+.mgb10{ margin-bottom:10px;}
+.mg10{ margin:10px;}
+.mgt120{margin-top: 120px;}
+
+.pdt8{ padding-top:8px;}
+.pdt10{ padding-top:10px;}
+.pdt12{ padding-top:12px;}
+.pdt15{ padding-top:15px;}
+.pdt20{ padding-top:20px;}
+.pdb10{ padding-bottom:10px;}
+.pdb15{ padding-bottom:15px;}
+.pd15{ padding:15px;}
+.pdl5{ padding-left: 5px; }
+.pdr5{ padding-right: 5px; }
+.pdr10{ padding-right: 10px; }
+.pdl10{ padding-left: 10px; }
+.pdr20{padding-right:20px;}
+.pdr36{padding-right:36px;}
+.pdr50{ padding-right:50px;}
+.pdr55{ padding-right:55px;}
+.pdr30{ padding-right: 30px; }
+.pdl20{ padding-left: 20px; }
+.pdl6{ padding-left: 6px; }
+.pdl16{ padding-left: 16px !important; }
+.pdl0{padding-left: 0;}
+.pdr0{padding-right: 0;}
+.border0{border:0px !important;}
+
+.color-green{color: #32df6c !important;}
+.color-red{color: #e14d2f !important;}
+.color-black{color: #666666 !important;}
+
+.tl{ text-align:left;}
+.as-btn{ width: 46px; display: inline-block;}
+
+.width95{width: 95%;}
+.num{color:red; font-style:normal;}
+
+fieldset {
+    padding: .35em .625em .75em;
+    margin: 0 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+legend{
+	padding:.5em;
+	border:0;
+	width:auto;
+	font-size: 14px;
+	font-weight:bold;
+	position: relative;
+}
+@-moz-document url-prefix(){legend{top:10px;}}  /*  火狐浏览器需要设置top10px */
+
+.list-top-row{
+	border-bottom: 1px solid #dbdcde;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 13px;
+}
+.list-top-ex{
+  padding-top: 8px;
+  padding-bottom: 7px;
+}
+.list-top-row .nav>li>a{
+  padding:13px 15px 13px;
+}
+.pdb4{
+    padding-bottom: 4px;
+}
+.pdt3{
+    padding-top: 3px;
+}
+.pdt0{
+     padding-top: 0;
+ }
+
+
+/* form validate */
+input.ng-pristine.ng-invalid{ border-color:#ccc; }
+/* input.ng-invalid,
+input.ng-invalid.ng-touched{  border-color:#a94442; } */
+input.ng-invalid{
+	border-color:#ccc;
+}
+input.tb-invalid{
+	border-color:#a94442;
+}
+.modal-md{
+	width:750px;
+}
+
+.pointer{
+	cursor:pointer !important;
+}
+
+.clear-mrgb img{
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: -15px;
+}
+
+/*.operate-col{
+  text-align:center;
+}*/
+/*.lh35{line-height: 35px;}
+.pdb0{padding-bottom: 0;}*/
+/* modal */
+.modal-backdrop.in {
+    filter: alpha(opacity=30);
+    opacity: .3;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #e8edf1;
+} /* 这是针对缺省样式 (必须的) */
+
+::-webkit-scrollbar-track {
+    background-color: #e8edf1;
+    border:1px solid #e8edf1;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 4px;
+} /* 滚动条的滑轨背景颜色 */
+
+::-webkit-scrollbar-thumb{
+    background-color:#c1c1c1;
+    -webkit-border-radius: 4px;
+    border: 1px solid #e8edf1;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+} /* 滑块颜色 */
+
+/*---鼠标点击滚动条显示样式--*/
+::-webkit-scrollbar-thumb:hover{
+    background-color:#A9A9A9;
+}
+
+::-webkit-scrollbar-thumb:active{
+     background-color:#898989;
+ }
+
+::-webkit-scrollbar-button {
+    background-color: #f1f1f1;
+    height:10px;
+    width: 10px;
+} /* 滑轨两头的监听按钮颜色 */
+
+/* 定义滚动条水平渐增按扭的样式 */
+::-webkit-scrollbar-button:horizontal:end:increment {
+    width:13px;
+    background: url(../images/SB_buttons_hori_end.png) 0 50% no-repeat;
+}
+/* 定义滚动条水平渐减按扭的样式 */
+::-webkit-scrollbar-button:horizontal:start:decrement {
+    width:13px;
+    background: url(../images/SB_buttons_hori_start.png) 100% 50% no-repeat;
+}/* 定义滚动条垂直渐增按扭的样式 */
+::-webkit-scrollbar-button:vertical:end:increment {
+    height:13px;
+    background: url(../images/SB_buttons_vert_end.png)  50% 100% no-repeat;
+}
+/* 定义滚动条垂直渐减按扭的样式 */
+::-webkit-scrollbar-button:vertical:start:decrement {
+    height:13px;
+    background: url(../images/SB_buttons_vert_start.png) 50% 0 no-repeat;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+} /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+
+/* 适配992px-1200px */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .navbar-self .navbar-left > li > a{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .navbar-right > li > a {
+        padding: 15px 5px;
+    }
+}
+
+/*table-custom下a标签样式*/
+.table-custom > tbody > tr > td > a{
+  color: #33abf9;
+  cursor: pointer;
+  text-decoration: none;
+}

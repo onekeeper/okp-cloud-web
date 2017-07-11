@@ -1,0 +1,124 @@
+.top-container{
+    margin: 15px -15px;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    font-size: 16px;
+}
+.table-top-section{
+    height: 5%;
+    border-bottom: 0;
+}
+.table-top-section .table-name{
+    color: #000;
+    font-size: 16px;
+}
+
+.loading{
+  display: inline-block;
+  min-width: 70px;
+  min-height: 30px;
+  width: 100%;
+  height:100%;
+  background: url(../../images/loading-b.gif) center center no-repeat;
+}
+
+.tr-loading,
+.tr-empty{
+  height: 310px;
+  background-color: #fff;
+  text-align: center;
+}
+.table-custom>tbody>tr.tr-empty:hover {
+    background:none;
+}
+
+.table-custom>tbody>tr.tr-loading,
+.table-custom>tbody>tr.tr-empty{
+  background-color: #fff;
+}
+
+.tr-loading td,
+.tr-empty td{
+  height: 310px;
+}
+.table-responsive{
+  width: 100%;
+  height: 90%;
+  padding: 5px 0;
+  margin: 3px 0;
+}
+.table-custom{
+    margin-bottom: 0;
+}
+.table-custom > tbody > tr > td,
+.table-custom > tbody > tr > th,
+.table-custom > tfoot > tr > td,
+.table-custom > tfoot > tr > th,
+.table-custom > thead > tr > td,
+.table-custom > thead > tr > th {
+    color: #666666;
+    font-weight: normal;
+    vertical-align: middle;
+    padding: 5px 8px;
+    border: 0;
+}
+.table-custom > tbody > tr > th,
+.table-custom > tfoot > tr > th,
+.table-custom > thead > tr > th {
+    color: #b3b3b3;
+}
+.table-custom > tbody > tr > .col-operate,
+.table-custom > tfoot > tr > .col-operate,
+.table-custom > thead > tr > .col-operate{
+    min-width: 140px;
+    text-align: center;
+}
+.table-custom>tbody+tbody {
+    border-top: 0;
+}
+.btn-query{
+  padding: 4px 18px;
+  border: 1px solid #60c2ff;
+  color: #7bcbfc;
+}
+.btn-query:hover,
+.btn-query:focus,
+.btn-query:active
+{
+  border: 1px solid #60c2ff;
+  background-color: #60c2ff;
+  color: #fff;
+}
+/* 分页 */
+.nav-pager{
+  position: relative;
+  height: 5%;
+}
+.nav-pager nav{
+    position: absolute;
+    bottom: 0;
+}
+.nav-pager nav:first-child{
+    left: 0;
+}
+.nav-pager nav:last-child{
+    right: 0;
+}
+.nav-pager .pagination {
+    margin: 0;
+}
+
+/* 宽度限制的表格 */
+.table-limit > tbody > tr > td,
+.table-limit > tbody > tr > th,
+.table-limit > tfoot > tr > td,
+.table-limit > tfoot > tr > th,
+.table-limit > thead > tr > td,
+.table-limit > thead > tr > th {
+    min-width: 80px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

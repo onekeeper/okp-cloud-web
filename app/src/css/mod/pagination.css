@@ -1,0 +1,41 @@
+.page-info{
+	font-size: 14px;
+	line-height: 26px;
+	color: #bbb;
+    font-style: normal;
+}
+.pageSize{
+	display: inline-block;
+    vertical-align: middle;
+    width: 55px;
+    height: 24px;
+    padding: 2px 4px;
+    color: #444;
+}
+.ul-pager>li>a,
+.ul-pager>li>span {
+    padding: 2px 8px;
+    margin: 4px;
+    border-radius: 4px;
+}
+.ul-pager>.dot>a:focus,
+.ul-pager>.dot>a:hover,
+.ul-pager>.dot>span:focus,
+.ul-pager>.dot>span:hover {
+    color: #337ab7;
+    background-color: #fff;
+    border-color: #ddd;
+}
+.icon-prev,
+.icon-next{
+    display: inline-block;
+    width: 8px;
+    height: 12px;
+    margin-bottom: -1px;
+}
+.icon-prev{
+    background: url(../../images/icons/prev-icon.png) no-repeat center center;
+}
+.icon-next{
+    background: url(../../images/icons/next-icon.png) no-repeat center center;
+}

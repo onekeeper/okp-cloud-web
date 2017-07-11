@@ -1,0 +1,6 @@
+1. 安装node
+2. 命令行执行：npm install -g grunt-cli  
+3. 命令行进入web目录
+4. 命令行执行：npm install --save-dev  
+5. 步骤4完成后，命令行执行：grunt
+6. 浏览器端访问

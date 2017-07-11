@@ -1,0 +1,60 @@
+<!-- 页面头部 s -->
+<div class="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-self">
+        <div class="container-fluid">
+            <!-- 左上产品LOGO -->
+            <a class="navbar-brand visible-xs-inline-block" ui-sref="main.home" style="color:#fff">运维自动化云平台</a>
+            <a class="navbar-brand navbar-logo pdt12" ui-sref="main.home">
+                <div class="logo-icon">
+                    <img class="hidden-xs" src="../../src/images/logo.png" width="100%" alt="LOGO">
+                </div>
+            </a>
+            <!-- 收起状态下的导航 -->
+            <div class="navbar-header">
+                <a role="button" class="navbar-toggle collaptest" data-toggle="collapse" data-target="#J_fixedNavbar">
+                    <span class="sr-only">收起后的导航（三）</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+            </div>
+            <!-- 导航主体 s -->
+            <div id="J_fixedNavbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <!--
+                    <li ui-sref-active="active"><a ui-sref="main.home">首 页</a></li>
+                    <li ng-class="{'active': pagePath.indexOf('dispatch')>-1}"><a ui-sref="main.dispatch">调度管理</a></li>
+                    -->
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.warning">历史告警</a></li>
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.notice">历史通知</a></li>
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.noticeRule">通知规则</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mNoticeRule">管理员通知规则</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mAuthorizeManage">授权管理</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mUserManage">人员管理</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mSiteManage">站点管理</a></li>
+                </ul>
+                <!-- 右侧功能项 s -->
+                <ul class="nav navbar-nav navbar-right hidden-xs" ng-init="initHeader()">
+                    <li><a class="btn" style="color:#b2b2b2;cursor:text;"><i class="icon-header icon-header-user"></i>欢迎你，<span class="user-name">{{username}}</span></a></li>
+                    <li><a role="button" class="btn btn-link" ng-click="clickChangePwd()"><i
+                        class="icon-header icon-header-password"></i>修改密码</span></a></li>
+                    <li><a role="button" class="btn btn-link" ng-click="clickLogout(commonFlag)"><i
+                        class="icon-header icon-header-logout"></i>退出</span></a></li>
+                </ul>
+                <!-- 右侧功能项 e -->
+            </div>
+            <!-- 导航主体 e -->
+        </div>
+    </nav>
+</div>
+<!-- 页面头部 e -->
+<div class="main-content">
+    <!-- modal s -->
+
+    <!-- modal e -->
+    <ui-view></ui-view>
+</div>
+<!-- 修改密码弹窗 -->
+<div id="J_editPwd" modal-directive>
+    <div ng-include="'views/userMgr/editPwdModal.html'"></div>
+</div>

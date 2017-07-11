@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">人员账号（邮箱地址）<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="userList.init.modalForm.email" ng-change="validateForm('email','user')" placeholder="" ng-readonly="userList.init.actionType === 'update'">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.email.dirty && validate.user.email.error.required">
+                            账号不能为空
+                        </span>
+                        <span ng-if="validate.user.email.dirty && validate.user.email.error.format">
+                            账号需满足邮箱格式
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.email.dirty && validate.user.email.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.email.dirty && validate.user.email.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">姓名<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="userList.init.modalForm.username"
+                           ng-change="validateForm('username','user')" placeholder="">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.username.dirty && validate.user.username.error.required">
+                            用户姓名不能为空
+                        </span>
+                        <span ng-if="validate.user.username.dirty && validate.user.username.error.format">
+                            用户姓名不超过10个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.username.dirty && validate.user.username.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.username.dirty && validate.user.username.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">联系电话</label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="userList.init.modalForm.mobile"
+                           ng-change="validateForm('mobile','user')" placeholder="">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.mobile.dirty && validate.user.mobile.error.format">
+                            格式有误，请填写手机号或带区号的电话号码
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.mobile.dirty && validate.user.mobile.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.mobile.dirty && validate.user.mobile.valid"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

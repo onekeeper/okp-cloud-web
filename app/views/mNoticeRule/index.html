@@ -1,0 +1,107 @@
+<div class="box box-all" ng-init="init()">
+    <div class="row top-container">
+        <!--
+        <div class="col-lg-3 col-md-3 top-left">
+            <ol class="breadcrumb">
+                <li class="active">通知规则</li>
+            </ol>
+        </div>
+        -->
+        <div class="col-lg-9 col-md-9 top-right">
+            <form>
+                <!--
+                <div class="col-lg-5 col-md-5"></div>
+                -->
+                <div class="col-lg-3 col-md-3 input-custom">
+                    <input type="text" class="form-control" placeholder="请输入站点名称" ng-model="query.siteName">
+
+                </div>
+                <div class="col-lg-3 col-md-3 input-custom">
+                    <input type="text" class="form-control" placeholder="请输入人员名称" ng-model="query.userName">
+                </div>
+                <div class="col-lg-1 col-md-1">
+                    <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layout-container">
+        <div class="row box-all">
+            <div class="col-lg-12 col-md-12 box-all box-pading">
+                <div class="ds-panel box-all">
+                    <div class="row table-top-section">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="table-name">通知规则列表</div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 text-right">
+                            <div class="table-action">
+                                <a href="javascript:;" class="icon icon-add" title="新增" ng-click="clickAdd()"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-custom">
+                            <thead>
+                                <tr>
+                                    <th >站点名称</th>
+                                    <th >人员邮箱</th>
+                                    <th >人员名称</th>
+                                    <th >告警级别</th>
+                                    <th >告警状态</th>
+                                    <th >通知方式</th>
+                                    <th class="col-operate">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-show="mNoticeRuleList.init.loading">
+                                <tr class="tr-loading text-center">
+                                    <td colspan="7"><div class="loading"></div></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-hide="mNoticeRuleList.init.loading">
+                                <tr class="tr-empty text-center" ng-show="mNoticeRuleList.length==0">
+                                    <td colspan="7" ng-if="initData.getListError!=''">{{initData.getListError}}</td>
+                                    <td colspan="7" ng-if="mNoticeRuleList=='' && initData.getListError==''">数据为空</td>
+                                </tr>
+                                <tr ng-repeat="item in mNoticeRuleList">
+                                    <td ng-bind="item.site_name"></td>
+                                    <td ng-bind="item.email"></td>
+                                    <td ng-bind="item.username"></td>
+                                    <td>
+                                        <span ng-if="item.alert_severity == 1">消息</span>
+                                        <span ng-if="item.alert_severity == 2">告警</span>
+                                        <span ng-if="item.alert_severity == 4">威胁</span>
+                                        <span ng-if="item.alert_severity == 3">消息，告警</span>
+                                        <span ng-if="item.alert_severity == 5">消息，威胁</span>
+                                        <span ng-if="item.alert_severity == 6">告警，威胁</span>
+                                        <span ng-if="item.alert_severity == 7">消息，告警，威胁</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="item.alert_status == 1">已解决</span>
+                                        <span ng-if="item.alert_status == 2">遗留</span>
+                                        <span ng-if="item.alert_status == 3">已解决，遗留</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="item.method_id == 1">邮件</span>
+                                        <span ng-if="item.method_id == 2">微信</span>
+                                        <span ng-if="item.method_id == 3">邮件，微信</span>
+                                    </td>
+                                    <td class="col-operate">
+                                        <a role="button" class="icon icon-edit" title="编辑" ng-click="clickEdit($index)"></a>
+                                        <a role="button" class="icon icon-del" title="删除" ng-click="clickDelete($index)"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pager-directive pager="pager" func="'queryData'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="init.loading || mNoticeRuleList.length==0"></pager-directive>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div id="J_addmNoticeRule" modal-directive>
+        <div ng-include="'views/mNoticeRule/addmNoticeRuleModal.html'"></div>
+    </div>
+    <div id="J_mNoticeRuleConfirm" modal-directive>
+        <div ng-include="'views/public/confirmModal.html'"></div>
+    </div>
+</div>

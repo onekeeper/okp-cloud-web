@@ -1,0 +1,263 @@
+/* 输入框 */
+.input-custom .form-control{
+    padding: 4px 12px;
+    border-radius: 4px;
+    height: 30px;
+}
+.input-custom-lg .form-control{
+    padding: 6px 12px;
+    border-radius: 4px;
+    height: 34px;
+}
+/* 下拉框样式  */
+.input-custom select.form-control,
+.input-custom-lg select.form-control {
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    z-index: 10000;
+}
+.select-btn,
+.select-btn-lg,
+.select-date-icon{
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    z-index: 9999;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #60c2ff url(../images/arrow/select-button.png) no-repeat center center;
+}
+.select-btn-lg,
+.select-date-icon{
+    width: 34px;
+    height: 34px;
+}
+.select-date-icon{
+    background: #60c2ff url(../images/modal/date.png) no-repeat center center;
+}
+.input-custom select.form-control::-ms-expand { display: none; }
+.select-date{
+    position: relative;
+    background: transparent;
+    z-index: 10000;
+}
+.select-date[disabled],
+.select-date[readonly],
+fieldset[disabled] .select-date {
+    background-color: transparent;
+}
+.form-control[disabled]+.select-btn,
+.form-control[disabled]+.select-btn-lg,
+.form-control[disabled]+.select-date-icon{
+    background-color: #999 ;
+}
+
+/* icons */
+.icon{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin: 0 8px;
+}
+.icon-add-new{
+    background: url(../images/icons/ico-insert.png) no-repeat center center;
+}
+.icon-add{
+    background: url(../images/icons/addTaskgroup.png) no-repeat center center;
+}
+.icon-refresh{
+    background: url(../images/icons/refresh.png) no-repeat center center;
+}
+.icon-pause{
+    background: url(../images/icons/pause.png) no-repeat center center;
+}
+.icon-start{
+    background: url(../images/icons/start.png) no-repeat 2px center;
+}
+.icon-edit{
+    background: url(../images/icons/edit.png) no-repeat center center;
+}
+.icon-del{
+    background: url(../images/icons/del.png) no-repeat center center;
+}
+.icon-pwd{
+    background: url(../images/icons/pwd.png) no-repeat center center;
+}
+.icon-add:focus,
+.icon-add:hover,
+.icon-add:active{
+    background: url(../images/icons/addTaskgroup-active.png) no-repeat center center;
+}
+.icon-refresh:focus,
+.icon-refresh:hover,
+.icon-refresh:active{
+    background: url(../images/icons/refresh-active.png) no-repeat center center;
+}
+.icon-pause:focus,
+.icon-pause:hover,
+.icon-pause:active{
+    background: url(../images/icons/pause-active.png) no-repeat center center;
+}
+.icon-start:focus,
+.icon-start:hover,
+.icon-start:active{
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+.icon-edit:focus,
+.icon-edit:hover,
+.icon-edit:active{
+    background: url(../images/icons/edit-active.png) no-repeat center center;
+}
+.icon-del:focus,
+.icon-del:hover,
+.icon-del:active{
+    background: url(../images/icons/del-active.png) no-repeat center center;
+}
+.icon-pwd:focus,
+.icon-pwd:hover,
+.icon-pwd:active{
+    background: url(../images/icons/pwd-active.png) no-repeat center center;
+}
+.icon-pause[disabled],
+.icon-pause:focus[disabled],
+.icon-pause:hover[disabled],
+.icon-pause:active[disabled]{
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    background: url(../images/icons/pause.png) no-repeat center center;
+    cursor: not-allowed;
+}
+
+/* 头部图标 */
+.icon-header{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.icon-header-user{
+    background: url(../images/user.png) no-repeat center center;
+}
+.icon-header-password{
+    background: url(../images/modify-pwd.png) no-repeat center center;
+}
+.icon-header-logout{
+    background: url(../images/logout.png) no-repeat center center;
+}
+/* 验证对错图标 */
+.valid-error,
+.valid-success{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-top: 9px;
+}
+.valid-error{
+    background: url(../images/validate-fail.png) no-repeat center center;
+}
+.valid-success{
+    background: url(../images/validate-right.png) no-repeat center center;
+}
+/* 必填标志 */
+.sign-must{
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: middle;
+    margin-bottom: -5px;
+    color: #eb3f2f;
+    font-size: 16px;
+}
+.error-msg{
+    font-size: 14px;
+    /*margin: 10px 20px;*/
+    color: red;
+}
+/* 弹窗表单 */
+#J_addDispatch .modal-dialog{
+    width: 850px;
+}
+.clear-mrgb{
+    margin-bottom: 2px;
+}
+.validate-container{
+    color: red;
+    height: 20px;
+    padding-left: 2px;
+}
+.fieldset-modal{
+    padding:.35em .625em .75em;
+    margin:0 2px;
+    height: 100%;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    background:#f5f5f5;
+}
+.day-radio-group .radio-inline{
+    padding-left: 15px;
+}
+.border-right-gray .radio{
+    min-height: 60px;
+    border-right: 1px solid #ccc;
+}
+/* 监控作业 */
+/* .monitor-items{
+    position: relative;
+    width: 100%;
+    height: 50%;
+    padding: 0;
+    overflow: auto;
+}
+.monitor-item{
+    display: inline-block;
+    width: 12%;
+    height: 47.5%;
+    margin-top: 2.5%;
+    list-style: none;
+} */
+.monitor-items{
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+.monitor-item {
+    list-style: none;
+    width: 12.5%;
+    height: 50%;
+    /*margin-bottom: 5px;*/
+}
+.monitor-item > .job-name{
+    font-size: 16px;
+    padding-top: 5px;
+    text-align: center;
+}
+.item-pause,
+.item-running,
+.item-complete{
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: 0 auto;
+}
+.item-pause{
+    background: url(../images/pause.png) no-repeat center center;
+}
+.item-running{
+    background: url(../images/running.gif) no-repeat center center;
+}
+.item-complete{
+    background: url(../images/complete.png) no-repeat center center;
+}

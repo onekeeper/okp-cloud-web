@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>运维自动化云平台</title>
+        <base target="_self">
+        <meta name="description" content="">
+        <!-- lib css files -->
+        <link rel="stylesheet" href="src/css/lib/bootstrap_3.3.6.min.css">
+        <link rel="stylesheet" href="src/js/plugin/jeDate/jedate.css">
+        <!-- app css files -->
+        <link rel="stylesheet" href="src/css/main.css">
+        <link rel="stylesheet" href="src/css/mod/table-section.css">
+        <link rel="stylesheet" href="src/css/mod/modal.css">
+        <link rel="stylesheet" href="src/css/mod/pagination.css">
+        <link rel="stylesheet" href="src/css/login.css">
+        <link rel="stylesheet" href="src/css/userMgr.css">
+        <link rel="stylesheet" href="src/css/sysconfig.css">
+        <link rel="stylesheet" href="src/css/mod/button.css">
+        <link rel="shortcut icon" href="favicon.ico">
+    </head>
+    <body ng-app="myappApp">
+    	<!--[if lt IE 9]>
+        <div class="alert alert-info text-center" role="alert" >
+	          由于本系统不兼容IE部分版本，为能达到使用效果，请使用谷歌CHROME或火狐FIREFOX浏览器打开本页面。
+	    </div>
+        <![endif]-->
+        <ui-view></ui-view>
+        <!-- lib js files -->
+		<script src="src/js/lib/jquery_1.11.3.min.js"></script>
+        <script src="src/js/lib/jquery.treeview.js"></script>
+		<script src="src/js/lib/ajaxfileupload.js"></script>
+        <script src="src/js/lib/bootstrap_3.3.6.min.js"></script>
+        <script src="src/js/lib/angular/angular/angular.js"></script>
+        <script src="src/js/lib/angular/angular-cookies/angular-cookies.js"></script>
+        <script src="src/js/lib/angular/ui-router/angular-ui-router.js"></script>
+        <!-- <script src="src/js/lib/angular/angular-route/angular-route.js"></script> -->
+        <script src="src/js/plugin/underscore/underscore.1.8.3.min.js"></script>
+        <script src="src/js/plugin/md5/index.js"></script>
+        <script src="src/js/plugin/jeDate/jquery.jedate.min.js"></script>
+        <script src="src/js/plugin/echarts3/echarts.common.min.js"></script>
+		<!-- app js files -->
+
+        <!-- module s -->
+        <script src="src/js/app.js"></script>
+        <script src="src/js/services/ajaxInfo.js"></script>
+        <script src="src/js/services/validate.js"></script>
+        <script src="src/js/services/clientStore.js"></script>
+
+        <script src="src/js/controllers/header.js"></script>
+        <script src="src/js/controllers/home/home.js"></script>
+        <script src="src/js/controllers/login/login.js"></script>
+
+        <script src="src/js/controllers/mUserManage/mUserManage.js"></script>
+        <script src="src/js/controllers/mSiteManage/mSiteManage.js"></script>
+
+        <script src="src/js/controllers/warning/warning.js"></script><!-- 历史告警 -->
+        <script src="src/js/controllers/notice/notice.js"></script><!-- 历史通知 -->
+        <script src="src/js/controllers/noticeRule/noticeRule.js"></script><!-- 通知规则 -->
+
+         <!-- 通知规则 管理员 -->
+        <script src="src/js/controllers/mNoticeRule/mNoticeRule.js"></script>
+        <!-- 授权管理 管理员 -->
+        <script src="src/js/controllers/mDelegation/mDelegation.js"></script>
+
+        <!-- mock -->
+        <!--<script src="src/js/mock/mock.js"></script>-->
+        <!-- 模拟数据 -->
+        <!--<script src="src/js/mock/mockData.js"></script>-->
+
+        <!--directive-->
+        <script src="src/js/directives/pagination.js"></script>
+        <script src="src/js/directives/tableNoopr.js"></script>
+        <script src="src/js/directives/modal.js"></script>
+        <!-- module e -->
+	</body>
+</html>

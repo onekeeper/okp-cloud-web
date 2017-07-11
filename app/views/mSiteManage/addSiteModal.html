@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">站点名称<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="siteList.init.modalForm.site_name"
+                           ng-change="validateForm('site_name','site')" placeholder="">
+                    <div class="validate-container">
+                        <span ng-if="validate.site.site_name.dirty && validate.site.site_name.error.required">
+                            站点名称不能为空
+                        </span>
+                        <span ng-if="validate.site.site_name.dirty && validate.site.site_name.error.format">
+                            站点名称不超过20个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if="validate.site.site_name.dirty && validate.site.site_name.invalid"></i>
+                    <i class="valid-success" ng-if="validate.site.site_name.dirty && validate.site.site_name.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">省<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="siteList.init.modalForm.province_code"
+                            ng-options = "item.province_code as item.province_name for item in siteList.init.provinceList"
+                            ng-change="validateForm('province','site');getCityList();">
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.site.province_code.dirty && validate.site.province_code.error.required">
+                            省不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.site.province_code.dirty && validate.site.province_code.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.site.province_code.dirty && validate.site.province_code.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">市<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="siteList.init.modalForm.city_code"
+                            ng-options = "item.city_code as item.city_name for item in siteList.init.cityList"
+                            ng-change="validateForm('city','site');">
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.site.city_code.dirty && validate.site.city_code.error.required">
+                            市不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.site.city_code.dirty && validate.site.city_code.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.site.city_code.dirty && validate.site.city_code.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">详细地址<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="siteList.init.modalForm.address"
+                           ng-change="validateForm('address','site')" placeholder="">
+                    <div class="validate-container">
+                        <span ng-if="validate.site.address.dirty && validate.site.address.error.required">
+                            详细地址不能为空
+                        </span>
+                        <span ng-if="validate.site.address.dirty && validate.site.address.error.format">
+                            详细地址不超过20个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.site.address.dirty && validate.site.address.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.site.address.dirty && validate.site.address.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">License<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <!--
+                    <input class="form-control" type="text" ng-model="siteList.init.modalForm.license"
+                           ng-change="validateForm('license','site')" placeholder="">
+                    -->
+                    <input type="file"  name="file" id="J_importFile" class="form-control" style="width:72%;display:inline-block;"
+                           ng-model="siteList.init.modalForm.license" value="" ng-change="validateForm('license','site');"/>
+                    <button class="btn btn-gray btn-import" data-text="导入"  type="button"  ng-click="importLicense($event);">确定</button>
+                    <div class="validate-container">
+                        <span ng-if="validate.site.license.dirty && validate.site.license.invalid">
+                            {{errorMsg}}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.site.license.dirty && validate.site.license.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.site.license.dirty && validate.site.license.valid"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
