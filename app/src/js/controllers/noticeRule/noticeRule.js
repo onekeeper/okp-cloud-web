@@ -75,10 +75,10 @@ angular.module('myappApp')
                 }
             }
             for(var i = 0;i<$scope.cache.listArr.length;i++){
-                if(data.data.items[i].method == 1){
-                    $scope.cache.listArr[i].method = '邮件';
-                }else if(data.data.items[i].method == 2){
-                    $scope.cache.listArr[i].method = '微信';
+                if(data.data.items[i].methods == 1){
+                    $scope.cache.listArr[i].methods = '邮件';
+                }else if(data.data.items[i].methods == 2){
+                    $scope.cache.listArr[i].methods = '微信';
                 }
             }
 

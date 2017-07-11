@@ -22,7 +22,6 @@
             method: 'get',
             data: {
                 sitename: '',
-                host: '',
                 page : '' ,
                 per_page : ''
             }
@@ -65,9 +64,9 @@
             $scope.cache.listArr = data.data.items;
 
             for(var i = 0;i<$scope.cache.listArr.length;i++){
-                if(data.data.items[i].status == 1){
+                if(data.data.items[i].status == 0){
                     $scope.cache.listArr[i].status = '成功';
-                }else if(data.data.items[i].status == 0){
+                }else if(data.data.items[i].status == 1){
                     $scope.cache.listArr[i].status = '失败';
                 }
             }
