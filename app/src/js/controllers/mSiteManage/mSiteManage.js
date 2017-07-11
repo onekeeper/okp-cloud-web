@@ -66,7 +66,6 @@ angular.module('myappApp')
                     url: urlPrefix + '/partner/site/#',
                     method: 'put',
                     data: {
-                        license:'',
                         site_name:'',
                         province_code:'',
                         city_code:'',
@@ -184,6 +183,9 @@ angular.module('myappApp')
                     it.removeClass('disabled');
                     console.log(data.errMsg);
                 };
+            if(!flag){
+                delete config.data[license];
+            }
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
 
@@ -345,7 +347,7 @@ angular.module('myappApp')
                     }
                 }
 
-                if(type === 'license' || type === 'all') {
+                if((type === 'license' || type === 'all') || $scope.siteList.init.actionType == 'add') {
                     if (!$("#J_importFile").val()) {
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = false;
