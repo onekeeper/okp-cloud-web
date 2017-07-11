@@ -61,9 +61,9 @@
                                     <td ng-bind="item.province_name"></td>
                                     <td ng-bind="item.city_name"></td>
                                     <td ng-bind="item.address"></td>
-                                    <td ng-bind="item.create_at"></td>
-                                    <td ng-bind="item.update_at"></td>
-                                    <td ng-bind="item.license_end"></td>
+                                    <td ng-bind="item.create_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                                    <td ng-bind="item.update_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                                    <td ng-bind="item.license_end | date:'yyyy-MM-dd HH:mm:ss'"></td>
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"
                                            ng-click="clickEdit($index)"></a>

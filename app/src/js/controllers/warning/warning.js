@@ -28,7 +28,7 @@
             }
         },
         getSiteList: {
-            url: urlPrefix + '/user/site/detail/',
+            url: urlPrefix + '/user/site/',
             method: 'get',
             data: {}
         },
@@ -56,9 +56,8 @@
         var config = $scope.api.getWarnList;
         config.data = {
             sitename: $scope.siteName,
-            host: $scope.hostName,
             page: $scope.pager.curPage || 1,
-            per_page: parseInt($scope.pager.pageSize) || 20 
+            per_page: parseInt($scope.pager.pageSize) || 20
         };
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
@@ -96,7 +95,7 @@
     */
     $scope.getSiteList = function(item){
         var config = $scope.api.getSiteList;
-        config.url = urlPrefix + '/user/site/detail/' + item;
+        config.url = urlPrefix + '/user/site/' + item;
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.modalTitle = '站点详情';
@@ -107,7 +106,7 @@
                 province:data.data.province,
                 city:data.data.city,
                 address:data.data.address
-            }   
+            }
             $scope.apply();
         },
         fnError = function (data) {
@@ -142,7 +141,7 @@
         }else if($scope.showflag == 2){
             angular.element("#J_infoDetail").modal('hide');
         }
-        
+
     }
 
     $scope.apply = function() {

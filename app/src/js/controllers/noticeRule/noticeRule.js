@@ -34,7 +34,7 @@ angular.module('myappApp')
             }
         },
         getSiteList: {
-            url: urlPrefix + '/user/site/detail',
+            url: urlPrefix + '/user/site/',
             method: 'get',
             data: {}
         }
@@ -43,7 +43,7 @@ angular.module('myappApp')
     $scope.cache = {
         listArr: [],
         siteObj: {}
-    } 
+    }
 
     /*获取列表*/
     $scope.getNoticeRuleList = function(){
@@ -51,7 +51,7 @@ angular.module('myappApp')
         config.data = {
             sitename: $scope.siteName,
             page: $scope.pager.curPage || 1,
-            per_page: parseInt($scope.pager.pageSize) || 20 
+            per_page: parseInt($scope.pager.pageSize) || 20
         };
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
@@ -95,7 +95,7 @@ angular.module('myappApp')
     /*获取站点*/
     $scope.getSiteList = function(item){
         var config = $scope.api.getSiteList;
-        config.url = urlPrefix + '/user/site/detail' + item;
+        config.url = urlPrefix + '/user/site/' + item;
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.modalTitle = '站点详情';
@@ -105,7 +105,7 @@ angular.module('myappApp')
                 province:data.data.province,
                 city:data.data.city,
                 address:data.data.address
-            }   
+            }
             $scope.apply();
         },
         fnError = function (data) {
@@ -125,9 +125,9 @@ angular.module('myappApp')
         if($scope.showflag == 1){
             angular.element("#J_stationDetail").modal('hide');
         }else{
-            angular.element("#J_infoDetail").modal('hide'); 
+            angular.element("#J_infoDetail").modal('hide');
         }
-        
+
     }
 
     $scope.apply = function() {

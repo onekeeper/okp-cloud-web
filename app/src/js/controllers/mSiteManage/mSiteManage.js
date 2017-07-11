@@ -26,6 +26,7 @@ angular.module('myappApp')
                 provinceList:[],
                 cityList:[],
                 modalForm:{
+                    license:'',
                     site_name:'',
                     province_code:'',
                     city_code:'',
@@ -35,20 +36,26 @@ angular.module('myappApp')
             query:{
                 'site_name':'',
             },
-            apis:{
+            apis: {
                 getList: {
                     url: urlPrefix + '/partner/sites',
                     method: 'get',
                     data: {
                         page: 1,
                         per_page: '',
-                        site_name:''
+                        site_name: ''
                     }
+                },
+                license: {
+                    url: urlPrefix + '/partner/site/license',
+                    method: 'post',
+                    data:{}
                 },
                 addOne:{
                     url: urlPrefix + '/partner/site',
                     method: 'post',
                     data: {
+                        license:'',
                         site_name:'',
                         province_code:'',
                         city_code:'',
@@ -59,6 +66,7 @@ angular.module('myappApp')
                     url: urlPrefix + '/partner/site/#',
                     method: 'put',
                     data: {
+                        license:'',
                         site_name:'',
                         province_code:'',
                         city_code:'',
@@ -155,6 +163,7 @@ angular.module('myappApp')
                     url:  flag ? $scope.siteList.apis.addOne.url : $scope.siteList.apis.updateOne.url.replace(/\#/,$scope.siteList.init.actionId),
                     method: flag ? $scope.siteList.apis.addOne.method : $scope.siteList.apis.updateOne.method,
                     data: {
+                        license: $scope.siteList.init.modalForm.license,
                         site_name: $scope.siteList.init.modalForm.site_name,
                         province_code: $scope.siteList.init.modalForm.province_code,
                         city_code: $scope.siteList.init.modalForm.city_code,
@@ -165,7 +174,7 @@ angular.module('myappApp')
                     it.removeClass('disabled');
                     if(data){
                         $('#J_addSite').modal('hide');
-                        $scope.siteList.init.modalForm = {site_name:'',province_code:'',city_code:'',address:''};
+                        $scope.siteList.init.modalForm = {site_name:'',province_code:'',city_code:'',address:'',license:''};
                         $scope.modalTitle = '';
                         $scope.query(true);
                     }
@@ -278,6 +287,7 @@ angular.module('myappApp')
             $scope.siteList.init.modalForm['province_code'] = '';
             $scope.siteList.init.modalForm['city_code'] = '';
             $scope.siteList.init.modalForm['address'] = '';
+            $scope.siteList.init.modalForm['license'] = '';
             $scope.selfValid();
             angular.element('#J_addcSite').modal();
         };
@@ -396,17 +406,15 @@ angular.module('myappApp')
             if(!$("#J_importFile").val()){
                 $scope.validate.site.license.dirty = true;
                 $scope.validate.site.license.invalid = true;
+                $scope.validate.site.license.valid = false;
                 $scope.errorMsg = '请选择License文件';
                 return;
             }
             $.ajaxFileUpload({
-                    url:$scope.siteList.apis.addOne.url,
+                    url:$scope.siteList.apis.license.url,
                     secureuri:false,
                     fileElementId:"J_importFile",
-                    headers: {
-                        'Authorization' : 'Onekeeper '+ $cookieStore.get('token')
-                    },
-                    data: {'Authorization' : 'Onekeeper '+ $cookieStore.get('token')},
+                    //data: {'Authorization' : 'Onekeeper '+ $cookieStore.get('token')},
                     dataType: "json",
                     success: function (data, status){
                         it.removeClass('disabled');
@@ -418,6 +426,7 @@ angular.module('myappApp')
                             $scope.apply();
                             return;
                         }
+                        $scope.siteList.init.modalForm.license = data.license;
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = true;
                         $scope.validate.site.license.invalid = false;

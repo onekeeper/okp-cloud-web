@@ -28,7 +28,7 @@
             }
         },
         getSiteList: {
-            url: urlPrefix + '/user/site/detail',
+            url: urlPrefix + '/user/site/',
             method: 'get',
             data: {}
         }
@@ -56,7 +56,6 @@
         var config = $scope.api.getNoticeList;
         config.data = {
             sitename: $scope.siteName,
-            host: $scope.hostName,
             page: $scope.pager.curPage || 1,
             per_page: parseInt($scope.pager.pageSize) || 20
         };
@@ -88,7 +87,7 @@
     */
     $scope.getSiteList = function(item){
         var config = $scope.api.getSiteList;
-        config.url = urlPrefix + '/user/site/detail' + item;
+        config.url = urlPrefix + '/user/site/' + item;
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.modalTitle = '站点详情';
