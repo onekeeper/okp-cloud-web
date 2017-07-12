@@ -4,7 +4,7 @@
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">站点<span class="sign-must">*</span></label>
                 <div class="col-lg-7">                    
-                    <select class="form-control" ng-model="initData.modalForm.siteId" ng-options="v.site_id as v.site_name for (k , v) in initData.siteOptions" ng-change="validateForm('site')">
+                    <select class="form-control" ng-model="initData.modalForm.siteId" ng-options="v.site_id as v.site_name for (k , v) in initData.siteOptions" ng-change="validateForm('site')" ng-disabled="initData.actionType == 'update'">
                          <option value="">--请选择--</option>
                     </select>
                     <div class="validate-container">
@@ -21,7 +21,7 @@
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">用户<span class="sign-must">*</span></label>
                 <div class="col-lg-7">                    
-                    <select class="form-control" ng-model="initData.modalForm.userId" ng-options="v.user_id as v.username for (k , v) in initData.userOptions" ng-change="validateForm('user')">
+                    <select class="form-control" ng-model="initData.modalForm.userId" ng-options="v.user_id as v.username for (k , v) in initData.userOptions" ng-change="validateForm('user')" ng-disabled="initData.actionType == 'update'">
                          <option value="">--请选择--</option>
                     </select>
                     <div class="validate-container">
@@ -40,7 +40,7 @@
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.severityId" type="hidden" value="0">               
                     <label class="checkbox-inline" ng-repeat="item in initData.warnLevelOptions">
-                        <input ng-model="initData.modalForm.severity[item.severity_id]" type="checkbox" ng-click="validateForm('severity')">{{item.severity_name}}
+                        <input ng-model="initData.modalForm.severity[item.severity_id]" type="checkbox" ng-click="validateForm('severity')" ng-checked="initData.modalForm.severity[item.severity_id]">{{item.severity_name}}
                     </label>
                     <div class="validate-container">
                         <span ng-if="validate.severity.dirty && validate.severity.error.required">
