@@ -58,7 +58,7 @@
                                     <td ng-bind="item.username"></td>
                                     <td ng-bind="item.email"></td>
                                     <td ng-bind="item.mobile"></td>
-                                    <td ng-bind="item.create_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                                    <td ng-bind="item.create_at | dateFilter"></td>
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"
                                            ng-click="clickEdit($index)"></a>
