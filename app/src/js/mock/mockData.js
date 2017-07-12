@@ -1,6 +1,6 @@
 /*
 *普通登录
- */
+*/
 Mock.mock(/\/user\/login/, 'post', function(options){
     console.log(options.body);
     return {
@@ -16,7 +16,7 @@ Mock.mock(/\/user\/login/, 'post', function(options){
 /*
  *管理员登录
  */
-Mock.mock(/\/partner\/login/, 'post', function(options){
+ Mock.mock(/\/partner\/login/, 'post', function(options){
     console.log(options.body);
     return {
         'code' : 1 ,
@@ -30,40 +30,41 @@ Mock.mock(/\/partner\/login/, 'post', function(options){
 
 /*
 *历史告警
- */
-Mock.mock(/\/user\/alert/, 'get',{
-	'code' : 1 ,
-	'message' : 'success' ,
-	data : {
-		'total':20,
-		'items' : [
-		{
-			'create_at' : '2017-07-01 12:00:00' ,
-			'site_name' : '站点1' ,
-			'host' : 'pc001' ,
-			'severity' : 'serious' ,
-			'status' : 'PROBLEM' ,
-			'content' : 'error start at 11:50am...'
-		},
-		]
-	}
+*/
+Mock.mock(/\/user\/alerts/, 'get',{
+    'code' : 1 ,
+    'message' : 'success' ,
+    data : {
+        'items' : [
+        {
+            'create_at' : '2017-07-01 12:00:00' ,
+            'site_id':'1',
+            'site_name' : '站点1' ,
+            'host' : 'pc001' ,
+            'severity' : 1,
+            'status' : 1 ,
+            'content' : 'error start at 11:50am...'
+        }
+        ] ,
+        'total' : 20
+    }
 });
 
 /*
  *人员管理
  */
-Mock.mock(/\/partner\/user\/details/, 'get',{
+ Mock.mock(/\/partner\/user\/details/, 'get',{
     code : 1 ,
     message : 'success' ,
     data : {
         'total':20,
         'items' : [
-            {
-                'username' : '张三' ,
-                'email' : 'user@qq.com' ,
-                'mobile' : '13900000000' ,
-                'create_at' : '2017-07-01 12:00:00'
-            }
+        {
+            'username' : '张三' ,
+            'email' : 'user@qq.com' ,
+            'mobile' : '13900000000' ,
+            'create_at' : '2017-07-01 12:00:00'
+        }
         ]
     }
 });
@@ -71,24 +72,79 @@ Mock.mock(/\/partner\/user\/details/, 'get',{
 /*
  *站点管理
  */
-Mock.mock(/\/partner\/sites/, 'get',{
+ Mock.mock(/\/partner\/sites/, 'get',{
     code : 1 ,
     message : 'success' ,
     data : {
         'total':20,
         'items' : [
-            {
-                'site_name' : '站点名称' ,
-                'sn' : '站点序号' ,
-                'province_code':'300',
-                'province_name':'浙江',
-                'city_code':'100',
-                'city_name':'杭州',
-                'address' : '西湖区凤起路1号' ,
-                'create_at' : '2017-07-01 00:00:00' ,
-                'license_end' : '2018-07-01 00:00:00'
-            }
+        {
+            'site_name' : '站点名称' ,
+            'sn' : '站点序号' ,
+            'province_code':'300',
+            'province_name':'浙江',
+            'city_code':'100',
+            'city_name':'杭州',
+            'address' : '西湖区凤起路1号' ,
+            'create_at' : '2017-07-01 00:00:00' ,
+            'license_end' : '2018-07-01 00:00:00'
+        }
         ]
     }
 });
 
+/*
+*站点信息
+*/
+Mock.mock(/\/user\/site\/1/,'get',{ 
+    'code' : 1 ,
+    'message' : 'success' ,
+    'data' : {
+        'site_name' : '站点1' ,
+        'province' : '浙江' ,
+        'city' : '杭州' ,
+        'address' : '西湖区凤起路1号'
+    }
+});
+
+/*
+*通知规则
+*/
+Mock.mock(/\/user\/rules/,'get', {
+    'code' : 1 ,
+    'message' : 'success' ,
+    'data' : {
+        'items' : [
+        {
+            'site_id':'1',
+            'site_name' : '站点1' ,
+            'alert_severity' : 1 ,
+            'alert_status' : 1 ,
+            'method' : 1
+        }
+        ] ,
+        'total' : 20
+    }
+});
+
+/*
+*历史通知
+*/
+Mock.mock(/\/user\/notifications/,'get', {
+    'code' : 1 ,
+    'message' : 'success' ,
+    data : {
+        'items' : [
+        {
+            'begin_at' : '2017-07-01 12:00:00' ,
+            'finish_at' : '2017-07-01 12:00:01' ,
+            'site_id':1,
+            'site_name' : '站点1' ,
+            'host' : 'pc001' ,
+            'status' : 0 ,
+            'content' : 'error start at 11:50am...error start at 11:50am...error start at 11:50am...error start at 11:50am...error start at 11:50am...'
+        }
+        ] ,
+        'total' : 20
+    }
+});
