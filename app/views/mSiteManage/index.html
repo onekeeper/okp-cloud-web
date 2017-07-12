@@ -40,7 +40,9 @@
                                     <th>市</th>
                                     <th>详细地址</th>
                                     <th>创建时间</th>
+                                    <!--
                                     <th>变更时间</th>
+                                    -->
                                     <th>License有效期</th>
                                     <th class="col-operate">操作</th>
                                 </tr>
@@ -61,9 +63,11 @@
                                     <td ng-bind="item.province_name"></td>
                                     <td ng-bind="item.city_name"></td>
                                     <td ng-bind="item.address"></td>
-                                    <td ng-bind="item.create_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                                    <td ng-bind="item.create_at | dateFilter"></td>
+                                    <!--
                                     <td ng-bind="item.update_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                                    <td ng-bind="item.license_end | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                                    -->
+                                    <td ng-bind="item.license_end | dateFilter"></td>
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"
                                            ng-click="clickEdit($index)"></a>
