@@ -18,10 +18,10 @@ angular.module('myappApp')
             	data = data || {};
             	if(data.code){
             		$('.modal-backdrop').remove();
-            		if(data.code == '401'){
+            		if(status == 401){
                         $state.go("login");
             		}
-            		if(data.code == '402'){
+            		if(status == 402){
             			$rootScope.$broadcast('updateLogin');
             			$location.path('/402');
             		}
@@ -33,12 +33,12 @@ angular.module('myappApp')
             	}
             }).error(function(data,status,headers,config){
             	data = data || {};
+            	if(status == 401){
+            	    $state.go("login");
+                }
             	if(data.code){
-            		$('.modal-backdrop').remove();
-            		if(data.code == '401'){
-                        $state.go("login");
-            		}
-            		if(data.code == '402'){
+            		//$('.modal-backdrop').remove();
+            		if(status == 402){
             			$rootScope.$broadcast('updateLogin');
             			$location.path('/402');
             			if( fnSuccess ){
