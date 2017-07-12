@@ -78,7 +78,6 @@ angular.module('myappApp')
                     it.removeClass('disabled');
                     if(data){
                         var d = typeof(data)==="string" ? JSON.parse(data) : data;
-                        $rootScope.user = d.data;
                         $rootScope.userLogStatus = 'login';
                         $cookieStore.put('token',d.data.access_token);
                         if(type == 'common'){
