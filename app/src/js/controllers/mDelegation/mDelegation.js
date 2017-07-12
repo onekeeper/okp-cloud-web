@@ -67,6 +67,12 @@ angular.module('myappApp')
                     delegation_module: ''
                }
             },
+            editOne:{
+               url: urlPrefix + '/delegation',
+               method: 'put',
+               data: {
+               }
+            },
             deleteOne:{
                url: urlPrefix + '/delegation',
                method: 'delete',
@@ -252,7 +258,32 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
-    
+    /**
+     * 接受授权
+     * @param it: clicked object
+     */
+    $scope.editOne = function(it){
+        var flag = $scope.initData.actionType === 'update',
+            config = {
+            url: $scope.apis.editOne.url + "/" + $scope.initData.modalForm.id,
+            method: $scope.apis.editOne.method,
+            data: {}
+        },
+        fnSuccess = function (data){
+            it.removeClass('disabled');
+            if(data.code == 1){
+               $('#J_mDelegationConfirm').modal('hide');
+               $scope.query(true);
+            }
+            $scope.apply();
+        },
+        fnFail = function(data){
+            it.removeClass('disabled');
+            console.log(data.message);
+            $scope.errMsg = data.message;
+        };
+        AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
+    };
     /**
      * 收回授权
      * @param it: clicked object
@@ -294,6 +325,10 @@ angular.module('myappApp')
                 it.addClass('disabled');
                 $scope.deleteOne(it);
                 break;
+            case 'update':
+                it.addClass('disabled');
+                $scope.editOne(it);
+                break;
             default:
                 if($scope.validateForm('all')){
                     it.addClass('disabled');
@@ -322,13 +357,25 @@ angular.module('myappApp')
         angular.element('#J_addmDelegation').modal();
     };    
     /**
-     * 点击删除
+     * 取消授权
      * @param index
      */
     $scope.clickDelete = function(index){
         $scope.modalTitle = '取消授权';
         $scope.modalInfo = '取消授权后不可恢复，确定执行此操作吗？';
         $scope.initData.actionType = 'delete';
+        $scope.errMsg = '';
+        $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
+        angular.element('#J_mDelegationConfirm').modal();
+    };
+    /**
+     * 接受授权
+     * @param index
+     */
+    $scope.clickEdit = function(index){
+        $scope.modalTitle = '接受授权';
+        $scope.modalInfo = '接受授权后不可恢复，确定执行此操作吗？';
+        $scope.initData.actionType = 'update';
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();

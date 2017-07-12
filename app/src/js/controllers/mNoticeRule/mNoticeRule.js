@@ -336,7 +336,7 @@ angular.module('myappApp')
      * @param it: clicked object
      */
     $scope.editOne = function(it){
-        var flag = $scope.initData.actionType === 'add',
+        var flag = $scope.initData.actionType === 'update',
             config = {
             url: $scope.apis.editOne.url + "/" + $scope.initData.modalForm.id,
             method: $scope.apis.editOne.method,
@@ -487,6 +487,7 @@ angular.module('myappApp')
             $scope.initData.modalForm.method[1] = true;
             $scope.initData.modalForm.method[2] = true;
         }
+        $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
     }; 
     /**
