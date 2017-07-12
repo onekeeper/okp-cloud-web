@@ -41,51 +41,6 @@ angular
 			templateUrl: "views/home/index.html",
 			controller: "HomeCtrl"
 		})
-		.state("main.dispatch", {
-			url: "/dispatch",
-			templateUrl: "views/dispatchMgr/index.html",
-			controller: "DispatchCtrl"
-		})
-        .state("main.dispatchDetail", {
-            url: "/dispatchDetail/:jobName",
-            templateUrl: "views/dispatchMgr/detail.html",
-            controller: "DispatchDetailCtrl"
-        })
-        .state("main.dispatchTaskDetail", {
-            url: "/dispatchTaskDetail/:jobName",
-            templateUrl: "views/dispatchMgr/taskDetail.html",
-            controller: "TaskDetail"
-        })
-        .state("main.logList", {
-            url: "/logList",
-            templateUrl: "views/logList/index.html",
-            controller: "logListCtrl"
-        })
-        .state("main.userMgr", {
-            url: "/userMgr",
-            templateUrl: "views/userMgr/index.html",
-            controller: "UserCtrl"
-        })
-		.state("main.monitorlist", {
-			url: "/monitor",
-			templateUrl: "views/monitorList/index.html",
-			controller: "MonitorList"
-		})
-		.state("main.historytask", {
-			url: "/historytask",
-			templateUrl: "views/historyTask/index.html",
-			controller: "HistoryTask"
-		})
-		.state("main.taskdetail", {
-			url: "/historytaskdetail/:jobName",
-			templateUrl: "views/historyTask/detail.html",
-			controller: "TaskDetail"
-		})
-		.state("main.sysconfig", {
-			url: "/sysconfig",
-			templateUrl: "views/sysConfig/index.html",
-			controller: "SysConfigCtrl"
-		})
 		.state("main.warning", {//历史告警查询
 			url: "/warning",
 			templateUrl: "views/warning/index.html",
@@ -120,7 +75,5 @@ angular
 			url: "/mSiteManage",
 			templateUrl: "views/mSiteManage/index.html",
 			controller: "mSiteManageCtrl"
-		}) /*测试git冲突场景1*/
-		/*测试git冲突场景2*/
-		/*测试git创建新分支场景3*/
+		})
   });

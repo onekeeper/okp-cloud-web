@@ -8,24 +8,15 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-  	.controller('LoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer){
+  	.controller('LoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
         var apiLoginUrl = urlPrefix + '/user/login',
             otherApiLoginUrl = urlPrefix + '/partner/login';
 
         $scope.init = function() {
-            $rootScope.userLogStatus = '';
-            $rootScope.tokenValue = '';
-            $scope.user = {
-                username:'',
-                password:''
-            };
-            $scope.errorMsg = '';
+            $scope.clearLoginInfo();
             if($rootScope.commonFlag == undefined) {
                 $rootScope.commonFlag = true;
                 $cookieStore.put('commonFlag',true);
-            }
-            if($rootScope.userLogStatus == 'logout'){
-                $scope.clearLoginInfo();
             }
   		};
 
@@ -57,15 +48,9 @@ angular.module('myappApp')
                 return false;
             }
             if( $scope.validForm() ){
-                // 清空客户端缓存
-                if( $cookieStore && $cookieStore.get('loginUser') ){
-                    $cookieStore.remove("loginUser");
-                }
-                if( $cookieStore && $cookieStore.get('token') ){
-                    $cookieStore.remove("token");
-                }
-                if( $cookieStore && $cookieStore.get('userLogStatus') ){
-                    $cookieStore.remove("userLogStatus");
+                // 清空
+                if( sessionStore.get('token') ){
+                    sessionStore.clear();
                 }
                 $scope.errorMsg = '';
                 it.addClass('disabled');
@@ -79,16 +64,16 @@ angular.module('myappApp')
                     if(data){
                         var d = typeof(data)==="string" ? JSON.parse(data) : data;
                         $rootScope.userLogStatus = 'login';
-                        $cookieStore.put('token',d.data.access_token);
+                        sessionStore.set('token',d.data.access_token);
                         if(type == 'common'){
                             $rootScope.username = d.data.username;
-                            $cookieStore.put('loginUser',$rootScope.username);
-                            $cookieStore.put('userLogStatus','login');
+                            sessionStore.set('loginUser',$rootScope.username);
+                            sessionStore.set('userLogStatus','login');
                             $state.go('main.warning');
                         }else {
                             $rootScope.username = d.data.name;
-                            $cookieStore.put('loginUser',$rootScope.username);
-                            $cookieStore.put('userLogStatus','login');
+                            sessionStore.set('loginUser',$rootScope.username);
+                            sessionStore.set('userLogStatus','login');
                             $state.go('main.mNoticeRule');
                         }
                     }
@@ -117,16 +102,14 @@ angular.module('myappApp')
         };
 
         $scope.clearLoginInfo = function(){
+            $rootScope.userLogStatus = '';
+            $scope.user = {
+                username:'',
+                password:''
+            };
+            $scope.errorMsg = '';
             $rootScope.username = '';
-            if( $cookieStore && $cookieStore.get('loginUser') ){
-                $cookieStore.remove("loginUser");
-            }
-            if( $cookieStore && $cookieStore.get('token') ){
-                $cookieStore.remove("token");
-            }
-            if( $cookieStore && $cookieStore.get('userLogStatus') ){
-                $cookieStore.remove("userLogStatus");
-            }
+            sessionStore.clear();
             $scope.apply();
         };
 

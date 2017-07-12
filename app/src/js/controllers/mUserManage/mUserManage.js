@@ -139,6 +139,7 @@ angular.module('myappApp')
      * @param it: clicked object
      */
     $scope.addOrUpdate = function(it){
+        $scope.errMsg = '';
         var flag = $scope.userList.init.actionType === 'add';
         var config = {
             url:  flag ? $scope.userList.apis.addOne.url : $scope.userList.apis.updateOne.url.replace(/\#/,$scope.userList.init.actionId),
@@ -162,7 +163,8 @@ angular.module('myappApp')
         },
         fnFail = function(data){
             it.removeClass('disabled');
-            console.log(data.errMsg);
+            $scope.errMsg = data.message;
+            console.log(data.message);
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -190,7 +192,7 @@ angular.module('myappApp')
         },
         fnFail = function(data){
             it.removeClass('disabled');
-            console.log(data.errMsg);
+            console.log(data.message);
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };

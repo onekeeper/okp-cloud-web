@@ -8,7 +8,8 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-  	.controller('HeaderCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate',function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate) {
+  	.controller('HeaderCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
+        function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
         $scope.userList = {
             init:{
                 defaultUser: {
@@ -57,12 +58,12 @@ angular.module('myappApp')
                 $rootScope.commonFlag = $cookieStore.get('commonFlag');
             }
             if($rootScope.userLogStatus == undefined){
-                $rootScope.userLogStatus = $cookieStore.get('userLogStatus');
+                $rootScope.userLogStatus = sessionStore.get('userLogStatus');
             }
 	        // 获取登入信息
 			if($rootScope.userLogStatus == 'login'){
-                if( $cookieStore && $cookieStore.get('loginUser') ){
-                    $rootScope.username = $cookieStore.get('loginUser');
+                if( sessionStore.get('loginUser') ){
+                    $rootScope.username = sessionStore.get('loginUser');
                 }
 			}else{
                 $state.go("login");
@@ -73,15 +74,7 @@ angular.module('myappApp')
          * 清除信息
          */
         $scope.clearLoginInfo = function(){
-            if( $cookieStore && $cookieStore.get('token') ) {
-                $cookieStore.remove('token');
-            }
-            if( $cookieStore && $cookieStore.get('userLogStatus') ) {
-                $cookieStore.remove('userLogStatus');
-            }
-            if( $cookieStore && $cookieStore.get('loginUser') ) {
-                $cookieStore.remove('loginUser');
-            }
+            sessionStore.clear();
             $rootScope.userLogStatus = 'logout';
             $rootScope.username = '';
             $state.go('login');
@@ -98,13 +91,6 @@ angular.module('myappApp')
             $scope.clearLoginInfo();
             $scope.apply();
         };
-
-        /**
-         * 获取登录信息
-         */
-        //$scope.getLocalLoginInfo = function(){
-
-        //};
 
         $scope.bindEvent = function () {
             $('body').off('click','.nav li');
