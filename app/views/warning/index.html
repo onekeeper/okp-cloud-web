@@ -46,7 +46,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in cache.listArr">
-                                    <td title="">{{item.create_at}}</td>
+                                    <td title="">{{item.create_at | dateFilter}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.severity == 1? '消息' : item.severity == 2 ? '告警' : '威胁'}}</td>

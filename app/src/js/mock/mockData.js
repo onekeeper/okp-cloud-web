@@ -136,8 +136,8 @@ Mock.mock(/\/user\/notifications/,'get', {
     data : {
         'items' : [
         {
-            'begin_at' : '2017-07-01 12:00:00' ,
-            'finish_at' : '2017-07-01 12:00:01' ,
+            'begin_at' : '2017-07-11T07:33:31' ,
+            'finish_at' : '2017-07-11T07:33:34' ,
             'site_id':1,
             'site_name' : '站点1' ,
             'host' : 'pc001' ,
