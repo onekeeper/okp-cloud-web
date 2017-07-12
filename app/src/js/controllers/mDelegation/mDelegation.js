@@ -125,7 +125,7 @@ angular.module('myappApp')
         },
         fnSuccess = function (d){
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
-            if(data && data.items.length > 0){
+            if(data && data.data.length > 0){
                 $scope.initData.siteOptions = data.data;
             }
             $scope.apply();
@@ -248,6 +248,7 @@ angular.module('myappApp')
         fnFail = function(data){
             it.removeClass('disabled');
             console.log(data.message);
+            $scope.errMsg = data.message;
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -273,6 +274,7 @@ angular.module('myappApp')
         fnFail = function(data){
             it.removeClass('disabled');
             console.log(data.message);
+            $scope.errMsg = data.message;
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -306,6 +308,7 @@ angular.module('myappApp')
     $scope.clickAdd = function(){
          $scope.modalTitle = '新增授权';
          $scope.initData.actionType = 'add';
+         $scope.errMsg = '';
          $scope.initData.modalForm = {
             id:'',
             siteId: '',
@@ -326,6 +329,7 @@ angular.module('myappApp')
         $scope.modalTitle = '取消授权';
         $scope.modalInfo = '取消授权后不可恢复，确定执行此操作吗？';
         $scope.initData.actionType = 'delete';
+        $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();
     };

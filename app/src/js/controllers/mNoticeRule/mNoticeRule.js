@@ -89,7 +89,7 @@ angular.module('myappApp')
            }
         },
         editOne:{
-           url: urlPrefix + ' /notificationrule',
+           url: urlPrefix + '/notificationrule',
            method: 'put',
            data: {
                 site_id:'',
@@ -327,6 +327,7 @@ angular.module('myappApp')
         fnFail = function(data){
             it.removeClass('disabled');
             console.log(data.message);
+            $scope.errMsg = data.message;
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -358,6 +359,7 @@ angular.module('myappApp')
         fnFail = function(data){
             it.removeClass('disabled');
             console.log(data.message);
+            $scope.errMsg = data.message;
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -374,7 +376,7 @@ angular.module('myappApp')
         fnSuccess = function (data){
             it.removeClass('disabled');
             if(data.code == 1){
-                angular.element('#J_userConfirm').modal('hide');
+                angular.element('#J_mNoticeRuleConfirm').modal('hide');
                 $scope.query(true);
             }
             $scope.apply();
@@ -382,6 +384,7 @@ angular.module('myappApp')
         fnFail = function(data){
             it.removeClass('disabled');
             console.log(data.message);
+            $scope.errMsg = data.message;
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -401,6 +404,10 @@ angular.module('myappApp')
                 it.addClass('disabled');
                 $scope.deleteOne(it);
                 break;
+            case 'update':
+                it.addClass('disabled');
+                $scope.editOne(it);
+                break;
             default: 
                 if($scope.validateForm('all')){
                     it.addClass('disabled');
@@ -415,6 +422,7 @@ angular.module('myappApp')
     $scope.clickAdd = function(){
          $scope.modalTitle = '新增通知规则';
          $scope.initData.actionType = 'add';
+         $scope.errMsg = '';
          $scope.initData.modalForm = {
             id:'',
             siteId: '',
@@ -436,13 +444,49 @@ angular.module('myappApp')
     $scope.clickEdit = function(index){
         $scope.modalTitle = '修改通知规则';
         $scope.initData.actionType = 'update';
+        $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mNoticeRuleList[index].id;
         $scope.initData.modalForm.siteId = $scope.mNoticeRuleList[index].site_id;
         $scope.initData.modalForm.userId = $scope.mNoticeRuleList[index].user_id;
-        $scope.initData.modalForm.severityId = $scope.mNoticeRuleList[index].severity_id;
-        $scope.initData.modalForm.statusId = $scope.mNoticeRuleList[index].status_id;
+        $scope.initData.modalForm.severityId = $scope.mNoticeRuleList[index].alert_severity;
+        if($scope.initData.modalForm.severityId == 1){
+            $scope.initData.modalForm.severity[1] = true;
+        }else if($scope.initData.modalForm.severityId == 2){
+            $scope.initData.modalForm.severity[2] = true;
+        }else if($scope.initData.modalForm.severityId == 4){
+            $scope.initData.modalForm.severity[4] = true;
+        }else if($scope.initData.modalForm.severityId == 3){
+            $scope.initData.modalForm.severity[1] = true;
+            $scope.initData.modalForm.severity[2] = true;
+        }else if($scope.initData.modalForm.severityId == 5){
+            $scope.initData.modalForm.severity[1] = true;
+            $scope.initData.modalForm.severity[4] = true;
+        }else if($scope.initData.modalForm.severityId == 6){
+            $scope.initData.modalForm.severity[2] = true;
+            $scope.initData.modalForm.severity[4] = true;
+        }else if($scope.initData.modalForm.severityId == 7){
+            $scope.initData.modalForm.severity[1] = true;
+            $scope.initData.modalForm.severity[2] = true;
+            $scope.initData.modalForm.severity[4] = true;
+        }
+        $scope.initData.modalForm.statusId = $scope.mNoticeRuleList[index].alert_status;
+        if($scope.initData.modalForm.statusId == 1){
+            $scope.initData.modalForm.status[1] = true;
+        }else if($scope.initData.modalForm.statusId == 2){
+            $scope.initData.modalForm.status[2] = true;
+        }else if($scope.initData.modalForm.statusId == 3){
+            $scope.initData.modalForm.status[1] = true;
+            $scope.initData.modalForm.status[2] = true;
+        }
         $scope.initData.modalForm.methodId = $scope.mNoticeRuleList[index].method_id;
-        console.log($scope.initData.modalForm);
+        if($scope.initData.modalForm.methodId == 1){
+            $scope.initData.modalForm.method[1] = true;
+        }else if($scope.initData.modalForm.methodId == 2){
+            $scope.initData.modalForm.method[2] = true;
+        }else if($scope.initData.modalForm.methodId == 3){
+            $scope.initData.modalForm.method[1] = true;
+            $scope.initData.modalForm.method[2] = true;
+        }
         angular.element('#J_addmNoticeRule').modal();
     }; 
     /**
@@ -453,6 +497,7 @@ angular.module('myappApp')
         $scope.modalTitle = '删除通知规则';
         $scope.modalInfo = '删除通知规则后不可恢复，确定执行此操作吗？';
         $scope.initData.actionType = 'delete';
+        $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mNoticeRuleList[index].id;
         angular.element('#J_mNoticeRuleConfirm').modal();
     };
@@ -479,6 +524,7 @@ angular.module('myappApp')
         }
         if(type === 'severity' || type === 'all'){
             $scope.initData.modalForm.severityId = 0;
+            console.log($scope.initData.modalForm.severity);
             if(!!$scope.initData.modalForm.severity){
                 $.each($scope.initData.modalForm.severity, function(k,v){ 
                     if(v){
