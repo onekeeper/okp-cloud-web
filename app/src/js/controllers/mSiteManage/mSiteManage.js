@@ -347,7 +347,7 @@ angular.module('myappApp')
                     }
                 }
 
-                if((type === 'license' || (type === 'all' && $scope.siteList.init.actionType == 'add')) {
+                if(type === 'license' || (type === 'all' && $scope.siteList.init.actionType == 'add')){
                     if (!$("#J_importFile").val()) {
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = false;
