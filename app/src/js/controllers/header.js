@@ -14,12 +14,10 @@ angular.module('myappApp')
                 defaultUser: {
                     userId: 0,
                     username: '',
-                    oldPassWord:'',
                     passWord:'',
                     confirmPassWord:''
                 },
                 pwdModalForm:{
-                    oldPassWord: '',
                     passWord:'',
                     repeatPassWord:''
                 }
@@ -35,12 +33,18 @@ angular.module('myappApp')
                     method: 'post',
                     data:{}
                 },
-                changePwd:{
-                    url: urlPrefix + '/user/#?changePass',
+                changePwdCommon:{
+                    url: urlPrefix + '/user/info',
                     method: 'post',
                     data:{
-                        oldPassWord:'',
-                        passWord:''
+                        password:''
+                    }
+                },
+                changePwdOther:{
+                    url: urlPrefix + '/partner/info',
+                    method: 'post',
+                    data:{
+                        login_password:''
                     }
                 }
             }
@@ -113,16 +117,12 @@ angular.module('myappApp')
          * 点击修改密码
          */
         $scope.clickChangePwd = function(){
-            $scope.getLocalLoginInfo();
-            $scope.theUser = $.extend({},$scope.userList.init.defaultUser);
             $scope.errorMsg = '';
             $scope.selfValid();
             $scope.modalTitle = '修改密码';
             $scope.isEditPwd = true;
-            $scope.userList.init.pwdModalForm.oldPassWord = '';
             $scope.userList.init.pwdModalForm.passWord = '';
             $scope.userList.init.pwdModalForm.repeatPassWord = '';
-            $scope.userList.init.pwdModalForm.account = $scope.theUser.username;
             $scope.apply();
             angular.element('#J_editPwd').modal();
         };
@@ -137,12 +137,17 @@ angular.module('myappApp')
 	    	}
 	    	if( $scope.validateForm('all','pwd') ){
 	    		it.addClass('disabled');
-                var ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwd);
-                ajaxConfig.url = ajaxConfig.url.replace('#',$scope.theUser.userId);
+                var ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdCommon);
                 ajaxConfig.data = {
-                    oldPassWord: hex_md5($scope.userList.init.pwdModalForm.oldPassWord),
-                    passWord: hex_md5($scope.userList.init.pwdModalForm.passWord)
+                    password: $scope.userList.init.pwdModalForm.passWord
                 };
+	    		if(!$rootScope.commonFlag){
+                    ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdOther);
+                    ajaxConfig.data = {
+                        login_password: $scope.userList.init.pwdModalForm.passWord
+                    };
+                }
+
                 AjaxServer.ajaxInfo( ajaxConfig, function(data){
                     it.removeClass('disabled');
                     if(data) angular.element('#J_editPwd').modal('hide');
@@ -151,19 +156,6 @@ angular.module('myappApp')
                     var err = typeof error === 'string' ? JSON.parse(error) : error;
 					$scope.sysError = err.errMsg || '系统未知错误，请联系开发人员';
 					console.log($scope.sysError);
-                    // 暂时处理
-                    if(err.errMsg === '原密码错误'){
-                        $scope.validate.pwd.oldPassWord = {
-                            dirty:true,
-                            valid:false,
-                            invalid:true,
-                            error:{
-                                required:false,
-                                format:false,
-                                same:true
-                            }
-                        };
-                    }
 					$scope.apply();
                 });
             }
@@ -183,21 +175,6 @@ angular.module('myappApp')
             $scope.errorMsg = '';
 
             if(whichForm === 'pwd'){
-                // 原密码
-                if(type.indexOf('oldPassWord')>-1 || type.indexOf('all')>-1){
-                    $scope.validate.pwd.oldPassWord = angular.extend({},validDirtyObj);
-                    if(!$scope.userList.init.pwdModalForm.oldPassWord){
-                        $scope.validate.pwd.oldPassWord = angular.extend({},validNotObj,{error:{ required:true, format:false, same:false}
-                        });
-                        $scope.apply();
-                        return false;
-                    }
-                    else if(!Validate.validComplexHash($scope.userList.init.pwdModalForm.oldPassWord)){
-                        $scope.validate.pwd.oldPassWord = angular.extend({},validNotObj,{error:{ required:false, format:true, same:false}});
-                        $scope.apply();
-                        return false;
-                    }
-                }
                 // 新密码
                 if(type.indexOf('passWord')>-1 || type.indexOf('all')>-1){
                     $scope.validate.pwd.passWord = angular.extend({},validDirtyObj);
@@ -272,7 +249,6 @@ angular.module('myappApp')
         $scope.selfValid = function (){
             $scope.validate = {
                 pwd:{
-                    oldPassWord:{},
                     passWord:{},
                     repeatPassWord:{}
                 }

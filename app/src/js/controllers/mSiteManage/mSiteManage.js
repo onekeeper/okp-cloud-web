@@ -172,7 +172,7 @@ angular.module('myappApp')
                 fnSuccess = function (data){
                     it.removeClass('disabled');
                     if(data){
-                        $('#J_addSite').modal('hide');
+                        $('#J_addcSite').modal('hide');
                         $scope.siteList.init.modalForm = {site_name:'',province_code:'',city_code:'',address:'',license:''};
                         $scope.modalTitle = '';
                         $scope.query(true);
