@@ -68,10 +68,9 @@ angular.module('myappApp')
                }
             },
             resetPwd:{
-                url: urlPrefix + '/partner/user/reset',
-                method: 'post',
+                url: urlPrefix + '/partner/user/#',
+                method: 'patch',
                 data: {
-                    email:""
                 }
             }
         }
@@ -203,7 +202,7 @@ angular.module('myappApp')
         var config = {
                 url: $scope.userList.apis.resetPwd.url.replace(/\#/, $scope.userList.init.actionId),
                 method: $scope.userList.apis.resetPwd.method,
-                data: {'email': $scope.userList.init.actionId}
+                data: {}
             },
             fnSuccess = function (data) {
                 it.removeClass('disabled');
@@ -218,7 +217,7 @@ angular.module('myappApp')
             },
             fnFail = function (data) {
                 it.removeClass('disabled');
-                console.log(data.errMsg);
+                console.log(data.message);
             };
         AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
     }
@@ -241,6 +240,7 @@ angular.module('myappApp')
             case 'resetPwd':
                 it.addClass('disabled');
                 $scope.resetPwd(it);
+                break;
             default:
                 if($scope.validateForm('all','user')){
                     it.addClass('disabled');
