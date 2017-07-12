@@ -157,6 +157,7 @@ angular.module('myappApp')
          * @param it: clicked object
          */
         $scope.addOrUpdate = function(it){
+            $scope.errMsg = '';
             var flag = $scope.siteList.init.actionType === 'add';
             var config = {
                     url:  flag ? $scope.siteList.apis.addOne.url : $scope.siteList.apis.updateOne.url.replace(/\#/,$scope.siteList.init.actionId),
@@ -181,6 +182,7 @@ angular.module('myappApp')
                 },
                 fnFail = function(data){
                     it.removeClass('disabled');
+                    $scope.errMsg = data.message;
                     console.log(data.message);
                 };
             if(!flag){
@@ -221,6 +223,7 @@ angular.module('myappApp')
          * 获取省份列表
          */
         $scope.getProvinceList = function(){
+            $scope.siteList.init.provinceList = [];
             var config = $scope.siteList.apis.getProvince,
                 fnSuccess = function (data){
                     if(data){
@@ -238,6 +241,7 @@ angular.module('myappApp')
          * 获取市列表
          */
         $scope.getCityList = function(){
+            $scope.siteList.init.cityList = [];
             var config = {
                     url:  $scope.siteList.apis.getCity.url,
                     method: $scope.siteList.apis.getCity.method,
@@ -246,6 +250,10 @@ angular.module('myappApp')
                 fnSuccess = function (data){
                     if(data){
                         $scope.siteList.init.cityList = data.data;
+                        /*编辑操作时，获取城市列表成功后弹出表单*/
+                        if($scope.siteList.init.actionType == 'update') {
+                            angular.element('#J_addcSite').modal();
+                        }
                     }
                     $scope.apply();
                 },
@@ -305,7 +313,7 @@ angular.module('myappApp')
             $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
             $scope.getCityList();
             $scope.selfValid();
-            angular.element('#J_addcSite').modal();
+            //angular.element('#J_addcSite').modal();
         };
 
         /**
@@ -349,7 +357,7 @@ angular.module('myappApp')
                 }
 
                 if(type === 'license' || (type === 'all' && $scope.siteList.init.actionType == 'add')){
-                    if (!$("#J_importFile").val()) {
+                    if (!$("#J_importFile").val() && $scope.validate.site.license.valid && !$scope.validate.site.license.dirty) {
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = false;
                         $scope.validate.site.license.invalid = true;
