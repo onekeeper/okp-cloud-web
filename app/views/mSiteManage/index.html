@@ -52,7 +52,7 @@
                             </tbody>
                             <tbody ng-hide="siteList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="siteList.init.tdObj.length==0">
-                                    <td colspan="9" ng-if="siteList.init.getListError!=''">{{getListError}}</td>
+                                    <td colspan="9" ng-if="siteList.init.getListError!=''">{{siteList.init.getListError}}</td>
                                     <td colspan="9" ng-if="siteList.init.getListError==''">数据为空</td>
                                 </tr>
                                 <tr ng-repeat="item in siteList.init.tdObj">

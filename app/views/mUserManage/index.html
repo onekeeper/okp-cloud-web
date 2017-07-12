@@ -51,7 +51,7 @@
                             </tbody>
                             <tbody ng-hide="userList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="userList.init.tdObj.length==0">
-                                    <td colspan="5" ng-if="userList.init.getListError!=''">{{getListError}}</td>
+                                    <td colspan="5" ng-if="userList.init.getListError!=''">{{userList.init.getListError}}</td>
                                     <td colspan="5" ng-if="userList.init.getListError==''">数据为空</td>
                                 </tr>
                                 <tr ng-repeat="item in userList.init.tdObj">

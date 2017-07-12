@@ -181,10 +181,10 @@ angular.module('myappApp')
                 },
                 fnFail = function(data){
                     it.removeClass('disabled');
-                    console.log(data.errMsg);
+                    console.log(data.message);
                 };
             if(!flag){
-                delete config.data[license];
+                delete config.data["license"];
             }
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
@@ -212,7 +212,7 @@ angular.module('myappApp')
                 },
                 fnFail = function(data){
                     it.removeClass('disabled');
-                    console.log(data.errMsg);
+                    console.log(data.message);
                 };
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
@@ -229,7 +229,7 @@ angular.module('myappApp')
                     $scope.apply();
                 },
                 fnFail = function(data){
-                    console.log(data.errMsg);
+                    console.log(data.message);
                 };
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
@@ -250,7 +250,7 @@ angular.module('myappApp')
                     $scope.apply();
                 },
                 fnFail = function(data){
-                    console.log(data.errMsg);
+                    console.log(data.message);
                 };
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
@@ -303,6 +303,7 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'update';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
+            $scope.getCityList();
             $scope.selfValid();
             angular.element('#J_addcSite').modal();
         };

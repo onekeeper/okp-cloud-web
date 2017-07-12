@@ -1,5 +1,5 @@
 angular.module('myappApp')
-  	.service('AjaxServer', function($location, $http, $cookieStore, $rootScope){
+  	.service('AjaxServer', function($location, $http, $cookieStore, $rootScope, $state){
   		$rootScope.$broadcast('updateLogin');
   		this.pathStr = $location.path();
   		this.ajaxInfo = function( config , fnSuccess, fnFail ) {
@@ -19,7 +19,7 @@ angular.module('myappApp')
             	if(data.code){
             		$('.modal-backdrop').remove();
             		if(data.code == '401'){
-            			$location.path('/login').search({'redirectUrl':this.pathStr});
+                        $state.go("login");
             		}
             		if(data.code == '402'){
             			$rootScope.$broadcast('updateLogin');
@@ -36,7 +36,7 @@ angular.module('myappApp')
             	if(data.code){
             		$('.modal-backdrop').remove();
             		if(data.code == '401'){
-            			$location.path('/login').search({'redirectUrl':this.pathStr});
+                        $state.go("login");
             		}
             		if(data.code == '402'){
             			$rootScope.$broadcast('updateLogin');
