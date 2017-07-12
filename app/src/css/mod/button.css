@@ -9,8 +9,8 @@
     background-color: #f86f4b;
 }
 .btn-gray{
-    background-color: #8392af;
-    border-color: #66afaf;
+    background-color: #337ab7;
+    border-color: #2e6da4;
 }
 .btn-orange:hover,
 .btn-orange:focus
@@ -29,14 +29,14 @@
 .btn-gray:focus
 {
     color: #fff;
-    border-color: #548796;
-    background-color: #5c7096;
+    border-color: #204d74;
+    background-color: #286090;
 }
 .btn-gray.active,
 .btn-gray:active{
     color: #fff;
-    background-color: #8392af;
-    border-color: #66afaf;
+    background-color: #286090;
+    border-color: #204d74;
 }
 .btn-import{
     width:60px;
