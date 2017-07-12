@@ -84,9 +84,9 @@
                                         <span ng-if="item.alert_status == 3">已解决，遗留</span>
                                     </td>
                                     <td>
-                                        <span ng-if="item.method_id == 1">邮件</span>
-                                        <span ng-if="item.method_id == 2">微信</span>
-                                        <span ng-if="item.method_id == 3">邮件，微信</span>
+                                        <span ng-if="item.method == 1">邮件</span>
+                                        <span ng-if="item.method == 2">微信</span>
+                                        <span ng-if="item.method == 3">邮件，微信</span>
                                     </td>
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="编辑" ng-click="clickEdit($index)"></a>
