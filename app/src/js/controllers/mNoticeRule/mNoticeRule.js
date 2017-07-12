@@ -478,7 +478,7 @@ angular.module('myappApp')
             $scope.initData.modalForm.status[1] = true;
             $scope.initData.modalForm.status[2] = true;
         }
-        $scope.initData.modalForm.methodId = $scope.mNoticeRuleList[index].method_id;
+        $scope.initData.modalForm.methodId = $scope.mNoticeRuleList[index].method;
         if($scope.initData.modalForm.methodId == 1){
             $scope.initData.modalForm.method[1] = true;
         }else if($scope.initData.modalForm.methodId == 2){
