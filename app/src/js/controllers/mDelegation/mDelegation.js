@@ -290,7 +290,7 @@ angular.module('myappApp')
      */
     $scope.deleteOne = function(it){
         var config = {
-            url:  $scope.apis.deleteOne.url + "/" + $scope.init.modalForm.id,
+            url:  $scope.apis.deleteOne.url + "/" + $scope.initData.modalForm.id,
             method: $scope.apis.deleteOne.method,
             data: {}
         },
