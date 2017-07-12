@@ -58,7 +58,7 @@
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.statusId" type="hidden" value="0">               
                     <label class="checkbox-inline" ng-repeat="item in initData.warnStatusOptions">
-                        <input ng-model="initData.modalForm.status[item.status_id]" type="checkbox" ng-click="validateForm('status')">{{item.status_name}}
+                        <input ng-model="initData.modalForm.status[item.status_id]" type="checkbox" ng-click="validateForm('status')" ng-checked="initData.modalForm.status[item.status_id]">{{item.status_name}}
                     </label>
                     <div class="validate-container">
                         <span ng-if="validate.status.dirty && validate.status.error.required">
@@ -76,7 +76,7 @@
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.methodId" type="hidden" value="0">               
                     <label class="checkbox-inline" ng-repeat="item in initData.noticeMethodOptions">
-                        <input ng-model="initData.modalForm.method[item.method_id]" type="checkbox" ng-click="validateForm('method')">{{item.method_name}}
+                        <input ng-model="initData.modalForm.method[item.method_id]" type="checkbox" ng-click="validateForm('method')" ng-checked="initData.modalForm.method[item.method_id]">{{item.method_name}}
                     </label>
                     <div class="validate-container">
                         <span ng-if="validate.method.dirty && validate.method.error.required">
