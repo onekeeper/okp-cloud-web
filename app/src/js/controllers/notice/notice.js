@@ -63,14 +63,6 @@
             $scope.pager.total = data.data.total;
             $scope.cache.listArr = data.data.items;
 
-            for(var i = 0;i<$scope.cache.listArr.length;i++){
-                if(data.data.items[i].status == 0){
-                    $scope.cache.listArr[i].status = '成功';
-                }else if(data.data.items[i].status == 1){
-                    $scope.cache.listArr[i].status = '失败';
-                }
-            }
-
             $scope.apply();
         },
         fnError = function (data) {
@@ -89,43 +81,28 @@
         config.url = urlPrefix + '/user/site/' + item;
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
-            $scope.modalTitle = '站点详情';
+            $scope.mTitle = '站点详情';
             angular.element("#J_stationDetail").modal('show');
-            $scope.cache.siteObj = {
-                siteName:data.data.site_name,
-                province:data.data.province,
-                city:data.data.city,
-                address:data.data.address
-            }
+            $scope.cache.siteObj = data.data;
+            
             $scope.apply();
         },
         fnError = function (data) {
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
-            angular.element("#J_infoDetail").modal('show');
+            //angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
     }
 
     $scope.showSite = function(item){
         $scope.getSiteList(item);
-        $scope.showflag = 1;
     }
 
     $scope.showWarn = function(item){
-        $('.modal-header > h6').html('告警详情');
+        $scope.mTitle = '通知详情';
         angular.element("#J_infoDetail").modal('show');
         $scope.infoDetail = item.content;
-        $scope.showflag = 2;
-    }
-
-    $scope.clickOk = function () {
-        if($scope.showflag == 1){
-            angular.element("#J_stationDetail").modal('hide');
-        }else if($scope.showflag == 2){
-            angular.element("#J_infoDetail").modal('hide');
-        }
-
     }
 
     $scope.apply = function() {

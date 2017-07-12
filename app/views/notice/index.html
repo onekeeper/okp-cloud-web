@@ -50,7 +50,7 @@
                                     <td>{{item.finish_at}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
-                                    <td>{{item.status}}</td>
+                                    <td>{{item.status == 0 ? '成功' :'失败'}}</td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
@@ -61,10 +61,10 @@
             </div>
         </div>
     </div>
-    <div id="J_stationDetail" modal-directive>
+    <div id="J_stationDetail" show-directive>
         <div ng-include="'views/public/stationDetail.html'"></div>
     </div>
-    <div id="J_infoDetail" modal-directive>
+    <div id="J_infoDetail" show-directive>
         <div ng-include="'views/public/infoDetail.html'"></div>
     </div>
 </div>

@@ -42,9 +42,9 @@
                             <tbody>
                                 <tr ng-repeat="item in cache.listArr">
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
-                                    <td>{{item.alert_severity}}</td>
-                                    <td>{{item.alert_status}}</td>
-                                    <td>{{item.methods}}</td>
+                                    <td>{{item.alert_severity == 1? '消息' : item.alert_severity == 2 ? '告警' : '威胁'}}</td>
+                                    <td>{{item.alert_status == 1?'已解决':'遗留' }}</td>
+                                    <td>{{item.method == 1?'邮件':'微信'}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -54,10 +54,10 @@
             </div>
         </div>
     </div>
-    <div id="J_infoDetail" modal-directive>
+    <div id="J_infoDetail" show-directive>
         <div ng-include="'views/public/infoDetail.html'"></div>
     </div>
-    <div id="J_stationDetail" modal-directive>
+    <div id="J_stationDetail" show-directive>
         <div ng-include="'views/public/stationDetail.html'"></div>
     </div>
 </div>
