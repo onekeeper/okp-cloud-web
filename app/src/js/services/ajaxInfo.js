@@ -1,5 +1,5 @@
 angular.module('myappApp')
-  	.service('AjaxServer', function($location, $http, $cookieStore, $rootScope, $state){
+  	.service('AjaxServer', function($location, $http, $cookieStore, $rootScope, $state, sessionStore){
   		$rootScope.$broadcast('updateLogin');
   		this.pathStr = $location.path();
   		this.ajaxInfo = function( config , fnSuccess, fnFail ) {
@@ -12,12 +12,11 @@ angular.module('myappApp')
                 data: config.data || '',
                 params: config.method == 'get' ? config.data || '' : '',
                 responseType: config.responseType || 'json',
-                headers: {'Authorization' : 'Onekeeper '+ $cookieStore.get('token')},//config.headers,
+                headers: {'Authorization' : 'Onekeeper '+ sessionStore.get('token')},//config.headers,
                 url: config.url
             }).success(function(data,status,headers,config){
             	data = data || {};
             	if(data.code){
-            		$('.modal-backdrop').remove();
             		if(status == 401){
                         $state.go("login");
             		}
