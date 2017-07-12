@@ -70,9 +70,9 @@
                                         <span ng-if="item.status == 1">等待确认</span>
                                         <span ng-if="item.status == 2">确认完成</span>
                                     </td>
-                                    <td class="col-operate">
-                                        <a role="button" class="icon icon-del" title="取消授权" ng-if="item.status == 2" ng-click="clickDelete($index)"></a>
-                                        <a role="button" class="icon icon-edit" title="接受授权" ng-if="item.status == 1"ng-click="clickEdit($index)"></a>
+                                    <td class="col-operate">{{}}
+                                        <a role="button" class="icon icon-del" title="取消授权" ng-if="item.grantor_name == username" ng-click="clickDelete($index)"></a>
+                                        <a role="button" class="icon icon-edit" title="接受授权" ng-if="item.grantee_name == username && item.status == 1"ng-click="clickEdit($index)"></a>
                                     </td>
                                 </tr>
                             </tbody>
