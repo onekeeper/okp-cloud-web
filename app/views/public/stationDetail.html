@@ -1,4 +1,4 @@
-<div style="width:100%;margin:0 auto;">
+<!-- <div style="width:100%;margin:0 auto;">
 	<div class="table-responsive">
 		<table class="table table-hover table-custom">
 			<tbody>
@@ -16,7 +16,12 @@
 			</tbody>
 		</table>
 	</div>
-</div>
+</div> -->
 
+<div class="modal-show">
+	<div class="col-lg-6 col-md-6 modal-list" ng-repeat="(key,value) in listContent" >
+			{{key}}：<span class="text-muted">{{value}}</span>
+	</div>
+</div>
 
 
