@@ -106,6 +106,7 @@ angular.module('myappApp')
         $scope.init = function () {
             $scope.getList();
             $scope.infoDetail = '';
+            $scope.pager.curPage = 1;
         };
 
         /**
@@ -147,7 +148,7 @@ angular.module('myappApp')
                     $scope.siteList.init.loading = false;
                     $scope.siteList.init.tdObj = data.data.items;
                     $scope.pager.total = data.data.total;
-                    $scope.pager.totalPage = Math.ceil( data.total / parseInt($scope.pager.pageSize) );
+                    $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
                     $scope.apply();
                     $scope.getProvinceList();//获取省份
                 },

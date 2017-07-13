@@ -66,6 +66,8 @@
                             scope.pager.curPage--;
                         }
                         if(targetPage === 'Next'){
+                            console.log(scope.pager.curPage);
+                            console.log(scope.pager.totalPage);
                             if(scope.pager.curPage >= scope.pager.totalPage) return false;
                             scope.pager.curPage++;
                         }

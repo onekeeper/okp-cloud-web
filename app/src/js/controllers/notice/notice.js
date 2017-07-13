@@ -61,8 +61,8 @@
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.pager.total = data.data.total;
+            $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
             $scope.cache.listArr = data.data.items;
-
             $scope.apply();
         },
         fnError = function (data) {

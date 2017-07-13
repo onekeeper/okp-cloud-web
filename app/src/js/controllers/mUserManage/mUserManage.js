@@ -122,7 +122,7 @@ angular.module('myappApp')
             $scope.userList.init.loading = false;
             $scope.userList.init.tdObj = data.data.items;
             $scope.pager.total = data.data.total;
-            $scope.pager.totalPage = Math.ceil( data.total / parseInt($scope.pager.pageSize) );
+            $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
             $scope.apply();
         },
         fnFail = function(data){
