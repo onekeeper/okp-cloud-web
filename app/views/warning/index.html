@@ -39,8 +39,8 @@
                                     <th title="创建时间">创建时间</th>
                                     <th title="站点名称">站点名称</th>
                                     <th title="主机名称">主机名称</th>
-                                    <th title="告警级别">告警级别</th>
-                                    <th title="告警状态">告警状态</th>
+                                    <th title="可通知级别">可通知级别</th>
+                                    <th title="可通知状态">可通知状态</th>
                                     <th title="告警详情">告警详情</th>
                                 </tr>
                             </thead>
@@ -49,8 +49,8 @@
                                     <td title="">{{item.create_at | dateFilter}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
-                                    <td>{{item.severity == 1? '消息' : item.severity == 2 ? '告警' : '威胁'}}</td>
-                                    <td>{{item.status == 1?'已解决':'遗留' }}</td>
+                                    <td>{{item.severity == 1? '消息' : item.severity == 2 ? '告警' : item.severity == 4 ? '威胁' : item.severity == 6 ? '告警，威胁' : '消息，告警，威胁'}}</td>
+                                    <td>{{item.status == 1 ? '已解决' : item.status == 2 ? '遗留' : '已解决，遗留' }}</td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
