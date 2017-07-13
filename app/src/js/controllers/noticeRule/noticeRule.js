@@ -77,7 +77,13 @@ angular.module('myappApp')
             $scope.mTitle = '站点详情';
             angular.element("#J_stationDetail").modal('show');
             $scope.cache.siteObj = data.data[0];
-
+            $scope.listContent = {
+                '站点名称':$scope.cache.siteObj.site_name,
+                '省':$scope.cache.siteObj.province,
+                '市':$scope.cache.siteObj.city ,
+                '地址':$scope.cache.siteObj.address,
+                'access_key':$scope.cache.siteObj.access_key
+            }
             $scope.apply();
         },
         fnError = function (data) {
