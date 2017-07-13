@@ -222,7 +222,7 @@ angular.module('myappApp')
                 console.log(data.message);
             };
         AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
-    }
+    };
 
     /**
      * 点击确定

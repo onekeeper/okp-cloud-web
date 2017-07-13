@@ -50,6 +50,7 @@
 }
 .table-custom{
     margin-bottom: 0;
+    table-layout: fixed;
 }
 .table-custom > tbody > tr > td,
 .table-custom > tbody > tr > th,
@@ -62,6 +63,7 @@
     vertical-align: middle;
     padding: 5px 8px;
     border: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .table-custom > tbody > tr > th,
 .table-custom > tfoot > tr > th,
