@@ -121,8 +121,14 @@ angular.module('myappApp')
 	*/
 	this.validComplexHash = function(str){
 		// var reg = /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,20}$/;
-		var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
-        return reg.test(str);
+        //var specialWords = ['~','!','@','#','￥','%','&','*','.'];
+        var pattern = new RegExp("[`~!@#$%^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+        var rs = "";
+        for (var i = 0; i < str.length; i++) {
+            rs = rs+str.substr(i, 1).replace(pattern, 'a');
+        }
+        var reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
+        return reg.test(rs);
 	};
 
 	/*
