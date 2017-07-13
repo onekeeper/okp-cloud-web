@@ -41,6 +41,7 @@
                                     <th title="站点名称">站点名称</th>
                                     <th title="主机名称">主机名称</th>
                                     <th title="通知状态">通知状态</th>
+                                    <th title="通知方法">通知方法</th>
                                     <th title="通知内容">通知内容</th>
                                 </tr>
                             </thead>
@@ -51,6 +52,7 @@
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.status == 0 ? '成功' :'失败'}}</td>
+                                    <td>{{item.method == 1 ? '邮件' : item.method == 2 ?'微信':'邮件，微信'}}</td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
