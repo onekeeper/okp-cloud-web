@@ -91,6 +91,9 @@ fieldset[disabled] .select-date {
 .icon-pwd{
     background: url(../images/icons/pwd.png) no-repeat center center;
 }
+.icon-key{
+    background: url(../images/icons/key.png) no-repeat center center;
+}
 .icon-add:focus,
 .icon-add:hover,
 .icon-add:active{
@@ -135,6 +138,12 @@ fieldset[disabled] .select-date {
     filter:alpha(opacity=50);
     background: url(../images/icons/pause.png) no-repeat center center;
     cursor: not-allowed;
+}
+
+.icon-key:focus,
+.icon-key:hover,
+.icon-key:active{
+    background: url(../images/icons/key-active.png) no-repeat center center;
 }
 
 /* 头部图标 */

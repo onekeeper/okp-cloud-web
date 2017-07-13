@@ -204,6 +204,7 @@ angular.module('myappApp')
          * @param it: clicked object
          */
         $scope.deleteOneSite = function(it){
+            $scope.errMsg = '';
             var config = {
                     url:  $scope.siteList.apis.deleteOne.url.replace(/\#/,$scope.siteList.init.actionId),
                     method: $scope.siteList.apis.deleteOne.method,
@@ -222,6 +223,7 @@ angular.module('myappApp')
                 },
                 fnFail = function(data){
                     it.removeClass('disabled');
+                    $scope.errMsg = data.message;
                     console.log(data.message);
                 };
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
@@ -231,6 +233,7 @@ angular.module('myappApp')
          * 重置AccessKey
          */
         $scope.resetKey = function(it) {
+            $scope.errMsg = '';
             var config = {
                     url: $scope.siteList.apis.resetKey.url.replace(/\#/, $scope.siteList.init.actionId),
                     method: $scope.siteList.apis.resetKey.method,
@@ -249,6 +252,7 @@ angular.module('myappApp')
                 },
                 fnFail = function (data) {
                     it.removeClass('disabled');
+                    $scope.errMsg = data.message;
                     console.log(data.message);
                 };
             AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
