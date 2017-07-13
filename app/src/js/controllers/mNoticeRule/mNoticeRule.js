@@ -255,7 +255,6 @@ angular.module('myappApp')
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
 
-
     /**
      * 获取通知规则列表
      */
@@ -265,7 +264,7 @@ angular.module('myappApp')
             method: $scope.apis.getmNoticeRuleList.method,
             data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.per_page) || 10,
+                per_page: parseInt($scope.pager.pageSize) || 10,
                 site_name: $scope.query.siteName || null,
                 username: $scope.query.userName || null
             }
@@ -288,6 +287,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取数据条数
      */
@@ -297,7 +297,6 @@ angular.module('myappApp')
             $scope.pager.totalPage = Math.ceil( $scope.initData.total / parseInt($scope.pager.per_page) );
         }
     };
-
 
     /**
      * 添加
