@@ -1,4 +1,9 @@
 (function ($) {
+    if(!sessionStorage ||
+        (!sessionStorage.getItem('userLogStatus') || !sessionStorage.getItem('loginUser') || !sessionStorage.getItem('token'))) {
+        $(window.location).attr('href', '../../#/login');
+        return;
+    }
 	var data = [
 		 {name: '海门', value: 9, warn: 0},
 		 {name: '鄂尔多斯', value: 12, warn: 0},
@@ -399,7 +404,7 @@
 				res.push({
 					name: data[i].name,
 					value: geoCoord.concat(data[i].value).concat(data[i].warn),
-					itemStyle:{normal:{color:colorValue}}  
+					itemStyle:{normal:{color:colorValue}}
 				});
 			}
 		}
@@ -423,7 +428,7 @@
 				var obj = params;//JSON.parse(JSON.stringify(params));
 				var itemName = obj.name;
 				var value = obj.value;
-				var str = "<ur style='text-align:left;list-style:none;'><li style='font:bolder;'>" + itemName + "</li>";
+				var str = "<ur style='text-align:left;list-style:none;'><li style='font-weight:bolder;'>" + itemName + "</li>";
 				str = str + "<li>共 " + value[2] + " 台主机</li>";
 				str = str + "<li>故障 <span style='color:#f35d40;'>" + value[3] + "</span> 台</li>";
 				str = str + "</ul>";
@@ -592,7 +597,7 @@
 				}
 			   ]
 			}
-		},		
+		},
 		series : [
 			{
 				name: '站点数量',
@@ -650,15 +655,12 @@
 			}
 		]
 	};
-	
-	var chart = echarts.init( document.getElementById("J_map"));
-	chart.setOption(option);  
-	
-	
+
+
 	function getid(id){
 		return document.getElementById(id);
 	}
-	
+
 	//滚动栏部分-------------------//
 	function mar(){
 		if(t2.offsetTop<=t.scrollTop){
@@ -667,7 +669,7 @@
 			t.scrollTop++;
 		}
 	}
-	
+
 	var t=getid("J_scroll"),t1=getid("J_scroll_info"),t2=getid("J_scroll_help"),timer;
 	$(function(){
 		$("#J_scroll").mouseover(function(){
@@ -676,7 +678,7 @@
 		   timer=setInterval(mar,30)
 		});
 	})
-	
+
 	var structScrollInfo = function(arrInfo){
 		$("#J_scroll_info").html(" ");
 		clearInterval(timer);
@@ -701,11 +703,111 @@
 			li.append(divInfo);
 			ul.append(li);
 		}
-		$("#J_scroll_info").append(ul);			
+		$("#J_scroll_info").append(ul);
 		t2.innerHTML=t1.innerHTML;
 		timer=setInterval(mar,30);
 	};
-	
-	structScrollInfo("");
-	  
+
+    //get key every 30min
+    function getKeyTimmer(){
+        $.ajax({
+            type:"get",
+            dataType: "json",
+            url:"/partner/refresh",
+            data:{},
+            async:false,
+            headers: {
+                'Authorization' : 'Onekeeper '+sessionStorage.getItem('token')
+            },
+            success:function(data){
+                sessionStorage.setItem('token',data.access_token);
+            },
+            error:function(){
+                console.log("系统程序错误！");
+            }
+        });
+        setTimeout(getKeyTimmer,18000000)
+    }
+
+    //转换后台地图点接口数据
+    function convertInterfaceData(data){
+        var reArr = [];
+        var objTemp = {};
+        for(var i=0; i<data.length; i++){
+            objTemp.name = data[i].city_name;
+            objTemp.value = data[i].site_total;
+            objTemp.warn = data[i].site_alert_count;
+            reArr.push(objTemp);
+        }
+        return reArr;
+    }
+
+    //转换后台地图告警接口数据
+    function convertWarnInfo(data){
+        var reArr = [];
+        var strTemp = '';
+        for(var i=0; i < data.length; i++){
+            strTemp += '"'+data.occure_at+'"';
+            strTemp += '"'+data.host+'"';
+            strTemp += '"'+data.content+'"';
+            reArr.push(strTemp);
+        }
+        return reArr;
+    }
+
+    var chart = echarts.init( document.getElementById("J_map"));
+    function getMapDataTimmer(){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/partner/mappoint",
+            data: {},
+            async: false,
+            headers: {
+                'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
+            },
+            success: function (data) {
+                if(data && data.data) {
+                    option.series.data[0] = convertData(convertInterfaceData(data.data));
+                    option.series.data[1] = convertData(convertInterfaceData(data.data).sort(function (a, b) {
+                        return b.value - a.value;
+                    }).slice(0, 6));
+                    chart.setOption(option);
+                }
+            },
+            error: function () {
+                chart.setOption(option);
+                console.log("系统程序错误！");
+            }
+        });
+        setTimeout(getMapDataTimmer,20000);
+    }
+
+    function getScrollDataTimmer(){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/partner/mapcontent",
+            data: {},
+            async: false,
+            headers: {
+                'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
+            },
+            success: function (data) {
+                if(data && data.data) {
+                    structScrollInfo(convertWarnInfo(data.data));
+                }
+            },
+            error: function () {
+                structScrollInfo([]);
+                console.log("系统程序错误！");
+            }
+        });
+        setTimeout(getScrollDataTimmer,20000);
+    }
+
+    getMapDataTimmer();
+    getScrollDataTimmer();
+    getKeyTimmer();
+
 })(jQuery);

@@ -20,10 +20,10 @@ angular.module('myappApp')
         modalForm:{
             id:'',
             siteId: '',
-            userId: '',            
+            userId: '',
             severityId: '',
             statusId:'',
-            methodId:'',            
+            methodId:'',
             severity:[],
             status:[],
             method: []
@@ -72,7 +72,7 @@ angular.module('myappApp')
             method: 'get',
             data: {
                 page: 1,
-                per_page: 20,
+                per_page: '',
                 site_name:'',
                 username:''
             }
@@ -85,7 +85,7 @@ angular.module('myappApp')
                 user_id:'',
                 severity_id:'',
                 status_id:'',
-                method_id:'' 
+                method_id:''
            }
         },
         editOne:{
@@ -120,7 +120,7 @@ angular.module('myappApp')
         $scope.getWarnStatusOptions();
         $scope.getNoticeMethodOptions();
 
-        //得到列表        
+        //得到列表
         $scope.getmNoticeRuleList();//通知规则
 
         //绑定事件
@@ -143,7 +143,7 @@ angular.module('myappApp')
         $scope.getmNoticeRuleList();
         $scope.getPager();
     };
-    $scope.formatState = function () {       
+    $scope.formatState = function () {
         $scope.initData.getListError = '';
         $scope.initData.loading = true;
         $scope.mNoticeRuleList = [];
@@ -253,7 +253,7 @@ angular.module('myappApp')
             console.log(data.message || '获取列表失败');
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
-    };  
+    };
 
 
     /**
@@ -263,9 +263,9 @@ angular.module('myappApp')
         var config = {
             url:  $scope.apis.getmNoticeRuleList.url,
             method: $scope.apis.getmNoticeRuleList.method,
-            data: {                
+            data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.per_page) || 20,
+                per_page: parseInt($scope.pager.per_page) || 10,
                 site_name: $scope.query.siteName || null,
                 username: $scope.query.userName || null
             }
@@ -295,10 +295,10 @@ angular.module('myappApp')
         if($scope.initData.total > 0){
             $scope.pager.total = $scope.initData.total;
             $scope.pager.totalPage = Math.ceil( $scope.initData.total / parseInt($scope.pager.per_page) );
-        }        
+        }
     };
 
-    
+
     /**
      * 添加
      * @param it: clicked object
@@ -313,7 +313,7 @@ angular.module('myappApp')
                 user_id: String($scope.initData.modalForm.userId),
                 severity_id: String($scope.initData.modalForm.severityId),
                 status_id: String($scope.initData.modalForm.statusId),
-                method_id: String($scope.initData.modalForm.methodId)               
+                method_id: String($scope.initData.modalForm.methodId)
             }
         },
         fnSuccess = function (data){
@@ -408,11 +408,11 @@ angular.module('myappApp')
                 it.addClass('disabled');
                 $scope.editOne(it);
                 break;
-            default: 
+            default:
                 if($scope.validateForm('all')){
                     it.addClass('disabled');
                     $scope.addOne(it);
-                }               
+                }
                 break;
         }
     };
@@ -426,17 +426,17 @@ angular.module('myappApp')
          $scope.initData.modalForm = {
             id:'',
             siteId: '',
-            userId: '',            
+            userId: '',
             severityId: '',
             statusId:'',
-            methodId:'',            
+            methodId:'',
             severity:[],
             status:[],
             method: []
         };
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
-    };   
+    };
     /**
      * 点击修改
      * @param index
@@ -489,7 +489,7 @@ angular.module('myappApp')
         }
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
-    }; 
+    };
     /**
      * 点击删除
      * @param index
@@ -514,60 +514,60 @@ angular.module('myappApp')
             if(!$scope.initData.modalForm.siteId){
                 $scope.validate.site = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'user' || type === 'all'){
             $scope.validate.user = angular.extend({},validDirtyObj);
             if(!$scope.initData.modalForm.userId){
                 $scope.validate.user = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'severity' || type === 'all'){
             $scope.initData.modalForm.severityId = 0;
             console.log($scope.initData.modalForm.severity);
             if(!!$scope.initData.modalForm.severity){
-                $.each($scope.initData.modalForm.severity, function(k,v){ 
+                $.each($scope.initData.modalForm.severity, function(k,v){
                     if(v){
                         $scope.initData.modalForm.severityId += parseInt(k);
                     }
-                }); 
-            }           
+                });
+            }
             $scope.validate.severity = angular.extend({},validDirtyObj);
             if($scope.initData.modalForm.severityId == 0){
                 $scope.validate.severity = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'status' || type === 'all'){
             $scope.initData.modalForm.statusId = 0;
             if(!!$scope.initData.modalForm.status){
-                $.each($scope.initData.modalForm.status, function(k,v){ 
+                $.each($scope.initData.modalForm.status, function(k,v){
                     if(v){
                         $scope.initData.modalForm.statusId += parseInt(k);
                     }
-                }); 
-            }           
+                });
+            }
             $scope.validate.status = angular.extend({},validDirtyObj);
             if($scope.initData.modalForm.statusId == 0){
                 $scope.validate.status = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'method' || type === 'all'){
             $scope.initData.modalForm.methodId = 0;
             if(!!$scope.initData.modalForm.method){
-                $.each($scope.initData.modalForm.method, function(k,v){ 
+                $.each($scope.initData.modalForm.method, function(k,v){
                     if(v){
                         $scope.initData.modalForm.methodId += parseInt(k);
                     }
-                }); 
-            }           
+                });
+            }
             $scope.validate.method = angular.extend({},validDirtyObj);
             if($scope.initData.modalForm.methodId == 0){
                 $scope.validate.method = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         $scope.apply();
         return true;
@@ -599,7 +599,7 @@ angular.module('myappApp')
             });
         });
     };
-    
+
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();

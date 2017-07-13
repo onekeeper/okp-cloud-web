@@ -56,7 +56,7 @@
         config.data = {
             sitename: $scope.siteName,
             page: $scope.pager.curPage || 1,
-            per_page: parseInt($scope.pager.pageSize) || 20
+            per_page: parseInt($scope.pager.pageSize) || 10
         };
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
@@ -84,7 +84,7 @@
             $scope.mTitle = '站点详情';
             angular.element("#J_stationDetail").modal('show');
             $scope.cache.siteObj = data.data[0];
-            
+
             $scope.apply();
         },
         fnError = function (data) {

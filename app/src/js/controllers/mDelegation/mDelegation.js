@@ -20,7 +20,7 @@ angular.module('myappApp')
         modalForm:{
             id:'',
             siteId: '',
-            partnerId: '',            
+            partnerId: '',
             moduleId: '',
             grantorId:'',
             granteeId:'',
@@ -53,11 +53,11 @@ angular.module('myappApp')
                 method: 'get',
                 data: {
                     page: 1,
-                    per_page: 20,
+                    per_page: '',
                     partner_name:'',
                     site_name:''
                 }
-            },           
+            },
             addOne:{
                url: urlPrefix + '/delegation',
                method: 'post',
@@ -91,7 +91,7 @@ angular.module('myappApp')
         $scope.getPartnerOptions();
         $scope.getDelegationOptions();
 
-        //得到列表        
+        //得到列表
         $scope.getmDelegationList();//通知规则
 
         //绑定事件
@@ -114,7 +114,7 @@ angular.module('myappApp')
         $scope.getmDelegationList();
         $scope.getPager();
     };
-    $scope.formatState = function () {       
+    $scope.formatState = function () {
         $scope.initData.getListError = '';
         $scope.initData.loading = true;
         $scope.mDelegationList = [];
@@ -182,7 +182,7 @@ angular.module('myappApp')
             console.log(data.message || '获取列表失败');
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
-    };    
+    };
 
 
     /**
@@ -192,7 +192,7 @@ angular.module('myappApp')
         var config = {
             url:  $scope.apis.getmDelegationList.url,
             method: $scope.apis.getmDelegationList.method,
-            data: {                
+            data: {
                 page: $scope.pager.curPage || 1,
                 per_page: parseInt($scope.pager.per_page) || 10,
                 site_name: $scope.query.siteName || null,
@@ -224,10 +224,10 @@ angular.module('myappApp')
         if($scope.initData.total > 0){
             $scope.pager.total = $scope.initData.total;
             $scope.pager.totalPage = Math.ceil( $scope.initData.total / parseInt($scope.pager.per_page) );
-        }        
+        }
     };
 
-    
+
     /**
      * 添加授权
      * @param it: clicked object
@@ -240,7 +240,7 @@ angular.module('myappApp')
             data: {
                 site_id: String($scope.initData.modalForm.siteId),
                 grantee_id: String($scope.initData.modalForm.partnerId),
-                delegation_module: String($scope.initData.modalForm.moduleId)                
+                delegation_module: String($scope.initData.modalForm.moduleId)
             }
         },
         fnSuccess = function (data){
@@ -347,7 +347,7 @@ angular.module('myappApp')
          $scope.initData.modalForm = {
             id:'',
             siteId: '',
-            partnerId: '',            
+            partnerId: '',
             moduleId: '',
             grantorId:'',
             granteeId:'',
@@ -355,7 +355,7 @@ angular.module('myappApp')
         };
         $scope.selfValid();
         angular.element('#J_addmDelegation').modal();
-    };    
+    };
     /**
      * 取消授权
      * @param index
@@ -392,29 +392,29 @@ angular.module('myappApp')
             if(!$scope.initData.modalForm.siteId){
                 $scope.validate.siteName = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'partner' || type === 'all'){
             $scope.validate.partner = angular.extend({},validDirtyObj);
             if(!$scope.initData.modalForm.partnerId){
                 $scope.validate.partner = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         if(type === 'module' || type === 'all'){
             $scope.initData.modalForm.moduleId = 0;
             if(!!$scope.initData.modalForm.module){
-                $.each($scope.initData.modalForm.module, function(k,v){ 
+                $.each($scope.initData.modalForm.module, function(k,v){
                     if(v){
                         $scope.initData.modalForm.moduleId += parseInt(k);
                     }
-                }); 
-            }           
+                });
+            }
             $scope.validate.module = angular.extend({},validDirtyObj);
             if($scope.initData.modalForm.moduleId == 0){
                 $scope.validate.module = angular.extend({},validNotObj,{error:{required:true}});
                 return;
-            }  
+            }
         }
         $scope.apply();
         return true;
@@ -444,7 +444,7 @@ angular.module('myappApp')
             });
         });
     };
-    
+
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
