@@ -34,17 +34,17 @@
                             <thead>
                                 <tr>
                                     <th title="站点名称">站点名称</th>
-                                    <th title="告警级别">告警级别</th>
-                                    <th title="告警状态">告警状态</th>
+                                    <th title="可通知级别">可通知级别</th>
+                                    <th title="可通知状态">可通知状态</th>
                                     <th title="通知方式">通知方式</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in cache.listArr">
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
-                                    <td>{{item.alert_severity == 1? '消息' : item.alert_severity == 2 ? '告警' : '威胁'}}</td>
-                                    <td>{{item.alert_status == 1?'已解决':'遗留' }}</td>
-                                    <td>{{item.method == 1?'邮件':'微信'}}</td>
+                                    <td>{{item.alert_severity == 1? '消息' : item.alert_severity == 2 ? '告警' : item.alert_severity == 4 ? '威胁' : item.alert_severity == 6 ? '告警，威胁' : '消息，告警，威胁'}}</td>
+                                    <td>{{item.alert_status == 1 ? '已解决' : item.alert_status == 2 ? '遗留' : '已解决，遗留' }}</td>
+                                    <td>{{item.methods == 1 ? '邮件' : item.methods == 2 ?'微信':'邮件，微信'}}</td>
                                 </tr>
                             </tbody>
                         </table>

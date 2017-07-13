@@ -38,7 +38,10 @@
                                     <th>站点SN</th>
                                     <th>省</th>
                                     <th>市</th>
+                                    <!--
                                     <th>详细地址</th>
+                                    -->
+                                    <th>AccessKey</th>
                                     <th>创建时间</th>
                                     <!--
                                     <th>变更时间</th>
@@ -49,20 +52,23 @@
                             </thead>
                             <tbody ng-show="siteList.init.loading">
                                 <tr class="tr-loading text-center">
-                                    <td colspan="9"><div class="loading"></div></td>
+                                    <td colspan="8"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
                             <tbody ng-hide="siteList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="siteList.init.tdObj.length==0">
-                                    <td colspan="9" ng-if="siteList.init.getListError!=''">{{siteList.init.getListError}}</td>
-                                    <td colspan="9" ng-if="siteList.init.getListError==''">数据为空</td>
+                                    <td colspan="8" ng-if="siteList.init.getListError!=''">{{siteList.init.getListError}}</td>
+                                    <td colspan="8" ng-if="siteList.init.getListError==''">数据为空</td>
                                 </tr>
                                 <tr ng-repeat="item in siteList.init.tdObj">
                                     <td ng-bind="item.site_name"></td>
-                                    <td ng-bind="item.sn"></td>
+                                    <td ng-bind="item.sn" title="{{item.sn}}"></td>
                                     <td ng-bind="item.province_name"></td>
                                     <td ng-bind="item.city_name"></td>
-                                    <td ng-bind="item.address"></td>
+                                    <!--
+                                    <td ng-bind="item.address" title="{{item.address}}"></td>
+                                    -->
+                                    <td><a ng-click="showKeyDetail(item.access_key);" title="{{item.access_key}}">{{item.access_key}}</td>
                                     <td ng-bind="item.create_at | dateFilter"></td>
                                     <!--
                                     <td ng-bind="item.update_at | date:'yyyy-MM-dd HH:mm:ss'"></td>
@@ -71,6 +77,8 @@
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"
                                            ng-click="clickEdit($index)"></a>
+                                        <a role="button" class="icon icon-key" title="重置Access_key"
+                                           ng-click="clickResetKey($index)"></a>
                                         <a role="button" class="icon icon-del" title="删除"
                                            ng-click="clickDelete($index)"></a>
                                     </td>
@@ -88,5 +96,11 @@
     </div>
     <div id="J_siteConfirm" modal-directive>
         <div ng-include="'views/public/confirmModal.html'"></div>
+    </div>
+    <div id="J_keyConfirm" modal-directive>
+        <div ng-include="'views/public/confirmModal.html'"></div>
+    </div>
+    <div id="J_keyInfoDetail" show-directive>
+        <div ng-include="'views/public/infoDetail.html'"></div>
     </div>
 </div>

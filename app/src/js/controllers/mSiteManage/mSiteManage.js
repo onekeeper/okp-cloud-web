@@ -78,6 +78,12 @@ angular.module('myappApp')
                     data: {
                     }
                 },
+                resetKey:{
+                    url: urlPrefix + '/partner/site/#',
+                    method: 'patch',
+                    data: {
+                    }
+                },
                 getProvince:{
                     url: urlPrefix + '/partner/dropdown/provinces',
                     method: 'get',
@@ -99,6 +105,7 @@ angular.module('myappApp')
          */
         $scope.init = function () {
             $scope.getList();
+            $scope.infoDetail = '';
         };
 
         /**
@@ -119,6 +126,7 @@ angular.module('myappApp')
         $scope.formatState = function () {
             $scope.siteList.init.getListError = '';
             $scope.siteList.init.loading = true;
+            $scope.infoDetail = '';
         };
 
         /**
@@ -196,6 +204,7 @@ angular.module('myappApp')
          * @param it: clicked object
          */
         $scope.deleteOneSite = function(it){
+            $scope.errMsg = '';
             var config = {
                     url:  $scope.siteList.apis.deleteOne.url.replace(/\#/,$scope.siteList.init.actionId),
                     method: $scope.siteList.apis.deleteOne.method,
@@ -214,9 +223,39 @@ angular.module('myappApp')
                 },
                 fnFail = function(data){
                     it.removeClass('disabled');
+                    $scope.errMsg = data.message;
                     console.log(data.message);
                 };
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
+        };
+
+        /**
+         * 重置AccessKey
+         */
+        $scope.resetKey = function(it) {
+            $scope.errMsg = '';
+            var config = {
+                    url: $scope.siteList.apis.resetKey.url.replace(/\#/, $scope.siteList.init.actionId),
+                    method: $scope.siteList.apis.resetKey.method,
+                    data: {}
+                },
+                fnSuccess = function (data) {
+                    it.removeClass('disabled');
+                    if (data) {
+                        angular.element('#J_keyConfirm').modal('hide');
+                        $scope.modalTitle = '';
+                        $scope.modalInfo = '';
+                        $scope.siteList.init.actionId = 0;
+                        $scope.query(true);
+                    }
+                    $scope.apply();
+                },
+                fnFail = function (data) {
+                    it.removeClass('disabled');
+                    $scope.errMsg = data.message;
+                    console.log(data.message);
+                };
+            AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
         };
 
         /**
@@ -278,6 +317,10 @@ angular.module('myappApp')
                     it.addClass('disabled');
                     $scope.deleteOneSite(it);
                     break;
+                case 'resetKey':
+                    it.addClass('disabled');
+                    $scope.resetKey(it);
+                    break;
                 default:
                     if($scope.validateForm('all','site')){
                         it.addClass('disabled');
@@ -326,6 +369,27 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'delete';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_siteConfirm').modal();
+        };
+
+        /**
+         * 点击重置access_key
+         * @param index
+         */
+        $scope.clickResetKey = function(index){
+            $scope.modalTitle = '重置AccessKey';
+            $scope.modalInfo = '确定重置该站点AccessKey吗？';
+            $scope.siteList.init.actionType = 'resetKey';
+            $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
+            angular.element('#J_keyConfirm').modal();
+        };
+
+        /**
+         *显示key详细信息
+         */
+        $scope.showKeyDetail = function(value){
+            $scope.mTitle = 'AccessKey详情';
+            angular.element("#J_keyInfoDetail").modal('show');
+            $scope.infoDetail = value;
         };
 
         /**

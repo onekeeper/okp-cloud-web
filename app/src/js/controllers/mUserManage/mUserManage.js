@@ -174,6 +174,7 @@ angular.module('myappApp')
      * @param it: clicked object
      */
     $scope.deleteOneUser = function(it){
+        $scope.errMsg = '';
         var config = {
             url:  $scope.userList.apis.deleteOne.url.replace(/\#/,$scope.userList.init.actionId),
             method: $scope.userList.apis.deleteOne.method,
@@ -192,6 +193,7 @@ angular.module('myappApp')
         },
         fnFail = function(data){
             it.removeClass('disabled');
+            $scope.errMsg = data.message;
             console.log(data.message);
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
@@ -201,6 +203,7 @@ angular.module('myappApp')
      * 密码重置
      */
     $scope.resetPwd = function(it) {
+        $scope.errMsg = '';
         var config = {
                 url: $scope.userList.apis.resetPwd.url.replace(/\#/, $scope.userList.init.actionId),
                 method: $scope.userList.apis.resetPwd.method,
@@ -219,10 +222,11 @@ angular.module('myappApp')
             },
             fnFail = function (data) {
                 it.removeClass('disabled');
+                $scope.errMsg = data.message;
                 console.log(data.message);
             };
         AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
-    }
+    };
 
     /**
      * 点击确定

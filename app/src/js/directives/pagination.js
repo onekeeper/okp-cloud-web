@@ -36,10 +36,10 @@
                         return 10;
                      })( scope.tbh , scope.trh ),
                      pageSizeOptions: (function(largest){                                 // 每页条数选项,largest为每页条数最大值
-                         var arr = [10,15,20,25];
+                         var arr = [10,20,30,40,50];
                          //for(var i = 0; i < largest; i++) arr[i] = i + 1 + '';
                          return  arr;
-                     })( scope.pslgst || 30 )
+                     })( scope.pslgst || 50 )
                  };
 
                 /**

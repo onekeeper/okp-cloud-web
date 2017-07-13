@@ -1,0 +1,58 @@
+.main{
+	padding: 0px 1.6rem 1.6rem;
+	color:#ffe972;
+}
+
+.full-map{
+	position:absolute; 
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+	z-index:1000;
+}
+
+.scroll-info{
+	position:absolute;
+	text-align:left;
+	width: 52%;
+	height:20%;
+	left:26%;
+	bottom:22px;
+	z-index:1002;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:normal;
+	font-family: "Microsoft YaHei"; 
+}
+
+.scroll-info-right{
+	position:absolute;
+	text-align:right;
+	width: 52%;
+	height:20%;
+	right:20px;
+	bottom:22px;
+	z-index:1002;
+	color:#FFFFFF;
+	font-size:12px;
+	font-weight:normal;
+	font-family: "Microsoft YaHei"; 
+}
+
+.scroll-info ul li, .scroll-info-right ul li{
+	list-style:none;
+	height:22px;
+}
+
+#J_scroll_help{
+	margin-top:-10px;
+}
+
+
+
+
+
+
+
+

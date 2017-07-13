@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>运维自动化</title>
+        <base target="_self">
+        <meta name="description" content="">
+        <!-- lib css files -->
+        <link rel="stylesheet" href="../../src/css/lib/bootstrap_3.3.6.min.css">
+        <!-- app css files s -->
+        <link rel="stylesheet" href="../../src/css/map/mapMain.css">
+        <!-- monitor -->
+        <link rel="stylesheet" href="../../src/css/map/index.css">
+        <!-- app css files e -->
+        <link rel="shortcut icon" href="../../favicon.ico">
+        <style>
+			.BMap_cpyCtrl,.anchorBL{
+			   display:none;
+			}
+        </style>
+    </head>
+    <body>
+    	<!--[if lt IE 9]>
+        <div class="alert alert-info text-center" role="alert" >
+	          由于本系统不兼容IE部分版本，为能达到使用效果，请使用谷歌CHROME或火狐FIREFOX浏览器打开本页面。
+	    </div>
+        <![endif]-->
+
+
+        <!-- main s -->
+        <div class="main">
+            <div class="container-fluid" >
+                <div class="row">
+					<!--
+					<div class="header">
+					     <div class="sysName">运维自动化监控</div>
+					</div>
+					-->
+
+					<!--地图容器-->
+					<div class="full-map" id="J_map"></div>
+
+					<!--信息滚动栏-->
+					<div id="J_scroll" class="scroll-info-right" style="overflow:hidden;">
+						<div id="J_scroll_info">
+
+						</div>
+						<div id="J_scroll_help"></div>
+					</div>
+                </div>
+            </div>
+        </div>
+        <!-- main e -->
+        <!-- footer s -->
+        <div class="footer">
+        </div>
+        <!-- footer e -->
+
+        <!-- lib js files -->
+        <script src="../../src/js/lib/jquery_1.11.3.min.js"></script>
+        <script src="../../src/js/lib/bootstrap_3.3.6.min.js"></script>
+        <script src="../../src/js/plugin/echarts3/echarts.common.min.js"></script>
+        <script src="../../src/js/plugin/echarts3/echarts.min.js"></script>
+        <script src="../../src/js/map/lib/bmap.min.js"></script>
+        <script src="../../src/js/map/lib/bmap_script.js"></script>
+        <script src="../../src/js/map/monitorMap.js"></script>
+	</body>
+</html>
