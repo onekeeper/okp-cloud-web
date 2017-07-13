@@ -60,10 +60,10 @@
                                 </tr>
                                 <tr ng-repeat="item in siteList.init.tdObj">
                                     <td ng-bind="item.site_name"></td>
-                                    <td ng-bind="item.sn"></td>
+                                    <td ng-bind="item.sn" title="{{item.sn}}"></td>
                                     <td ng-bind="item.province_name"></td>
                                     <td ng-bind="item.city_name"></td>
-                                    <td ng-bind="item.address"></td>
+                                    <td ng-bind="item.address" title="{{item.address}}"></td>
                                     <td><a ng-click="showKeyDetail(item.access_key);" title="{{item.access_key}}">{{item.access_key}}</td>
                                     <td ng-bind="item.create_at | dateFilter"></td>
                                     <!--
