@@ -38,7 +38,9 @@
                                     <th>站点SN</th>
                                     <th>省</th>
                                     <th>市</th>
+                                    <!--
                                     <th>详细地址</th>
+                                    -->
                                     <th>AccessKey</th>
                                     <th>创建时间</th>
                                     <!--
@@ -50,20 +52,22 @@
                             </thead>
                             <tbody ng-show="siteList.init.loading">
                                 <tr class="tr-loading text-center">
-                                    <td colspan="9"><div class="loading"></div></td>
+                                    <td colspan="8"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
                             <tbody ng-hide="siteList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="siteList.init.tdObj.length==0">
-                                    <td colspan="9" ng-if="siteList.init.getListError!=''">{{siteList.init.getListError}}</td>
-                                    <td colspan="9" ng-if="siteList.init.getListError==''">数据为空</td>
+                                    <td colspan="8" ng-if="siteList.init.getListError!=''">{{siteList.init.getListError}}</td>
+                                    <td colspan="8" ng-if="siteList.init.getListError==''">数据为空</td>
                                 </tr>
                                 <tr ng-repeat="item in siteList.init.tdObj">
                                     <td ng-bind="item.site_name"></td>
                                     <td ng-bind="item.sn" title="{{item.sn}}"></td>
                                     <td ng-bind="item.province_name"></td>
                                     <td ng-bind="item.city_name"></td>
+                                    <!--
                                     <td ng-bind="item.address" title="{{item.address}}"></td>
+                                    -->
                                     <td><a ng-click="showKeyDetail(item.access_key);" title="{{item.access_key}}">{{item.access_key}}</td>
                                     <td ng-bind="item.create_at | dateFilter"></td>
                                     <!--
