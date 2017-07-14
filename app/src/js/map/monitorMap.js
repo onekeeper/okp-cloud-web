@@ -4,7 +4,7 @@
         $(window.location).attr('href', '../../#/login');
         return;
     }
-	var data = [
+	var dataMap = [
 		 {name: '海门', value: 9, warn: 0},
 		 {name: '鄂尔多斯', value: 12, warn: 0},
 		 {name: '招远', value: 12, warn: 0},
@@ -603,7 +603,7 @@
 				name: '站点数量',
 				type: 'scatter',
 				coordinateSystem: 'bmap',
-				data: convertData(data),
+				data: convertData(dataMap),
 				symbolSize: function (val) {
 					return val[2] / 10;
 				},
@@ -626,7 +626,7 @@
 				name: 'Top 5',
 				type: 'effectScatter',
 				coordinateSystem: 'bmap',
-				data: convertData(data.sort(function (a, b) {
+				data: convertData(dataMap.sort(function (a, b) {
 					return b.value - a.value;
 				}).slice(0, 6)),
 				symbolSize: function (val) {
@@ -736,7 +736,7 @@
         for(var i=0; i<data.length; i++){
             objTemp.name = data[i].city_name;
             objTemp.value = data[i].site_total;
-            objTemp.warn = data[i].site_alert_count;
+            objTemp.warn = 0;
             reArr.push(objTemp);
         }
         return reArr;
@@ -757,10 +757,11 @@
 
     var chart = echarts.init( document.getElementById("J_map"));
     function getMapDataTimmer(){
+        var tempArr = [];
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/partner/mappoint",
+            url: "/partner/states/allhosts",
             data: {},
             async: false,
             headers: {
@@ -768,8 +769,39 @@
             },
             success: function (data) {
                 if(data && data.data) {
-                    option.series.data[0] = convertData(convertInterfaceData(data.data));
-                    option.series.data[1] = convertData(convertInterfaceData(data.data).sort(function (a, b) {
+                    tempArr = convertInterfaceData(data.data);
+                    option.series.data[0] = convertData(tempArr);
+                    getMapWarnDataTimmer(tempArr);
+                }
+            },
+            error: function () {
+                getMapWarnDataTimmer(dataMap);
+                console.log("系统程序错误！");
+            }
+        });
+        setTimeout(getMapDataTimmer,20000);
+    }
+
+    function getMapWarnDataTimmer(arr){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: "/partner/map/problemhosts?timedelta=30",
+            data: {},
+            async: false,
+            headers: {
+                'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
+            },
+            success: function (data) {
+                if(data && data.data) {
+                    for(var i=0; i<data.data.length; i++){
+                        for(var j=0; j<arr.length; j++){
+                            if(data.data[i].city_name == arr[j].name){
+                                arr[j].warn = data.data[i].site_total;
+                            }
+                        }
+                    }
+                    option.series.data[1] = convertData(arr.sort(function (a, b) {
                         return b.value - a.value;
                     }).slice(0, 6));
                     chart.setOption(option);
@@ -780,7 +812,6 @@
                 console.log("系统程序错误！");
             }
         });
-        setTimeout(getMapDataTimmer,20000);
     }
 
     function getScrollDataTimmer(){
