@@ -43,7 +43,7 @@ angular.module('myappApp')
     $scope.pager = {};
     $scope.apis = {
         getSiteOptions: {
-            url: urlPrefix + '/dropdown/sites',
+            url: urlPrefix + '/dropdown/sites?include_delegation=true',
             method: 'get',
             data: {}
         },

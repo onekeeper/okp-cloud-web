@@ -55,12 +55,12 @@
                                     <th class="col-operate">操作</th>
                                 </tr>
                             </thead>
-                            <tbody ng-show="mNoticeRuleList.init.loading">
+                            <tbody ng-show="mNoticeRuleList.initData.loading">
                                 <tr class="tr-loading text-center">
                                     <td colspan="7"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
-                            <tbody ng-hide="mNoticeRuleList.init.loading">
+                            <tbody ng-hide="mNoticeRuleList.initData.loading">
                                 <tr class="tr-empty text-center" ng-show="mNoticeRuleList.length==0">
                                     <td colspan="7" ng-if="initData.getListError!=''">{{initData.getListError}}</td>
                                     <td colspan="7" ng-if="mNoticeRuleList=='' && initData.getListError==''">数据为空</td>
@@ -96,7 +96,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <pager-directive pager="pager" func="'queryData'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="init.loading || mNoticeRuleList.length==0"></pager-directive>
+                    <pager-directive pager="pager" func="'queryData'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="initData.loading || mNoticeRuleList.length==0"></pager-directive>
                 </div>
             </div>
         </div>
