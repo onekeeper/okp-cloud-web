@@ -773,7 +773,7 @@
             success: function (data) {
                 if(data && data.data) {
                     tempArr = convertInterfaceData(data.data);
-                    option.series.data[0] = convertData(tempArr);
+                    option.series[0].data = convertData(tempArr);
                     getMapWarnDataTimmer(tempArr);
                 }
             },
@@ -804,7 +804,7 @@
                             }
                         }
                     }
-                    option.series.data[1] = convertData(arr.sort(function (a, b) {
+                    option.series[1].data = convertData(arr.sort(function (a, b) {
                         return b.value - a.value;
                     }).slice(0, 6));
                     chart.setOption(option);
