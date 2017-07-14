@@ -4,6 +4,9 @@
         $(window.location).attr('href', '../../#/login');
         return;
     }
+    var baseUrl = '/api/v1',
+        rangeTime = 30*24*60;//临时：30天
+        //rangeTime = 3(获取3分钟内的数据)
 	var dataMap = [
 		 {name: '海门', value: 9, warn: 0},
 		 {name: '鄂尔多斯', value: 12, warn: 0},
@@ -713,7 +716,7 @@
         $.ajax({
             type:"get",
             dataType: "json",
-            url:"/partner/refresh",
+            url:baseUrl + "/partner/refresh",
             data:{},
             async:false,
             headers: {
@@ -761,7 +764,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/partner/states/allhosts",
+            url: baseUrl + "/partner/states/allhosts",
             data: {},
             async: false,
             headers: {
@@ -786,7 +789,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/partner/map/problemhosts?timedelta=30",
+            url: baseUrl + "/partner/map/problemhosts?timedelta="+ rangeTime,
             data: {},
             async: false,
             headers: {
@@ -818,7 +821,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "/partner/mapcontent",
+            url: baseUrl + "/partner/map/contents?timedelta=" + rangeTime,
             data: {},
             async: false,
             headers: {
