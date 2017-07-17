@@ -802,10 +802,7 @@
                             if(data.data[i].city_name == arr[j].name){
                                 arr[j].warn = data.data[i].site_total;
                             }
-                        }+++
-
-
-
+                        }
                     }
                     option.series[1].data = convertData(arr.sort(function (a, b) {
                         return b.value - a.value;
