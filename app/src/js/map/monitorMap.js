@@ -750,9 +750,9 @@
         var reArr = [];
         var strTemp = '';
         for(var i=0; i < data.length; i++){
-            strTemp += '"'+data.occure_at+'"';
-            strTemp += '"'+data.host+'"';
-            strTemp += '"'+data.content+'"';
+            strTemp += '"'+data[i].occure_at+'"';
+            strTemp += '"'+data[i].host+'"';
+            strTemp += '"'+data[i].content+'"';
             reArr.push(strTemp);
         }
         return reArr;
@@ -802,7 +802,10 @@
                             if(data.data[i].city_name == arr[j].name){
                                 arr[j].warn = data.data[i].site_total;
                             }
-                        }
+                        }+++
+
+
+
                     }
                     option.series[1].data = convertData(arr.sort(function (a, b) {
                         return b.value - a.value;
