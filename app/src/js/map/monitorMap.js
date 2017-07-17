@@ -735,8 +735,9 @@
     //转换后台地图点接口数据
     function convertInterfaceData(data){
         var reArr = [];
-        var objTemp = {};
+        var objTemp = null;
         for(var i=0; i<data.length; i++){
+            objTemp = {};
             objTemp.name = data[i].city_name;
             objTemp.value = data[i].site_total;
             objTemp.warn = 0;
