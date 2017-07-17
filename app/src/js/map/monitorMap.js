@@ -750,6 +750,7 @@
         var reArr = [];
         var strTemp = '';
         for(var i=0; i < data.length; i++){
+            strTemp = '';
             strTemp += '"'+data[i].occure_at+'"';
             strTemp += '"'+data[i].host+'"';
             strTemp += '"'+data[i].content+'"';
