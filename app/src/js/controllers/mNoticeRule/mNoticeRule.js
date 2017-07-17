@@ -141,7 +141,6 @@ angular.module('myappApp')
      */
     $scope.queryData = function(){
         $scope.getmNoticeRuleList();
-        $scope.getPager();
     };
     $scope.formatState = function () {
         $scope.initData.getListError = '';
@@ -275,6 +274,7 @@ angular.module('myappApp')
             if(data && data.data.items.length > 0){
                 $scope.mNoticeRuleList = data.data.items;
                 $scope.initData.total = data.data.total;
+                $scope.getPager();
             }
             else $scope.mNoticeRuleList = [];
             $scope.apply();

@@ -112,8 +112,8 @@ angular.module('myappApp')
      */
     $scope.queryData = function(){
         $scope.getmDelegationList();
-        $scope.getPager();
     };
+
     $scope.formatState = function () {
         $scope.initData.getListError = '';
         $scope.initData.loading = true;
@@ -204,6 +204,7 @@ angular.module('myappApp')
             if(data && data.data.items.length > 0){
                 $scope.mDelegationList = data.data.items;
                 $scope.initData.total = data.data.total;
+                $scope.getPager();
             }
             else $scope.mDelegationList = [];
             $scope.apply();
