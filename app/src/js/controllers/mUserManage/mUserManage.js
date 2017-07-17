@@ -313,7 +313,7 @@ angular.module('myappApp')
      */
     $scope.validateForm = function ( type , whichForm ){
         var validDirtyObj = angular.extend({},validFormatObj,{dirty:true}),
-            validNotObj = angular.extend({},validDirtyObj,{valid:true,invalid:true});
+            validNotObj = angular.extend({},validDirtyObj,{valid:false,invalid:true});
         // 清除提示
         $scope.errorMsg = '';
         // 用户表单
