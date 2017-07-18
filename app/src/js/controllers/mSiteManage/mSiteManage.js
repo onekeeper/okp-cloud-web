@@ -285,7 +285,7 @@ angular.module('myappApp')
             var config = {
                     url:  $scope.siteList.apis.getCity.url,
                     method: $scope.siteList.apis.getCity.method,
-                    data: {province: $scope.siteList.init.tdObj[index].province_code}
+                    data: {province: ''}
                 },
                 fnSuccess = function (data){
                     if(data){
@@ -305,23 +305,12 @@ angular.module('myappApp')
                 fnFail = function(data){
                     console.log(data.message);
                 };
-            AjaxServer.ajaxInfo( config , function (data){
-                if(data){
-                    $scope.siteList.init.cityList = data.data;
-                    $scope.apply();
-                    /*编辑操作时，获取城市列表成功后弹出表单*/
-                    if(index !=undefined && index >= 0) {
-                        $scope.siteList.init.actionType = 'update';
-                        $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
-                        $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
-                        $scope.apply();
-                        $scope.selfValid();
-                        angular.element('#J_addcSite').modal();
-                    }
-                }
-            }, function(data){
-                console.log(data.message);
-            });
+            if(index !=undefined && index >= 0){
+                config.data.province = $scope.siteList.init.tdObj[index].province_code;
+            }else{
+                config.data.province =  $scope.siteList.init.modalForm.province_code;
+            }
+            AjaxServer.ajaxInfo( config, fnSuccess, fnFail);
         };
 
         /**

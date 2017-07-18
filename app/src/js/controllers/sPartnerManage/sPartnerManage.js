@@ -180,7 +180,7 @@ angular.module('myappApp')
         var config = {
                 url:  $scope.partnerList.apis.getCity.url,
                 method: $scope.partnerList.apis.getCity.method,
-                data: {province: $scope.partnerList.init.tdObj[index].province_code}
+                data: {province: ''}
             },
             fnSuccess = function (data){
                 if(data){
@@ -200,6 +200,11 @@ angular.module('myappApp')
             fnFail = function(data){
                 console.log(data.message);
             };
+        if(index !=undefined && index >= 0){
+            config.data.province = $scope.partnerList.init.tdObj[index].province_code;
+        }else{
+            config.data.province = $scope.partnerList.init.modalForm.province_code;
+        }
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
 
