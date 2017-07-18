@@ -475,7 +475,7 @@ angular.module('myappApp')
                         $scope.apply();
                         return false;
                     }
-                    else if(!Validate.validLength($scope.siteList.init.modalForm.address,{maxLen:20})){
+                    else if(!Validate.validLength($scope.siteList.init.modalForm.address,{maxLen:50})){
                         $scope.validate.site.address = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
                         $scope.apply();
                         return false;
