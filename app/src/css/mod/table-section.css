@@ -95,8 +95,9 @@
 }
 /* 分页 */
 .nav-pager{
-  position: relative;
-  height: 5%;
+    position: relative;
+    height: 5%;
+    bottom: 14px;
 }
 .nav-pager nav{
     position: absolute;

@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">登录账号<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="partnerList.init.modalForm.login_username"
+                           ng-change="validateForm('login_username','user')" ng-readonly="partnerList.init.actionType === 'update'">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.login_username.dirty && validate.user.login_username.error.required">
+                            登录账号不能为空
+                        </span>
+                        <span ng-if="validate.user.login_username.dirty && validate.user.login_username.error.format">
+                            登录账号不超过10个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.login_username.dirty && validate.user.login_username.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.login_username.dirty && validate.user.login_username.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">公司名称<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="partnerList.init.modalForm.partner_name"
+                           ng-change="validateForm('partner_name','user')" ng-readonly="partnerList.init.actionType === 'update'">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.partner_name.dirty && validate.user.partner_name.error.required">
+                            公司名称不能为空
+                        </span>
+                        <span ng-if="validate.user.partner_name.dirty && validate.user.partner_name.error.format">
+                            公司名称不超过50个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.partner_name.dirty && validate.user.partner_name.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.partner_name.dirty && validate.user.partner_name.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">省<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="partnerList.init.modalForm.province_code"
+                            ng-options = "item.province_code as item.province_name for item in partnerList.init.provinceList"
+                            ng-change="validateForm('province_code','user');getCityList();">
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.user.province_code.dirty && validate.user.province_code.error.required">
+                            省不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.province_code.dirty && validate.user.province_code.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.province_code.dirty && validate.user.province_code.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">市<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="partnerList.init.modalForm.city_code"
+                            ng-options = "item.city_code as item.city_name for item in partnerList.init.cityList"
+                            ng-change="validateForm('city_code','user');">
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.user.city_code.dirty && validate.user.city_code.error.required">
+                            市不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.city_code.dirty && validate.user.city_code.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.city_code.dirty && validate.user.city_code.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">详细地址<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input class="form-control" type="text" ng-model="partnerList.init.modalForm.address"
+                           ng-change="validateForm('address','user')" placeholder="">
+                    <div class="validate-container">
+                        <span ng-if="validate.user.address.dirty && validate.user.address.error.required">
+                            详细地址不能为空
+                        </span>
+                        <span ng-if="validate.user.address.dirty && validate.user.address.error.format">
+                            详细地址不超过50个字符
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.user.address.dirty && validate.user.address.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.user.address.dirty && validate.user.address.valid"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

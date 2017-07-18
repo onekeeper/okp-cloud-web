@@ -2,48 +2,24 @@
 
 /**
  * @ngdoc function
- * @name myappApp.controller:LoginCtrl
+ * @name myappApp.controller:superLoginCtrl
  * @description
- * # 用户登录 LoginCtrl
+ * # 超级管理用户登录 superLoginCtrl
  * Controller of the myappApp
  */
 angular.module('myappApp')
-  	.controller('LoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
-        var apiLoginUrl = urlPrefix + '/user/login',
-            otherApiLoginUrl = urlPrefix + '/partner/login';
+  	.controller('superLoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
+        var apiLoginUrl = urlPrefix + '/superviser/login';
 
         $scope.init = function() {
             $scope.clearLoginInfo();
-            if($rootScope.commonFlag == undefined) {
-                $rootScope.commonFlag = true;
-                $cookieStore.put('commonFlag',true);
-            }
-            sessionStore.set('partnerFlag','false');
   		};
 
-  		$scope.showLogin = function(type){
-            $scope.init();
-  		    if(type == 'other'){
-                $rootScope.commonFlag = false;
-                $cookieStore.put('commonFlag',false);
-            }else{
-                $rootScope.commonFlag = true;
-                $cookieStore.put('commonFlag',true);
-            }
-        };
-
-        $scope.clickSubmit = function( ev, type ) {
+        $scope.clickSubmit = function( ev ) {
             var data = {
-                email: $scope.user.username,
-                password: $scope.user.password
+                login_username: $scope.user.username,
+                login_password: $scope.user.password
             };
-            if(type != 'common'){
-                apiLoginUrl = otherApiLoginUrl;
-                data = {
-                    login_username: $scope.user.username,
-                    login_password: $scope.user.password//hex_md5($scope.user.password)
-                };
-            }
             var it = $(ev.target), ajaxConfig;
             if( it.hasClass('disabled') ){
                 return false;
@@ -66,17 +42,12 @@ angular.module('myappApp')
                         var d = typeof(data)==="string" ? JSON.parse(data) : data;
                         $rootScope.userLogStatus = 'login';
                         sessionStore.set('token',d.data.access_token);
-                        if(type == 'common'){
-                            $rootScope.username = d.data.username;
-                            sessionStore.set('loginUser',$rootScope.username);
-                            sessionStore.set('userLogStatus','login');
-                            $state.go('main.warning');
-                        }else {
-                            $rootScope.username = d.data.name;
-                            sessionStore.set('loginUser',$rootScope.username);
-                            sessionStore.set('userLogStatus','login');
-                            $state.go('main.mNoticeRule');
-                        }
+                        $rootScope.username = $scope.user.username;
+                        sessionStore.set('loginUser',$rootScope.username);
+                        sessionStore.set('userLogStatus','login');
+                        $rootScope.partnerFlag = true;
+                        sessionStore.set('partnerFlag','true');
+                        $state.go('main.sPartner');
                     }
                 }, function( error ) {
                     it.removeClass('disabled');
@@ -117,5 +88,4 @@ angular.module('myappApp')
         $scope.apply = function() {
             if(!$scope.$$phase) $scope.$apply();
         };
-
   	}]);

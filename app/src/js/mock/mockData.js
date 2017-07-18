@@ -29,6 +29,18 @@ Mock.mock(/\/user\/login/, 'post', function(options){
 });
 
 /*
+ *登录
+ */
+Mock.mock(/\/superviser\/login/, 'post', function(options){
+    return {
+        'code' : 1,
+        'data' : {
+            access_token: '9363f395-e656-96e9-dc26-5040e723626a'
+        }
+    }
+});
+
+/*
 *历史告警
 */
 Mock.mock(/\/user\/alerts/, 'get',{
@@ -96,7 +108,7 @@ Mock.mock(/\/user\/alerts/, 'get',{
 /*
 *站点信息
 */
-Mock.mock(/\/user\/site\/1/,'get',{ 
+Mock.mock(/\/user\/site\/1/,'get',{
     'code' : 1 ,
     'message' : 'success' ,
     'data' : {
@@ -146,5 +158,28 @@ Mock.mock(/\/user\/notifications/,'get', {
         }
         ] ,
         'total' : 20
+    }
+});
+
+/*
+ *合作伙伴
+ */
+Mock.mock(/\/superviser\/partner/, 'get',{
+    'code' : 1 ,
+    'message' : 'success' ,
+     data : {
+        'items' : [
+            {
+                'id' : '100' ,
+                'name':'杭州美创科技有限公司',
+                'login_username' : 'hzmc' ,
+                'province_name' : '浙江' ,
+                'province_code' : '100',
+                'city_name' : '杭州' ,
+                'city_code' : '10001',
+                'address' : '丰谭路199号'
+            }
+        ] ,
+        'total' : 40
     }
 });

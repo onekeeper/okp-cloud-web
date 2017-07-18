@@ -47,6 +47,13 @@ angular.module('myappApp')
                     data:{
                         login_password:''
                     }
+                },
+                changePwdSuper:{
+                    url: urlPrefix + '/superviser/info',
+                    method: 'post',
+                    data:{
+                        login_password:''
+                    }
                 }
             }
         };
@@ -57,6 +64,9 @@ angular.module('myappApp')
             if($rootScope.commonFlag == undefined){
                 $rootScope.commonFlag = $cookieStore.get('commonFlag');
             }
+            if($rootScope.partnerFlag == undefined){
+                $rootScope.partnerFlag = sessionStore.get('partnerFlag');
+            }
             if($rootScope.userLogStatus == undefined){
                 $rootScope.userLogStatus = sessionStore.get('userLogStatus');
             }
@@ -64,6 +74,9 @@ angular.module('myappApp')
 			if($rootScope.userLogStatus == 'login'){
                 if( sessionStore.get('loginUser') ){
                     $rootScope.username = sessionStore.get('loginUser');
+                }
+                if($rootScope.commonFlag == undefined && $rootScope.partnerFlag == 'false'){
+                    $state.go("login");
                 }
 			}else{
                 $state.go("login");
@@ -73,22 +86,26 @@ angular.module('myappApp')
         /**
          * 清除信息
          */
-        $scope.clearLoginInfo = function(){
+        $scope.clearLoginInfo = function(type){
             sessionStore.clear();
             $rootScope.userLogStatus = 'logout';
             $rootScope.username = '';
-            $state.go('login');
+            if($rootScope.partnerFlag == 'true' || type == 'true') {
+                $state.go('onekeeper');
+            }else {
+                $state.go('login');
+            }
             $scope.apply();
         };
 
         /**
          * 用户登出
          */
-        $scope.clickLogout = function(type){
+        $scope.clickLogout = function(type,mtype){
             if(type){
                 $rootScope.commonFlag = type;
             }
-            $scope.clearLoginInfo();
+            $scope.clearLoginInfo(mtype);
             $scope.apply();
         };
 
@@ -127,8 +144,14 @@ angular.module('myappApp')
                 ajaxConfig.data = {
                     password: $scope.userList.init.pwdModalForm.passWord
                 };
-	    		if(!$rootScope.commonFlag){
+	    		if(!$rootScope.commonFlag && $rootScope.partnerFlag == 'false'){
                     ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdOther);
+                    ajaxConfig.data = {
+                        login_password: $scope.userList.init.pwdModalForm.passWord
+                    };
+                }
+                if($rootScope.partnerFlag == 'true'){
+                    ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdSuper);
                     ajaxConfig.data = {
                         login_password: $scope.userList.init.pwdModalForm.passWord
                     };

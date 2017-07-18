@@ -20,7 +20,7 @@
             </div>
             <!-- 导航主体 s -->
             <div id="J_fixedNavbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-left" ng-if="partnerFlag == 'false'">
                     <!--
                     <li ui-sref-active="active"><a ui-sref="main.home">首 页</a></li>
                     <li ng-class="{'active': pagePath.indexOf('dispatch')>-1}"><a ui-sref="main.dispatch">调度管理</a></li>
@@ -38,7 +38,7 @@
                     <li><a class="btn" style="color:#b2b2b2;cursor:text;"><i class="icon-header icon-header-user"></i>欢迎你，<span class="user-name">{{username}}</span></a></li>
                     <li><a role="button" class="btn btn-link" ng-click="clickChangePwd()"><i
                         class="icon-header icon-header-password"></i>修改密码</span></a></li>
-                    <li><a role="button" class="btn btn-link" ng-click="clickLogout(commonFlag)"><i
+                    <li><a role="button" class="btn btn-link" ng-click="clickLogout(commonFlag,partnerFlag)"><i
                         class="icon-header icon-header-logout"></i>退出</span></a></li>
                 </ul>
                 <!-- 右侧功能项 e -->

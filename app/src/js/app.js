@@ -31,6 +31,11 @@ angular
 			templateUrl: "views/login/index.html",
 			controller: "LoginCtrl"
 		})
+        .state("onekeeper", {
+            url: "/onekeeper",
+            templateUrl: "views/login/onekeeper.html",
+            controller: "superLoginCtrl"
+        })
 		.state("main", {
      		url: "/main",
             templateUrl: "views/index.html",
@@ -76,4 +81,9 @@ angular
 			templateUrl: "views/mSiteManage/index.html",
 			controller: "mSiteManageCtrl"
 		})
+        .state("main.sPartner", {//合作伙伴
+            url: "/partner",
+            templateUrl: "views/sPartnerManage/index.html",
+            controller: "sPartnerManageCtrl"
+        })
   });

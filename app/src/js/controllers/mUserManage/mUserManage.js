@@ -354,15 +354,15 @@ angular.module('myappApp')
             // 联系电话
             if(type === 'mobile' || type === 'all'){
                 $scope.validate.user.mobile = angular.extend({},validDirtyObj);
+                if(!$scope.userList.init.modalForm.mobile){
+                    $scope.validate.user.mobile = angular.extend({},validNotObj,{ error:{required:true,format:false,same:false} });
+                    $scope.apply();
+                    return false;
+                }
                 if($scope.userList.init.modalForm.mobile && !Validate.validTel($scope.userList.init.modalForm.mobile)){
                     $scope.validate.user.mobile = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
                     $scope.apply();
                     return false;
-                }
-                if(!$scope.userList.init.modalForm.mobile){
-                    $scope.validate.user.mobile.valid = true;
-                    $scope.validate.user.mobile.invalid = false;
-                    $scope.validate.user.mobile.error.format = false;
                 }
             }
         }
@@ -385,6 +385,7 @@ angular.module('myappApp')
      * 自定义验证
      */
     $scope.selfValid = function (){
+        $scope.errMsg = '';
         $scope.validate = {
             user:{
                 email:{},

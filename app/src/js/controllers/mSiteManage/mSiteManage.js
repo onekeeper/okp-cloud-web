@@ -280,7 +280,7 @@ angular.module('myappApp')
         /**
          * 获取市列表
          */
-        $scope.getCityList = function(){
+        $scope.getCityList = function(index){
             $scope.siteList.init.cityList = [];
             var config = {
                     url:  $scope.siteList.apis.getCity.url,
@@ -290,12 +290,16 @@ angular.module('myappApp')
                 fnSuccess = function (data){
                     if(data){
                         $scope.siteList.init.cityList = data.data;
+                        $scope.apply();
                         /*编辑操作时，获取城市列表成功后弹出表单*/
-                        if($scope.siteList.init.actionType == 'update') {
+                        if(index !=undefined && index >= 0) {
+                            $scope.siteList.init.actionType = 'update';
+                            $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
+                            $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
+                            $scope.selfValid();
                             angular.element('#J_addcSite').modal();
                         }
                     }
-                    $scope.apply();
                 },
                 fnFail = function(data){
                     console.log(data.message);
@@ -352,12 +356,7 @@ angular.module('myappApp')
          */
         $scope.clickEdit = function(index){
             $scope.modalTitle = '修改站点';
-            $scope.siteList.init.actionType = 'update';
-            $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
-            $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
-            $scope.getCityList();
-            $scope.selfValid();
-            //angular.element('#J_addcSite').modal();
+            $scope.getCityList(index);
         };
 
         /**
@@ -535,6 +534,7 @@ angular.module('myappApp')
          * 自定义验证
          */
         $scope.selfValid = function (){
+            $scope.errMsg = '';
             $scope.validate = {
                 site:{
                     site_name:{},
