@@ -142,7 +142,7 @@ angular.module('myappApp')
 	    		it.addClass('disabled');
                 var ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdCommon);
                 ajaxConfig.data = {
-                    password: $scope.userList.init.pwdModalForm.passWord
+                    login_password: $scope.userList.init.pwdModalForm.passWord
                 };
 	    		if(!$rootScope.commonFlag && $rootScope.partnerFlag == 'false'){
                     ajaxConfig = $.extend(true,{},$scope.userList.apis.changePwdOther);

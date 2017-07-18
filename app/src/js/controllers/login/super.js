@@ -45,7 +45,7 @@ angular.module('myappApp')
                         $rootScope.username = $scope.user.username;
                         sessionStore.set('loginUser',$rootScope.username);
                         sessionStore.set('userLogStatus','login');
-                        $rootScope.partnerFlag = true;
+                        $rootScope.partnerFlag = 'true';
                         sessionStore.set('partnerFlag','true');
                         $state.go('main.sPartner');
                     }

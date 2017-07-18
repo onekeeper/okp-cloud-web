@@ -18,6 +18,7 @@ angular.module('myappApp')
                 $rootScope.commonFlag = true;
                 $cookieStore.put('commonFlag',true);
             }
+            $rootScope.partnerFlag = 'false';
             sessionStore.set('partnerFlag','false');
   		};
 
