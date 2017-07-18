@@ -30,6 +30,7 @@ angular.module('myappApp')
                 $rootScope.commonFlag = true;
                 $cookieStore.put('commonFlag',true);
             }
+            $scope.apply();
         };
 
         $scope.clickSubmit = function( ev, type ) {
