@@ -180,7 +180,7 @@ angular.module('myappApp')
         var config = {
                 url:  $scope.partnerList.apis.getCity.url,
                 method: $scope.partnerList.apis.getCity.method,
-                data: {province: $scope.partnerList.init.modalForm.province_code}
+                data: {province: $scope.partnerList.init.tdObj[index].province_code}
             },
             fnSuccess = function (data){
                 if(data){
