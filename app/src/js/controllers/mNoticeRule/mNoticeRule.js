@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name myappApp.controller:mNoticeRuleCtrl
  * @description
- * @author [Xieq]
+ * @author [Guor]
  * # mNoticeRuleCtrl
  * Controller of the myappApp
  */
@@ -127,6 +127,7 @@ angular.module('myappApp')
         // $scope.bindEvent();
         console.log($scope.initData);
     };
+
     /**
      * 页面查询操作
      * @param flag: if curPage == 1
@@ -169,6 +170,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取用户列表选项
      */
@@ -190,6 +192,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取告警级别列表选项
      */
@@ -211,6 +214,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取告警状态列表选项
      */
@@ -232,6 +236,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+    
     /**
      * 获取通知方式列表选项
      */

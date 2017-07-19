@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name myappApp.controller:mAuthorizeManageCtrl
  * @description
- * @author [Xieq]
+ * @author [Guor]
  * # mAuthorizeManageCtrl
  * Controller of the myappApp
  */
@@ -141,6 +141,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取合作伙伴列表选项
      */
@@ -162,6 +163,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 获取授权类型列表选项
      */
@@ -185,7 +187,7 @@ angular.module('myappApp')
     };
 
     /**
-     * 获取通知规则列表
+     * 获取授权管理列表
      */
     $scope.getmDelegationList = function(){
         var config = {
@@ -195,7 +197,7 @@ angular.module('myappApp')
                 page: $scope.pager.curPage || 1,
                 per_page: parseInt($scope.pager.pageSize) || 10,
                 site_name: $scope.query.siteName || null,
-                partner_name: $scope.query.partnerName || null,
+                partner_name: $scope.query.grantorName || null,
             }
         },
         fnSuccess = function (d){
