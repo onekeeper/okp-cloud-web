@@ -3,8 +3,14 @@
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-self">
         <div class="container-fluid">
             <!-- 左上产品LOGO -->
-            <a class="navbar-brand visible-xs-inline-block" href="./views/home/monitor_map.html" style="color:#fff">运维自动化云平台</a>
-            <a class="navbar-brand navbar-logo pdt12" href="./views/home/monitor_map.html">
+            <a class="navbar-brand visible-xs-inline-block" href="./views/home/monitor_map.html" ng-if="partnerFlag == 'false' && !commonFlag">运维自动化云平台</a>
+            <a class="navbar-brand navbar-logo pdt12" href="./views/home/monitor_map.html" ng-if="partnerFlag == 'false' && !commonFlag">
+                <div class="logo-icon">
+                    <img class="hidden-xs" src="../../src/images/logo.png" width="100%" alt="LOGO">
+                </div>
+            </a>
+            <a class="navbar-brand visible-xs-inline-block" ng-if="partnerFlag == 'true' || commonFlag">运维自动化云平台</a>
+            <a class="navbar-brand navbar-logo pdt12" ng-if="partnerFlag == 'true' || commonFlag">
                 <div class="logo-icon">
                     <img class="hidden-xs" src="../../src/images/logo.png" width="100%" alt="LOGO">
                 </div>

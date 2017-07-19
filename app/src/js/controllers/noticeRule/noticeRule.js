@@ -81,8 +81,8 @@ angular.module('myappApp')
                 '站点名称':$scope.cache.siteObj.site_name,
                 '省':$scope.cache.siteObj.province,
                 '市':$scope.cache.siteObj.city ,
-                '地址':$scope.cache.siteObj.address,
-                'access_key':$scope.cache.siteObj.access_key
+                '地址':$scope.cache.siteObj.address//,
+                //'access_key':$scope.cache.siteObj.access_key
             }
             $scope.apply();
         },
