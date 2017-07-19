@@ -507,6 +507,7 @@ angular.module('myappApp')
                             $scope.apply();
                             return;
                         }
+                        $scope.errorMsg = '';
                         $scope.siteList.init.modalForm.license = data.data.license;
                         $scope.validate.site.license.dirty = true;
                         $scope.validate.site.license.valid = true;

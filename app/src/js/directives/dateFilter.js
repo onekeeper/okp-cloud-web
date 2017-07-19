@@ -12,7 +12,10 @@
  angular.module('myappApp')
  .filter('dateFilter', function(){
  	return function(time){
+        time = time.replace(/-/g,'/');
+        time = time.replace(/T/g,' ');
  		var date = new Date(time);
+        date.setHours (date.getHours () + 8);
  		var symbol1 = "-";
  		var symbol2 = ":";
  		var month = date.getMonth() + 1;
@@ -36,6 +39,6 @@
  			second = "0" + second;
  		}
  		var res = date.getFullYear() + symbol1 + month + symbol1 + day + " " + hour + symbol2 + minute + symbol2 + second;
- 		return res; 
+ 		return res;
  	}
  })

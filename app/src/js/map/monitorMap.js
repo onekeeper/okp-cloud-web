@@ -752,12 +752,33 @@
         var strTemp = '';
         for(var i=0; i < data.length; i++){
             strTemp = '';
-            strTemp += '"'+data[i].occure_at+'"';
+            strTemp += '"'+transData(data[i].occure_at)+'"';
             strTemp += '"'+data[i].host+'"';
             strTemp += '"'+data[i].content+'"';
             reArr.push(strTemp);
         }
         return reArr;
+    }
+
+    //时间格式及+8
+    function transData(time){
+        time = time.replace(/-/g,'/');
+        time = time.replace(/T/g,' ');
+        var date = new Date (time);
+        var year = date.getFullYear();
+        date.setHours (date.getHours () + 8);
+        var m = date.getMonth () + 1;
+        m = m < 10 ? "0" + m : m;
+        var d = date.getDate ();
+        d = d < 10 ? "0" + d : d;
+        var h = date.getHours ();
+        h = h < 10 ? "0" + h : h;
+        var mm = date.getMinutes ();
+        mm = mm < 10 ? "0" + mm : mm;
+        var ss = date.getSeconds ();
+        ss = ss < 10 ? "0" + ss : ss;
+        var res = year+ '-' +m + "-" + d + " " + h + ":" + mm+ ":"+ss;
+        return res;
     }
 
     var chart = echarts.init( document.getElementById("J_map"));
