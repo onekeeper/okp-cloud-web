@@ -32,7 +32,7 @@ angular.module('myappApp')
             	}
             }).error(function(data,status,headers,config){
             	data = data || {};
-            	if(status == 401){
+            	if(status == 401 || status == 400){
             	    $state.go("login");
                 }
             	if(data.code){
