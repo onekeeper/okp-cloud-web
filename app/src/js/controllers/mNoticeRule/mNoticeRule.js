@@ -236,7 +236,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
-    
+
     /**
      * 获取通知方式列表选项
      */
