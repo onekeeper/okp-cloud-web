@@ -720,7 +720,7 @@
             data:{},
             async:false,
             headers: {
-                'Authorization' : 'Onekeeper '+sessionStorage.getItem('token')
+                'Authorization' : 'Onekeeper '+sessionStorage.getItem('freshToken')
             },
             success:function(data){
                 sessionStorage.setItem('token',data.access_token);

@@ -68,6 +68,8 @@ angular.module('myappApp')
                         var d = typeof(data)==="string" ? JSON.parse(data) : data;
                         $rootScope.userLogStatus = 'login';
                         sessionStore.set('token',d.data.access_token);
+                        sessionStore.set('freshToken',d.data.refresh_token);
+
                         if(type == 'common'){
                             $rootScope.username = d.data.username;
                             sessionStore.set('loginUser',$rootScope.username);

@@ -42,6 +42,7 @@ angular.module('myappApp')
                         var d = typeof(data)==="string" ? JSON.parse(data) : data;
                         $rootScope.userLogStatus = 'login';
                         sessionStore.set('token',d.data.access_token);
+                        sessionStore.set('freshToken',d.data.refresh_token);
                         $rootScope.username = $scope.user.username;
                         sessionStore.set('loginUser',$rootScope.username);
                         sessionStore.set('userLogStatus','login');
