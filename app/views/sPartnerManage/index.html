@@ -3,7 +3,7 @@
         <div class="col-lg-9 col-md-9 top-right">
             <form>
                 <div class="col-lg-4 col-md-4 input-custom">
-                    <input type="text" class="form-control" placeholder="请输入公司名称" ng-model="userList.query.name">
+                    <input type="text" class="form-control" placeholder="请输入公司名称" ng-model="partnerList.query.partner_name">
                 </div>
                 <div class="col-lg-1 col-md-1">
                     <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
@@ -69,7 +69,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <pager-directive pager="pager" func="'getPartnerList'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="userList.init.loading || userList.init.tdObj.length==0"></pager-directive>
+                    <pager-directive pager="pager" func="'getPartnerList'" format-state="'formatState'" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="partnerList.init.loading || partnerList.init.tdObj.length==0"></pager-directive>
                 </div>
             </div>
         </div>
