@@ -17,9 +17,11 @@ angular.module('myappApp')
             }).success(function(data,status,headers,config){
             	data = data || {};
             	if(data.code){
-            		if(status == 401){
+            		if(status == 401 && sessionStore.get('partnerFlag')!='true'){
                         $state.go("login");
-            		}
+            		}else if(status == 401 && sessionStore.get('partnerFlag')=='true'){
+                        $state.go("onekeeper");
+                    }
             		if(status == 402){
             			$rootScope.$broadcast('updateLogin');
             			$location.path('/402');
@@ -32,8 +34,10 @@ angular.module('myappApp')
             	}
             }).error(function(data,status,headers,config){
             	data = data || {};
-            	if(status == 401 || status == 400){
-            	    $state.go("login");
+                if((status == 401 || status == 400) && sessionStore.get('partnerFlag')!='true'){
+                    $state.go("login");
+                }else if((status == 401 || status == 400)  && sessionStore.get('partnerFlag')=='true'){
+                    $state.go("onekeeper");
                 }
             	if(data.code){
             		//$('.modal-backdrop').remove();
