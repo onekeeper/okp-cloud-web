@@ -723,7 +723,7 @@
                 'Authorization' : 'Onekeeper '+sessionStorage.getItem('freshToken')
             },
             success:function(data){
-                sessionStorage.setItem('token',data.access_token);
+                sessionStorage.setItem('token',data.data.access_token);
             },
             error:function(){
                 console.log("系统程序错误！");
