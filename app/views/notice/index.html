@@ -8,7 +8,7 @@
                         <tbody>
                             <tr>
                                 <td style="font-size: 14px;padding: 0;width: 7em;">输入查询条件</td>
-                                <td><input type="text" class="form-control" placeholder="站点名称" ng-model="siteName"></td>
+                                <td><input type="text" class="form-control" placeholder="告警站点" ng-model="siteName"></td>
                                 <!--
                                 <td><input type="text" class="form-control" placeholder="主机名称" ng-model="hostName"></td>
                                 -->
@@ -36,18 +36,16 @@
                         <table class="table table-striped table-hover table-limit table-custom">
                             <thead>
                                 <tr>
-                                    <th title="开始时间">开始时间</th>
-                                    <th title="完成时间">完成时间</th>
-                                    <th title="站点名称">站点名称</th>
-                                    <th title="主机名称">主机名称</th>
+                                    <th title="通知时间">通知时间</th>
+                                    <th title="告警站点">告警站点</th>
+                                    <th title="告警对象">告警对象</th>
                                     <th title="通知状态">通知状态</th>
-                                    <th title="通知方法">通知方法</th>
-                                    <th title="通知内容">通知内容</th>
+                                    <th title="通知方式">通知方式</th>
+                                    <th title="通知内容" style="width:30%;">通知内容</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in cache.listArr">
-                                    <td>{{item.begin_at | dateFilter}}</td>
                                     <td>{{item.finish_at | dateFilter}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>

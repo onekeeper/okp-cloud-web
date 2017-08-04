@@ -557,3 +557,9 @@ input.tb-invalid{
   padding: 5px 15px;
   color:#b3b3b3;
 }
+/*jeData图片*/
+.dataImg{
+  background-image: url("../images/icons/jeDataImg.png");
+  background-repeat:no-repeat; 
+  background-position:right center;
+}

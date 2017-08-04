@@ -22,7 +22,9 @@
             method: 'get',
             data: {
                 sitename: '',
-                host: '',
+                status:'',
+                starttime:'',
+                endtime:'',
                 page : '' ,
                 per_page : ''
             }
@@ -32,12 +34,12 @@
             method: 'get',
             data: {}
         },
-    }
+    };
 
     $scope.cache = {
         listArr: [],
         siteObj: {}
-    }
+    };
 
     /*
     *初始化
@@ -45,9 +47,12 @@
     $scope.init = function(){
         $rootScope.pagePath = $location.path();
         $scope.pager.curPage = 1;
-        $scope.siteName= '';
+        ///$scope.siteName= '';
+        $scope.queryInfo = {};
+        $scope.saveTime = {};
         $scope.getWarnList(); //显示列表
-    }
+        $scope.getData();//日期插件
+    };
 
     /*
     *获取列表
@@ -55,7 +60,10 @@
     $scope.getWarnList = function(){
         var config = $scope.api.getWarnList;
         config.data = {
-            sitename: $scope.siteName,
+            sitename: $scope.queryInfo.siteName,
+            status:$scope.queryInfo.warnStatus,
+            starttime:$scope.saveTime.time_Start,
+            endtime:$scope.saveTime.time_End,
             page: $scope.pager.curPage || 1,
             per_page: parseInt($scope.pager.pageSize) || 10
         };
@@ -72,7 +80,7 @@
             angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
     /*
     *获取站点
@@ -100,14 +108,14 @@
             angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
     /*
     *显示站点详情
     */
     $scope.showSite = function(item){
         $scope.getSiteList(item);
-    }
+    };
 
     /*
     *显示告警详情
@@ -116,7 +124,59 @@
         $scope.mTitle = '告警详情';
         angular.element("#J_infoDetail").modal('show');
         $scope.infoDetail = item.content;
-    }
+    };
+
+    /*
+    *日期减去8小时
+    */
+    $scope.countDate = function(date){
+        var temp = ($.timeStampDate(date,false) - 28800).toString();
+        return ($.timeStampDate(temp,true));
+    };
+
+    /*
+    *日期插件
+    */
+    $scope.getData = function(){
+        var start = {
+            format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: '1977-01-01 00:00:00',
+            maxDate: $.nowDate({DD:0}),
+            ishmsVal:false,
+            zIndex:3000,
+            choosefun: function(elem,date){
+                end.minDate = date;
+                endDates();
+                $scope.saveTime.time_Start = $scope.countDate(date); 
+            },
+            okfun:function (elem,date) {
+                 end.minDate = date;
+                 endDates();
+                 $scope.saveTime.time_Start = $scope.countDate(date);
+            }
+        };
+        var end = {
+            format: 'YYYY-MM-DD hh:mm:ss',
+            minDate: $.nowDate({DD:0}),
+            maxDate: '2099-06-16 00:00:00',
+            ishmsVal:false,
+            zIndex:3000, 
+            choosefun: function(elem,date){
+                start.maxDate = date; 
+                $scope.saveTime.time_End = $scope.countDate(date);
+            },
+            okfun:function (elem,date) {
+                 start.maxDate = date;
+                 $scope.saveTime.time_End = $scope.countDate(date); 
+            }
+        };
+        function endDates() {
+            end.trigger = false;
+            $("#endTime").jeDate(end);
+        }
+        $("#startTime").jeDate(start);
+        $("#endTime").jeDate(end);
+    };
 
     $scope.apply = function() {
         if(!$scope.$$phase) {
