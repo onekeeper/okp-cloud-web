@@ -344,7 +344,7 @@ angular.module('myappApp')
                     $scope.apply();
                     return false;
                 }
-                else if(!Validate.validLength($scope.userList.init.modalForm.username,{maxLen:10})){
+                else if(!Validate.validLength($scope.userList.init.modalForm.username,{maxLen:32})){
                     $scope.validate.user.username = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
                     $scope.apply();
                     return false;
