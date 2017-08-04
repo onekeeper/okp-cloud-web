@@ -2,15 +2,15 @@
     <div class="col-lg-12">
         <form class="form-horizontal" novalidate>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">账号（邮件地址）<span class="sign-must">*</span></label>
+                <label class="control-label col-lg-4">账号（邮箱地址）<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
                     <input class="form-control" type="text" ng-model="userList.init.modalForm.email" ng-change="validateForm('email','user')" placeholder="" ng-readonly="userList.init.actionType === 'update'">
                     <div class="validate-container">
                         <span ng-if="validate.user.email.dirty && validate.user.email.error.required">
-                            账号不能为空
+                            邮箱账号不能为空
                         </span>
                         <span ng-if="validate.user.email.dirty && validate.user.email.error.format">
-                            账号需满足邮件格式
+                            邮箱账号需满足格式
                         </span>
                     </div>
                 </div>
