@@ -34,11 +34,17 @@
             method: 'get',
             data: {}
         },
+        getStatusList:{
+            url: urlPrefix + '/partner/dropdown/statuses',
+            method: 'get',
+            data: {}
+        }
     };
 
     $scope.cache = {
         listArr: [],
-        siteObj: {}
+        siteObj: {},
+        statusList: []
     };
 
     /*
@@ -51,6 +57,7 @@
         $scope.queryInfo = {};
         $scope.saveTime = {};
         $scope.getWarnList(); //显示列表
+        $scope.getStatus();//获取告警状态
         $scope.getData();//日期插件
     };
 
@@ -78,6 +85,23 @@
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');
+        };
+        AjaxServer.ajaxInfo(config, fnSuccess, fnError);
+    };
+
+    /*
+    *获取告警状态列表
+    */
+    $scope.getStatus = function(){
+        var config = $scope.api.getStatusList;
+        var fnSuccess = function (d) {
+            var data = typeof(d)==='string' ? JSON.parse(d) : d;
+            $scope.cache.statusList = data.data;
+            $scope.apply();
+        },
+        fnError = function (data) {
+            $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
+            $scope.modalTitle = '错误信息';
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
     };
@@ -153,6 +177,9 @@
                  end.minDate = date;
                  endDates();
                  $scope.saveTime.time_Start = $scope.countDate(date);
+            },
+            clearfun:function() {
+                $scope.saveTime.time_Start = "";
             }
         };
         var end = {
@@ -168,6 +195,9 @@
             okfun:function (elem,date) {
                  start.maxDate = date;
                  $scope.saveTime.time_End = $scope.countDate(date); 
+            },
+            clearfun:function() {
+                $scope.saveTime.time_End = "";
             }
         };
         function endDates() {
@@ -177,10 +207,10 @@
         $("#startTime").jeDate(start);
         $("#endTime").jeDate(end);
     };
-
+    
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
         }
     }
-})
+});
