@@ -79,7 +79,7 @@ angular.module('myappApp')
                             $rootScope.username = d.data.name;
                             sessionStore.set('loginUser',$rootScope.username);
                             sessionStore.set('userLogStatus','login');
-                            $state.go('main.mNoticeRule');
+                            $state.go('main.mSiteManage');
                         }
                     }
                 }, function( error ) {
