@@ -50,7 +50,7 @@
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.status == 0 ? '成功' :'失败'}}</td>
-                                    <td>{{item.method == 1 ? '邮件' : item.method == 2 ?'微信':'邮件，微信'}}</td>
+                                    <td>{{item.method == 1 ? '邮件' : item.method == 2 ?'微信':'邮箱，微信'}}</td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
