@@ -3,7 +3,7 @@
         <div class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img class="col-lg-6" src="src/images/login-logo.png" alt="LOGO">
+                    <img class="col-lg-6" src="src/images/login-logo.svg" alt="LOGO">
                 </a>
             </div>
         </div>
@@ -14,12 +14,13 @@
             </div>
             <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 login-wrap">
                 <div class="login-box">
-                    <div class="box-header">用户登录</div>
+<!--                     <div class="box-header">用户登录</div>
                     <ul class="nav nav-tabs nav-justified nav-cloud">
                         <li role="presentation" ng-class="{'active':commonFlag}"><a ng-click="showLogin('common')">普通登录</a></li>
                         <li role="presentation" ng-class="{'active':!commonFlag}"><a ng-click="showLogin('other')">管理员登录</a></li>
-                    </ul>
+                    </ul> -->                    
                     <form class="form-horizontal login-form" ng-if="commonFlag">
+                        <div class="box-header">用户登录</div>
                         <div class="form-group">
                         <label class="control-label col-lg-2 col-md-2 col-sm-2 col-xs-2"><span class="icon ico-user"></span></label>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 pdl0">
@@ -40,11 +41,13 @@
                             <!-- 提示信息 e -->
                         </div>
                         <div class="btn-group">
-                            <button id="J_tSubmit"  class="btn btn-default btn-block btn-lg btn-login" ng-click="clickSubmit($event,'common')">登 录</button>
+                            <button id="J_tSubmit"  class="btn btn-default btn-block btn-lg btn-login" ng-click="clickSubmit($event,'common')">登    录</button>
+                            <a class="a-check-login" ng-click="showLogin('other')">管理员登录</a>
                         </div>
                     </form>
 
                     <form class="form-horizontal login-form" ng-if="!commonFlag">
+                        <div class="box-header">管理员登录</div>
                         <div class="form-group">
                             <label class="control-label col-lg-2 col-md-2 col-sm-2 col-xs-2"><span class="icon ico-user"></span></label>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 pdl0">
@@ -65,7 +68,8 @@
                             <!-- 提示信息 e -->
                         </div>
                         <div class="btn-group">
-                            <button id="J_tSubmit"  class="btn btn-default btn-block btn-lg btn-login" ng-click="clickSubmit($event,'other')">登 录</button>
+                            <button id="J_tSubmit"  class="btn btn-default btn-block btn-lg btn-login" ng-click="clickSubmit($event,'other')">登    录</button>  
+                            <a class="a-check-login" ng-click="showLogin('common')">用户登录</a>
                         </div>
                     </form>
                 </div>
@@ -75,7 +79,7 @@
     <div class="footer login">
         <div class="container-fluid">
             <div class="row">
-                <p class="text-center">Operation Automation Cloud Platform 运维自动化云平台 V1.0 杭州美创科技有限公司 版权所有 @2017</p>
+                <p class="text-center">ONEKEEPER Cloud｜浙ICP备12021012号-2 ©2017  <a target="_blank" href="http://www.mchz.com.cn/">MCHZ</a></p>
             </div>
         </div>
     </div>

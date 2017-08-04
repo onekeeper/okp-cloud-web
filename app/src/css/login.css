@@ -182,3 +182,8 @@
     border-radius: 0px !important;
     cursor:pointer;
 }
+.a-check-login{
+	height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+}
