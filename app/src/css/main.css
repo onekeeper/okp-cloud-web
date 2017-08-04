@@ -563,3 +563,6 @@ input.tb-invalid{
   background-repeat:no-repeat; 
   background-position:right center;
 }
+.width-20p{
+  width: 20%;
+}

@@ -31,13 +31,15 @@
                     <li ui-sref-active="active"><a ui-sref="main.home">首 页</a></li>
                     <li ng-class="{'active': pagePath.indexOf('dispatch')>-1}"><a ui-sref="main.dispatch">调度管理</a></li>
                     -->
-                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.warning">历史告警</a></li>
-                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.notice">历史通知</a></li>
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.warning">告警列表</a></li>
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.notice">通知列表</a></li>
                     <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.noticeRule">通知规则</a></li>
-                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mNoticeRule">管理员通知规则</a></li>
-                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mAuthorizeManage">授权管理</a></li>
-                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mUserManage">人员管理</a></li>
+
                     <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mSiteManage">站点管理</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mUserManage">人员管理</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mAuthorizeManage">服务授权</a></li>
+                    <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mNoticeRule">通知规则</a></li>
+                    
                 </ul>
                 <!-- 右侧功能项 s -->
                 <ul class="nav navbar-nav navbar-right hidden-xs" ng-init="initHeader()">
