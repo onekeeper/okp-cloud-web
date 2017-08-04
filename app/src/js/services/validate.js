@@ -69,7 +69,7 @@ angular.module('myappApp')
 	};
 
 	/*
-	*  validEmail  邮箱校验
+	*  validEmail  邮件校验
 	*  param: str 需要验证的数据
 	*/
 	this.validEmail = function(str){
