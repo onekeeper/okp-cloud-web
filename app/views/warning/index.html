@@ -7,16 +7,12 @@
                     <table class="table-task pull-left">
                         <tbody>
                             <tr>
-                                <td style="font-size: 14px;padding: 0;width: 7em;">输入查询条件</td>
+                                <td><input type="text" id="startTime" class="form-control dataImg" placeholder="开始时间" ng-model="queryInfo.time_Start" readonly></td>
+                                <td><input type="text" id="endTime" class="form-control dataImg" placeholder="结束时间" ng-model="queryInfo.time_End" readonly></td>
                                 <td><input type="text" class="form-control" placeholder="告警站点" ng-model="queryInfo.siteName"></td>
-                                <td><input type="text" id="startTime" class="form-control dataImg" placeholder="开始时间" ng-model="queryInfo.time_Start"></td>
-                                <td><input type="text" id="endTime" class="form-control dataImg" placeholder="结束时间" ng-model="queryInfo.time_End"></td>
                                 <td style="width: 13em;">
-                                    <select ng-model="queryInfo.warnStatus" class="form-control">
+                                    <select ng-options="i.status_id as i.status_name for (k,i) in cache.statusList" ng-model="queryInfo.warnStatus" class="form-control">
                                         <option value="">--选择告警状态--</option>
-                                        <option value="1">已消除</option>
-                                        <option value="2">待处理</option>
-                                        <option value="3">已消除，待处理</option>
                                     </select>
                                 </td>
                             </tr>
@@ -48,7 +44,7 @@
                                     <th title="告警对象">告警对象</th>
                                     <th title="告警级别">告警级别</th>
                                     <th title="告警状态">告警状态</th>
-                                    <th title="告警内容" style="width:30%;">告警内容</th>
+                                    <th title="告警内容" class="width-30p">告警内容</th>
                                 </tr>
                             </thead>
                             <tbody>
