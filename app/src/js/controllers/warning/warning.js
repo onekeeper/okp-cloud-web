@@ -163,9 +163,10 @@
     */
     $scope.getData = function(){
         var start = {
+            skinCell:'jedateblack',
             format: 'YYYY-MM-DD hh:mm:ss',
             minDate: '1977-01-01 00:00:00',
-            maxDate: $.nowDate({DD:0}),
+            maxDate: '2099-01-01 00:00:00',
             ishmsVal:false,
             zIndex:3000,
             choosefun: function(elem,date){
@@ -183,8 +184,9 @@
             }
         };
         var end = {
+            skinCell:'jedateblack',
             format: 'YYYY-MM-DD hh:mm:ss',
-            minDate: $.nowDate({DD:0}),
+            minDate: '1977-01-01 00:00:00',
             maxDate: '2099-06-16 00:00:00',
             ishmsVal:false,
             zIndex:3000, 
