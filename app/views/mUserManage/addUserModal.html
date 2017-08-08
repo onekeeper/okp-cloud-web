@@ -4,6 +4,7 @@
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">账号（邮箱地址）<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
+              <!--       <input class="form-control" type="text" ng-model="userList.init.modalForm.email" placeholder="" ng-readonly="userList.init.actionType === 'update'"> -->
                     <input class="form-control" type="text" ng-model="userList.init.modalForm.email" ng-change="validateForm('email','user')" placeholder="" ng-readonly="userList.init.actionType === 'update'">
                     <div class="validate-container">
                         <span ng-if="validate.user.email.dirty && validate.user.email.error.required">
@@ -22,6 +23,8 @@
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">姓名<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
+                    <!-- <input class="form-control" type="text" ng-model="userList.init.modalForm.username"
+                            placeholder=""> -->
                     <input class="form-control" type="text" ng-model="userList.init.modalForm.username"
                            ng-change="validateForm('username','user')" placeholder="">
                     <div class="validate-container">
@@ -41,6 +44,8 @@
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">联系电话<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
+                    <!-- <input class="form-control" type="text" ng-model="userList.init.modalForm.mobile"
+                           placeholder=""> -->
                     <input class="form-control" type="text" ng-model="userList.init.modalForm.mobile"
                            ng-change="validateForm('mobile','user')" placeholder="">
                     <div class="validate-container">
@@ -48,7 +53,7 @@
                             联系电话不能为空
                         </span>
                         <span ng-if="validate.user.mobile.dirty && validate.user.mobile.error.format">
-                            格式有误，请填写手机号或带区号的电话号码
+                            格式有误，请填写手机号码
                         </span>
                     </div>
                 </div>

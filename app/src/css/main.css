@@ -579,3 +579,7 @@ input.tb-invalid{
   line-height: 28px;
   padding: 0px;
 }
+
+.checkbox-7rem{
+  width: 7rem;
+}

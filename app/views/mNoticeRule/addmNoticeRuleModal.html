@@ -39,7 +39,7 @@
                 <label class="control-label col-lg-4">告警级别（多选）<span class="sign-must">*</span></label>
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.severityId" type="hidden" value="0">               
-                    <label class="checkbox-inline" ng-repeat="item in initData.warnLevelOptions">
+                    <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.warnLevelOptions">
                         <input ng-model="initData.modalForm.severity[item.severity_id]" type="checkbox" ng-click="validateForm('severity')" ng-checked="initData.modalForm.severity[item.severity_id]">{{item.severity_name}}
                     </label>
                     <div class="validate-container">
@@ -57,7 +57,7 @@
                 <label class="control-label col-lg-4">告警状态（多选）<span class="sign-must">*</span></label>
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.statusId" type="hidden" value="0">               
-                    <label class="checkbox-inline" ng-repeat="item in initData.warnStatusOptions">
+                    <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.warnStatusOptions">
                         <input ng-model="initData.modalForm.status[item.status_id]" type="checkbox" ng-click="validateForm('status')" ng-checked="initData.modalForm.status[item.status_id]">{{item.status_name}}
                     </label>
                     <div class="validate-container">
@@ -75,7 +75,7 @@
                 <label class="control-label col-lg-4">通知方式（多选）<span class="sign-must">*</span></label>
                 <div class="col-lg-7">     
                     <input ng-model="initData.modalForm.methodId" type="hidden" value="0">               
-                    <label class="checkbox-inline" ng-repeat="item in initData.noticeMethodOptions">
+                    <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.noticeMethodOptions">
                         <input ng-model="initData.modalForm.method[item.method_id]" type="checkbox" ng-click="validateForm('method')" ng-checked="initData.modalForm.method[item.method_id]">{{item.method_name}}
                     </label>
                     <div class="validate-container">
