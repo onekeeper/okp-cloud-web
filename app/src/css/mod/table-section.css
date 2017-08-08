@@ -69,7 +69,7 @@
 .table-custom > tbody > tr > th,
 .table-custom > tfoot > tr > th,
 .table-custom > thead > tr > th {
-    color: #a7a2a3;
+    color: #555;
     font-weight: bold;
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
