@@ -74,8 +74,8 @@
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #f9f9f9;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #dcd9d9;
+    border-bottom: 1px solid #dcd9d9;
 }
 .table-hover>tbody>tr:hover {
     background-color: #e7e7e7;

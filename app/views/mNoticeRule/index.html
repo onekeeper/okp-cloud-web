@@ -13,11 +13,11 @@
                 <div class="col-lg-5 col-md-5"></div>
                 -->
                 <div class="col-lg-3 col-md-3 input-custom">
-                    <input type="text" class="form-control" placeholder="请输入站点名称" ng-model="query.siteName">
+                    <input type="text" class="form-control" placeholder="输入站点名称" ng-model="query.siteName" ng-keyup="queryAsKeyup($event)">
 
                 </div>
                 <div class="col-lg-3 col-md-3 input-custom">
-                    <input type="text" class="form-control" placeholder="请输入人员名称" ng-model="query.userName">
+                    <input type="text" class="form-control" placeholder="输入人员名称" ng-model="query.userName" ng-keyup="queryAsKeyup($event)">
                 </div>
                 <div class="col-lg-1 col-md-1">
                     <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>

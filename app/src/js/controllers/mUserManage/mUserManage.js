@@ -84,6 +84,14 @@ angular.module('myappApp')
         $scope.getList();
     };
 
+    //点击回车查询
+    $scope.queryAsKeyup = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+        if(keycode==13){
+            $scope.query(true);
+        }
+    };
+
     /**
      * 页面查询操作
      * @param flag: if curPage == 1
