@@ -366,6 +366,11 @@ angular.module('myappApp')
         };
         $scope.selfValid();
         angular.element('#J_addmDelegation').modal();
+        angular.element('#J_addmDelegation').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        }); 
     };
     /**
      * 取消授权
@@ -378,6 +383,11 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();
+        angular.element('#J_mDelegationConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
     /**
      * 接受授权
@@ -390,6 +400,11 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();
+        angular.element('#J_mDelegationConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
     /**
      * 表单验证

@@ -194,6 +194,11 @@ angular.module('myappApp')
                         $scope.apply();
                         $scope.selfValid();
                         angular.element('#J_addPartner').modal();
+                        angular.element('#J_addPartner').draggable({   
+                            handle: ".modal-header",   
+                            cursor: 'move',   
+                            refreshPositions: false  
+                        });
                     }
                 }
             },
@@ -345,6 +350,11 @@ angular.module('myappApp')
          $scope.apply();
          $scope.selfValid();
          angular.element('#J_addPartner').modal();
+         angular.element('#J_addPartner').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**
@@ -366,6 +376,11 @@ angular.module('myappApp')
         $scope.partnerList.init.actionType = 'delete';
         $scope.partnerList.init.actionId = $scope.partnerList.init.tdObj[index].id;
         angular.element('#J_partnerConfirm').modal();
+        angular.element('#J_partnerConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**
@@ -378,6 +393,11 @@ angular.module('myappApp')
         $scope.partnerList.init.actionType = 'resetPwd';
         $scope.partnerList.init.actionId = $scope.partnerList.init.tdObj[index].id;
         angular.element('#J_partnerConfirm').modal();
+        angular.element('#J_partnerConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**

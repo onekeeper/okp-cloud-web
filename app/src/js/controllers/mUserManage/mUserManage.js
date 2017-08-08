@@ -274,6 +274,11 @@ angular.module('myappApp')
          $scope.userList.init.selected = [];
          $scope.selfValid();
          angular.element('#J_addUser').modal();
+         angular.element('#J_addUser').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**
@@ -287,6 +292,11 @@ angular.module('myappApp')
          $scope.userList.init.modalForm = angular.extend({},$scope.userList.init.tdObj[index]);
          $scope.selfValid();
          angular.element('#J_addUser').modal();
+         angular.element('#J_addUser').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**
@@ -299,6 +309,11 @@ angular.module('myappApp')
         $scope.userList.init.actionType = 'delete';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
+        angular.element('#J_userConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**
@@ -311,6 +326,11 @@ angular.module('myappApp')
         $scope.userList.init.actionType = 'resetPwd';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
+        angular.element('#J_userConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
 
     /**

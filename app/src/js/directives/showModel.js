@@ -15,7 +15,8 @@
 		restrict: "EAC",
 		templateUrl: 'views/public/showModel.html',
 		replace: true,
-		transclude: true
+		transclude: true,
+		draggable: true
 		
 	}
 })

@@ -448,6 +448,11 @@ angular.module('myappApp')
         };
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
+        angular.element('#J_addmNoticeRule').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
     /**
      * 点击修改
@@ -501,6 +506,11 @@ angular.module('myappApp')
         }
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
+        angular.element('#J_addmNoticeRule').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
     /**
      * 点击删除
@@ -513,6 +523,11 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mNoticeRuleList[index].id;
         angular.element('#J_mNoticeRuleConfirm').modal();
+        angular.element('#J_mNoticeRuleConfirm').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
     };
     /**
      * 表单验证

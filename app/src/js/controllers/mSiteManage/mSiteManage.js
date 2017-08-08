@@ -107,6 +107,7 @@ angular.module('myappApp')
             $scope.getList();
             $scope.infoDetail = '';
             $scope.pager.curPage = 1;
+            $scope.bindevent();
         };
 
         //点击回车查询
@@ -116,6 +117,25 @@ angular.module('myappApp')
                 $scope.query(true);
             }
         };
+
+        $scope.bindevent = function(){
+            // $(document).on("show.bs.modal", ".modal", function(){
+            //     this.draggable({
+            //        handle: ".modal-header"   // 只能点击头部拖动
+            //     });
+            //     this.css("overflow", "hidden");
+            // });
+            // $('#J_addcSite').on('show.bs.modal', function () {
+            //     this.draggable({
+            //        handle: ".modal-header"   // 只能点击头部拖动
+            //     });
+            //     this.css("overflow", "hidden");
+            // })
+            $(document).on("show.bs.modal", ".modal", function(){
+                
+            })
+        };
+        
 
         /**
          * 页面查询操作
@@ -307,6 +327,11 @@ angular.module('myappApp')
                             $scope.apply();
                             $scope.selfValid();
                             angular.element('#J_addcSite').modal();
+                            angular.element('#J_addcSite').draggable({   
+                                handle: ".modal-header",   
+                                cursor: 'move',   
+                                refreshPositions: false  
+                            });
                         }
                     }
                 },
@@ -362,6 +387,11 @@ angular.module('myappApp')
             $scope.siteList.init.modalForm['license'] = '';
             $scope.selfValid();
             angular.element('#J_addcSite').modal();
+            angular.element('#J_addcSite').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            }); 
         };
 
         /**
@@ -383,6 +413,11 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'delete';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_siteConfirm').modal();
+            angular.element('#J_siteConfirm').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            }); 
         };
 
         /**
@@ -395,6 +430,11 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'resetKey';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_keyConfirm').modal();
+            angular.element('#J_keyConfirm').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            }); 
         };
 
         /**
