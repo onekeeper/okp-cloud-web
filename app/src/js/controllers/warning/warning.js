@@ -209,10 +209,21 @@
         $("#startTime").jeDate(start);
         $("#endTime").jeDate(end);
     };
-    
+
+    /*
+    *回车事件
+    */
+    $scope.enterSearch = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+               $scope.getWarnList(); 
+            }
+    };
+
+
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 });

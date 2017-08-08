@@ -21,7 +21,7 @@ angular.module('myappApp')
         $scope.pager.curPage = 1;
         $scope.siteName = '';
         $scope.getNoticeRuleList();//显示列表
-   }
+   };
 
    $scope.api = {
         getNoticeRuleList: {
@@ -38,12 +38,12 @@ angular.module('myappApp')
             method: 'get',
             data: {}
         }
-    }
+    };
 
     $scope.cache = {
         listArr: [],
         siteObj: {}
-    }
+    };
 
     /*获取列表*/
     $scope.getNoticeRuleList = function(){
@@ -66,7 +66,7 @@ angular.module('myappApp')
             //angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
     /*获取站点*/
     $scope.getSiteList = function(item){
@@ -92,16 +92,29 @@ angular.module('myappApp')
             //angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
+    /*
+    *显示站点详情
+    */
     $scope.showSite = function(item){
         $scope.getSiteList(item);
-    }
+    };
 
+    /*
+    *回车事件
+    */
+    $scope.enterSearch = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+               $scope.getNoticeRuleList(); 
+            }
+    };
+    
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 
 })

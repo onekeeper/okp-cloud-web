@@ -9,7 +9,7 @@
                             <tr>
                                 <td><input type="text" id="startTime" class="form-control dataImg" placeholder="选择开始时间" ng-model="queryInfo.time_Start" readonly></td>
                                 <td><input type="text" id="endTime" class="form-control dataImg" placeholder="选择结束时间" ng-model="queryInfo.time_End" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="输入告警站点" ng-model="queryInfo.siteName"></td>
+                                <td><input type="text" class="form-control" placeholder="输入告警站点" ng-model="queryInfo.siteName"  ng-keyup="enterSearch($event);"></td>
                                 <td style="width: 13em;">
                                     <select ng-options="i.status_id as i.status_name for (k,i) in cache.statusList" ng-model="queryInfo.warnStatus" class="form-control">
                                         <option value="">--选择告警状态--</option>

@@ -31,12 +31,12 @@
             method: 'get',
             data: {}
         }
-    }
+    };
 
     $scope.cache = {
         listArr: [],
         siteObj: {}
-    }
+    };
 
     /*
     *初始化
@@ -46,7 +46,7 @@
         $scope.pager.curPage = 1;
         $scope.siteName = '';
         $scope.getNoticeList();//显示列表
-   }
+   };
 
     /*
     *获取列表
@@ -71,7 +71,7 @@
             //angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
     /*
     *获取站点
@@ -100,22 +100,38 @@
             //angular.element("#J_infoDetail").modal('show');
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
-    }
+    };
 
+    /*
+    *显示站点详情
+    */
     $scope.showSite = function(item){
         $scope.getSiteList(item);
-    }
+    };
 
+    /*
+    *显示告警详情
+    */
     $scope.showWarn = function(item){
         $scope.mTitle = '通知详情';
         angular.element("#J_infoDetail").modal('show');
         $scope.infoDetail = item.content;
-    }
+    };
+
+    /*
+    *回车事件
+    */
+    $scope.enterSearch = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+               $scope.getNoticeList(); 
+            }
+    };
 
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 
 })
