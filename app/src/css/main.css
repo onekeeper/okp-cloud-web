@@ -573,3 +573,9 @@ input.tb-invalid{
 .width-30p{
   width: 30%;
 }
+
+.form-control {
+  height: 28px;
+  line-height: 28px;
+  padding: 0px;
+}

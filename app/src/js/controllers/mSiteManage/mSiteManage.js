@@ -118,21 +118,15 @@ angular.module('myappApp')
             }
         };
 
+        $scope.cleanFile = function(fileId){
+            var file = $("#"+fileId) 
+            file.after(file.clone().val("")); 
+            file.remove(); 
+        };
+
         $scope.bindevent = function(){
-            // $(document).on("show.bs.modal", ".modal", function(){
-            //     this.draggable({
-            //        handle: ".modal-header"   // 只能点击头部拖动
-            //     });
-            //     this.css("overflow", "hidden");
-            // });
-            // $('#J_addcSite').on('show.bs.modal', function () {
-            //     this.draggable({
-            //        handle: ".modal-header"   // 只能点击头部拖动
-            //     });
-            //     this.css("overflow", "hidden");
-            // })
-            $(document).on("show.bs.modal", ".modal", function(){
-                
+            $('body').on('change','input[id=lefile]',function(){
+                $('#J_importFile').val($(this).val());  
             })
         };
         
@@ -214,6 +208,8 @@ angular.module('myappApp')
                         $scope.siteList.init.modalForm = {site_name:'',province_code:'',city_code:'',address:'',license:''};
                         $scope.modalTitle = '';
                         $scope.query(true);
+                        //清空上传的file
+                        $scope.cleanFile('J_importFile');
                     }
                     $scope.apply();
                 },
@@ -227,6 +223,7 @@ angular.module('myappApp')
             }
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
+
 
         /**
          * 发送请求删除
@@ -350,7 +347,7 @@ angular.module('myappApp')
          * 点击确定
          * @param event: event object
          */
-        $scope.clickOk = function (event){
+        $scope.clickOk = function (event){            
             var it = $(event.target),
                 type = $scope.siteList.init.actionType;
             if(it.hasClass('disabled')){
@@ -365,10 +362,16 @@ angular.module('myappApp')
                     it.addClass('disabled');
                     $scope.resetKey(it);
                     break;
-                default:
+                case 'update':
                     if($scope.validateForm('all','site')){
                         it.addClass('disabled');
-                        $scope.addOrUpdate(it);
+                        $scope.addOrUpdate(it);                    
+                    }
+                    break;
+                case 'add':
+                    if($scope.validateForm('all','site')){
+                        it.addClass('disabled');
+                        $scope.importLicense(it);    
                     }
                     break;
             }
@@ -385,6 +388,7 @@ angular.module('myappApp')
             $scope.siteList.init.modalForm['city_code'] = '';
             $scope.siteList.init.modalForm['address'] = '';
             $scope.siteList.init.modalForm['license'] = '';
+            $scope.cleanFile('J_importFile');
             $scope.selfValid();
             angular.element('#J_addcSite').modal();
             angular.element('#J_addcSite').draggable({   
@@ -561,6 +565,9 @@ angular.module('myappApp')
                         $scope.validate.site.license.valid = true;
                         $scope.validate.site.license.invalid = false;
                         $scope.apply();
+
+                        //上传成功以后才保存表单
+                        $scope.addOrUpdate(it);
                     },
                     error: function(data){
                         it.removeClass('disabled');

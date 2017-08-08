@@ -171,7 +171,7 @@ fieldset[disabled] .select-date {
     width: 14px;
     height: 14px;
     vertical-align: middle;
-    margin-top: 9px;
+    margin-top: 6px;
 }
 .valid-error{
     background: url(../images/validate-fail.png) no-repeat center center;
@@ -198,7 +198,7 @@ fieldset[disabled] .select-date {
     width: 850px;
 }
 .clear-mrgb{
-    margin-bottom: 2px;
+    margin-bottom: 0px;
 }
 .validate-container{
     color: red;

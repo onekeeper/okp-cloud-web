@@ -12,7 +12,7 @@
 }
 .md-modal-content .modal-header h6{
 	text-align: left;
-	font-size: 18px;
+	font-size: 14px;
     line-height: 1.5;
 	font-weight: 400;
 	margin-top: 5px;
@@ -75,4 +75,7 @@
 .md-modal-content .alert-danger
 {
 	background-color: transparent;
+}
+.modal-header {
+    padding: 5px 15px;
 }

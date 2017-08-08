@@ -5,19 +5,19 @@
     color: #fff;
 }
 .btn-orange{
-    border-color: #eea236;
-    background-color: #f86f4b;
+    border-color: #bbb;
+    background-color: #bbb;
 }
 .btn-gray{
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #555;
+    border-color: #555;
 }
 .btn-orange:hover,
 .btn-orange:focus
 {
     color: #fff;
-    background-color: #ec971f;
-    border-color: #d58512;
+    background-color: #353638;
+    border-color: #353638;
 }
 .btn-orange.active,
 .btn-orange:active{
@@ -29,17 +29,19 @@
 .btn-gray:focus
 {
     color: #fff;
-    border-color: #204d74;
-    background-color: #286090;
+    background-color: #353638;
+    border-color: #353638;
 }
 .btn-gray.active,
 .btn-gray:active{
     color: #fff;
-    background-color: #286090;
-    border-color: #204d74;
+    background-color: #353638;
+    border-color: #353638;
 }
 .btn-import{
-    width:60px;
-    margin-top: -5px;
-    margin-left:6px;
+    padding-left: 5px;
+    height: 28px;
+    width: 78px;
+    margin-top: -4px;
+    margin-left:4px;
 }
