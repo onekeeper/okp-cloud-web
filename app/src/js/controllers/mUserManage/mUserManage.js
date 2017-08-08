@@ -113,7 +113,7 @@ angular.module('myappApp')
             method: $scope.userList.apis.getList.method,
             data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.pageSize) || 10,
+                per_page: parseInt($scope.pager.pageSize) || 20,
                 username: $scope.userList.query.username || null
             }
         },

@@ -268,7 +268,7 @@ angular.module('myappApp')
             method: $scope.apis.getmNoticeRuleList.method,
             data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.pageSize) || 10,
+                per_page: parseInt($scope.pager.pageSize) || 20,
                 site_name: $scope.query.siteName || null,
                 username: $scope.query.userName || null
             }

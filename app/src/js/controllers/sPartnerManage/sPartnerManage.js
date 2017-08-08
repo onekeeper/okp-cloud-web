@@ -132,7 +132,7 @@ angular.module('myappApp')
             method: $scope.partnerList.apis.getPartnerList.method,
             data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.pageSize) || 10,
+                per_page: parseInt($scope.pager.pageSize) || 20,
                 partner_name: $scope.partnerList.query.partner_name || null
             }
         },

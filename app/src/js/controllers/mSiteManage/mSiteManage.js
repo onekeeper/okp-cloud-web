@@ -139,7 +139,7 @@ angular.module('myappApp')
                     method: $scope.siteList.apis.getList.method,
                     data: {
                         page: $scope.pager.curPage || 1,
-                        per_page: parseInt($scope.pager.pageSize) || 10,
+                        per_page: parseInt($scope.pager.pageSize) || 20,
                         site_name: $scope.siteList.query.site_name || null
                     }
                 },

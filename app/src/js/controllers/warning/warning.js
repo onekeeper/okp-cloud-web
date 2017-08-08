@@ -72,7 +72,7 @@
             starttime:$scope.saveTime.time_Start,
             endtime:$scope.saveTime.time_End,
             page: $scope.pager.curPage || 1,
-            per_page: parseInt($scope.pager.pageSize) || 10
+            per_page: parseInt($scope.pager.pageSize) || 20
         };
         var fnSuccess = function (d) {
             var data = typeof(d)==='string' ? JSON.parse(d) : d;

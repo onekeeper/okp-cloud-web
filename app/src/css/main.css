@@ -14,7 +14,7 @@ html,body{
   background:#fff;
   min-width: 1200px;
   height: 100%;
-  font-size: 14px;
+  font-size: 12px;
   /*overflow-y: hidden;*/
 }
 
@@ -59,7 +59,7 @@ html,body{
 
 }
 .box-pading {
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 10px;
 }
 .box-all {
@@ -141,7 +141,7 @@ html,body{
 
 .page-title{
    color: #444;
-   font-size: 16px;
+   font-size: 14px;
    margin:0;
    padding-left: 10px;
 }

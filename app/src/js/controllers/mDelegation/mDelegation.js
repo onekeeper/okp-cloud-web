@@ -195,7 +195,7 @@ angular.module('myappApp')
             method: $scope.apis.getmDelegationList.method,
             data: {
                 page: $scope.pager.curPage || 1,
-                per_page: parseInt($scope.pager.pageSize) || 10,
+                per_page: parseInt($scope.pager.pageSize) || 20,
                 site_name: $scope.query.siteName || null,
                 partner_name: $scope.query.grantorName || null,
             }

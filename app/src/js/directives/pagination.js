@@ -31,10 +31,11 @@
                      curPage: 1,                                                          // 当前页码
                      totalPage: 0,                                                        // 总页数
                      total: 0,                                                            // 总条数
-                     pageSize: (function( tableHeight , trHeight ){                       // 每页显示（页面可选择）
-                        //return ( ~~(tableHeight / trHeight) || 1 ) + '';
-                        return 10;
-                     })( scope.tbh , scope.trh ),
+                     // pageSize: (function( tableHeight , trHeight ){                       // 每页显示（页面可选择）
+                     //    //return ( ~~(tableHeight / trHeight) || 1 ) + '';
+                     //    return 20;
+                     // })( scope.tbh , scope.trh ),
+                    pageSize: 20,
                      pageSizeOptions: (function(largest){                                 // 每页条数选项,largest为每页条数最大值
                          var arr = [10,20,30,40,50];
                          //for(var i = 0; i < largest; i++) arr[i] = i + 1 + '';
