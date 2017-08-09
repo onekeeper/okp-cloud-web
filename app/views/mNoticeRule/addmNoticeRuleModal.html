@@ -19,14 +19,14 @@
                 </div>
             </div>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">用户<span class="sign-must">*</span></label>
+                <label class="control-label col-lg-4">人员<span class="sign-must">*</span></label>
                 <div class="col-lg-7">                    
                     <select class="form-control" ng-model="initData.modalForm.userId" ng-options="v.user_id as v.username for (k , v) in initData.userOptions" ng-change="validateForm('user')" ng-disabled="initData.actionType == 'update'">
                          <option value="">--请选择--</option>
                     </select>
                     <div class="validate-container">
                         <span ng-if="validate.user.dirty && validate.user.error.required">
-                            用户不能为空。
+                            人员不能为空。
                         </span>
                     </div>
                 </div>

@@ -1,12 +1,13 @@
 <div class="box box-all" ng-init="init()">
     <div class="row top-container">
-        <div class="col-lg-9 col-md-9 top-right">
+        <div class="col-lg-9 col-md-9 top-right pdl25">
             <form>
                 <div class="col-lg-4 col-md-4 input-custom">
                     <input type="text" class="form-control" placeholder="请输入公司名称" ng-model="partnerList.query.partner_name">
                 </div>
-                <div class="col-lg-1 col-md-1">
-                    <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
+                <div class="col-lg-2 col-md-2">
+                    <a role="button" class="btn btn-default btn-query fs12" ng-click="query(true)">搜索</a>
+                    <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="queryClean(true)">重置</a>
                 </div>
             </form>
         </div>
@@ -22,7 +23,7 @@
                         <div class="col-lg-6 col-md-6 text-right">
                             <div class="table-action">
                                 <a role="button" class="btn btn-sm j-insert btn-primary" ng-click="clickAdd()">
-                                    <img class="mgr10" src="src/images/icons/ico-insert.png" />新增
+                                    <img class="mgr10" src="src/images/icons/ico-insert.svg" />新增
                                 </a>
                             </div>
                         </div>

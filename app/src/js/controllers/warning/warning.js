@@ -85,6 +85,11 @@
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');
+            angular.element('#J_infoDetail').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            });
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
     };
@@ -130,6 +135,11 @@
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');
+            angular.element('#J_infoDetail').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            });
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
     };
@@ -145,8 +155,13 @@
     *显示告警详情
     */
     $scope.showWarn = function(item){
-        $scope.mTitle = '告警详情';
+        $scope.mTitle = '告警内容';
         angular.element("#J_infoDetail").modal('show');
+        angular.element('#J_infoDetail').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
         $scope.infoDetail = item.content;
     };
 
@@ -220,6 +235,28 @@
             }
     };
 
+    /**
+    * 清空
+    */
+    $scope.queryClean = function( flag ){
+        if( flag ){
+            $scope.pager.curPage = 1;
+        }
+        $scope.cleanParameter();
+        $scope.getWarnList(); 
+    };
+
+    /**
+    * 清空查询条件
+    */
+    $scope.cleanParameter = function(){            
+        $scope.queryInfo.siteName = '';
+        $scope.queryInfo.warnStatus = '';
+        $scope.saveTime.time_Start = '';
+        $scope.saveTime.time_End = '';   
+        $scope.queryInfo.time_Start = '';   
+        $scope.queryInfo.time_End = '';
+    };
 
     $scope.apply = function() {
         if(!$scope.$$phase) {

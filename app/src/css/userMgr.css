@@ -85,16 +85,36 @@ fieldset[disabled] .select-date {
     background: url(../images/icons/start.png) no-repeat 2px center;
 }
 .icon-edit{
-    background: url(../images/icons/edit.png) no-repeat center center;
+    background: url(../images/icons/edit.svg) no-repeat center center;
 }
 .icon-del{
-    background: url(../images/icons/del.png) no-repeat center center;
+    background: url(../images/icons/del.svg) no-repeat center center;
 }
 .icon-pwd{
-    background: url(../images/icons/pwd.png) no-repeat center center;
+    background: url(../images/icons/pwd.svg) no-repeat center center;
 }
 .icon-key{
-    background: url(../images/icons/key.png) no-repeat center center;
+    background: url(../images/icons/key.svg) no-repeat center center;
+}
+.icon-del {
+    background: url(../images/icons/del.svg) no-repeat center center;
+}
+.icon-authorize{
+    background: url(../images/icons/authorize.svg) no-repeat center center;
+}
+.icon-authorize-cancel{
+    background: url(../images/icons/authorize-cancel.svg) no-repeat center center;
+}
+
+.icon-authorize:focus,
+.icon-authorize:hover,
+.icon-authorize:active{
+    background: url(../images/icons/authorize-active.svg) no-repeat center center;
+}
+.icon-authorize-cancel:focus,
+.icon-authorize-cancel:hover,
+.icon-authorize-cancel:active{
+    background: url(../images/icons/authorize-cancel-active.svg) no-repeat center center;
 }
 .icon-add:focus,
 .icon-add:hover,
@@ -120,17 +140,17 @@ fieldset[disabled] .select-date {
 .icon-edit:focus,
 .icon-edit:hover,
 .icon-edit:active{
-    background: url(../images/icons/edit-active.png) no-repeat center center;
+    background: url(../images/icons/edit-active.svg) no-repeat center center;
 }
 .icon-del:focus,
 .icon-del:hover,
 .icon-del:active{
-    background: url(../images/icons/del-active.png) no-repeat center center;
+    background: url(../images/icons/del-active.svg) no-repeat center center;
 }
 .icon-pwd:focus,
 .icon-pwd:hover,
 .icon-pwd:active{
-    background: url(../images/icons/pwd-active.png) no-repeat center center;
+    background: url(../images/icons/pwd-active.svg) no-repeat center center;
 }
 .icon-pause[disabled],
 .icon-pause:focus[disabled],
@@ -145,7 +165,7 @@ fieldset[disabled] .select-date {
 .icon-key:focus,
 .icon-key:hover,
 .icon-key:active{
-    background: url(../images/icons/key-active.png) no-repeat center center;
+    background: url(../images/icons/key-active.svg) no-repeat center center;
 }
 
 /* 头部图标 */

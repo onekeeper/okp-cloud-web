@@ -351,6 +351,7 @@ html,body{
 .mgr20{ margin-right:20px;}
 .mgr22{ margin-right:22px;}
 .mgl10{ margin-left:10px;}
+.mgl20{ margin-left:20px;}
 .mgl-50{ margin-left: 50px;}
 .mgt5{ margin-top: 5px;}
 .mgt20{ margin-top: 20px;}
@@ -359,6 +360,7 @@ html,body{
 .mg10{ margin:10px;}
 .mgt120{margin-top: 120px;}
 .mgt2-{margin-top: -2px;}
+.mgl4-{margin-left: -4px;}
 
 .pdt8{ padding-top:8px;}
 .pdt10{ padding-top:10px;}
@@ -369,6 +371,7 @@ html,body{
 .pdb15{ padding-bottom:15px;}
 .pd15{ padding:15px;}
 .pdl5{ padding-left: 5px; }
+.pdl25{padding-left: 25px;}
 .pdr5{ padding-right: 5px; }
 .pdr10{ padding-right: 10px; }
 .pdl10{ padding-left: 10px; }
@@ -583,4 +586,9 @@ input.tb-invalid{
 
 .checkbox-7rem{
   width: 7rem;
+}
+
+.input-custom{
+  padding-right: 5px;
+  padding-left: 5px;
 }

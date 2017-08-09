@@ -467,6 +467,11 @@ angular.module('myappApp')
         $scope.showKeyDetail = function(value){
             $scope.mTitle = '密钥';
             angular.element("#J_keyInfoDetail").modal('show');
+            angular.element('#J_keyInfoDetail').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            });
             $scope.infoDetail = value;
         };
 
@@ -552,15 +557,11 @@ angular.module('myappApp')
          */
         $scope.importLicense = function(ev){
             var it = $(ev.target);
-            if(it.hasClass('disabled')){
-                return false;
-            }
-            it.addClass('disabled');
             if(!$("#J_importFile").val()){
                 $scope.validate.site.license.dirty = true;
                 $scope.validate.site.license.invalid = true;
                 $scope.validate.site.license.valid = false;
-                $scope.errorMsg = '请选择License文件';
+                $scope.errorMsg = '请选择授权文件';
                 return;
             }
             $.ajaxFileUpload({

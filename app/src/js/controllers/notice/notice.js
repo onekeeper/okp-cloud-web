@@ -83,6 +83,11 @@
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.mTitle = '站点详情';
             angular.element("#J_stationDetail").modal('show');
+            angular.element('#J_stationDetail').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            });
             $scope.cache.siteObj = data.data[0];
             $scope.listContent = {
                 '站点名称':$scope.cache.siteObj.site_name,
@@ -113,8 +118,13 @@
     *显示告警详情
     */
     $scope.showWarn = function(item){
-        $scope.mTitle = '通知详情';
+        $scope.mTitle = '通知内容';
         angular.element("#J_infoDetail").modal('show');
+        angular.element('#J_infoDetail').draggable({   
+            handle: ".modal-header",   
+            cursor: 'move',   
+            refreshPositions: false  
+        });
         $scope.infoDetail = item.content;
     };
 
@@ -126,6 +136,24 @@
             if(keycode==13){
                $scope.getNoticeList(); 
             }
+    };
+
+    /**
+    * 清空
+    */
+    $scope.queryClean = function( flag ){
+        if( flag ){
+            $scope.pager.curPage = 1;
+        }
+        $scope.cleanParameter();
+        $scope.getNoticeList(); 
+    };
+
+    /**
+    * 清空查询条件
+    */
+    $scope.cleanParameter = function(){            
+        $scope.siteName = '';            
     };
 
     $scope.apply = function() {
