@@ -187,7 +187,7 @@
             choosefun: function(elem,date){
                 end.minDate = date;
                 //endDates();
-                $scope.saveTime.time_Start = $scope.countDate(date); 
+                $scope.saveTime.time_Start = $scope.countDate(date);
             },
             okfun:function (elem,date) {
                  end.minDate = date;
@@ -251,12 +251,27 @@
     */
     $scope.cleanParameter = function(){            
         $scope.queryInfo.siteName = '';
-        $scope.queryInfo.warnStatus = '';
-        $scope.saveTime.time_Start = '';
-        $scope.saveTime.time_End = '';   
+        $scope.queryInfo.warnStatus = ''; 
         $scope.queryInfo.time_Start = '';   
         $scope.queryInfo.time_End = '';
+
+        $scope.saveTime.time_End = "";
+        $scope.saveTime.time_Start = "";
+        var start = {
+            minDate: '1977-01-01 00:00:00',
+            maxDate: '2099-01-01 00:00:00'           
+        };
+        var end = {
+            minDate: '1977-01-01 00:00:00',
+            maxDate: '2099-01-01 00:00:00'           
+        };
+
+        start.maxDate = '1977-01-01 00:00:00'; 
+        end.minDate = '2099-01-01 00:00:00';
+        $("#startTime").jeDate(start);
+        $("#endTime").jeDate(end);
     };
+
 
     $scope.apply = function() {
         if(!$scope.$$phase) {
