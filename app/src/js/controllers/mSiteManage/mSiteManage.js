@@ -119,8 +119,9 @@ angular.module('myappApp')
         };
 
         $scope.cleanFile = function(fileId){
-            var file = $("#"+fileId) 
+            var file = $("#" + fileId) 
             file.after(file.clone().val("")); 
+            $("#" + fileId + '_name').val("");
             file.remove(); 
         };
 
