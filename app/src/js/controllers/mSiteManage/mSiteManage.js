@@ -125,8 +125,8 @@ angular.module('myappApp')
         };
 
         $scope.bindevent = function(){
-            $('body').on('change','input[id=lefile]',function(){
-                $('#J_importFile').val($(this).val());  
+            $('body').on('change','input[id=J_importFile]',function(){
+                $('#J_importFile_name').val($(this).val());  
             })
         };
         

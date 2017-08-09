@@ -128,6 +128,11 @@ angular.module('myappApp')
             $scope.userList.init.pwdModalForm.repeatPassWord = '';
             $scope.apply();
             angular.element('#J_editPwd').modal();
+            angular.element('#J_editPwd').draggable({   
+                handle: ".modal-header",   
+                cursor: 'move',   
+                refreshPositions: false  
+            });
         };
 
         /**
