@@ -313,7 +313,7 @@ window.console && (console = console || {log : function(){return;}});
             '<div class="jedatehmscon jedateprophours"></div><div class="jedatehmscon jedatepropminutes"></div><div class="jedatehmscon jedatepropseconds"></div></div>';
 
         var botStrHtml = '<div class="botflex jedatehmsshde"><ul class="jedatehms"><li><input type="text" maxlength="2" numval="23" hms="0"></li><i>:</i><li><input type="text" maxlength="2" numval="59" hms="1"></li><i>:</i><li><input type="text" maxlength="2" numval="59" hms="2"></li></ul></div>' +
-            '<div class="botflex jedatebtn"><span class="jedateok">'+lang.yes+'</span><span class="jedatetodaymonth">'+lang.today+'</span><span class="jedateclear">'+lang.clear+'</span></div>';
+            '<div class="jedatebtn"><span class="jedateclear">'+lang.clear+'</span></div>';
 
         var ymBtnHtml = '<p><span class="jedateymchle">&lt;&lt;</span><span class="jedateymchri">&gt;&gt;</span><span class="jedateymchok">'+lang.close+'</span></p>';
         //设置html到对应的DOM中
