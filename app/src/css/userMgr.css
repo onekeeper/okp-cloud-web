@@ -3,6 +3,7 @@
     padding: 4px 12px;
     border-radius: 4px;
     height: 30px;
+    line-height: 20px;
     font-size: 12px;
 }
 .input-custom-lg .form-control{
@@ -156,13 +157,13 @@ fieldset[disabled] .select-date {
     margin-right: 8px;
 }
 .icon-header-user{
-    background: url(../images/ico-header-user.png) no-repeat center center;
+    background: url(../images/ico-header-user.svg) no-repeat center center;
 }
 .icon-header-password{
-    background: url(../images/ico-header-password.png) no-repeat center center;
+    background: url(../images/ico-header-password.svg) no-repeat center center;
 }
 .icon-header-logout{
-    background: url(../images/ico-header-logout.png) no-repeat center center;
+    background: url(../images/ico-header-logout.svg) no-repeat center center;
 }
 /* 验证对错图标 */
 .valid-error,

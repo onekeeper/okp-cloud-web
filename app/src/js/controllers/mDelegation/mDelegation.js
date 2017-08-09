@@ -111,11 +111,29 @@ angular.module('myappApp')
      * @param flag: if curPage == 1
      */
     $scope.query = function ( flag ) {
-        console.log(flag);
         if( flag ) $scope.pager.curPage = 1;
         $scope.formatState();
         $scope.queryData();
     };
+
+    /**
+    * 清空
+    */
+    $scope.queryClean = function( flag ){
+        if( flag ) $scope.pager.curPage = 1;
+        $scope.formatState();
+        $scope.cleanParameter();          
+        $scope.queryData();
+    };
+
+    /**
+    * 清空查询条件
+    */
+    $scope.cleanParameter = function(){             
+        $scope.query.siteName = '';
+        $scope.query.grantorName = '';
+    };
+
     /**
      * 查询
      */

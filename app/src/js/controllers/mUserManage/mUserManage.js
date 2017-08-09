@@ -105,6 +105,25 @@ angular.module('myappApp')
     };
 
     /**
+    * 清空
+    */
+    $scope.queryClean = function( flag ){
+        if( flag ){
+            $scope.pager.curPage = 1;
+        }
+        $scope.formatState();
+        $scope.cleanParameter();
+        $scope.getList();
+    };
+
+    /**
+    * 清空查询条件
+    */
+    $scope.cleanParameter = function(){            
+        $scope.userList.query.username = '';            
+    };
+
+    /**
      * 状态初始化
      */
     $scope.formatState = function () {
@@ -268,7 +287,7 @@ angular.module('myappApp')
      * 点击新增
      */
     $scope.clickAdd = function(){
-         $scope.modalTitle = '新增用户';
+         $scope.modalTitle = '新增人员';
          $scope.userList.init.actionType = 'add';
          $scope.userList.init.modalForm = {email:'',username:'',mobile:''};
          $scope.userList.init.selected = [];
@@ -286,7 +305,7 @@ angular.module('myappApp')
      * @param index
      */
     $scope.clickEdit = function(index){
-         $scope.modalTitle = '修改用户';
+         $scope.modalTitle = '修改人员';
          $scope.userList.init.actionType = 'update';
          $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
          $scope.userList.init.modalForm = angular.extend({},$scope.userList.init.tdObj[index]);
@@ -304,8 +323,8 @@ angular.module('myappApp')
      * @param index
      */
     $scope.clickDelete = function(index){
-        $scope.modalTitle = '删除用户';
-        $scope.modalInfo = '删除后不可恢复，确定删除这个用户吗？';
+        $scope.modalTitle = '删除人员';
+        $scope.modalInfo = '删除后不可恢复，确定删除这个人员吗？';
         $scope.userList.init.actionType = 'delete';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
@@ -322,7 +341,7 @@ angular.module('myappApp')
      */
     $scope.clickResetPwd = function(index){
         $scope.modalTitle = '重置密码';
-        $scope.modalInfo = '重置密码将以邮件形式发送，确认重置该用户密码吗？';
+        $scope.modalInfo = '重置密码将以邮件形式发送，确认重置该人员密码吗？';
         $scope.userList.init.actionType = 'resetPwd';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
@@ -336,7 +355,7 @@ angular.module('myappApp')
     /**
      * 表单验证
      * @param type: 字段是哪个
-     * @param whichForm: 用户添加(user)
+     * @param whichForm: 人员添加(user)
      * @returns {boolean}
      */
     $scope.validateForm = function ( type , whichForm ){
@@ -344,9 +363,9 @@ angular.module('myappApp')
             validNotObj = angular.extend({},validDirtyObj,{valid:false,invalid:true});
         // 清除提示
         $scope.errorMsg = '';
-        // 用户表单
+        // 人员表单
         if(whichForm === 'user'){
-            // 添加时验证用户名
+            // 添加时验证人员名
             if($scope.userList.init.actionType === 'add'){
                 // 账号
                 if(type === 'email' || type === 'all'){
@@ -364,7 +383,7 @@ angular.module('myappApp')
                 }
             }
 
-            // 用户名
+            // 人员名
             if(type === 'username' || type === 'all'){
                 $scope.validate.user.username = angular.extend({},validDirtyObj);
                 if(!$scope.userList.init.modalForm.username){

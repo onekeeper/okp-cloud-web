@@ -144,6 +144,26 @@ angular.module('myappApp')
         };
 
         /**
+        * 清空
+        */
+        $scope.queryClean = function( flag ){
+            if( flag ){
+                $scope.pager.curPage = 1;
+            }
+            $scope.formatState();
+            $scope.cleanParameter();
+            $scope.getList();
+        };
+
+        /**
+        * 清空查询条件
+        */
+        $scope.cleanParameter = function(){            
+            $scope.siteList.query.site_name = '';            
+        };
+
+
+        /**
          * 状态初始化
          */
         $scope.formatState = function () {
@@ -371,7 +391,7 @@ angular.module('myappApp')
                 case 'add':
                     if($scope.validateForm('all','site')){
                         it.addClass('disabled');
-                        $scope.importLicense(it);    
+                        $scope.importLicense(event);    
                     }
                     break;
             }
@@ -429,8 +449,8 @@ angular.module('myappApp')
          * @param index
          */
         $scope.clickResetKey = function(index){
-            $scope.modalTitle = '重置AccessKey';
-            $scope.modalInfo = '确定重置该站点AccessKey吗？';
+            $scope.modalTitle = '重置密钥';
+            $scope.modalInfo = '确定重置该站点密钥吗？';
             $scope.siteList.init.actionType = 'resetKey';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_keyConfirm').modal();
@@ -445,7 +465,7 @@ angular.module('myappApp')
          *显示key详细信息
          */
         $scope.showKeyDetail = function(value){
-            $scope.mTitle = 'AccessKey详情';
+            $scope.mTitle = '密钥';
             angular.element("#J_keyInfoDetail").modal('show');
             $scope.infoDetail = value;
         };

@@ -5,8 +5,9 @@
                 <div class="col-lg-4 col-md-4 input-custom">
                     <input type="text" class="form-control" placeholder="输入姓名" ng-model="userList.query.username" ng-keyup="queryAsKeyup($event)">
                 </div>
-                <div class="col-lg-1 col-md-1">
+                <div class="col-lg-2 col-md-2">
                     <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
+                    <a role="button" class="btn btn-default btn-query" ng-click="queryClean(true)">重置</a>
                 </div>
             </form>
         </div>
@@ -51,8 +52,8 @@
                             </tbody>
                             <tbody ng-hide="userList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="userList.init.tdObj.length==0">
-                                    <td colspan="5" ng-if="userList.init.getListError!=''">{{userList.init.getListError}}</td>
-                                    <td colspan="5" ng-if="userList.init.getListError==''">数据为空</td>
+                                    <td colspan="5" ng-if="userList.init.getListError!=''">未找到结果</td>
+                                    <td colspan="5" ng-if="userList.init.getListError==''">未找到结果</td>
                                 </tr>
                                 <tr ng-repeat="item in userList.init.tdObj">
                                     <td ng-bind="item.username"></td>

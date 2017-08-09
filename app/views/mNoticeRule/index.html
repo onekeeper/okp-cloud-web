@@ -19,8 +19,9 @@
                 <div class="col-lg-3 col-md-3 input-custom">
                     <input type="text" class="form-control" placeholder="输入姓名" ng-model="query.userName" ng-keyup="queryAsKeyup($event)">
                 </div>
-                <div class="col-lg-1 col-md-1">
+                <div class="col-lg-2 col-md-2">
                     <a role="button" class="btn btn-default btn-query" ng-click="query(true)">搜索</a>
+                    <a role="button" class="btn btn-default btn-query" ng-click="queryClean(true)">重置</a>
                 </div>
             </form>
         </div>
@@ -62,8 +63,8 @@
                             </tbody>
                             <tbody ng-hide="mNoticeRuleList.initData.loading">
                                 <tr class="tr-empty text-center" ng-show="mNoticeRuleList.length==0">
-                                    <td colspan="7" ng-if="initData.getListError!=''">{{initData.getListError}}</td>
-                                    <td colspan="7" ng-if="mNoticeRuleList=='' && initData.getListError==''">数据为空</td>
+                                    <td colspan="7" ng-if="initData.getListError!=''">未找到结果</td>
+                                    <td colspan="7" ng-if="mNoticeRuleList=='' && initData.getListError==''">未找到结果</td>
                                 </tr>
                                 <tr ng-repeat="item in mNoticeRuleList">
                                     <td ng-bind="item.site_name"></td>
