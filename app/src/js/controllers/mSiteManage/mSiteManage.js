@@ -119,14 +119,15 @@ angular.module('myappApp')
         };
 
         $scope.cleanFile = function(fileId){
-            var file = $("#"+fileId) 
+            var file = $("#" + fileId) 
             file.after(file.clone().val("")); 
+            $("#" + fileId + '_name').val("");
             file.remove(); 
         };
 
         $scope.bindevent = function(){
-            $('body').on('change','input[id=lefile]',function(){
-                $('#J_importFile').val($(this).val());  
+            $('body').on('change','input[id=J_importFile]',function(){
+                $('#J_importFile_name').val($(this).val());  
             })
         };
         

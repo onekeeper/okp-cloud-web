@@ -83,10 +83,11 @@
                            ng-change="validateForm('license','site')" placeholder="">
                     -->
 
-                    <input id="lefile" type="file" style="display:none">  
+                    <input type="file"  name="file" id="J_importFile" style="display:none"
+                           ng-model="siteList.init.modalForm.license" ng-change="validateForm('license','site');"/>
                     <div class="input-append">  
-                        <input id="J_importFile" ng-model="siteList.init.modalForm.license" class="form-control" type="text" style="width:72%;display:inline-block;" readonly="true">  
-                        <a class="btn btn-gray btn-import" onclick="$('input[id=lefile]').click();">选择文件</a> 
+                        <input id="J_importFile_name" ng-model="siteList.init.modalForm.license" class="form-control" type="text" style="width:72%;display:inline-block;" readonly="true">  
+                        <a class="btn btn-gray btn-import" onclick="$('input[id=J_importFile]').click();">上传文件</a> 
                     </div>
 
                     <!-- <input type="file"  name="file" id="J_importFile" class="form-control" style="width:72%;display:inline-block;"
