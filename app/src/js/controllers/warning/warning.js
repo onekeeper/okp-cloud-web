@@ -171,12 +171,12 @@
             zIndex:3000,
             choosefun: function(elem,date){
                 end.minDate = date;
-                endDates();
+                //endDates();
                 $scope.saveTime.time_Start = $scope.countDate(date); 
             },
             okfun:function (elem,date) {
                  end.minDate = date;
-                 endDates();
+                 //endDates();
                  $scope.saveTime.time_Start = $scope.countDate(date);
             },
             clearfun:function() {
@@ -195,15 +195,15 @@
                 $scope.saveTime.time_End = $scope.countDate(date);
             },
             okfun:function (elem,date) {
-                 start.maxDate = date;
-                 $scope.saveTime.time_End = $scope.countDate(date); 
+                start.maxDate = date;
+                $scope.saveTime.time_End = $scope.countDate(date); 
             },
             clearfun:function() {
                 $scope.saveTime.time_End = "";
             }
         };
         function endDates() {
-            end.trigger = false;
+            //end.trigger = false;
             $("#endTime").jeDate(end);
         }
         $("#startTime").jeDate(start);
