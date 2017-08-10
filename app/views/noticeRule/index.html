@@ -33,7 +33,16 @@
                                     <th title="通知方式">通知方式</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody ng-show="initData.loading">
+                                <tr class="tr-loading text-center">
+                                    <td colspan="6"><div class="loading"></div></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-hide="initData.loading">
+                                <tr class="tr-empty text-center" ng-show="cache.listArr.length==0">
+                                    <td colspan="6" ng-if="initData.getListError!=''">未找到结果</td>
+                                    <td colspan="6" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
+                                </tr>
                                 <tr ng-repeat="item in cache.listArr">
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.alert_severity == 1? '消息' : item.alert_severity == 2 ? '一般' : item.alert_severity == 4 ? '严重' : item.alert_severity == 6 ? '一般，严重' : '消息，一般，严重'}}</td>
