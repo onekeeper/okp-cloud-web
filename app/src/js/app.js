@@ -16,74 +16,76 @@ angular
   ])
   .constant('urlPrefix', '/api/v1')
   .config(function ($stateProvider, $urlRouterProvider) {
+  		var timestamp = Date.parse( new Date());//时间戳清空缓存
+
     	$urlRouterProvider
-    	.when("", "/login")
-    	.when('/', "/login")
-		.when('/500', '500.html')
-	    .when('/400', '400.html')
-		.when('/404', '404.html')
-		.when('/402', 'authError.html')
-		.otherwise('/login');
+    	.when("", "/login?"+timestamp)
+    	.when('/', "/login?"+timestamp)
+		.when('/500', '500.html?'+timestamp)
+	    .when('/400', '400.html?'+timestamp)
+		.when('/404', '404.html?'+timestamp)
+		.when('/402', 'authError.html?'+timestamp)
+		.otherwise('/login?'+timestamp);
 
 		$stateProvider
 		.state("login", {
 			url: "/login",
-			templateUrl: "views/login/index.html",
+			templateUrl: "views/login/index.html?"+timestamp,
 			controller: "LoginCtrl"
 		})
         .state("onekeeper", {
             url: "/onekeeper",
-            templateUrl: "views/login/onekeeper.html",
+            templateUrl: "views/login/onekeeper.html?"+timestamp,
             controller: "superLoginCtrl"
         })
 		.state("main", {
      		url: "/main",
-            templateUrl: "views/index.html",
+            templateUrl: "views/index.html?"+timestamp,
             controller: "HeaderCtrl"
 		})
 		.state("main.home", {
 			url: "/home",
-			templateUrl: "views/home/index.html",
+			templateUrl: "views/home/index.html?"+timestamp,
 			controller: "HomeCtrl"
 		})
 		.state("main.warning", {//历史告警查询
 			url: "/warning",
-			templateUrl: "views/warning/index.html",
+			templateUrl: "views/warning/index.html?"+timestamp,
 			controller: "warningCtrl"
 		})
 		.state("main.notice", {//历史通知查询
 			url: "/notice",
-			templateUrl: "views/notice/index.html",
+			templateUrl: "views/notice/index.html?"+timestamp,
 			controller: "noticeCtrl"
 		})
 		.state("main.noticeRule", {//通知规则
 			url: "/noticeRule",
-			templateUrl: "views/noticeRule/index.html",
+			templateUrl: "views/noticeRule/index.html?"+timestamp,
 			controller: "noticeRuleCtrl"
 		})
 		.state("main.mNoticeRule", {//管理员通知规则
 			url: "/mNoticeRule",
-			templateUrl: "views/mNoticeRule/index.html",
+			templateUrl: "views/mNoticeRule/index.html?"+timestamp,
 			controller: "mNoticeRuleCtrl"
 		})
 		.state("main.mAuthorizeManage", {//授权管理
 			url: "/mAuthorizeManage",
-			templateUrl: "views/mAuthorizeManage/index.html",
+			templateUrl: "views/mAuthorizeManage/index.html?"+timestamp,
 			controller: "mAuthorizeManageCtrl"
 		})
 		.state("main.mUserManage", {//人员管理
 			url: "/mUserManage",
-			templateUrl: "views/mUserManage/index.html",
+			templateUrl: "views/mUserManage/index.html?"+timestamp,
 			controller: "mUserManageCtrl"
 		})
 		.state("main.mSiteManage", {//站点管理
 			url: "/mSiteManage",
-			templateUrl: "views/mSiteManage/index.html",
+			templateUrl: "views/mSiteManage/index.html?"+timestamp,
 			controller: "mSiteManageCtrl"
 		})
         .state("main.sPartner", {//合作伙伴
             url: "/partner",
-            templateUrl: "views/sPartnerManage/index.html",
+            templateUrl: "views/sPartnerManage/index.html?"+timestamp,
             controller: "sPartnerManageCtrl"
         })
   });
