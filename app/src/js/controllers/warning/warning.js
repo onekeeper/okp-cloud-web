@@ -15,6 +15,10 @@
     $scope.trh = angular.element('.table-custom tr').height() || 30;
     $scope.pslgst = 30;
     $scope.pager = {};
+    $scope.initData = {
+        getListError: '',
+        loading: true
+    };
 
     $scope.api = {
         getWarnList: {
@@ -61,10 +65,18 @@
         $scope.getData();//日期插件
     };
 
+    $scope.formatState = function () {
+        $scope.initData.getListError = '';
+        $scope.initData.loading = true;
+        $scope.cache.listArr= [];
+    };
+
     /*
     *获取列表
     */
     $scope.getWarnList = function(){
+        $scope.formatState();//初始化
+
         var config = $scope.api.getWarnList;
         config.data = {
             sitename: $scope.queryInfo.siteName,
@@ -75,6 +87,7 @@
             per_page: parseInt($scope.pager.pageSize) || 20
         };
         var fnSuccess = function (d) {
+            $scope.initData.loading = false;
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.pager.total = data.data.total;
             $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
@@ -82,6 +95,8 @@
             $scope.apply();
         },
         fnError = function (data) {
+            $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
+            $scope.initData.loading = false;
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');

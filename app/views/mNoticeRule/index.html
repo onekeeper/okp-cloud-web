@@ -56,12 +56,12 @@
                                     <th class="col-operate">操作</th>
                                 </tr>
                             </thead>
-                            <tbody ng-show="mNoticeRuleList.initData.loading">
+                            <tbody ng-show="initData.loading">
                                 <tr class="tr-loading text-center">
                                     <td colspan="7"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
-                            <tbody ng-hide="mNoticeRuleList.initData.loading">
+                            <tbody ng-hide="initData.loading">
                                 <tr class="tr-empty text-center" ng-show="mNoticeRuleList.length==0">
                                     <td colspan="7" ng-if="initData.getListError!=''">未找到结果</td>
                                     <td colspan="7" ng-if="mNoticeRuleList=='' && initData.getListError==''">未找到结果</td>

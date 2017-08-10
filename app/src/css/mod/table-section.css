@@ -118,6 +118,8 @@
 }
 .nav-pager .pagination {
     margin: 0;
+    top: 3px;
+    position: relative;
 }
 
 /* 宽度限制的表格 */

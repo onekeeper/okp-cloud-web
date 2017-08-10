@@ -8,13 +8,15 @@
 	display: inline-block;
     vertical-align: middle;
     width: 55px;
-    height: 24px;
-    padding: 2px 4px;
+    height: 20px;
+    padding: 0px 4px;
     color: #444;
+    top: -2px;
+    position: relative;
 }
 .ul-pager>li>a,
 .ul-pager>li>span {
-    padding: 2px 8px;
+    padding: 1px 6px;
     margin: 4px;
     border-radius: 4px;
 }

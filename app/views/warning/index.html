@@ -9,8 +9,8 @@
                             <tr>
                                 <td><input type="text" id="startTime" class="form-control dataImg" placeholder="起始时间" ng-model="queryInfo.time_Start" readonly></td>
                                 <td><input type="text" id="endTime" class="form-control dataImg" placeholder="结束时间" ng-model="queryInfo.time_End" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="告警站点" ng-model="queryInfo.siteName"  ng-keyup="enterSearch($event);"></td>
-                                <td style="width: 11.5em;">
+                                <td><input type="text" class="form-control" placeholder="输入告警站点" ng-model="queryInfo.siteName"  ng-keyup="enterSearch($event);"></td>
+                                <td style="width: 11.4em;">
                                     <select ng-options="i.status_id as i.status_name for (k,i) in cache.statusList" ng-model="queryInfo.warnStatus" class="form-control">
                                         <option value="">告警状态</option>
                                     </select>
@@ -48,7 +48,16 @@
                                     <th title="告警内容" class="width-30p">告警内容</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody ng-show="initData.loading">
+                                <tr class="tr-loading text-center">
+                                    <td colspan="6"><div class="loading"></div></td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-hide="initData.loading">
+                                <tr class="tr-empty text-center" ng-show="cache.listArr.length==0">
+                                    <td colspan="6" ng-if="initData.getListError!=''">未找到结果</td>
+                                    <td colspan="6" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
+                                </tr>
                                 <tr ng-repeat="item in cache.listArr">
                                     <td title="">{{item.create_at | dateFilter}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
