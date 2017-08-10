@@ -13,6 +13,7 @@
     color: #444;
     top: -2px;
     position: relative;
+    font-size: 12px;
 }
 .ul-pager>li>a,
 .ul-pager>li>span {
