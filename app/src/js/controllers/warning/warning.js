@@ -272,19 +272,22 @@
 
         $scope.saveTime.time_End = "";
         $scope.saveTime.time_Start = "";
-        var start = {
-            minDate: '1977-01-01 00:00:00',
-            maxDate: '2099-01-01 00:00:00'           
-        };
-        var end = {
-            minDate: '1977-01-01 00:00:00',
-            maxDate: '2099-01-01 00:00:00'           
-        };
+        $('#startTime').val('');
+        $('#endTime').val('');
+        
+        // var start = {
+        //     minDate: '1977-01-01 00:00:00',
+        //     maxDate: '2099-01-01 00:00:00'           
+        // };
+        // var end = {
+        //     minDate: '1977-01-01 00:00:00',
+        //     maxDate: '2099-01-01 00:00:00'           
+        // };
 
-        start.maxDate = '1977-01-01 00:00:00'; 
-        end.minDate = '2099-01-01 00:00:00';
-        $("#startTime").jeDate(start);
-        $("#endTime").jeDate(end);
+        // start.maxDate = '1977-01-01 00:00:00'; 
+        // end.minDate = '2099-01-01 00:00:00';
+        // $("#startTime").jeDate(start);
+        // $("#endTime").jeDate(end);
     };
 
 
