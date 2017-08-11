@@ -380,6 +380,11 @@ angular.module('myappApp')
                         $scope.apply();
                         return false;
                     }
+                    else if(!Validate.validLength($scope.userList.init.modalForm.email,{maxLen:64})){
+                        $scope.validate.user.email = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
+                        $scope.apply();
+                        return false;
+                    }
                 }
             }
 

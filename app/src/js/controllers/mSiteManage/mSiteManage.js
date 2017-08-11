@@ -497,7 +497,7 @@ angular.module('myappApp')
                         $scope.apply();
                         return false;
                     }
-                    else if(!Validate.validLength($scope.siteList.init.modalForm.site_name,{maxLen:20})){
+                    else if(!Validate.validLength($scope.siteList.init.modalForm.site_name,{maxLen:64})){
                         $scope.validate.site.site_name = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
                         $scope.apply();
                         return false;
@@ -542,7 +542,7 @@ angular.module('myappApp')
                         $scope.apply();
                         return false;
                     }
-                    else if(!Validate.validLength($scope.siteList.init.modalForm.address,{maxLen:50})){
+                    else if(!Validate.validLength($scope.siteList.init.modalForm.address,{maxLen:128})){
                         $scope.validate.site.address = angular.extend({},validNotObj,{ error:{required:false,format:true,same:false} });
                         $scope.apply();
                         return false;

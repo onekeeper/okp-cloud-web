@@ -11,7 +11,7 @@
                             站点名称不能为空
                         </span>
                         <span ng-if="validate.site.site_name.dirty && validate.site.site_name.error.format">
-                            站点名称不超过20个字符
+                            站点名称不超过64个字符,中文不能超过32个字
                         </span>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             详细地址不能为空
                         </span>
                         <span ng-if="validate.site.address.dirty && validate.site.address.error.format">
-                            详细地址不超过50个字符
+                            详细地址不超过128个字符,中文不能超过64个字
                         </span>
                     </div>
                 </div>
