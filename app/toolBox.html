@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运维工具箱</title>
+    <link rel="stylesheet" href="src/css/lib/bootstrap_3.3.6.min.css">
+    <link rel="stylesheet" href="src/css/toolBox.css">
+<!--     <link rel="stylesheet" href="src/css/main.css">
+ --></head>
+<body>
+    <!-- 页面头部 s -->
+    <div class="header">
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-self">
+            <div class="container-fluid">
+                <!-- 左上产品LOGO -->                
+                <a class="navbar-brand navbar-logo pdt12" href="toolBox.html">
+                    <div class="logo-icon">
+                        Worker ToolBox
+                    </div>
+                </a>
+                <div id="J_fixedNavbar" class="navbar-collapse collapse">                    
+                    <!-- 搜索 s -->
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请输入关键字检索">
+                        </div>                
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="top-container">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            工具超市
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-r">
+            <a role="button" class="btn button-blue back-button">返回</a>
+        </div>
+    </div>
+
+    <div class="body-container">
+            <div class="errorMsg" id="J_errorMsg">
+
+            </div>
+            <div class="tool-panel" id="J_tool_panel">
+
+            </div>
+    </div>
+    
+    <script src="src/js/lib/jquery_1.11.3.min.js"></script>
+    <script src="../src/js/toolBox.js"></script>
+</body>
+</html>

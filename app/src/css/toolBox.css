@@ -1,0 +1,130 @@
+html,body{
+  position: relative;
+  padding: 0;
+  background:#ebeff2;
+  /*min-width: 1200px;*/
+  height: 100%;
+  font-size: 12px;
+  /*overflow-y: hidden;*/
+}
+img{
+	padding: 1rem;
+    overflow: hidden;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.navbar {
+    border-radius: 0px;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-family: initial;
+    font-size: 24px;
+    margin: 0px;
+}
+.navbar-right {
+    float: right!important;
+     margin-right: 0px; 
+}
+.navbar-form .form-control {
+    width: 20em;
+}
+.top-container {
+    margin: 15px 0px;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    font-size: 16px;
+    top: 50px;
+    color: #686765;
+}
+.body-container{
+	position: absolute;
+	top: 100px;
+	left: 1rem;
+	right: 1rem;
+	bottom: 1rem;
+	background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	/*overflow-y: hidden;*/
+	min-height: 200px;
+	padding: 1rem;
+}
+.tool-panel img{
+	width: 80%;
+}
+
+.one-tool{
+	text-align: center;
+	padding-top: 1rem;
+}
+
+.one-tool p{
+	padding-top: 0.5rem;
+	color: #999999;
+}
+
+.one-tool img:hover{
+	cursor: pointer;
+	border: 1px solid #328fec;
+}
+
+.text-r{
+	text-align: right;
+}
+.button-blue{
+	border:1px solid #469fbf; 
+	background: #49b7d8;
+	padding: 0.3rem 2rem;
+	color:#fff;
+	margin-top: -4px;
+	margin-left: 2rem;
+}
+.btn:hover {
+    color: #fff;
+    background: #71d0ed;
+    border: 1px solid #5fb4d2;
+    text-decoration: none;
+}
+
+.errorMsg{
+	color: red;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+
+.tool-detail .body-container{
+	top: 70px;
+}
+.tool-detail .tool-panel{
+	padding: 2rem;
+}
+.tool-detail .tool-panel img{
+	width: 16rem;
+}
+
+.tool-top-panel{
+	height: 15rem;
+}
+.tool-top-panel strong{
+	font-weight: 700;
+    position: relative;
+    top: -6rem;
+    font-size: 2rem;
+    padding-left: 2rem;
+}
+.pdr5rem{
+	padding-right: 5rem;
+}
+.tool-text{
+	padding-top: 2rem;
+}
+
+
