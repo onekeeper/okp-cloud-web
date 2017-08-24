@@ -51,8 +51,8 @@ img{
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
-	/*overflow-y: hidden;*/
-	min-height: 200px;
+	overflow-y: auto;
+	/*min-height: 200px;*/
 	padding: 1rem;
 }
 .tool-panel img{
