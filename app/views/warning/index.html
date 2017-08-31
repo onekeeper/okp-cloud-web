@@ -59,7 +59,7 @@
                                     <td colspan="6" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
                                 </tr>
                                 <tr ng-repeat="item in cache.listArr">
-                                    <td title="">{{item.create_at | dateFilter}}</td>
+                                    <td title="">{{item.occure_at | dateFilter}}</td>
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.severity == 1? '消息' : item.severity == 2 ? '一般' : item.severity == 4 ? '严重' : item.severity == 6 ? '一般，严重' : '消息，一般，严重'}}</td>

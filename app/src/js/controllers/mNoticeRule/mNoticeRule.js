@@ -159,9 +159,9 @@ angular.module('myappApp')
     /**
     * 清空查询条件
     */
-    $scope.cleanParameter = function(){            
+    $scope.cleanParameter = function(){
         $scope.query.siteName = '';
-        $scope.query.userName = '';           
+        $scope.query.userName = '';
     };
 
     /**
@@ -467,10 +467,10 @@ angular.module('myappApp')
         };
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
-        angular.element('#J_addmNoticeRule').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_addmNoticeRule').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
     /**
@@ -522,13 +522,25 @@ angular.module('myappApp')
         }else if($scope.initData.modalForm.methodId == 3){
             $scope.initData.modalForm.method[1] = true;
             $scope.initData.modalForm.method[2] = true;
+        }else if($scope.initData.modalForm.methodId == 4){
+            $scope.initData.modalForm.method[4] = true;
+        }else if($scope.initData.modalForm.methodId == 5){
+            $scope.initData.modalForm.method[1] = true;
+            $scope.initData.modalForm.method[4] = true;
+        }else if($scope.initData.modalForm.methodId == 6){
+            $scope.initData.modalForm.method[2] = true;
+            $scope.initData.modalForm.method[4] = true;
+        }else if($scope.initData.modalForm.methodId == 7){
+            $scope.initData.modalForm.method[1] = true;
+            $scope.initData.modalForm.method[2] = true;
+            $scope.initData.modalForm.method[4] = true;
         }
         $scope.selfValid();
         angular.element('#J_addmNoticeRule').modal();
-        angular.element('#J_addmNoticeRule').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_addmNoticeRule').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
     /**
@@ -542,10 +554,10 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mNoticeRuleList[index].id;
         angular.element('#J_mNoticeRuleConfirm').modal();
-        angular.element('#J_mNoticeRuleConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_mNoticeRuleConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
     /**
