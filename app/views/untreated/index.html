@@ -1,27 +1,15 @@
 <div ng-init="init()">
     <!-- 搜索部分 -->
     <div class="row top-container">
-        <div class="col-lg-12 col-md-12 top-right pdl25">
+        <div class="col-lg-9 col-md-9 top-right pdl25">
             <form class="ng-pristine ng-valid">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-custom">
-                    <table class="table-task pull-left mgl4-">
-                        <tbody>
-                            <tr>
-                                <td><input type="text" id="startTime" class="form-control dataImg" placeholder="起始时间" ng-model="queryInfo.time_Start" readonly></td>
-                                <td><input type="text" id="endTime" class="form-control dataImg" placeholder="结束时间" ng-model="queryInfo.time_End" readonly></td>
-                                <td><input type="text" class="form-control" placeholder="输入告警站点" ng-model="queryInfo.siteName"  ng-keyup="enterSearch($event);"></td>
-                                <td style="width: 11.4em;">
-                                    <select ng-options="i.status_id as i.status_name for (k,i) in cache.statusList" ng-model="queryInfo.warnStatus" class="form-control">
-                                        <option value="">告警状态</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-                        <a role="button" class="btn btn-default btn-query fs12" ng-click="getWarnList();">搜索</a>
-                        <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="queryClean(true);">重置</a>
-                    </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-custom">
+                    <input type="text" class="form-control" placeholder="输入站点名称或告警内容" ng-model="queryInfo.keyWords" ng-keyup="enterSearch($event);">
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+                    <a role="button" class="btn btn-default btn-query fs12" ng-click="getWarnList();">搜索</a>
+                    <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="queryClean(true);">重置</a>
                 </div>
             </form>
         </div>
@@ -33,7 +21,7 @@
                 <div class="ds-panel box-all">
                     <div class="row table-top-section">
                         <div class="col-lg-6 col-md-6">
-                            <div class="table-name">告警列表</div>
+                            <div class="table-name">待处理告警列表</div>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -69,15 +57,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <pager-directive pager="pager" func="'getWarnList'" format-state="''" tbh="tbh" trh="trh" pslgst="pslgst" ng-hide="cache.listArr.length==0"></pager-directive>
                 </div>
             </div>
         </div>
     </div>
-    <div id="J_stationDetail" show-directive>
+    <div id="J_stationDetailUntreated" show-directive>
         <div ng-include="'views/public/stationDetail.html'"></div>
     </div>
-    <div id="J_infoDetail" show-directive>
+    <div id="J_infoDetailUntreated" show-directive>
         <div ng-include="'views/public/infoDetail.html'"></div>
     </div>
 </div>

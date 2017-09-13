@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:mUserManageCtrl
@@ -9,10 +7,9 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('mSiteManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', '$cookieStore', 'urlPrefix', 'AjaxServer','Validate',function ($scope, $rootScope, $http, $timeout, $interval, $filter, $cookieStore, urlPrefix, AjaxServer, Validate) {
-        $scope.tbh = (angular.element(window).height() - 140 ) * .9 - 30;
-        $scope.trh = angular.element('.table-custom tr').height() || 30;
-        $scope.pslgst = 30;
+    .controller('mSiteManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', '$cookieStore', 'urlPrefix', 'AjaxServer','Validate',
+        function ($scope, $rootScope, $http, $timeout, $interval, $filter, $cookieStore, urlPrefix, AjaxServer, Validate) {
+        'use strict';
 
         $scope.pager = {};
 
@@ -118,19 +115,25 @@ angular.module('myappApp')
             }
         };
 
+        /**
+         * 清空file文本框
+         * @param fileId
+         */
         $scope.cleanFile = function(fileId){
-            var file = $("#" + fileId) 
-            file.after(file.clone().val("")); 
+            var file = $("#" + fileId)
+            file.after(file.clone().val(""));
             $("#" + fileId + '_name').val("");
-            file.remove(); 
+            file.remove();
         };
 
+        /**
+         * 事件绑定
+         */
         $scope.bindevent = function(){
             $('body').on('change','input[id=J_importFile]',function(){
-                $('#J_importFile_name').val($(this).val());  
+                $('#J_importFile_name').val($(this).val());
             })
         };
-        
 
         /**
          * 页面查询操作
@@ -159,8 +162,8 @@ angular.module('myappApp')
         /**
         * 清空查询条件
         */
-        $scope.cleanParameter = function(){            
-            $scope.siteList.query.site_name = '';            
+        $scope.cleanParameter = function(){
+            $scope.siteList.query.site_name = '';
         };
 
 
@@ -215,7 +218,7 @@ angular.module('myappApp')
                     url:  flag ? $scope.siteList.apis.addOne.url : $scope.siteList.apis.updateOne.url.replace(/\#/,$scope.siteList.init.actionId),
                     method: flag ? $scope.siteList.apis.addOne.method : $scope.siteList.apis.updateOne.method,
                     data: {
-                        license: $scope.siteList.init.modalForm.license,
+                        license: $scope.siteList.init.modalForm.license || '',
                         site_name: $scope.siteList.init.modalForm.site_name,
                         province_code: $scope.siteList.init.modalForm.province_code,
                         city_code: $scope.siteList.init.modalForm.city_code,
@@ -240,7 +243,7 @@ angular.module('myappApp')
                     console.log(data.message);
                 };
             if(!flag){
-                delete config.data["license"];
+                //delete config.data["license"];
             }
             AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
@@ -345,10 +348,10 @@ angular.module('myappApp')
                             $scope.apply();
                             $scope.selfValid();
                             angular.element('#J_addcSite').modal();
-                            angular.element('#J_addcSite').draggable({   
-                                handle: ".modal-header",   
-                                cursor: 'move',   
-                                refreshPositions: false  
+                            angular.element('#J_addcSite').draggable({
+                                handle: ".modal-header",
+                                cursor: 'move',
+                                refreshPositions: false
                             });
                         }
                     }
@@ -368,7 +371,7 @@ angular.module('myappApp')
          * 点击确定
          * @param event: event object
          */
-        $scope.clickOk = function (event){            
+        $scope.clickOk = function (event){
             var it = $(event.target),
                 type = $scope.siteList.init.actionType;
             if(it.hasClass('disabled')){
@@ -386,13 +389,17 @@ angular.module('myappApp')
                 case 'update':
                     if($scope.validateForm('all','site')){
                         it.addClass('disabled');
-                        $scope.addOrUpdate(it);                    
+                        if($("#J_importFile").val()){//如果选择了新授权文件，则先上传再提交表单
+                            $scope.importLicenseAndCommitForm(event);
+                        }else{
+                            $scope.addOrUpdate(it);
+                        }
                     }
                     break;
                 case 'add':
                     if($scope.validateForm('all','site')){
                         it.addClass('disabled');
-                        $scope.importLicense(event);    
+                        $scope.importLicenseAndCommitForm(event);
                     }
                     break;
             }
@@ -412,11 +419,11 @@ angular.module('myappApp')
             $scope.cleanFile('J_importFile');
             $scope.selfValid();
             angular.element('#J_addcSite').modal();
-            angular.element('#J_addcSite').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
-            }); 
+            angular.element('#J_addcSite').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
+            });
         };
 
         /**
@@ -438,11 +445,11 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'delete';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_siteConfirm').modal();
-            angular.element('#J_siteConfirm').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
-            }); 
+            angular.element('#J_siteConfirm').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
+            });
         };
 
         /**
@@ -455,11 +462,11 @@ angular.module('myappApp')
             $scope.siteList.init.actionType = 'resetKey';
             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
             angular.element('#J_keyConfirm').modal();
-            angular.element('#J_keyConfirm').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
-            }); 
+            angular.element('#J_keyConfirm').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
+            });
         };
 
         /**
@@ -468,10 +475,10 @@ angular.module('myappApp')
         $scope.showKeyDetail = function(value){
             $scope.mTitle = '密钥';
             angular.element("#J_keyInfoDetail").modal('show');
-            angular.element('#J_keyInfoDetail').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
+            angular.element('#J_keyInfoDetail').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
             });
             $scope.infoDetail = value;
         };
@@ -556,7 +563,7 @@ angular.module('myappApp')
         /**
          * 响应导入License操作
          */
-        $scope.importLicense = function(ev){
+        $scope.importLicenseAndCommitForm = function(ev){
             var it = $(ev.target);
             if(!$("#J_importFile").val()){
                 $scope.validate.site.license.dirty = true;

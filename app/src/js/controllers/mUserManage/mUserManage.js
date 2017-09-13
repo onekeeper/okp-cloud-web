@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:mUserManageCtrl
@@ -9,10 +7,9 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-.controller('mUserManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
-    $scope.tbh = (angular.element(window).height() - 140 ) * .9 - 30;
-    $scope.trh = angular.element('.table-custom tr').height() || 30;
-    $scope.pslgst = 30;
+.controller('mUserManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',
+    function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
+    'use strict';
 
     $scope.pager = {};
 
@@ -119,8 +116,8 @@ angular.module('myappApp')
     /**
     * 清空查询条件
     */
-    $scope.cleanParameter = function(){            
-        $scope.userList.query.username = '';            
+    $scope.cleanParameter = function(){
+        $scope.userList.query.username = '';
     };
 
     /**
@@ -293,10 +290,10 @@ angular.module('myappApp')
          $scope.userList.init.selected = [];
          $scope.selfValid();
          angular.element('#J_addUser').modal();
-         angular.element('#J_addUser').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+         angular.element('#J_addUser').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 
@@ -311,10 +308,10 @@ angular.module('myappApp')
          $scope.userList.init.modalForm = angular.extend({},$scope.userList.init.tdObj[index]);
          $scope.selfValid();
          angular.element('#J_addUser').modal();
-         angular.element('#J_addUser').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+         angular.element('#J_addUser').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 
@@ -328,10 +325,10 @@ angular.module('myappApp')
         $scope.userList.init.actionType = 'delete';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
-        angular.element('#J_userConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_userConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 
@@ -345,10 +342,10 @@ angular.module('myappApp')
         $scope.userList.init.actionType = 'resetPwd';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();
-        angular.element('#J_userConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_userConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 

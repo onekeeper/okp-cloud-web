@@ -85,19 +85,16 @@ fieldset[disabled] .select-date {
     background: url(../images/icons/start.png) no-repeat 2px center;
 }
 .icon-edit{
-    background: url(../images/icons/edit.svg) no-repeat center center;
+    background: url(../images/icons/operate/edit.svg) no-repeat center center;
 }
 .icon-del{
-    background: url(../images/icons/del.svg) no-repeat center center;
+    background: url(../images/icons/operate/del.svg) no-repeat center center;
 }
 .icon-pwd{
-    background: url(../images/icons/pwd.svg) no-repeat center center;
+    background: url(../images/icons/operate/pwd.svg) no-repeat center center;
 }
 .icon-key{
-    background: url(../images/icons/key.svg) no-repeat center center;
-}
-.icon-del {
-    background: url(../images/icons/del.svg) no-repeat center center;
+    background: url(../images/icons/operate/key.svg) no-repeat center center;
 }
 .icon-authorize{
     background: url(../images/icons/authorize.svg) no-repeat center center;
@@ -140,17 +137,17 @@ fieldset[disabled] .select-date {
 .icon-edit:focus,
 .icon-edit:hover,
 .icon-edit:active{
-    background: url(../images/icons/edit-active.svg) no-repeat center center;
+    background: url(../images/icons/operate/edit-active.svg) no-repeat center center;
 }
 .icon-del:focus,
 .icon-del:hover,
 .icon-del:active{
-    background: url(../images/icons/del-active.svg) no-repeat center center;
+    background: url(../images/icons/operate/del-active.svg) no-repeat center center;
 }
 .icon-pwd:focus,
 .icon-pwd:hover,
 .icon-pwd:active{
-    background: url(../images/icons/pwd-active.svg) no-repeat center center;
+    background: url(../images/icons/operate/pwd-active.svg) no-repeat center center;
 }
 .icon-pause[disabled],
 .icon-pause:focus[disabled],
@@ -165,7 +162,7 @@ fieldset[disabled] .select-date {
 .icon-key:focus,
 .icon-key:hover,
 .icon-key:active{
-    background: url(../images/icons/key-active.svg) no-repeat center center;
+    background: url(../images/icons/operate/key-active.svg) no-repeat center center;
 }
 
 /* 头部图标 */

@@ -565,7 +565,7 @@ input.tb-invalid{
 /*jeData图片*/
 .dataImg{
   background-image: url("../images/icons/jeDataImg.png");
-  background-repeat:no-repeat; 
+  background-repeat:no-repeat;
   background-position:right center;
 }
 .dataImg[readonly]{
@@ -584,6 +584,10 @@ input.tb-invalid{
   padding: 0px;
 }
 
+.checkbox-inline{
+  line-height:20px;
+}
+
 .checkbox-7rem{
   width: 7rem;
 }
@@ -592,3 +596,33 @@ input.tb-invalid{
   padding-right: 5px;
   padding-left: 5px;
 }
+
+/*超管统计*/
+.count-chart{
+    text-align:center;
+    height:12rem;
+    padding-top: 1.5rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.count-chart .count-num{
+    color: #5092e1;
+    font-size:3rem;
+}
+
+.chart-row{
+    height:13.6rem;
+    margin:0px;
+}
+
+.pdl32 {
+    padding-left: 32px;
+}
+
+.count-list,.box-all-list{
+    height:70%;
+}
+
+.

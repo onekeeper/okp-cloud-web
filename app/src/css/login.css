@@ -190,3 +190,7 @@
     top: 20px;
     position: relative;
 }
+
+.login .login-box input[type="text"],.login .login-box input[type="password"]{
+    padding-left:6px;
+}

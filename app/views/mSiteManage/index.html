@@ -35,8 +35,8 @@
                         <table class="table table-striped table-hover table-custom">
                             <thead>
                                 <tr>
-                                    <th>站点名称</th>
-                                    <th>站点编号</th>
+                                    <th style="width:16%;">站点名称</th>
+                                    <th style="width:14%;">站点编号</th>
                                     <th>省</th>
                                     <th>市</th>
                                     <!--
@@ -64,8 +64,8 @@
                                 <tr ng-repeat="item in siteList.init.tdObj">
                                     <td ng-bind="item.site_name"></td>
                                     <td ng-bind="item.sn" title="{{item.sn}}"></td>
-                                    <td ng-bind="item.province_name"></td>
-                                    <td ng-bind="item.city_name"></td>
+                                    <td ng-bind="item.province_name | districtFiler"></td>
+                                    <td ng-bind="item.city_name | districtFiler"></td>
                                     <!--
                                     <td ng-bind="item.address" title="{{item.address}}"></td>
                                     -->
@@ -78,10 +78,10 @@
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"
                                            ng-click="clickEdit($index)"></a>
-                                        <a role="button" class="icon icon-key" title="重置密钥"
-                                           ng-click="clickResetKey($index)"></a>
                                         <a role="button" class="icon icon-del" title="删除"
                                            ng-click="clickDelete($index)"></a>
+                                        <a role="button" class="icon icon-key" title="重置密钥"
+                                           ng-click="clickResetKey($index)"></a>
                                     </td>
                                 </tr>
                             </tbody>

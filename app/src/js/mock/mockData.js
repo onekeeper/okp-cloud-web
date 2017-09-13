@@ -41,6 +41,22 @@ Mock.mock(/\/superviser\/login/, 'post', function(options){
 });
 
 /*
+ *待处理告警
+ */
+Mock.mock(/\/user\/app\/alerts\/untreated/, 'get',{
+    code : 1 ,
+    data : [{
+        'occure_at' : '2017-07-01 12:00:00' ,
+        'site_id':'1',
+        'site_name' : '站点1' ,
+        'host' : 'pc001' ,
+        'severity' : 1,
+        'status' : 1 ,
+        'content' : 'error start at 11:50am...'
+    }]
+});
+
+/*
 *历史告警
 */
 Mock.mock(/\/user\/alerts/, 'get',{
@@ -49,7 +65,7 @@ Mock.mock(/\/user\/alerts/, 'get',{
     data : {
         'items' : [
         {
-            'create_at' : '2017-07-01 12:00:00' ,
+            'occure_at' : '2017-07-01 12:00:00' ,
             'site_id':'1',
             'site_name' : '站点1' ,
             'host' : 'pc001' ,
@@ -94,9 +110,10 @@ Mock.mock(/\/user\/alerts/, 'get',{
             'site_name' : '站点名称' ,
             'sn' : '站点序号' ,
             'province_code':'300',
-            'province_name':'浙江',
+            'province_name':'浙江省',
             'city_code':'100',
-            'city_name':'杭州',
+            'city_name':'杭州市',
+            'access_key':'sdsf3423432432432',
             'address' : '西湖区凤起路1号' ,
             'create_at' : '2017-07-01 00:00:00' ,
             'license_end' : '2018-07-01 00:00:00'
@@ -171,13 +188,32 @@ Mock.mock(/\/superviser\/partner/, 'get',{
         'items' : [
             {
                 'id' : '100' ,
-                'name':'杭州美创科技有限公司',
+                'partner_name':'杭州美创科技有限公司',
                 'login_username' : 'hzmc' ,
                 'province_name' : '浙江' ,
                 'province_code' : '100',
                 'city_name' : '杭州' ,
                 'city_code' : '10001',
                 'address' : '丰谭路199号'
+            }
+        ] ,
+        'total' : 40
+    }
+});
+
+/*
+ *数据总览
+ */
+Mock.mock(/\/superviser\/listCount/, 'get',{
+    'code' : 1 ,
+    'message' : 'success' ,
+    data : {
+        'items' : [
+            {
+                'id' : '100' ,
+                'site_name':'站点名称',
+                'partner_name' : '公司名称' ,
+                'add_time' : '2017-09-11 12:00:08'
             }
         ] ,
         'total' : 40

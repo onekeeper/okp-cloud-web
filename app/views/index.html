@@ -27,10 +27,7 @@
             <!-- 导航主体 s -->
             <div id="J_fixedNavbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left mgl-50" ng-if="partnerFlag == 'false'">
-                    <!--
-                    <li ui-sref-active="active"><a ui-sref="main.home">首 页</a></li>
-                    <li ng-class="{'active': pagePath.indexOf('dispatch')>-1}"><a ui-sref="main.dispatch">调度管理</a></li>
-                    -->
+                    <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.untreated">待处理告警</a></li>
                     <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.warning">告警列表</a></li>
                     <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.notice">通知列表</a></li>
                     <li ui-sref-active="active" ng-if="commonFlag"><a ui-sref="main.noticeRule">通知规则</a></li>
@@ -39,7 +36,7 @@
                     <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mUserManage">人员管理</a></li>
                     <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mAuthorizeManage">服务授权</a></li>
                     <li ui-sref-active="active" ng-if="!commonFlag"><a ui-sref="main.mNoticeRule">通知规则</a></li>
-                    
+
                 </ul>
                 <!-- 右侧功能项 s -->
                 <ul class="nav navbar-nav navbar-right hidden-xs" ng-init="initHeader()">
@@ -58,9 +55,8 @@
 <!-- 页面头部 e -->
 <div class="main-content">
     <!-- modal s -->
-
-    <!-- modal e -->
     <ui-view></ui-view>
+    <!-- modal e -->
 </div>
 <!-- 修改密码弹窗 -->
 <div id="J_editPwd" modal-directive>

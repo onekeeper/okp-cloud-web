@@ -9,6 +9,7 @@
 	color: #81807e;
 	border-color: #dbdbdb;
 	border-radius: 4px 4px 0 0;
+    cursor:move;
 }
 .md-modal-content .modal-header h6{
 	text-align: left;
@@ -38,6 +39,11 @@
 	text-align: left;
 	color: #808080;
 }
+
+.md-modal-content .form-horizontal .value-label{
+    color:#555;
+}
+
 .md-modal-content .modal-body {
     padding: 20px;
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.directive:pagerDirective
@@ -9,6 +7,7 @@
 
  angular.module('myappApp')
 .directive('pagerDirective', function() {
+    'use strict';
 	return {
 		restrict: "EAC",
 		templateUrl: 'views/public/pagination.html',
@@ -35,7 +34,7 @@
                      //    //return ( ~~(tableHeight / trHeight) || 1 ) + '';
                      //    return 20;
                      // })( scope.tbh , scope.trh ),
-                    pageSize: 20,
+                     pageSize: 20,
                      pageSizeOptions: (function(largest){                                 // 每页条数选项,largest为每页条数最大值
                          var arr = [10,20,30,40,50];
                          //for(var i = 0; i < largest; i++) arr[i] = i + 1 + '';
@@ -96,4 +95,4 @@
 			}
 		}
 	}
-})
+});

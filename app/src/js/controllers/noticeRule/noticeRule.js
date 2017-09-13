@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:noticeRuleCtrl
@@ -10,10 +8,10 @@
  */
 
 angular.module('myappApp')
-.controller('noticeRuleCtrl', function ($scope, $rootScope, $http, $timeout, $location, $interval, AjaxServer, $state, urlPrefix) {
-    $scope.tbh = (angular.element(window).height() - 140 ) * .9 - 30;
-    $scope.trh = angular.element('.table-custom tr').height() || 30;
-    $scope.pslgst = 30;
+.controller('noticeRuleCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$location', '$interval', 'AjaxServer', '$state', 'urlPrefix',
+    function ($scope, $rootScope, $http, $timeout, $location, $interval, AjaxServer, $state, urlPrefix) {
+    'use strict';
+
     $scope.pager = {};
     $scope.initData = {
         getListError: '',
@@ -91,10 +89,10 @@ angular.module('myappApp')
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
             $scope.mTitle = '站点详情';
             angular.element("#J_stationDetail").modal('show');
-            angular.element('#J_stationDetail').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
+            angular.element('#J_stationDetail').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
             });
             $scope.cache.siteObj = data.data[0];
             $scope.listContent = {
@@ -127,7 +125,7 @@ angular.module('myappApp')
     $scope.enterSearch = function(e){
         var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-               $scope.getNoticeRuleList(); 
+               $scope.getNoticeRuleList();
             }
     };
 
@@ -139,20 +137,20 @@ angular.module('myappApp')
             $scope.pager.curPage = 1;
         }
         $scope.cleanParameter();
-        $scope.getNoticeRuleList(); 
+        $scope.getNoticeRuleList();
     };
 
     /**
     * 清空查询条件
     */
-    $scope.cleanParameter = function(){            
-        $scope.siteName = '';            
+    $scope.cleanParameter = function(){
+        $scope.siteName = '';
     };
-    
+
     $scope.apply = function() {
         if(!$scope.$$phase) {
             $scope.$apply();
         }
     };
 
-})
+}]);

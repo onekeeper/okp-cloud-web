@@ -3,7 +3,7 @@
         <form class="form-horizontal" novalidate>
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">授权站点<span class="sign-must">*</span></label>
-                <div class="col-lg-7">                    
+                <div class="col-lg-7">
                     <select class="form-control" ng-model="initData.modalForm.siteId" ng-options="v.site_id as v.site_name for (k , v) in initData.siteOptions" ng-change="validateForm('site')">
                          <option value="">--请选择--</option>
                     </select>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">服务方<span class="sign-must">*</span></label>
-                <div class="col-lg-7">                    
+                <div class="col-lg-7">
                     <select class="form-control" ng-model="initData.modalForm.partnerId" ng-options="v.partner_id as v.partner_name for (k , v) in initData.partnerOptions" ng-change="validateForm('partner')">
                          <option value="">--请选择--</option>
                     </select>
@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">授权服务（多选）<span class="sign-must">*</span></label>
-                <div class="col-lg-7">     
-                    <input ng-model="initData.modalForm.moduleId" type="hidden" value="0">               
+                <label class="control-label col-lg-4">授权服务<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input ng-model="initData.modalForm.moduleId" type="hidden" value="0">
                     <label class="checkbox-inline" ng-repeat="item in initData.delegationOptions">
                         <input ng-model="initData.modalForm.module[item.module_id]" type="checkbox" ng-click="validateForm('module')">{{item.module_name}}
                     </label>
@@ -52,7 +52,7 @@
                     <i class="valid-error" ng-if=" validate.module.dirty && validate.module.invalid"></i>
                     <i class="valid-success" ng-if=" validate.module.dirty && validate.module.valid"></i>
                 </div>
-            </div>            
+            </div>
         </form>
     </div>
 </div>

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:LoginCtrl
@@ -8,8 +6,10 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-  	.controller('LoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
-        var apiLoginUrl = urlPrefix + '/user/login',
+  	.controller('LoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',
+        function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
+        'use strict';
+  	    var apiLoginUrl = urlPrefix + '/user/login',
             otherApiLoginUrl = urlPrefix + '/partner/login';
 
         $scope.init = function() {
@@ -74,7 +74,7 @@ angular.module('myappApp')
                             $rootScope.username = d.data.username;
                             sessionStore.set('loginUser',$rootScope.username);
                             sessionStore.set('userLogStatus','login');
-                            $state.go('main.warning');
+                            $state.go('main.untreated');
                         }else {
                             $rootScope.username = d.data.name;
                             sessionStore.set('loginUser',$rootScope.username);

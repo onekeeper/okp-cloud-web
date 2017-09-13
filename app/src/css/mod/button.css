@@ -51,11 +51,11 @@
     font-size: 12px;
 }*/
 .btn-primary {
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: #5092e1;
+    border-color: #5092e1;
 }
 
 .btn-primary:hover {
-    background-color: #286090;
-    border-color: #286090;
+    background-color: #5092e1;
+    border-color: #5092e1;
 }

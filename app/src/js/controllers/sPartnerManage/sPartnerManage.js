@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:sPartnerManageCtrl
@@ -9,10 +7,9 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-.controller('sPartnerManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
-    $scope.tbh = (angular.element(window).height() - 140 ) * .9 - 30;
-    $scope.trh = angular.element('.table-custom tr').height() || 30;
-    $scope.pslgst = 30;
+.controller('sPartnerManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',
+    function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
+    'use strict';
 
     $scope.pager = {};
 
@@ -194,10 +191,10 @@ angular.module('myappApp')
                         $scope.apply();
                         $scope.selfValid();
                         angular.element('#J_addPartner').modal();
-                        angular.element('#J_addPartner').draggable({   
-                            handle: ".modal-header",   
-                            cursor: 'move',   
-                            refreshPositions: false  
+                        angular.element('#J_addPartner').draggable({
+                            handle: ".modal-header",
+                            cursor: 'move',
+                            refreshPositions: false
                         });
                     }
                 }
@@ -350,10 +347,10 @@ angular.module('myappApp')
          $scope.apply();
          $scope.selfValid();
          angular.element('#J_addPartner').modal();
-         angular.element('#J_addPartner').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+         angular.element('#J_addPartner').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 
@@ -376,10 +373,10 @@ angular.module('myappApp')
         $scope.partnerList.init.actionType = 'delete';
         $scope.partnerList.init.actionId = $scope.partnerList.init.tdObj[index].id;
         angular.element('#J_partnerConfirm').modal();
-        angular.element('#J_partnerConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_partnerConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 
@@ -393,10 +390,10 @@ angular.module('myappApp')
         $scope.partnerList.init.actionType = 'resetPwd';
         $scope.partnerList.init.actionId = $scope.partnerList.init.tdObj[index].id;
         angular.element('#J_partnerConfirm').modal();
-        angular.element('#J_partnerConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_partnerConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
 

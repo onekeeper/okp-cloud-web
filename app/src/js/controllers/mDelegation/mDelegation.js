@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:mAuthorizeManageCtrl
@@ -10,6 +8,7 @@
  */
 angular.module('myappApp')
 .controller('mAuthorizeManageCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
+    'use strict';
     urlPrefix = urlPrefix + "/partner";//管理员
     $scope.initData = {
         getListError: '',
@@ -39,7 +38,7 @@ angular.module('myappApp')
                 data: {}
             },
             getPartnerOptions: {
-                url: urlPrefix + '/dropdown/partners',
+                url: urlPrefix + '/dropdown/partners?is_provider=true',
                 method: 'get',
                 data: {}
             },
@@ -105,7 +104,7 @@ angular.module('myappApp')
             $scope.query(true);
         }
     };
-        
+
     /**
      * 页面查询操作
      * @param flag: if curPage == 1
@@ -122,14 +121,14 @@ angular.module('myappApp')
     $scope.queryClean = function( flag ){
         if( flag ) $scope.pager.curPage = 1;
         $scope.formatState();
-        $scope.cleanParameter();          
+        $scope.cleanParameter();
         $scope.queryData();
     };
 
     /**
     * 清空查询条件
     */
-    $scope.cleanParameter = function(){             
+    $scope.cleanParameter = function(){
         $scope.query.siteName = '';
         $scope.query.grantorName = '';
     };
@@ -384,11 +383,11 @@ angular.module('myappApp')
         };
         $scope.selfValid();
         angular.element('#J_addmDelegation').modal();
-        angular.element('#J_addmDelegation').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
-        }); 
+        angular.element('#J_addmDelegation').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
+        });
     };
     /**
      * 取消授权
@@ -401,10 +400,10 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();
-        angular.element('#J_mDelegationConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_mDelegationConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
     /**
@@ -418,10 +417,10 @@ angular.module('myappApp')
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
         angular.element('#J_mDelegationConfirm').modal();
-        angular.element('#J_mDelegationConfirm').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_mDelegationConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
     };
     /**

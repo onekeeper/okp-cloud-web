@@ -15,16 +15,12 @@ angular
     'ui.router'
   ])
   .constant('urlPrefix', '/api/v1')
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider','$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
   		var timestamp = Date.parse( new Date());//时间戳清空缓存
 
     	$urlRouterProvider
     	.when("", "/login?"+timestamp)
     	.when('/', "/login?"+timestamp)
-		.when('/500', '500.html?'+timestamp)
-	    .when('/400', '400.html?'+timestamp)
-		.when('/404', '404.html?'+timestamp)
-		.when('/402', 'authError.html?'+timestamp)
 		.otherwise('/login?'+timestamp);
 
 		$stateProvider
@@ -48,6 +44,11 @@ angular
 			templateUrl: "views/home/index.html?"+timestamp,
 			controller: "HomeCtrl"
 		})
+        .state("main.untreated", {//未处理告警
+            url: "/untreated",
+            templateUrl: "views/untreated/index.html?"+timestamp,
+            controller: "untreatedCtrl"
+        })
 		.state("main.warning", {//历史告警查询
 			url: "/warning",
 			templateUrl: "views/warning/index.html?"+timestamp,
@@ -88,4 +89,29 @@ angular
             templateUrl: "views/sPartnerManage/index.html?"+timestamp,
             controller: "sPartnerManageCtrl"
         })
-  });
+        .state("main.sPartnerCount", {//合作伙伴统计
+            url: "/partnerCount",
+            templateUrl: "views/sPartnerCount/index.html?"+timestamp,
+            controller: "sPartnerCountCtrl"
+        })
+        .state("500", {
+            url: "/500",
+            templateUrl: "500.html?"+timestamp,
+            controller: ""
+        })
+        .state("400", {
+            url: "/400",
+            templateUrl: "400.html?"+timestamp,
+            controller: ""
+        })
+        .state("404", {
+            url: "/404",
+            templateUrl: "404.html?"+timestamp,
+            controller: ""
+        })
+        .state("402", {
+            url: "/402",
+            templateUrl: "authError.html?"+timestamp,
+            controller: ""
+        })
+  }]);

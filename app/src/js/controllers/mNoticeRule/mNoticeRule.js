@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:mNoticeRuleCtrl
@@ -9,7 +7,9 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-.controller('mNoticeRuleCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
+.controller('mNoticeRuleCtrl',['$scope', '$rootScope', '$http', '$timeout', '$interval', '$filter', 'urlPrefix', 'AjaxServer','Validate',
+    function ($scope, $rootScope, $http, $timeout, $interval, $filter, urlPrefix, AjaxServer, Validate) {
+    'use strict';
     urlPrefix = urlPrefix + "/partner";//管理员
     $scope.initData = {
         getListError: '',
@@ -28,11 +28,6 @@ angular.module('myappApp')
             status:[],
             method: []
         },
-        // siteOptions:[{'site_id' : '1' , 'site_name' : '站点1'},{'site_id' : '2' , 'site_name' : '站点2'}],
-        // userOptions:[{'user_id' : '1' , 'username' : '王2'},{'user_id' : '2' , 'username' : '张三'}],
-        // warnLevelOptions:[{'severity_id' : '1' , 'severity_name' : '消息'},{'severity_id' : '2' , 'severity_name' : '告警'}],
-        // warnStatusOptions:[{'status_id' : '1' , 'status_name' : '已解决'},{'status_id' : '2' , 'status_name' : '遗留'}],
-        // noticeMethodOptions:[{'method_id' : '1' , 'method_name' : '成功'},{'method_id' : '2' , 'method_name' : '失败'}],
         siteOptions:[],
         userOptions:[],
         warnLevelOptions:[],
@@ -170,6 +165,7 @@ angular.module('myappApp')
     $scope.queryData = function(){
         $scope.getmNoticeRuleList();
     };
+
     $scope.formatState = function () {
         $scope.initData.getListError = '';
         $scope.initData.loading = true;
@@ -394,6 +390,7 @@ angular.module('myappApp')
         };
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
+
     /**
      * 删除
      * @param it: clicked object
@@ -447,6 +444,7 @@ angular.module('myappApp')
                 break;
         }
     };
+
     /**
      * 点击新增
      */
@@ -473,6 +471,7 @@ angular.module('myappApp')
             refreshPositions: false
         });
     };
+
     /**
      * 点击修改
      * @param index
@@ -543,6 +542,7 @@ angular.module('myappApp')
             refreshPositions: false
         });
     };
+
     /**
      * 点击删除
      * @param index
@@ -560,6 +560,7 @@ angular.module('myappApp')
             refreshPositions: false
         });
     };
+
     /**
      * 表单验证
      * @returns {boolean}
@@ -630,6 +631,7 @@ angular.module('myappApp')
         $scope.apply();
         return true;
     };
+
     var validFormatObj = {
         dirty:false,
         valid:true,
@@ -640,6 +642,7 @@ angular.module('myappApp')
             same:false
         }
     };
+
     /**
      * 自定义验证
      */

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:superLoginCtrl
@@ -8,8 +6,10 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-  	.controller('superLoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
-        var apiLoginUrl = urlPrefix + '/superviser/login';
+  	.controller('superLoginCtrl', ['$scope', '$rootScope', '$location','$cookieStore','$state','urlPrefix','AjaxServer','sessionStore',
+        function($scope, $rootScope, $location, $cookieStore,$state,urlPrefix,AjaxServer,sessionStore){
+  	    'use strict';
+  	    var apiLoginUrl = urlPrefix + '/superviser/login';
 
         $scope.init = function() {
             $scope.clearLoginInfo();

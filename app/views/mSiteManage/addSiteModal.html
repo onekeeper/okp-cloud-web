@@ -75,8 +75,10 @@
                     <i class="valid-success" ng-if=" validate.site.address.dirty && validate.site.address.valid"></i>
                 </div>
             </div>
-            <div class="form-group clear-mrgb" ng-if="siteList.init.actionType == 'add'">
-                <label class="control-label col-lg-4">授权文件<span class="sign-must">*</span></label>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">授权文件
+                    <span class="sign-must" ng-if="siteList.init.actionType === 'add'">*</span>
+                </label>
                 <div class="col-lg-7">
                     <!--
                     <input class="form-control" type="text" ng-model="siteList.init.modalForm.license"
@@ -85,9 +87,14 @@
 
                     <input type="file"  name="file" id="J_importFile" style="display:none"
                            ng-model="siteList.init.modalForm.license" ng-change="validateForm('license','site');"/>
-                    <div class="input-append">  
-                        <input id="J_importFile_name" ng-model="siteList.init.modalForm.license" class="form-control" type="text" style="width:72%;display:inline-block;" readonly="true">  
-                        <a class="btn btn-gray btn-import" onclick="$('input[id=J_importFile]').click();">上传文件</a> 
+                    <div class="input-append">
+                        <input id="J_importFile_name" ng-model="siteList.init.modalForm.license"
+                               class="form-control" type="text" style="width:72%;display:inline-block;"
+                               readonly="true" placeholder="选择授权文件" ng-if="siteList.init.actionType === 'add'">
+                        <input id="J_importFile_name" ng-model="siteList.init.modalForm.license"
+                               class="form-control" type="text" style="width:72%;display:inline-block;"
+                               readonly="true" placeholder="重新选择授权文件" ng-if="siteList.init.actionType === 'update'">
+                        <a class="btn btn-gray btn-import" onclick="$('input[id=J_importFile]').click();">上传文件</a>
                     </div>
 
                     <!-- <input type="file"  name="file" id="J_importFile" class="form-control" style="width:72%;display:inline-block;"

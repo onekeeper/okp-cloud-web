@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:warningCtrl
@@ -10,10 +8,10 @@
  */
 
  angular.module('myappApp')
- .controller('warningCtrl', function ($scope, $rootScope, $http, $timeout, $location, $interval, AjaxServer, $state, urlPrefix) {
-    $scope.tbh = (angular.element(window).height() - 140 ) * .9 - 30;
-    $scope.trh = angular.element('.table-custom tr').height() || 30;
-    $scope.pslgst = 30;
+ .controller('warningCtrl', ['$scope', '$rootScope', '$http', '$timeout', '$location', '$interval', 'AjaxServer', '$state', 'urlPrefix',
+     function ($scope, $rootScope, $http, $timeout, $location, $interval, AjaxServer, $state, urlPrefix) {
+    'use strict';
+
     $scope.pager = {};
     $scope.initData = {
         getListError: '',
@@ -100,10 +98,10 @@
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');
-            angular.element('#J_infoDetail').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
+            angular.element('#J_infoDetail').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
             });
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
@@ -150,10 +148,10 @@
             $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
             $scope.modalTitle = '错误信息';
             angular.element("#J_infoDetail").modal('show');
-            angular.element('#J_infoDetail').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
+            angular.element('#J_infoDetail').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
             });
         };
         AjaxServer.ajaxInfo(config, fnSuccess, fnError);
@@ -172,10 +170,10 @@
     $scope.showWarn = function(item){
         $scope.mTitle = '告警内容';
         angular.element("#J_infoDetail").modal('show');
-        angular.element('#J_infoDetail').draggable({   
-            handle: ".modal-header",   
-            cursor: 'move',   
-            refreshPositions: false  
+        angular.element('#J_infoDetail').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
         });
         $scope.infoDetail = item.content;
     };
@@ -219,14 +217,14 @@
             minDate: '1977-01-01 00:00:00',
             maxDate: '2099-06-16 00:00:00',
             ishmsVal:false,
-            zIndex:3000, 
+            zIndex:3000,
             choosefun: function(elem,date){
-                start.maxDate = date; 
+                start.maxDate = date;
                 $scope.saveTime.time_End = $scope.countDate(date);
             },
             okfun:function (elem,date) {
                 start.maxDate = date;
-                $scope.saveTime.time_End = $scope.countDate(date); 
+                $scope.saveTime.time_End = $scope.countDate(date);
             },
             clearfun:function() {
                 $scope.saveTime.time_End = "";
@@ -246,7 +244,7 @@
     $scope.enterSearch = function(e){
         var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-               $scope.getWarnList(); 
+               $scope.getWarnList();
             }
     };
 
@@ -258,33 +256,33 @@
             $scope.pager.curPage = 1;
         }
         $scope.cleanParameter();
-        $scope.getWarnList(); 
+        $scope.getWarnList();
     };
 
     /**
     * 清空查询条件
     */
-    $scope.cleanParameter = function(){            
+    $scope.cleanParameter = function(){
         $scope.queryInfo.siteName = '';
-        $scope.queryInfo.warnStatus = ''; 
-        $scope.queryInfo.time_Start = '';   
+        $scope.queryInfo.warnStatus = '';
+        $scope.queryInfo.time_Start = '';
         $scope.queryInfo.time_End = '';
 
         $scope.saveTime.time_End = "";
         $scope.saveTime.time_Start = "";
         $('#startTime').val('');
         $('#endTime').val('');
-        
+
         // var start = {
         //     minDate: '1977-01-01 00:00:00',
-        //     maxDate: '2099-01-01 00:00:00'           
+        //     maxDate: '2099-01-01 00:00:00'
         // };
         // var end = {
         //     minDate: '1977-01-01 00:00:00',
-        //     maxDate: '2099-01-01 00:00:00'           
+        //     maxDate: '2099-01-01 00:00:00'
         // };
 
-        // start.maxDate = '1977-01-01 00:00:00'; 
+        // start.maxDate = '1977-01-01 00:00:00';
         // end.minDate = '2099-01-01 00:00:00';
         // $("#startTime").jeDate(start);
         // $("#endTime").jeDate(end);
@@ -296,4 +294,4 @@
             $scope.$apply();
         }
     };
-});
+}]);

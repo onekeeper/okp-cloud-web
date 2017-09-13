@@ -3,7 +3,7 @@
         <form class="form-horizontal" novalidate>
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">站点<span class="sign-must">*</span></label>
-                <div class="col-lg-7">                    
+                <div class="col-lg-7">
                     <select class="form-control" ng-model="initData.modalForm.siteId" ng-options="v.site_id as v.site_name for (k , v) in initData.siteOptions" ng-change="validateForm('site')" ng-disabled="initData.actionType == 'update'">
                          <option value="">--请选择--</option>
                     </select>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group clear-mrgb">
                 <label class="control-label col-lg-4">人员<span class="sign-must">*</span></label>
-                <div class="col-lg-7">                    
+                <div class="col-lg-7">
                     <select class="form-control" ng-model="initData.modalForm.userId" ng-options="v.user_id as v.username for (k , v) in initData.userOptions" ng-change="validateForm('user')" ng-disabled="initData.actionType == 'update'">
                          <option value="">--请选择--</option>
                     </select>
@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">告警级别（多选）<span class="sign-must">*</span></label>
-                <div class="col-lg-7">     
-                    <input ng-model="initData.modalForm.severityId" type="hidden" value="0">               
+                <label class="control-label col-lg-4">告警级别<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input ng-model="initData.modalForm.severityId" type="hidden" value="0">
                     <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.warnLevelOptions">
                         <input ng-model="initData.modalForm.severity[item.severity_id]" type="checkbox" ng-click="validateForm('severity')" ng-checked="initData.modalForm.severity[item.severity_id]">{{item.severity_name}}
                     </label>
@@ -54,9 +54,9 @@
                 </div>
             </div>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">告警状态（多选）<span class="sign-must">*</span></label>
-                <div class="col-lg-7">     
-                    <input ng-model="initData.modalForm.statusId" type="hidden" value="0">               
+                <label class="control-label col-lg-4">告警状态<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input ng-model="initData.modalForm.statusId" type="hidden" value="0">
                     <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.warnStatusOptions">
                         <input ng-model="initData.modalForm.status[item.status_id]" type="checkbox" ng-click="validateForm('status')" ng-checked="initData.modalForm.status[item.status_id]">{{item.status_name}}
                     </label>
@@ -72,9 +72,9 @@
                 </div>
             </div>
             <div class="form-group clear-mrgb">
-                <label class="control-label col-lg-4">通知方式（多选）<span class="sign-must">*</span></label>
-                <div class="col-lg-7">     
-                    <input ng-model="initData.modalForm.methodId" type="hidden" value="0">               
+                <label class="control-label col-lg-4">通知方式<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <input ng-model="initData.modalForm.methodId" type="hidden" value="0">
                     <label class="checkbox-inline checkbox-7rem" ng-repeat="item in initData.noticeMethodOptions">
                         <input ng-model="initData.modalForm.method[item.method_id]" type="checkbox" ng-click="validateForm('method')" ng-checked="initData.modalForm.method[item.method_id]">{{item.method_name}}
                     </label>

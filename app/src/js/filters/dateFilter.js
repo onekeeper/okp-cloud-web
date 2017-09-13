@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.dateFiler
@@ -11,6 +9,7 @@
 
  angular.module('myappApp')
  .filter('dateFilter', function(){
+    'use strict';
  	return function(time){
         time = time.replace(/-/g,'/');
         time = time.replace(/T/g,' ');

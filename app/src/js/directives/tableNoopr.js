@@ -1,16 +1,15 @@
-'use strict';
-
 /**
  * @ngdoc function
- * @name myappApp.directive:SysConfigCtrl
+ * @name myappApp.directive:tableNoopr
  * @description
  * # SysConfigCtrl
  * Controller of the myappApp
- * author: tangb
+ * author: james
  */
 
  angular.module('myappApp')
 .directive('tableNoopr', function() {
+    'use strict';
 	return {
 		restrict: "EAC",
 		templateUrl: 'views/public/table-noopr.html',
@@ -26,4 +25,4 @@
 
 		}
 	}
-})
+});
