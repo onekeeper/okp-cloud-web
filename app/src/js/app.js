@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name myappApp
@@ -16,12 +14,14 @@ angular
   ])
   .constant('urlPrefix', '/api/v1')
   .config(['$stateProvider','$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
+        'use strict';
+
   		var timestamp = Date.parse( new Date());//时间戳清空缓存
 
     	$urlRouterProvider
-    	.when("", "/login?"+timestamp)
-    	.when('/', "/login?"+timestamp)
-		.otherwise('/login?'+timestamp);
+    	.when("", "/login")
+    	.when('/', "/login")
+		.otherwise('/login');
 
 		$stateProvider
 		.state("login", {

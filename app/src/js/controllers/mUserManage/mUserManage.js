@@ -338,7 +338,7 @@ angular.module('myappApp')
      */
     $scope.clickResetPwd = function(index){
         $scope.modalTitle = '重置密码';
-        $scope.modalInfo = '重置密码将以邮件形式发送，确认重置该人员密码吗？';
+        $scope.modalInfo = '重置密码将以邮件形式发送，确定重置该人员密码吗？';
         $scope.userList.init.actionType = 'resetPwd';
         $scope.userList.init.actionId = $scope.userList.init.tdObj[index].id;
         angular.element('#J_userConfirm').modal();

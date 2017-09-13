@@ -12,7 +12,7 @@ angular.module('myappApp')
 
         var match = optionsExp.match(NG_OPTIONS_REGEXP);
         if (!(match)) {
-            console.log('ng-options 表达式有误')
+            console.log('ng-options 表达式有误');
         }
         var valueName = match[5] || match[7];
         var keyName = match[6];
@@ -44,7 +44,7 @@ angular.module('myappApp')
                     'optionValues': optionValues,
                     'labelArray': labelArray,
                     'idArray': idArray
-                }
+                };
             }
         });
     }
@@ -59,6 +59,7 @@ angular.module('myappApp')
         '<div class="chose-drop chose-hide j-drop">' +
         '<div class="chose-search">' +
         '<input class="j-key" type="text" autocomplete="off">' +
+        '<a class="j-close-drop"></a>' +
         '</div>' +
         '<ul class="chose-result">' +
         // '<li ng-repeat="'+repeatTempl+'" data-id="'+keyTempl+'" >{{'+ valueTempl+'}}</li>'+
@@ -91,7 +92,7 @@ angular.module('myappApp')
                     var currentKey = ngModelCtrl.$modelValue;
                     if (isNaN(currentKey) || !currentKey) {
                         currentKey = '';
-                        choseNode.find('.j-view:first').text('请选择');
+                        choseNode.find('.j-view:first').text('--请选择--');
                         choseNode.find('i').addClass('chose-hide');
                     }
                     if ((currentKey + '').length > 0) {
@@ -111,7 +112,7 @@ angular.module('myappApp')
                     }
                     rs = scope.options;
                     setView();
-                }
+                };
                 scope.$watchCollection('options', setViewAndData);
                 scope.$watch(attr.ngModel, setView);
 
@@ -126,17 +127,25 @@ angular.module('myappApp')
                     }
                     return nodes;
 
-                }
+                };
                 choseNode.on('keyup', '.j-key', function() {
                     // 搜索输入框keyup，重新筛选列表
                     var value = $(this).val();
                     choseNode.find('ul:first').empty().append(getListNodes(value));
                     return false;
-                }).on('click', function() {
+                })
+                .on("click", '.j-close-drop', function() {
+                    choseNode.find('.j-drop').addClass('chose-hide');
+                    choseNode.find('i').addClass('chose-hide');
+                    //choseNode.find('.j-key').val('');
+                    return false;
+                })
+                .on('click', function() {
                     choseNode.find('.j-drop').removeClass('chose-hide');
-                    if (choseNode.find('.j-view:first').text() != '请选择') {
+                    if (choseNode.find('.j-view:first').text() != '--请选择--') {
                         choseNode.find('i').removeClass('chose-hide');
                     }
+                    choseNode.find('.j-key').val('');
                     choseNode.find('ul:first').empty().append(getListNodes(choseNode.find('.j-key').val()));
                     return false;
                 }).on('click', 'ul>li', function() {
@@ -149,7 +158,7 @@ angular.module('myappApp')
                 }).on('click', 'i', function() {
                     ngModelCtrl.$setViewValue('');
                     ngModelCtrl.$render();
-                    choseNode.find('.j-view:first').text('请选择');
+                    choseNode.find('.j-view:first').text('--请选择--');
                     return false;
 
                 });
@@ -158,7 +167,6 @@ angular.module('myappApp')
                     choseNode.find('i').addClass('chose-hide');
                     return false;
                 });
-
             }
         }
     };

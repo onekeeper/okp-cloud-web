@@ -59,3 +59,7 @@
     background-color: #5092e1;
     border-color: #5092e1;
 }
+
+.btn-sm{
+    padding: 5px 16px;
+}
