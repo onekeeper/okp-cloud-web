@@ -165,7 +165,7 @@ angular.module('myappApp')
                 $(document).on("click", function() {
                     $('.j-drop').addClass('chose-hide');
                     choseNode.find('i').addClass('chose-hide');
-                    return false;
+                    //return false;
                 });
             }
         }

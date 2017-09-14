@@ -25,9 +25,9 @@ angular.module('myappApp')
             granteeId:'',
             module: []
         },
-        siteOptions:[{'site_id' : '1' , 'site_name' : '站点1'},{'site_id' : '2' , 'site_name' : '站点2'}],
-        partnerOptions:[{'partner_id' : '1' , 'partner_name' : '美创'},{'partner_id' : '2' , 'partner_name' : '网易'}],
-        delegationOptions:[{'module_id' : '1' , 'module_name' : '数据库'},{'module_id' : '2' , 'module_name' : '中间件'}],
+        siteOptions:[],
+        partnerOptions:[],
+        delegationOptions:[],
         query:{siteName:'',grantorName:''}
     };
     $scope.pager = {};
@@ -382,6 +382,7 @@ angular.module('myappApp')
             module: []
         };
         $scope.selfValid();
+        $scope.apply();
         angular.element('#J_addmDelegation').modal();
         angular.element('#J_addmDelegation').draggable({
             handle: ".modal-header",
@@ -399,6 +400,7 @@ angular.module('myappApp')
         $scope.initData.actionType = 'delete';
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
+        $scope.apply();
         angular.element('#J_mDelegationConfirm').modal();
         angular.element('#J_mDelegationConfirm').draggable({
             handle: ".modal-header",
@@ -416,6 +418,7 @@ angular.module('myappApp')
         $scope.initData.actionType = 'update';
         $scope.errMsg = '';
         $scope.initData.modalForm.id = $scope.mDelegationList[index].id;
+        $scope.apply();
         angular.element('#J_mDelegationConfirm').modal();
         angular.element('#J_mDelegationConfirm').draggable({
             handle: ".modal-header",
@@ -462,6 +465,7 @@ angular.module('myappApp')
         $scope.apply();
         return true;
     };
+
     var validFormatObj = {
         dirty:false,
         valid:true,
@@ -492,5 +496,5 @@ angular.module('myappApp')
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 }]);

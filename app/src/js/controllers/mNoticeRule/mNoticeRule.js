@@ -464,6 +464,7 @@ angular.module('myappApp')
             method: []
         };
         $scope.selfValid();
+        $scope.apply();
         angular.element('#J_addmNoticeRule').modal();
         angular.element('#J_addmNoticeRule').draggable({
             handle: ".modal-header",
@@ -535,6 +536,7 @@ angular.module('myappApp')
             $scope.initData.modalForm.method[4] = true;
         }
         $scope.selfValid();
+        $scope.apply();
         angular.element('#J_addmNoticeRule').modal();
         angular.element('#J_addmNoticeRule').draggable({
             handle: ".modal-header",
@@ -665,5 +667,5 @@ angular.module('myappApp')
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 }]);
