@@ -19,9 +19,10 @@
 
     $scope.api = {
         getWarnList: {
-            url: urlPrefix + '/user/app/alerts/untreated?query=',
+            url: urlPrefix + '/user/app/alerts/untreated',
             method: 'get',
             data: {
+                query:''
             }
         },
         getSiteList: {
@@ -47,7 +48,6 @@
     */
     $scope.init = function(){
         $rootScope.pagePath = $location.path();
-        $scope.queryInfo = {};
         $scope.saveTime = {};
         $scope.queryInfo.keyWords = '';
         $scope.getWarnList(); //显示列表
@@ -67,7 +67,7 @@
         $scope.formatState();//初始化
 
         var config = $scope.api.getWarnList;
-            config.url = $scope.api.getWarnList.url + $scope.queryInfo.keyWords;
+            config.data.query = $scope.queryInfo.keyWords;
         var fnSuccess = function (d) {
             $scope.initData.loading = false;
             var data = typeof(d)==='string' ? JSON.parse(d) : d;
