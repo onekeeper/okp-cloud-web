@@ -48,7 +48,7 @@ angular.module('myappApp')
                         sessionStore.set('userLogStatus','login');
                         $rootScope.partnerFlag = 'true';
                         sessionStore.set('partnerFlag','true');
-                        $state.go('main.sPartner');
+                        $state.go('main.sPartnerCount');
                     }
                 }, function( error ) {
                     it.removeClass('disabled');
