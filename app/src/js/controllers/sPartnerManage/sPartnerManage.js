@@ -123,7 +123,7 @@ angular.module('myappApp')
     /**
      * 获取列表数据
      */
-    $scope.getPartnerList = function(){;
+    $scope.getPartnerList = function(){
         var config = {
             url:  $scope.partnerList.apis.getPartnerList.url,
             method: $scope.partnerList.apis.getPartnerList.method,
@@ -184,7 +184,7 @@ angular.module('myappApp')
                     $scope.partnerList.init.cityList = data.data;
                     $scope.apply();
                     /*编辑操作时，获取城市列表成功后弹出表单*/
-                    if(index !=undefined && index >= 0) {
+                    if(index !== undefined && index >= 0) {
                         $scope.partnerList.init.actionType = 'update';
                         $scope.partnerList.init.actionId = $scope.partnerList.init.tdObj[index].id;
                         $scope.partnerList.init.modalForm = angular.copy($scope.partnerList.init.tdObj[index]);
@@ -202,7 +202,7 @@ angular.module('myappApp')
             fnFail = function(data){
                 console.log(data.message);
             };
-        if(index !=undefined && index >= 0){
+        if(index !== undefined && index >= 0){
             config.data.province = $scope.partnerList.init.tdObj[index].province_code;
         }else{
             config.data.province = $scope.partnerList.init.modalForm.province_code;
@@ -519,5 +519,5 @@ angular.module('myappApp')
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 }]);

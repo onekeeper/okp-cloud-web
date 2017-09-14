@@ -124,7 +124,7 @@
                 '市':$scope.cache.siteObj.city ,
                 '地址':$scope.cache.siteObj.address//,
                 //'access_key':$scope.cache.siteObj.access_key
-            }
+            };
             $scope.apply();
         },
         fnError = function (data) {

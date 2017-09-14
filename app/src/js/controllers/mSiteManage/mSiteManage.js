@@ -120,7 +120,7 @@ angular.module('myappApp')
          * @param fileId
          */
         $scope.cleanFile = function(fileId){
-            var file = $("#" + fileId)
+            var file = $("#" + fileId);
             file.after(file.clone().val(""));
             $("#" + fileId + '_name').val("");
             file.remove();
@@ -132,7 +132,7 @@ angular.module('myappApp')
         $scope.bindevent = function(){
             $('body').on('change','input[id=J_importFile]',function(){
                 $('#J_importFile_name').val($(this).val());
-            })
+            });
         };
 
         /**
@@ -341,7 +341,7 @@ angular.module('myappApp')
                         $scope.siteList.init.cityList = data.data;
                         $scope.apply();
                         /*编辑操作时，获取城市列表成功后弹出表单*/
-                        if(index !=undefined && index >= 0) {
+                        if(index !== undefined && index >= 0) {
                             $scope.siteList.init.actionType = 'update';
                             $scope.siteList.init.actionId = $scope.siteList.init.tdObj[index].sn;
                             $scope.siteList.init.modalForm = angular.extend({},$scope.siteList.init.tdObj[index]);
@@ -359,7 +359,7 @@ angular.module('myappApp')
                 fnFail = function(data){
                     console.log(data.message);
                 };
-            if(index !=undefined && index >= 0){
+            if(index !== undefined && index >= 0){
                 config.data.province = $scope.siteList.init.tdObj[index].province_code;
             }else{
                 config.data.province =  $scope.siteList.init.modalForm.province_code;
@@ -607,7 +607,7 @@ angular.module('myappApp')
                         $scope.apply();
                     }
                 }
-            )
+            );
         };
 
         var validFormatObj = {
@@ -646,5 +646,5 @@ angular.module('myappApp')
             if(!$scope.$$phase) {
                 $scope.$apply();
             }
-        }
+        };
     }]);

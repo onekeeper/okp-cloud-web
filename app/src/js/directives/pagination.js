@@ -92,7 +92,7 @@
                     if(scope.func) scope.$parent[scope.func]();
                 }
 
-			}
+			};
 		}
-	}
+	};
 });

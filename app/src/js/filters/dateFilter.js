@@ -21,7 +21,7 @@
  		var day = date.getDate();
  		var hour = date.getHours();
  		var minute= date.getMinutes();
- 		var second = date.getSeconds()
+ 		var second = date.getSeconds();
  		if (month >= 1 && month <= 9) {
  			month = "0" + month;
  		}
@@ -39,5 +39,5 @@
  		}
  		var res = date.getFullYear() + symbol1 + month + symbol1 + day + " " + hour + symbol2 + minute + symbol2 + second;
  		return res;
- 	}
- })
+ 	};
+ });

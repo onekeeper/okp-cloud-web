@@ -24,5 +24,5 @@
 		controller: function($scope) {
 
 		}
-	}
+	};
 });

@@ -53,7 +53,7 @@ angular.module('myappApp')
                 }, function( error ) {
                     it.removeClass('disabled');
                     $scope.validFailFn(error.message);
-                })
+                });
            }else{
                 $scope.validFailFn();
            }

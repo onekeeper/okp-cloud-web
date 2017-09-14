@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.controller:HeaderCtrl
@@ -10,6 +8,8 @@
 angular.module('myappApp')
   	.controller('HeaderCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
         function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
+        'use strict';
+
         $scope.userList = {
             init:{
                 defaultUser: {
@@ -61,21 +61,21 @@ angular.module('myappApp')
 	   	$scope.initHeader = function () {
 	    	$scope.errorMsg = '';
             $scope.selfValid();
-            if($rootScope.commonFlag == undefined){
+            if($rootScope.commonFlag === undefined){
                 $rootScope.commonFlag = $cookieStore.get('commonFlag');
             }
-            if($rootScope.partnerFlag == undefined){
+            if($rootScope.partnerFlag === undefined){
                 $rootScope.partnerFlag = sessionStore.get('partnerFlag');
             }
-            if($rootScope.userLogStatus == undefined){
+            if($rootScope.userLogStatus === undefined){
                 $rootScope.userLogStatus = sessionStore.get('userLogStatus');
             }
 	        // 获取登入信息
-			if($rootScope.userLogStatus == 'login'){
+			if($rootScope.userLogStatus === 'login'){
                 if( sessionStore.get('loginUser') ){
                     $rootScope.username = sessionStore.get('loginUser');
                 }
-                if($rootScope.commonFlag == undefined && $rootScope.partnerFlag == 'false'){
+                if($rootScope.commonFlag === undefined && $rootScope.partnerFlag === 'false'){
                     $state.go("login");
                 }
 			}else{
@@ -128,10 +128,10 @@ angular.module('myappApp')
             $scope.userList.init.pwdModalForm.repeatPassWord = '';
             $scope.apply();
             angular.element('#J_editPwd').modal();
-            angular.element('#J_editPwd').draggable({   
-                handle: ".modal-header",   
-                cursor: 'move',   
-                refreshPositions: false  
+            angular.element('#J_editPwd').draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
             });
         };
 

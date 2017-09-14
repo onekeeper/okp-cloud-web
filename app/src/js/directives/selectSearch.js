@@ -27,7 +27,7 @@ angular.module('myappApp')
             if (newValue && newValue.length > 0) {
                 optionValues = valuesFn(scope) || [];
                 labelArray = [];
-                idArray = []
+                idArray = [];
                 for (var index = 0, l = optionValues.length; index < l; index++) {
                     var it = optionValues[index];
                     if (match[2] && match[1]) {
@@ -112,7 +112,8 @@ angular.module('myappApp')
                     }
                     rs = scope.options;
                     setView();
-                };
+                }
+
                 scope.$watchCollection('options', setViewAndData);
                 scope.$watch(attr.ngModel, setView);
 
@@ -122,12 +123,12 @@ angular.module('myappApp')
                     value = $.trim(value);
                     for (var i = 0, l = rs.labelArray.length; i < l; i++) {
                         if (rs.labelArray[i].indexOf(value) > -1) {
-                            nodes.push($('<li>').data('id', rs.idArray[i]).text(rs.labelArray[i]))
+                            nodes.push($('<li>').data('id', rs.idArray[i]).text(rs.labelArray[i]));
                         }
                     }
                     return nodes;
+                }
 
-                };
                 choseNode.on('keyup', '.j-key', function() {
                     // 搜索输入框keyup，重新筛选列表
                     var value = $(this).val();

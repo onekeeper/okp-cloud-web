@@ -1,4 +1,3 @@
-'use strict';
 /**
  * 通用验证服务
  * modified by:
@@ -6,6 +5,8 @@
  */
 angular.module('myappApp')
   	.service('Validate', function($location, $http){
+    'use strict';
+
     var self = this;
 	/*
 	*  validEmpty  非空校验
@@ -16,7 +17,7 @@ angular.module('myappApp')
 			return false;
 		}
 		value = $.trim(value);
-		if(value == '' || value.length == 0){
+		if(value === '' || value.length === 0){
 			return false;
 		}else{
 			return true;
@@ -28,7 +29,7 @@ angular.module('myappApp')
 	*  param: value1，value2 需要验证的数据
 	*/
 	this.validEqual = function(value1,value2){
-        if(!value1 || !value2 || value1==null || value2==null){
+        if(!value1 || !value2 || value1 === null || value2 === null){
 			return true;
 		}
         value1 = $.trim(value1);
@@ -160,7 +161,7 @@ angular.module('myappApp')
 			});
 			err = self._uniq(err);
 
-			if(!!err && err.length!=0){
+			if(!!err && err.length !== 0){
 				err = err.join(", ");
 				backInfo.status = false;
 				backInfo.error = "名称中不能含有特殊符号  " + err;
@@ -171,7 +172,7 @@ angular.module('myappApp')
 		}
 
 		return backInfo;
-	}
+	};
 
 	/*
 	*  validChinese  中文校验
@@ -266,7 +267,7 @@ angular.module('myappApp')
 	*         lengthRange.maxLen: 最大长度，默认为25
 	*/
 	this.validLength = function(str, lengthRange){
-		if(!str || str.length == 0 || typeof(str)!='string'){
+		if(!str || str.length === 0 || typeof(str) !== 'string'){
 			return false;
 		}
 		var minLen = lengthRange ? lengthRange.minLen || 0 : 0;
@@ -282,7 +283,7 @@ angular.module('myappApp')
 	*/
 	this._getRealLen = function(str){
 		var len = 0;
-		if(!str || str==''){
+		if(!str || str === ''){
             return len;
         }
         var realLength = 0,
@@ -335,6 +336,6 @@ angular.module('myappApp')
 		}else{
 			return false;
 		}
-	}
+	};
 
 });

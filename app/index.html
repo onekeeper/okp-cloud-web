@@ -11,15 +11,22 @@
         <link rel="stylesheet" href="src/css/lib/bootstrap_3.3.6.min.css">
         <link rel="stylesheet" href="src/js/plugin/jeDate/jedate.css"> <!-- 时间选择器 -->
         <!-- app css files -->
+
+        <!-- build:css src/css/oneKeeper.min.css -->
         <link rel="stylesheet" href="src/css/main.css">
-        <link rel="stylesheet" href="src/css/mod/table-section.css">
-        <link rel="stylesheet" href="src/css/mod/modal.css">
-        <link rel="stylesheet" href="src/css/mod/pagination.css">
         <link rel="stylesheet" href="src/css/login.css">
         <link rel="stylesheet" href="src/css/userMgr.css">
         <link rel="stylesheet" href="src/css/sysConfig.css">
+        <!-- endbuild -->
+
+        <!-- build:css src/css/mod/oneKeeperMod.min.css -->
+        <link rel="stylesheet" href="src/css/mod/table-section.css">
+        <link rel="stylesheet" href="src/css/mod/modal.css">
+        <link rel="stylesheet" href="src/css/mod/pagination.css">
         <link rel="stylesheet" href="src/css/mod/button.css">
         <link rel="stylesheet" href="src/css/mod/select-search.css">
+        <!-- endbuild -->
+
         <link rel="shortcut icon" href="favicon.ico">
     </head>
     <body ng-app="myappApp">
@@ -31,6 +38,7 @@
         <ui-view></ui-view>
         <!-- lib js files -->
 		<script src="src/js/lib/jquery_1.11.3.min.js"></script>
+        <script src="src/js/lib/jquery-ui.js"></script><!-- 拖动 -->
 		<script src="src/js/lib/ajaxfileupload.js"></script>
         <script src="src/js/lib/bootstrap_3.3.6.min.js"></script>
         <script src="src/js/lib/angular/angular/angular.min.js"></script>
@@ -42,51 +50,39 @@
 		<!-- app js files -->
 
         <!-- module s -->
+        <!-- build:js src/js/scripts.js -->
         <script src="src/js/app.js"></script>
         <script src="src/js/services/validate.js"></script>
         <script src="src/js/services/clientStore.js"></script>
         <script src="src/js/services/ajaxInfo.js"></script>
-
         <script src="src/js/controllers/header.js"></script>
         <script src="src/js/controllers/home/home.js"></script>
         <script src="src/js/controllers/login/login.js"></script>
         <script src="src/js/controllers/login/super.js"></script>
-
         <script src="src/js/controllers/mUserManage/mUserManage.js"></script>
         <script src="src/js/controllers/mSiteManage/mSiteManage.js"></script>
-
         <script src="src/js/controllers/untreated/untreated.js"></script>
-        <script src="src/js/controllers/warning/warning.js"></script><!-- 历史告警 -->
-        <script src="src/js/controllers/notice/notice.js"></script><!-- 历史通知 -->
-        <script src="src/js/controllers/noticeRule/noticeRule.js"></script><!-- 通知规则 -->
-
-         <!-- 通知规则 管理员 -->
+        <script src="src/js/controllers/warning/warning.js"></script>
+        <script src="src/js/controllers/notice/notice.js"></script>
+        <script src="src/js/controllers/noticeRule/noticeRule.js"></script>
         <script src="src/js/controllers/mNoticeRule/mNoticeRule.js"></script>
-        <!-- 授权管理 管理员 -->
         <script src="src/js/controllers/mDelegation/mDelegation.js"></script>
-
         <script src="src/js/controllers/sPartnerManage/sPartnerManage.js"></script>
         <script src="src/js/controllers/sPartnerCount/sPartnerCount.js"></script>
+        <script src="src/js/directives/pagination.js"></script>
+        <script src="src/js/directives/tableNoopr.js"></script>
+        <script src="src/js/directives/modal.js"></script>
+        <script src="src/js/directives/showModel.js"></script>
+        <script src="src/js/directives/selectSearch.js"></script>
+        <script src="src/js/filters/dateFilter.js"></script>
+        <script src="src/js/filters/districtFilter.js"></script>
+        <!-- endbuild -->
 
         <!-- mock -->
         <!--
         <script src="src/js/mock/mock.js"></script>
         <script src="src/js/mock/mockData.js"></script>
         -->
-
-        <!--directive-->
-        <script src="src/js/directives/pagination.js"></script>
-        <script src="src/js/directives/tableNoopr.js"></script>
-        <script src="src/js/directives/modal.js"></script>
-        <script src="src/js/directives/showModel.js"></script>
-        <script src="src/js/directives/selectSearch.js"></script>
-
-        <!--filters-->
-        <script src="src/js/filters/dateFilter.js"></script>
-        <script src="src/js/filters/districtFilter.js"></script>
-
-        <!-- 拖动 -->
-        <script src="src/js/lib/jquery-ui.js"></script>
         <!-- module e -->
 	</body>
 </html>

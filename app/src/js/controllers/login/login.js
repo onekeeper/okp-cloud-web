@@ -14,7 +14,7 @@ angular.module('myappApp')
 
         $scope.init = function() {
             $scope.clearLoginInfo();
-            if($rootScope.commonFlag == undefined) {
+            if($rootScope.commonFlag === undefined) {
                 $rootScope.commonFlag = true;
                 $cookieStore.put('commonFlag',true);
             }
@@ -85,7 +85,7 @@ angular.module('myappApp')
                 }, function( error ) {
                     it.removeClass('disabled');
                     $scope.validFailFn(error.message);
-                })
+                });
            }else{
                 $scope.validFailFn();
            }

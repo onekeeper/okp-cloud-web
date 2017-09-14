@@ -131,7 +131,7 @@ angular.module('myappApp')
     /**
      * 获取列表数据
      */
-    $scope.getList = function(){;
+    $scope.getList = function(){
         var config = {
             url:  $scope.userList.apis.getList.url,
             method: $scope.userList.apis.getList.method,
@@ -453,5 +453,5 @@ angular.module('myappApp')
         if(!$scope.$$phase) {
             $scope.$apply();
         }
-    }
+    };
 }]);

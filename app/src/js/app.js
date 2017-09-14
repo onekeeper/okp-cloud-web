@@ -113,5 +113,5 @@ angular
             url: "/402",
             templateUrl: "authError.html?"+timestamp,
             controller: ""
-        })
+        });
   }]);

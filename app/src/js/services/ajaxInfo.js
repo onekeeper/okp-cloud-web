@@ -3,10 +3,10 @@ angular.module('myappApp')
   		$rootScope.$broadcast('updateLogin');
   		this.pathStr = $location.path();
   		this.ajaxInfo = function( config , fnSuccess, fnFail ) {
-            if(!config || !config.url || '' == config.url){
+            if(!config || !config.url || '' === config.url){
                 console.log('ajax config error');
                 return false;
-            };
+            }
             return $http({
                 method: config.method || 'get',
                 data: config.data || '',

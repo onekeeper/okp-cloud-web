@@ -595,7 +595,7 @@ angular.module('myappApp')
                 });
             }
             $scope.validate.severity = angular.extend({},validDirtyObj);
-            if($scope.initData.modalForm.severityId == 0){
+            if($scope.initData.modalForm.severityId === 0){
                 $scope.validate.severity = angular.extend({},validNotObj,{error:{required:true}});
                 return;
             }
@@ -610,7 +610,7 @@ angular.module('myappApp')
                 });
             }
             $scope.validate.status = angular.extend({},validDirtyObj);
-            if($scope.initData.modalForm.statusId == 0){
+            if($scope.initData.modalForm.statusId === 0){
                 $scope.validate.status = angular.extend({},validNotObj,{error:{required:true}});
                 return;
             }
@@ -625,7 +625,7 @@ angular.module('myappApp')
                 });
             }
             $scope.validate.method = angular.extend({},validDirtyObj);
-            if($scope.initData.modalForm.methodId == 0){
+            if($scope.initData.modalForm.methodId === 0){
                 $scope.validate.method = angular.extend({},validNotObj,{error:{required:true}});
                 return;
             }

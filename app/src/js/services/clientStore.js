@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name myappApp.service:localStore and sessionStore
@@ -9,6 +7,7 @@
  */
 angular.module('myappApp')
     .factory('localStore',['$window',function($window){
+        'use strict';
         return {
             // 存储单个属性
             set: function (key,value) {

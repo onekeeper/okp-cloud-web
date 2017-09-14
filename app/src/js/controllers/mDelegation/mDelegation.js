@@ -457,7 +457,7 @@ angular.module('myappApp')
                 });
             }
             $scope.validate.module = angular.extend({},validDirtyObj);
-            if($scope.initData.modalForm.moduleId == 0){
+            if($scope.initData.modalForm.moduleId === 0){
                 $scope.validate.module = angular.extend({},validNotObj,{error:{required:true}});
                 return;
             }
