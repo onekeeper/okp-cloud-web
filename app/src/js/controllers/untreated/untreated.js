@@ -49,6 +49,7 @@
     $scope.init = function(){
         $rootScope.pagePath = $location.path();
         $scope.saveTime = {};
+        $scope.queryInfo = {};
         $scope.queryInfo.keyWords = '';
         $scope.getWarnList(); //显示列表
         $scope.getStatus();//获取告警状态
