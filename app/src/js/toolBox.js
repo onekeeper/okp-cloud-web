@@ -2,7 +2,7 @@
 * 工具箱相关js
 * 作者：郭荣
 */
-var apiGetToolListUrl = 'toolBoxDemo.json';//得到工具列表接口（需要换成线上真实接口地址）
+var apiGetToolListUrl = '/api/v1/store/tools';//得到工具列表接口（需要换成线上真实接口地址）
 var initToolList = null;
 var initToolObj = null;
 
