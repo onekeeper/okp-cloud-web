@@ -8,12 +8,12 @@ html,body{
   /*overflow-y: hidden;*/
 }
 img{
-	padding: 1rem;
+	padding: 0.3rem;
     overflow: hidden;
-    border: 1px solid #dbdbdb;
+    /*border: 1px solid #dbdbdb;*/
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    /*-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);*/
+    /*box-shadow: 0 1px 1px rgba(0,0,0,.05);*/
 }
 .navbar {
     border-radius: 0px;
@@ -26,7 +26,7 @@ img{
 }
 .navbar-right {
     float: right!important;
-     margin-right: 0px; 
+     margin-right: 0px;
 }
 .navbar-form .form-control {
     width: 20em;
@@ -56,7 +56,7 @@ img{
 	padding: 1rem;
 }
 .tool-panel img{
-	width: 80%;
+	width: 100%;
 }
 
 .one-tool{
@@ -78,7 +78,7 @@ img{
 	text-align: right;
 }
 .button-blue{
-	border:1px solid #469fbf; 
+	border:1px solid #469fbf;
 	background: #49b7d8;
 	padding: 0.3rem 2rem;
 	color:#fff;
