@@ -32,7 +32,7 @@
     top: 50%;
     margin-top: -254px;
 	height: 509px;
-	background: url(../images/login-ad.png) 100% 50% no-repeat;
+	/*background: url(../images/login-ad.png) 100% 50% no-repeat;*/
 }
 
 .login .login-wrap{

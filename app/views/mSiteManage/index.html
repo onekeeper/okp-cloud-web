@@ -40,9 +40,9 @@
                                 <tr>
                                     <th style="width:16%;">站点名称</th>
                                     <th style="width:14%;">站点编号</th>
+                                    <!--
                                     <th>省</th>
                                     <th>市</th>
-                                    <!--
                                     <th>详细地址</th>
                                     -->
                                     <th class='width-20p'>密钥</th>
@@ -56,20 +56,20 @@
                             </thead>
                             <tbody ng-show="siteList.init.loading">
                                 <tr class="tr-loading text-center">
-                                    <td colspan="8"><div class="loading"></div></td>
+                                    <td colspan="6"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
                             <tbody ng-hide="siteList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="siteList.init.tdObj.length==0">
-                                    <td colspan="8" ng-if="siteList.init.getListError!=''">未找到结果</td>
-                                    <td colspan="8" ng-if="siteList.init.getListError==''">未找到结果</td>
+                                    <td colspan="6" ng-if="siteList.init.getListError!=''">未找到结果</td>
+                                    <td colspan="6" ng-if="siteList.init.getListError==''">未找到结果</td>
                                 </tr>
                                 <tr ng-repeat="item in siteList.init.tdObj">
                                     <td ng-bind="item.site_name"></td>
                                     <td ng-bind="item.sn" title="{{item.sn}}"></td>
+                                    <!--
                                     <td ng-bind="item.province_name | districtFiler"></td>
                                     <td ng-bind="item.city_name | districtFiler"></td>
-                                    <!--
                                     <td ng-bind="item.address" title="{{item.address}}"></td>
                                     -->
                                     <td><a ng-click="showKeyDetail(item.access_key);" title="{{item.access_key}}">{{item.access_key}}</td>
