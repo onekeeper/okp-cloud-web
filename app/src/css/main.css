@@ -354,6 +354,7 @@ html,body{
 .mgl20{ margin-left:20px;}
 .mgl-50{ margin-left: 50px;}
 .mgt5{ margin-top: 5px;}
+.mgt14{ margin-top: 14px !important;}
 .mgt20{ margin-top: 20px;}
 .mgb20{ margin-bottom:20px;}
 .mgb10{ margin-bottom:10px;}
@@ -621,8 +622,19 @@ input.tb-invalid{
     padding-left: 32px;
 }
 
+.pdt56{
+    padding-top:56px;
+}
+
+.pdb20{padding-bottom:20px;}
+
 .count-list,.box-all-list{
     height:70%;
 }
 
-.
+.row-reset{
+    margin-left:0px;
+    margin-right:0px;
+}
+
+.height-full{height:100%;}

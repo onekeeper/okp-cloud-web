@@ -7,8 +7,7 @@
  * Main module of the application.
  * version: 1.5.0
  */
-angular
-  .module('myappApp', [
+angular.module('myappApp', [
     'ngCookies',
     'ui.router'
   ])
@@ -21,6 +20,7 @@ angular
     	$urlRouterProvider
     	.when("", "/login")
     	.when('/', "/login")
+        .when('/main/workOrder', '/main/workOrder/handlingList')
 		.otherwise('/login');
 
 		$stateProvider
@@ -38,11 +38,6 @@ angular
      		url: "/main",
             templateUrl: "views/index.html?"+timestamp,
             controller: "HeaderCtrl"
-		})
-		.state("main.home", {
-			url: "/home",
-			templateUrl: "views/home/index.html?"+timestamp,
-			controller: "HomeCtrl"
 		})
         .state("main.untreated", {//未处理告警
             url: "/untreated",
@@ -93,6 +88,21 @@ angular
             url: "/partnerCount",
             templateUrl: "views/sPartnerCount/index.html?"+timestamp,
             controller: "sPartnerCountCtrl"
+        })
+        .state("main.workOrder", {
+            url: "/workOrder",
+            templateUrl: "views/workOrder/index.html",
+            controller: "WorkOrderCtrl"
+        })
+        .state("main.workOrder.handling", {
+            url: "/handlingList",
+            templateUrl: "views/workOrder/handlingList.html",
+            controller: "WorkOrderHandlingCtrl"
+        })
+        .state("main.workOrder.closed", {
+            url: "/closedList",
+            templateUrl: "views/workOrder/closedList.html",
+            controller: "WorkOrderClosedCtrl"
         })
         .state("500", {
             url: "/500",
