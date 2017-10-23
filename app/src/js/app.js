@@ -109,6 +109,16 @@ angular.module('myappApp', [
             templateUrl: "views/workOrder/closedList.html",
             controller: "WorkOrderClosedCtrl"
         })
+        .state("main.workOrder.add", {
+            url: "/addForm",
+            templateUrl: "views/workOrder/addForm.html",
+            controller: "WorkOrderAddCtrl"
+        })
+        .state("main.workOrder.editAndAssign", {
+            url: "/editAndAssign",
+            templateUrl: "views/workOrder/editAndAssign.html",
+            controller: "WorkOrderEditAndAssignCtrl"
+        })
         .state("500", {
             url: "/500",
             templateUrl: "500.html?"+timestamp,
