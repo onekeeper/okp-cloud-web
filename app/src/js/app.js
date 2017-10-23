@@ -94,6 +94,11 @@ angular.module('myappApp', [
             templateUrl: "views/workOrder/index.html",
             controller: "WorkOrderCtrl"
         })
+        .state("main.workOrder.updating", {
+            url: "/updaList",
+            templateUrl: "views/workOrder/updatingList.html",
+            controller: "WorkOrderUpdatingCtrl"
+        })
         .state("main.workOrder.handling", {
             url: "/handlingList",
             templateUrl: "views/workOrder/handlingList.html",

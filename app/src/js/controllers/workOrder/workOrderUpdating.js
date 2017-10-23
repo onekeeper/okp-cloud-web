@@ -1,12 +1,12 @@
 /**
  * @ngdoc function
- * @name myappApp.controller:WorkClosedCtrl
+ * @name myappApp.controller:WorkOrderUpdatingCtrl
  * @description
- * WorkClosedCtrl
+ * WorkOrderUpdatingCtrl
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderClosedCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
+    .controller('WorkOrderUpdatingCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
         function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
             'use strict';
 
@@ -20,8 +20,8 @@ angular.module('myappApp')
                 statusList: []
             };
             $scope.apis = {
-                getClosedList: {
-                    url: urlPrefix + '/worksheet/closure',
+                getUpdatingList: {
+                    url: urlPrefix + '/worksheet/updating',
                     method: 'get',
                     data: {
                         query: ''
@@ -37,8 +37,7 @@ angular.module('myappApp')
                 $scope.saveTime = {};
                 $scope.query = {};
                 $scope.query.queryValue = '';
-                $scope.getClosedList(); //显示列表
-                // $scope.getStatus();//获取告警状态
+                $scope.getUpdatingList(); //显示列表
             };
 
             $scope.formatState = function () {
@@ -47,13 +46,16 @@ angular.module('myappApp')
                 $scope.cache.listArr= [];
             };
 
-            $scope.getClosedList = function () {
+            /*
+             * 获取列表
+             */
+            $scope.getUpdatingList = function () {
                 $scope.formatState();
-                var config = $scope.apis.getClosedList;
+                var config = $scope.apis.getUpdatingList;
                 config.data.query = $scope.query.queryValue;
                 var fnSuccess = function (d) {
                     $scope.initData.loading = false;
-                    var data = typeof(d)==='string' ? JSON.parse(d) : d;
+                    var data = typeof(d) === 'string' ? JSON.parse(d) : d;
                     $scope.cache.listArr = data.data;
                     $scope.apply();
                 };
@@ -61,13 +63,6 @@ angular.module('myappApp')
                     $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
                     $scope.initData.loading = false;
                     $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
-                    // $scope.modalTitle = '错误信息';
-                    // angular.element("#J_infoDetailUntreated").modal('show');
-                    // angular.element('#J_infoDetailUntreated').draggable({
-                    //     handle: ".modal-header",
-                    //     cursor: 'move',
-                    //     refreshPositions: false
-                    // });
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnError);
             };
@@ -77,7 +72,7 @@ angular.module('myappApp')
              */
             $scope.queryClean = function( flag ){
                 $scope.cleanParameter();
-                $scope.getClosedList();
+                $scope.getHandlingList();
             };
 
             /**
@@ -93,6 +88,4 @@ angular.module('myappApp')
                     $scope.$apply();
                 }
             };
-
-        }
-]);
+        }]);

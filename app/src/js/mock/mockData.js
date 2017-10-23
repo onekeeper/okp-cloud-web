@@ -219,3 +219,86 @@ Mock.mock(/\/superviser\/listCount/, 'get',{
         'total' : 40
     }
 });
+/*
+* 处理中的工单
+*/
+Mock.mock(/\/worksheet\/active/, 'get', {
+    'code': 1,
+    'data':[{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'receiver':'rec',
+        'server_type':'1',
+        'problem_type':'2',
+        'duration':'20',
+        'idle':'20',
+        'status':'处理中'
+    },{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'receiver':'rec',
+        'server_type':'1',
+        'problem_type':'2',
+        'duration':'20',
+        'idle':'20',
+        'status': '升级中'
+    }]
+});
+/*
+* 已关闭的工单
+*/
+Mock.mock(/\/worksheet\/closure/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'close_at':'2017-10-11',
+        'duration':'10'
+    },{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'close_at':'2017-10-11',
+        'duration':'10'
+    }]
+});
+/*
+* 待指派的工单
+*/
+Mock.mock(/\/worksheet\/updating/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'update_at':'2017-10-11'
+    },{
+        'editor':'aaa',
+        'id':'333',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'update_at':'2017-10-11'
+    }]
+});
