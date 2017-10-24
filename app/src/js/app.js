@@ -95,7 +95,7 @@ angular.module('myappApp', [
             controller: "WorkOrderCtrl"
         })
         .state("main.workOrder.updating", {
-            url: "/updaList",
+            url: "/updatingList",
             templateUrl: "views/workOrder/updatingList.html",
             controller: "WorkOrderUpdatingCtrl"
         })
@@ -115,7 +115,7 @@ angular.module('myappApp', [
             controller: "WorkOrderAddCtrl"
         })
         .state("main.workOrder.editAndAssign", {
-            url: "/editAndAssign",
+            url: "/editAndAssign/{id}",
             templateUrl: "views/workOrder/editAndAssign.html",
             controller: "WorkOrderEditAndAssignCtrl"
         })

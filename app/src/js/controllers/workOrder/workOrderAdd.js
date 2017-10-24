@@ -64,10 +64,13 @@ angular.module('myappApp')
                 config.data.content = $scope.formData.content;
                 config.data.source = $scope.formData.source;
                 var fnSuccess = function (d) {
-                    
+                    var data = typeof(d)==='string' ? JSON.parse(d) : d;
+                    console.log(data.message);
                 };
                 var fnFail = function (data) {
-
+                    $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
+                    $scope.initData.loading = false;
+                    $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
             };

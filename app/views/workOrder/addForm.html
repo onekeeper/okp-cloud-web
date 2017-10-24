@@ -6,10 +6,10 @@
                     <form class="form-horizontal clearfix">
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <p>站点基本信息：</p>
-                            <div class="col-lg-offset-1">
+                            <div class="col-lg-offset-2">
                                 <label class="control-label pull-left">站点名：</label>
                                 <div class="col-lg-6">
-                                    <select class="form-control input-sm" ng-model="formData.site_name">
+                                    <select class="form-control input-sm">
                                         <option>选择站点</option>
                                     </select>
                                 </div>
@@ -17,10 +17,10 @@
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <p>告警基本信息：</p>
-                            <div class="col-lg-offset-1">
+                            <div class="col-lg-offset-2">
                                 <label class="control-label pull-left">告警编号：</label>
                                 <div class="col-lg-6">
-                                    <select class="form-control input-sm" ng-model="formData.alert_id">
+                                    <select class="form-control input-sm">
                                         <option>选择待处理告警</option>
                                     </select>
                                 </div>
@@ -30,38 +30,53 @@
                     <hr>
                     <form class="form-horizontal clearfix">
                         <div class="form-group">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <input type="text" class="form-control input-sm" ng-model="formData.name" placeholder="工单标题">
+                            <div class="col-lg-offset-1">
+                                <label class="control-label pull-left">工单标题：</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="text" class="form-control input-sm" ng-model="formData.name" placeholder="工单标题">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <select class="form-control input-sm" ng-model="formData.problem_type">
-                                    <option>请选择故障类型</option>
-                                </select>
+                            <div class="col-lg-offset-1">
+                                <label class="control-label pull-left">故障类型：</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <select class="form-control input-sm" ng-model="formData.problem_type">
+                                        <option>请选择故障类型</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <select class="form-control input-sm" ng-model="formData.server_type">
-                                    <option>请选择处理类型</option>
-                                </select>
+                            <div class="col-lg-offset-1">
+                                <label class="control-label pull-left">处理类型：</label>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <select class="form-control input-sm" ng-model="formData.server_type">
+                                            <option>请选择处理类型</option>
+                                        </select>
+                                    </div>
                             </div>
                         </div>
                     </form>
                     <hr>
                     <form class="form-horizontal clearfix">
                         <div class="form-group">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <textarea class="form-control input-sm" cols="" rows="4" ng-model="formData.content" placeholder="填写工单处理记录"></textarea>
+                            <div class="col-lg-offset-1">
+                                <label class="control-label pull-left">工单记录：</label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <textarea class="form-control input-sm" cols="" rows="4" ng-model="formData.content" placeholder="填写工单处理记录"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <input type="file" id="J_uploadFile" style="display: none;">
-                                <button class="btn btn-default btn-xs" ng-click="uploadFile();">附件上传
-                                </button>
-                                <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
+                            <div class="col-lg-offset-1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label class="control-label pull-left" style="visibility: hidden">工单记录：</label>
+                                    <input type="file" id="J_uploadFile" style="display: none;">
+                                    <button class="btn btn-default btn-xs" ng-click="uploadFile();">附件上传
+                                    </button>
+                                    <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
+                                </div>
                             </div>
                         </div>
                     </form>

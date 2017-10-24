@@ -237,7 +237,7 @@ Mock.mock(/\/worksheet\/active/, 'get', {
         'status':'处理中'
     },{
         'editor':'aaa',
-        'id':'333',
+        'id':'10',
         'name':'avtyu',
         'creater':'bbb',
         'receiver':'rec',
@@ -293,7 +293,7 @@ Mock.mock(/\/worksheet\/updating/, 'get', {
         'update_at':'2017-10-11'
     },{
         'editor':'aaa',
-        'id':'333',
+        'id':'10',
         'name':'avtyu',
         'creater':'bbb',
         'server_type':'1',
@@ -301,4 +301,94 @@ Mock.mock(/\/worksheet\/updating/, 'get', {
         'create_at':'2017-10-10',
         'update_at':'2017-10-11'
     }]
+});
+/*
+ * 获取工单详情
+ */
+Mock.mock(/\/worksheet\/edit/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':{
+        'alert_id':'acrhf',
+        'alert_content':'alert happend',
+        'site_id':'10',
+        'site_name':'site1',
+        'problem_type':'1',
+        'server_type':'1',
+        'source':[{'id':'1','name':'aaa'}, {'id':'2','name':'bbb'}],
+        'status':'1'
+    }
+});
+/*
+ * 创建工单
+ */
+Mock.mock(/\/worksheet\/create/, 'post' ,function (options) {
+    return {
+        'code':1,
+        'message':'success'
+    }
+});
+/*
+ * 查询处理记录
+ */
+Mock.mock(/\/worksheet\/note/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':{
+        'id':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':'thisaaaaaaa'
+    }
+});
+/*
+ * 查询操作记录
+ */
+Mock.mock(/\/worksheet\/record/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':{
+        'id':'1',
+        'order':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':'thisaaaaaaa'}
+});
+/*
+ * 修订工单（提交修改）
+ */
+Mock.mock(/\/worksheet\/edit/, 'post', function (options) {
+    return {
+        'code':1,
+        'message':'success'
+    }
+});
+/*
+ * 升级工单
+ */
+Mock.mock(/\/worksheet\/update/, 'post', function (options) {
+    return {
+        'code':1,
+        'message':'success'
+    }
+});
+/*
+ * 指派工单
+ */
+Mock.mock(/\/worksheet\/assign/, 'post', function (options) {
+    return {
+        'code':1,
+        'message':'success'
+    }
+});
+/*
+ * 关闭工单
+ */
+Mock.mock(/\/worksheet\/close/, 'post', function (options) {
+    return {
+        'code':1,
+        'message':'success'
+    }
 });

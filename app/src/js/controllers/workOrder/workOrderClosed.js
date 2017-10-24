@@ -10,6 +10,7 @@ angular.module('myappApp')
         function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
             'use strict';
 
+            $scope.pager = {};
             $scope.initData = {
                 getListError: '',
                 loading: true
@@ -47,14 +48,38 @@ angular.module('myappApp')
                 $scope.cache.listArr= [];
             };
 
+            //点击回车查询
+            $scope.queryAsKeyup = function(e){
+                var keycode = window.event?e.keyCode:e.which;
+                if(keycode==13){
+                    $scope.querySearch(true);
+                }
+            };
+
+            /**
+             * 页面查询操作
+             * @param flag: if curPage == 1
+             */
+            $scope.querySearch = function ( flag ) {
+                if( flag ){
+                    $scope.pager.curPage = 1;
+                }
+                $scope.formatState();
+                $scope.getClosedList();
+            };
+
             $scope.getClosedList = function () {
                 $scope.formatState();
                 var config = $scope.apis.getClosedList;
                 config.data.query = $scope.query.queryValue;
+                config.data.page = $scope.pager.curPage || 1;
+                config.data.per_page = parseInt($scope.pager.pageSize) || 20;
                 var fnSuccess = function (d) {
                     $scope.initData.loading = false;
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.cache.listArr = data.data;
+                    $scope.pager.total = data.data.total;
+                    $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
                     $scope.apply();
                 };
                 var fnError = function (data) {
