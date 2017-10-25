@@ -44,17 +44,45 @@ angular.module('myappApp')
             $scope.init = function () {
                 $rootScope.pagePath = $location.path();
                 $scope.formData = {};
+                $scope.bindEvent();
             };
             /*
              * 上传文件触发
              */
             $scope.uploadFile = function () {
-                $('#J_uploadFile').click()
+                $('#J_uploadFile').click();
+            };
+            $scope.bindEvent = function () {
+                $('#J_uploadFile').on('change',function (ev) {
+                    for (var i = 0; i < this.files.length; i++) {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(this.files[i]);
+                        reader.onload = function () {
+                            var div = document.createElement('div');
+                            var img = document.createElement('img');
+                            var name = document.createElement('p');
+                            div.style = "width: 80px; float: left;";
+                            img.src = this.result;
+                            img.style = "width: 60px; height: auto; margin: 10px;";
+                            name.innerHTML = ev.currentTarget.value.replace(/C/g,'').replace(/\:/g,'').replace(/\\/g,'').replace(/fakepath/g,'');
+                            name.style = "width: 100%; text-align: center;";
+                            div.appendChild(img);
+                            div.appendChild(name);
+                            $('#thumbnail').append(div);
+                        }
+                    }
+                });
             };
             /*
-             * 上传文件
+             * 创建工单
              */
-            $scope.createWorkOrder = function () {
+            $scope.createWorkOrder = function (event) {
+                $(event.target).addClass('disabled');
+                if($('#J_uploadFile').val()){
+
+                }else{
+
+                }
                 var config = $scope.apis.createWorkOrder;
                 config.data.site_name = $scope.formData.site_name;
                 config.data.alert_id = $scope.formData.alert_id;
@@ -65,7 +93,8 @@ angular.module('myappApp')
                 config.data.source = $scope.formData.source;
                 var fnSuccess = function (d) {
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
-                    console.log(data.message);
+
+                    $state.go('main.workOrder.handling');
                 };
                 var fnFail = function (data) {
                     $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
@@ -73,6 +102,10 @@ angular.module('myappApp')
                     $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
+            };
+
+            $scope.importImgAndCommitForm = function () {
+
             };
 
             $scope.apply = function() {

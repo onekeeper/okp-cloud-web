@@ -49,7 +49,7 @@
                                 <td colspan="8" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
                             </tr>
                             <tr ng-repeat="item in cache.listArr">
-                                <td><a ui-sref="main.workOrder.editAndAssign" target="_blank">{{item.id}}</a></td>
+                                <td><a ui-sref="main.workOrder.edit({id: item.id})" target="_self">{{item.id}}</a></td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.editor}}</td>
                                 <td>{{item.creater}}</td>

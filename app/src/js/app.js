@@ -114,11 +114,21 @@ angular.module('myappApp', [
             templateUrl: "views/workOrder/addForm.html",
             controller: "WorkOrderAddCtrl"
         })
-        .state("main.workOrder.editAndAssign", {
-            url: "/editAndAssign/{id}",
+        .state("main.workOrder.edit", {
+            url: "/edit/{id}",
             templateUrl: "views/workOrder/editAndAssign.html",
             controller: "WorkOrderEditAndAssignCtrl"
         })
+        .state("main.workOrder.assign", {
+            url: "/assign/{id}",
+            templateUrl: "views/workOrder/editAndAssign.html",
+            controller: "WorkOrderEditAndAssignCtrl"
+        })
+        // .state("main.workOrder.closed", {
+        //     url: "/closed/{id}",
+        //     templateUrl: "views/workOrder/editAndAssign.html",
+        //     controller: "WorkOrderEditAndAssignCtrl"
+        // })
         .state("500", {
             url: "/500",
             templateUrl: "500.html?"+timestamp,

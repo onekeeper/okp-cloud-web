@@ -21,7 +21,9 @@ angular.module('myappApp')
                 status: '',
                 name: '' , //工单标题
                 content: '', // 处理记录
-                disabled: true // 是否可操作
+                handling: true, // 是否处理中的判断
+                updating: true, //升级中和已关闭的判断
+                title: ''
             };
             $scope.trans = { // 类型转换
                 worksheet_status_list: [{'status': '1', 'name': '处理中'},{'status': '2', 'name': '升级中'},
@@ -109,6 +111,7 @@ angular.module('myappApp')
                 $scope.getEditInfo($stateParams.id);
                 $scope.getNoteList($stateParams.id);
                 $scope.getRecordList($stateParams.id);
+                $scope.bindEvent();
                 $('.nav-tabs>li:first-child').addClass('active');
             };
             /*
@@ -116,6 +119,30 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 $('#J_uploadFile_edit').click()
+            };
+            /*
+             * 缩略图
+             */
+            $scope.bindEvent = function () {
+                $('#J_uploadFile_edit').on('change',function (ev) {
+                    for (var i = 0; i < this.files.length; i++) {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(this.files[i]);
+                        reader.onload = function () {
+                            var div = document.createElement('div');
+                            var img = document.createElement('img');
+                            var name = document.createElement('p');
+                            div.style = "width: 80px; float: left;";
+                            img.src = this.result;
+                            img.style = "width: 60px; height: auto; margin: 10px;";
+                            name.innerHTML = ev.currentTarget.value.replace(/C/g,'').replace(/\:/g,'').replace(/\\/g,'').replace(/fakepath/g,'');
+                            name.style = "width: 100%; text-align: center;";
+                            div.appendChild(img);
+                            div.appendChild(name);
+                            $('#thumbnail').append(div);
+                        }
+                    }
+                });
             };
             /*
              * 获取工单详情
@@ -127,10 +154,37 @@ angular.module('myappApp')
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.formData = data.data;
                     var status = $scope.formData.status;
-                    status == 1 ? $scope.formData.disabled = false : $scope.formData.disabled = true;
+                    switch(status){
+                        case '1':
+                            $scope.formData.title = '处理中的';
+                            $scope.formData.handling = true;
+                            $scope.formData.updating = false;
+                            break;
+                        case '2':
+                            $scope.formData.title = '升级中的';
+                            $scope.formData.handling = false;
+                            $scope.formData.updating = true;
+                            break;
+                        case '3':
+                            $scope.formData.title = '已关闭的';
+                            $scope.formData.handling = false;
+                            $scope.formData.updating = false;
+                            break;
+                    }
+                    for (var i = 0; i < $scope.formData.source.length; i++) {
+                        var div = document.createElement('div');
+                        var img = document.createElement('img');
+                        var name = document.createElement('p');
+                        div.style = "width: 80px; float: left;";
+                        img.style = "width: 60px; height: 60px; margin: 10px;";
+                        name.innerHTML = $scope.formData.source[i].name;
+                        name.style = "width: 100%; text-align: center;";
+                        div.appendChild(img);
+                        div.appendChild(name);
+                        $('#thumbnail').append(div);
+                    }
                 };
                 var fnFail = function (data) {
-
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess ,fnFail);
             };
@@ -177,6 +231,8 @@ angular.module('myappApp')
                 config.data.source = $scope.formData.source;
                 var fnSuccess = function (d) {
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
+
+                    $state.go('main.workOrder.handling');
                 };
                 var fnFail = function (data) {
 
@@ -187,7 +243,7 @@ angular.module('myappApp')
              * 取消
              */
             $scope.cancel = function () {
-                window.close();
+                window.history.go(-1);
             };
             /*
              * 升级工单
@@ -222,17 +278,27 @@ angular.module('myappApp')
             /*
              * 关闭工单
              */
-            $scope.closeWorkOrder = function (id) {
+            $scope.clickOk = function () {
                 var config = $scope.apis.closeWorkOrder;
                 config.data.id = $stateParams.id;
                 var fnSuccess = function (d) {
 
-                    window.close();
+                    $('#J_editConfirm').modal('hide');
+                    window.history.go(-1);
                 };
                 var fnFail = function (data) {
 
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
+            };
+            $scope.closeWorkOrder = function () {
+                angular.element('#J_editConfirm').modal();
+                angular.element('#J_editConfirm').draggable({
+                    handle: ".modal-header",
+                    cursor: 'move',
+                    refreshPositions: false
+                });
+                $scope.modalInfo = '确定关闭工单吗？'
             };
             $scope.tabTrans = function (flag) {
                 $scope.tab.status = flag;
