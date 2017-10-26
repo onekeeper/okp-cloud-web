@@ -49,7 +49,7 @@ angular.module('myappApp')
              * 上传文件触发
              */
             $scope.uploadFile = function () {
-                $('#J_uploadFile').click()
+                $('#J_uploadFile').click();
             };
             /*
              * 上传文件

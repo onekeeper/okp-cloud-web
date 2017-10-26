@@ -115,7 +115,7 @@ angular.module('myappApp')
              * 上传文件触发
              */
             $scope.uploadFile = function () {
-                $('#J_uploadFile_edit').click()
+                $('#J_uploadFile_edit').click();
             };
             /*
              * 获取工单详情
@@ -127,7 +127,7 @@ angular.module('myappApp')
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.formData = data.data;
                     var status = $scope.formData.status;
-                    status == 1 ? $scope.formData.disabled = false : $scope.formData.disabled = true;
+                    $scope.formData.disabled = status === 1 ?  false : true;
                 };
                 var fnFail = function (data) {
 
@@ -236,7 +236,7 @@ angular.module('myappApp')
             };
             $scope.tabTrans = function (flag) {
                 $scope.tab.status = flag;
-                if($scope.tab.status == true){
+                if($scope.tab.status === true){
                     $('.nav-tabs>li:first-child').addClass('active');
                     $('.nav-tabs>li:last-child').removeClass('active');
                 }else{
