@@ -50,7 +50,7 @@ angular.module('myappApp')
             //点击回车查询
             $scope.queryAsKeyup = function(e){
                 var keycode = window.event?e.keyCode:e.which;
-                if(keycode==13){
+                if(keycode === 13){
                     $scope.querySearch(true);
                 }
             };
