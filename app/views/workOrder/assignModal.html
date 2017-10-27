@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal" novalidate>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-2">指派用户<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="formData.assign_user"
+                           ng-change="validateForm('assign_user','assignOrder')"
+                           ng-options = "item.id as item.name for item in formData.usersList">
+                        <option value="">请选择要指派的用户</option>
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.assignOrder.assign_user.dirty && validate.assignOrder.assign_user.error.required">
+                            指派的用户不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if="validate.assignOrder.assign_user.dirty && validate.assignOrder.assign_user.invalid"></i>
+                    <i class="valid-success" ng-if="validate.assignOrder.assign_user.dirty && validate.assignOrder.assign_user.valid"></i>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

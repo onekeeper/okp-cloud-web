@@ -6,14 +6,15 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderUpdatingCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
-        function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
+    .controller('WorkOrderUpdatingCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer',
+        function ($scope, $rootScope, $window, $location, $state, urlPrefix, AjaxServer) {
             'use strict';
 
             $scope.pager = {};
             $scope.initData = {
                 getListError: '',
-                loading: true
+                loading: true,
+                curRecord: ''
             };
             $scope.cache = {
                 listArr: [],
@@ -108,9 +109,58 @@ angular.module('myappApp')
                 $scope.apply();
             };
 
+            /**
+             * 点击退回工单
+             */
+            $scope.clickSendBack = function(item){
+                $scope.modalTitle = '提示信息';
+                $scope.modalInfo = '确定退回此工单吗？';
+                angular.element('#J_workOrderSendBackConfirm').modal();
+                angular.element('#J_workOrderSendBackConfirm').draggable({
+                    handle: ".modal-header",
+                    cursor: 'move',
+                    refreshPositions: false
+                });
+                $scope.initData.curRecord = item;
+            };
+
+            /**
+             * 点击确定
+             * @param event: event object
+             */
+            $scope.clickOk = function (event){
+                var it = $(event.target);
+                if(it.hasClass('disabled')){
+                    return false;
+                }
+                it.addClass('disabled');
+                $scope.sendBack(it);
+            };
+
+            /**
+             * 退回工单
+             */
+            $scope.sendBack = function(it) {
+                var config = $scope.apis.sendBackWorkOrder;
+                config.data.id = $scope.initData.curRecord.id;
+                config.data.user_id = $scope.initData.curRecord.editor;//要退回的目标（占时只有名称，接口中需要id）
+                var fnSuccess = function (d) {
+                    it.removeClass('disabled');
+                    $('#J_workOrderConfirm').modal('hide');
+                    $scope.getUpdatingList();
+                };
+                var fnFail = function (data) {
+                    it.removeClass('disabled');
+                    $scope.errMsg = data.message;
+                    console.log(data.message);
+                };
+                AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
+            };
+
+
             $scope.apply = function() {
                 if(!$scope.$$phase) {
                     $scope.$apply();
                 }
             };
-        }]);
+    }]);

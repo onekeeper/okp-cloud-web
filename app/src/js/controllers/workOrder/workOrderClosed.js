@@ -6,8 +6,8 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderClosedCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
-        function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
+    .controller('WorkOrderClosedCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer',
+        function ($scope, $rootScope, $window, $location, $state, urlPrefix, AjaxServer) {
             'use strict';
 
             $scope.pager = {};
@@ -86,13 +86,6 @@ angular.module('myappApp')
                     $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
                     $scope.initData.loading = false;
                     $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
-                    // $scope.modalTitle = '错误信息';
-                    // angular.element("#J_infoDetailUntreated").modal('show');
-                    // angular.element('#J_infoDetailUntreated').draggable({
-                    //     handle: ".modal-header",
-                    //     cursor: 'move',
-                    //     refreshPositions: false
-                    // });
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnError);
             };
@@ -118,6 +111,5 @@ angular.module('myappApp')
                     $scope.$apply();
                 }
             };
-
         }
 ]);

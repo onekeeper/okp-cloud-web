@@ -40,21 +40,36 @@
                             </thead>
                             <tbody ng-show="initData.loading">
                             <tr class="tr-loading text-center">
-                                <td colspan="8"><div class="loading"></div></td>
+                                <td colspan="9"><div class="loading"></div></td>
                             </tr>
                             </tbody>
                             <tbody ng-hide="initData.loading">
                             <tr class="tr-empty text-center" ng-show="cache.listArr.length==0">
-                                <td colspan="8" ng-if="initData.getListError!=''">未找到结果</td>
-                                <td colspan="8" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
+                                <td colspan="9" ng-if="initData.getListError!=''">未找到结果</td>
+                                <td colspan="9" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
                             </tr>
                             <tr ng-repeat="item in cache.listArr">
-                                <td><a ui-sref="main.workOrder.edit({id: item.id})" target="_self">{{item.id}}</a></td>
+                                <td><a ui-sref="main.workOrder.edit({id: item.id})">{{item.id}}</a></td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.editor}}</td>
                                 <td>{{item.creater}}</td>
-                                <td>{{item.server_type}}</td>
-                                <td>{{item.problem_type}}</td>
+                                <td ng-switch="item.server_type">
+                                    <span ng-switch-when="1">配置变更</span>
+                                    <span ng-switch-when="2">故障处理</span>
+                                    <span ng-switch-when="3">性能优化</span>
+                                    <span ng-switch-when="4">虚拟化</span>
+                                    <span ng-switch-when="5">操作系统</span>
+                                    <span ng-switch-when="6">中间件</span>
+                                    <span ng-switch-when="7">数据库</span>
+                                    <span ng-switch-default>N/A</span>
+                                </td>
+                                <td ng-switch="item.problem_type">
+                                    <span ng-switch-when="1">网络</span>
+                                    <span ng-switch-when="2">服务器</span>
+                                    <span ng-switch-when="3">存储</span>
+                                    <span ng-switch-when="4">闪回</span>
+                                    <span ng-switch-default>N/A</span>
+                                </td>
                                 <td>{{item.create_at}}</td>
                                 <td>{{item.close_at}}</td>
                                 <td>{{item.duration}}</td>

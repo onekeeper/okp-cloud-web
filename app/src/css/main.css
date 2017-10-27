@@ -55,9 +55,6 @@ html,body{
     display: block;
 }
 
-.box {
-
-}
 .box-pading {
   padding-top: 0px;
   padding-bottom: 10px;
@@ -465,6 +462,10 @@ input.tb-invalid{
     margin-left: -15px;
 }
 
+.nav-tabs-li a{cursor:pointer;}
+
+input.form-control{padding-left:4px;}
+
 /*.operate-col{
   text-align:center;
 }*/
@@ -622,6 +623,10 @@ input.tb-invalid{
     padding-left: 32px;
 }
 
+.pdl62 {
+    padding-left: 62px;
+}
+
 .pdt56{
     padding-top:56px;
 }
@@ -638,3 +643,49 @@ input.tb-invalid{
 }
 
 .height-full{height:100%;}
+
+.form-title{
+    padding-left:35px;
+    margin-top: 5px;
+}
+
+.panel-padding{
+    padding:14px;
+    overflow-x: hidden;
+}
+
+.panel-padding .control-label {
+    padding-right: 0;
+    font-weight: 400;
+    text-align: left;
+    color: #808080;
+}
+
+.panel-padding .value-label {
+    padding-left: 30px;
+}
+
+.file-img-div{
+    width: 80px; float: left;text-align:center;
+    position:relative;
+}
+
+.file-img{
+    width: 60px; height: 60px; margin: 10px;
+}
+
+.del-file{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:12px;
+    height:12px;
+    border:0;
+    cursor:pointer;
+}
+
+.del-file:hover{
+    border:1px solid #ddd;
+    background:url("../images/icons/delImg.png") no-repeat center center;
+}
+

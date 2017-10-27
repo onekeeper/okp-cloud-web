@@ -575,7 +575,7 @@ angular.module('myappApp')
             $.ajaxFileUpload({
                     url:$scope.siteList.apis.license.url,
                     secureuri:false,
-                    fileElementId:"J_importFile",
+                    fileElementId:["J_importFile"],
                     //data: {'Authorization' : 'Onekeeper '+ $cookieStore.get('token')},
                     dataType: "json",
                     success: function (data, status){
@@ -606,8 +606,7 @@ angular.module('myappApp')
                         $scope.errorMsg = '导入失败,请核对';
                         $scope.apply();
                     }
-                }
-            );
+            });
         };
 
         var validFormatObj = {

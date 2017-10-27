@@ -6,8 +6,8 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderHandlingCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
-        function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
+    .controller('WorkOrderHandlingCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer',
+        function ($scope, $rootScope, $window, $location, $state, urlPrefix, AjaxServer) {
             'use strict';
 
             $scope.pager = {};

@@ -226,7 +226,7 @@ Mock.mock(/\/worksheet\/active/, 'get', {
     'code': 1,
     'data':[{
         'editor':'aaa',
-        'id':'333',
+        'id':'1',
         'name':'avtyu',
         'creater':'bbb',
         'receiver':'rec',
@@ -237,7 +237,7 @@ Mock.mock(/\/worksheet\/active/, 'get', {
         'status':'处理中'
     },{
         'editor':'aaa',
-        'id':'10',
+        'id':'1',
         'name':'avtyu',
         'creater':'bbb',
         'receiver':'rec',
@@ -248,34 +248,7 @@ Mock.mock(/\/worksheet\/active/, 'get', {
         'status': '升级中'
     }]
 });
-/*
-* 已关闭的工单
-*/
-Mock.mock(/\/worksheet\/closure/, 'get', {
-    'code':1,
-    'message':'success',
-    'data':[{
-        'editor':'aaa',
-        'id':'333',
-        'name':'avtyu',
-        'creater':'bbb',
-        'server_type':'1',
-        'problem_type':'2',
-        'create_at':'2017-10-10',
-        'close_at':'2017-10-11',
-        'duration':'10'
-    },{
-        'editor':'aaa',
-        'id':'333',
-        'name':'avtyu',
-        'creater':'bbb',
-        'server_type':'1',
-        'problem_type':'2',
-        'create_at':'2017-10-10',
-        'close_at':'2017-10-11',
-        'duration':'10'
-    }]
-});
+
 /*
 * 待指派的工单
 */
@@ -284,7 +257,7 @@ Mock.mock(/\/worksheet\/updating/, 'get', {
     'message':'success',
     'data':[{
         'editor':'aaa',
-        'id':'333',
+        'id':'2',
         'name':'avtyu',
         'creater':'bbb',
         'server_type':'1',
@@ -293,7 +266,7 @@ Mock.mock(/\/worksheet\/updating/, 'get', {
         'update_at':'2017-10-11'
     },{
         'editor':'aaa',
-        'id':'10',
+        'id':'2',
         'name':'avtyu',
         'creater':'bbb',
         'server_type':'1',
@@ -302,10 +275,67 @@ Mock.mock(/\/worksheet\/updating/, 'get', {
         'update_at':'2017-10-11'
     }]
 });
+
 /*
- * 获取工单详情
+ * 已关闭的工单
  */
-Mock.mock(/\/worksheet\/edit/, 'get', {
+Mock.mock(/\/worksheet\/closure/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{
+        'editor':'aaa',
+        'id':'3',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'close_at':'2017-10-11',
+        'duration':'10'
+    },{
+        'editor':'aaa',
+        'id':'3',
+        'name':'avtyu',
+        'creater':'bbb',
+        'server_type':'1',
+        'problem_type':'2',
+        'create_at':'2017-10-10',
+        'close_at':'2017-10-11',
+        'duration':'10'
+    }]
+});
+
+/*
+ *获取站点选择列表
+ */
+Mock.mock(/\/worksheet\/sites/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{'id':'1','name':'站点1'}, {'id':'2','name':'站点2'}]
+});
+
+/*
+ *获取告警选择列表
+ */
+Mock.mock(/\/worksheet\/alerts/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{'id':'1','name':'告警1'}, {'id':'2','name':'告警2'}]
+});
+
+/*
+ *获取指派用户
+ */
+Mock.mock(/\/worksheet\/users/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':[{'id':'1','name':'用户1'}, {'id':'2','name':'用户2'}]
+});
+
+/*
+ * 获取工单详情(处理中)
+ */
+Mock.mock(/\/worksheet\/edit\?id\=1/, 'get', {
     'code':1,
     'message':'success',
     'data':{
@@ -319,6 +349,43 @@ Mock.mock(/\/worksheet\/edit/, 'get', {
         'status':'1'
     }
 });
+
+/*
+ * 获取工单详情(待指派)
+ */
+Mock.mock(/\/worksheet\/edit\?id\=2/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':{
+        'alert_id':'acrhf',
+        'alert_content':'alert happend',
+        'site_id':'10',
+        'site_name':'site1',
+        'problem_type':'1',
+        'server_type':'1',
+        'source':[{'id':'1','name':'aaa'}, {'id':'2','name':'bbb'}],
+        'status':'2'
+    }
+});
+
+/*
+ * 获取工单详情(已关闭)
+ */
+Mock.mock(/\/worksheet\/edit\?id\=3/, 'get', {
+    'code':1,
+    'message':'success',
+    'data':{
+        'alert_id':'acrhf',
+        'alert_content':'alert happend',
+        'site_id':'10',
+        'site_name':'site1',
+        'problem_type':'1',
+        'server_type':'1',
+        'source':[{'id':'1','name':'aaa'}, {'id':'2','name':'bbb'}],
+        'status':'3'
+    }
+});
+
 /*
  * 创建工单
  */

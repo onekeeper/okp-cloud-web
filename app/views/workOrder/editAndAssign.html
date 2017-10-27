@@ -1,47 +1,40 @@
 <div ng-init="init()">
     <div class="row top-container mgt14">
-        <div class="col-lg-6 col-md-6 top-right" style="padding-left: 35px;">
+        <div class="col-lg-6 col-md-6 form-title">
             <span>{{formData.title}}</span>工单信息
         </div>
-        <div ng-if="commonFlag && formData.handling" class="col-lg-offset-4 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <button class="btn btn-primary btn-sm" ng-click="updateWorkOrder()">升级工单</button>
-        </div>
-        <div ng-if="!commonFlag && formData.updating" class="col-lg-offset-4 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <button class="btn btn-primary btn-sm" ng-click="assignWorkOrder()">指派工单</button>
-        </div>
-        <div  ng-if="(commonFlag && formData.handling) || (!commonFlag && formData.updating)" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <button class="btn btn-orange btn-sm" ng-click="closeWorkOrder()" style="width: 80px;">关闭工单
-            </button>
+        <div class="col-lg-6 col-md-6 text-right">
+            <button ng-if="commonFlag && formData.handling" class="btn btn-primary btn-sm" ng-click="clickUpdateWorkOrder()">升级工单</button>
+            <button ng-if="!commonFlag && formData.updating" class="btn btn-primary btn-sm" ng-click="clickAssignOrder()">指派工单</button>
+            <button ng-if="formData.updating || formData.handling" class="btn btn-primary btn-sm" ng-click="clickCloseWorkOrder()">关闭工单</button>
         </div>
     </div>
     <div class="layout-container pdt56">
         <div class="row box-all">
             <div class="col-lg-12 col-md-12 box-all box-pading">
-                <div class="ds-panel box-all" style="overflow-x: hidden">
+                <div class="ds-panel box-all panel-padding">
                     <form class="form-horizontal clearfix">
                         <div class="clearfix">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <p>站点基本信息：</p>
                                 <div class="col-lg-offset-2 clearfix">
-                                    <label class="pull-left">站点名：</label>
-                                    <div class="col-lg-6">
-                                        {{formData.site_name}}
-                                    </div>
+                                    <label class="control-label pull-left">站点ID：</label>
+                                    <label class="control-label value-label">{{formData.site_id}}</label>
                                 </div>
                                 <div class="col-lg-offset-2 clearfix">
-                                    <label class="pull-left">站点ID：</label>
-                                    <div class="col-lg-6">
-                                        {{formData.site_id}}
-                                    </div>
+                                    <label class="control-label pull-left">站点名：</label>
+                                    <label class="control-label value-label">{{formData.site_name}}</label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <p>告警基本信息：</p>
                                 <div class="col-lg-offset-2 clearfix">
-                                    <label class="pull-left">告警编号：</label>
-                                    <div class="col-lg-6">
-                                        {{formData.alert_id}}
-                                    </div>
+                                    <label class="control-label pull-left">告警编号：</label>
+                                    <label class="control-label value-label">{{formData.alert_id}}</label>
+                                </div>
+                                <div class="col-lg-offset-2 clearfix">
+                                    <label class="control-label pull-left">告警内容：</label>
+                                    <label class="control-label value-label">{{formData.alert_content}}</label>
                                 </div>
                             </div>
                         </div>
@@ -49,81 +42,125 @@
                         <div class="clearfix">
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left">工单标题：</label>
+                                    <label class="control-label pull-left">工单标题<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <input type="text" class="form-control input-sm" ng-model="formData.name"
-                                               placeholder="工单标题" ng-disabled="!formData.handling || !commonFlag">
+                                               placeholder="工单标题" ng-disabled="!formData.handling || !commonFlag"
+                                               ng-change="validateForm('name','workOrder');">
+                                        <div class="validate-container">
+                                            <span ng-if="validate.workOrder.name.dirty && validate.workOrder.name.error.required">
+                                                工单标题不能为空
+                                            </span>
+                                            <span ng-if="validate.workOrder.name.dirty && validate.workOrder.name.error.format">
+                                                工单标题不超过128个字符,中文不能超过64个字
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <i class="valid-error" ng-if=" validate.workOrder.name.dirty && validate.workOrder.name.invalid"></i>
+                                        <i class="valid-success" ng-if=" validate.workOrder.name.dirty && validate.workOrder.name.valid"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left">故障类型：</label>
+                                    <label class="control-label pull-left">故障类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag">
-                                            <option>请选择故障类型</option>
-                                            <option ng-repeat="problem in formData.problem_type">{{problem}}</option>
+                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag"
+                                                ng-options = "item.id as item.name for item in overrallData.problem_type_list"
+                                                ng-model="formData.problem_type"
+                                                ng-change="validateForm('problem_type','workOrder');">
+                                            <option value="">请选择故障类型</option>
                                         </select>
+                                        <div class="validate-container">
+                                            <span ng-if="validate.workOrder.problem_type.dirty && validate.workOrder.problem_type.error.required">
+                                                故障类型不能为空
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <i class="valid-error" ng-if=" validate.workOrder.problem_type.dirty && validate.workOrder.problem_type.invalid"></i>
+                                        <i class="valid-success" ng-if=" validate.workOrder.problem_type.dirty && validate.workOrder.problem_type.valid"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left">处理类型：</label>
+                                    <label class="control-label pull-left">处理类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag">
-                                            <option>请选择处理类型</option>
-                                            <option ng-repeat="server in formData.server_type">{{server}}</option>
+                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag"
+                                                ng-options = "item.id as item.name for item in overrallData.server_type_list"
+                                                ng-model="formData.server_type"
+                                                ng-change="validateForm('server_type','workOrder');">
+                                            <option value="">请选择处理类型</option>
                                         </select>
+                                        <div class="validate-container">
+                                            <span ng-if="validate.workOrder.server_type.dirty && validate.workOrder.server_type.error.required">
+                                                处理类型不能为空
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <i class="valid-error" ng-if=" validate.workOrder.server_type.dirty && validate.workOrder.server_type.invalid"></i>
+                                        <i class="valid-success" ng-if=" validate.workOrder.server_type.dirty && validate.workOrder.server_type.valid"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="clearfix">
-                            <div class="form-group">
+                        <hr ng-if="commonFlag && formData.handling">
+                        <div class="clearfix" ng-show="commonFlag && formData.handling">
+                            <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
                                         <textarea class="form-control input-sm" cols="" rows="4"
                                                   ng-model="formData.content"
                                                   ng-disabled="!formData.handling || !commonFlag"
-                                                  placeholder="填写工单处理记录"></textarea>
+                                                  placeholder="填写工单处理记录"
+                                                  ng-change="validateForm('content','workOrder');"></textarea>
+                                        <div class="validate-container">
+                                            <span ng-if="validate.workOrder.content.dirty && validate.workOrder.content.error.format">
+                                                详细地址不超过1024个字符,中文不能超过512个字
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <i class="valid-error" ng-if=" validate.workOrder.content.dirty && validate.workOrder.content.invalid"></i>
+                                        <i class="valid-success" ng-if=" validate.workOrder.content.dirty && validate.workOrder.content.valid"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                        <label class="control-label pull-left" style="visibility: hidden">工单记录：</label>
-                                        <input type="file" id="J_uploadFile_edit" style="display: none;" multiple>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdl0">
+                                        <div id="thumbnail" class="clearfix" style="margin: 15px 0;">
+                                            <div ng-repeat="item in formData.source" class="file-img-div">
+                                                <img class="file-img"/>
+                                                <div class="del-file" ng-click="deleteFile(item);"></div>
+                                                <span>{{item.name}}</span>
+                                            </div>
+                                        </div>
+                                        <div id="J_fileInputEditContainer" style="display:none;">
+                                        </div>
+                                        <input type="file" id="J_uploadFile_edit" style="display: none;">
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
                                                 ng-disabled="!formData.handling || !commonFlag">附件上传
                                         </button>
                                         <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                         <hr>
-                        <div id="thumbnail" class="clearfix" style="margin: 15px;">
+                        <div class="clearfix form-group text-center">
+                            <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)" ng-if="commonFlag && formData.handling" style="width: 120px;">保存</button>
+                            <button class="btn btn-orange btn-inline" ng-click="cancel()" ng-if="commonFlag && formData.handling" style="width: 120px;">取消</button>
                         </div>
-                        <hr>
-                        <div class="clearfix form-group">
-                            <div ng-if="commonFlag" class="col-lg-offset-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                                <button class="btn btn-gray btn-inline" ng-click="saveWorkOrder()" ng-if="commonFlag && formData.handling" style="width: 80px;">保存</button>
-                            </div>
-                            <div ng-if="!commonFlag" class="col-lg-offset-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                            </div>
-                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                                <button class="btn btn-orange btn-inline" ng-click="cancel()" ng-if="commonFlag && formData.handling" style="width: 80px;">取消
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
+                        <div>
                             <ul class="nav nav-tabs">
-                                <li class="" ng-click="tabTrans(true)"><a>处理记录</a></li>
-                                <li class="" ng-click="tabTrans(false)"><a>操作记录</a></li>
+                                <li class="nav-tabs-li" ng-class="{'active':tab.status}" ng-click="tabTrans(true)"><a>处理记录</a></li>
+                                <li class="nav-tabs-li" ng-class="{'active':!tab.status}" ng-click="tabTrans(false)"><a>操作记录</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="col-lg-12">
@@ -169,7 +206,14 @@
             </div>
         </div>
     </div>
-    <div id="J_editConfirm" modal-directive>
-        <div ng-include="'views/public/confirmModal.html'"></div>
-    </div>
+</div>
+
+<!--关闭工单确认-->
+<div id="J_workOrderConfirm" modal-directive>
+    <div ng-include="'views/public/confirmModal.html'"></div>
+</div>
+
+<!--指派工单-->
+<div id="J_workOrderAssign" modal-directive>
+    <div ng-include="'views/workOrder/assignModal.html'"></div>
 </div>

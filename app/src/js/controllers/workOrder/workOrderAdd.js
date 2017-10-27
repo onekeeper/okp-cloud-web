@@ -6,35 +6,42 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderAddCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$cookieStore','$state','urlPrefix','AjaxServer','Validate','sessionStore',
-        function ($scope, $rootScope, $window, $location, $timeout, $cookieStore,$state,urlPrefix,AjaxServer,Validate,sessionStore) {
+    .controller('WorkOrderAddCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer','Validate',
+        function ($scope, $rootScope, $window, $location, $state,urlPrefix, AjaxServer, Validate) {
             'use strict';
 
-            $scope.formData = {
-                alert_id: '',
-                alert_content: '',
-                site_id: '',
-                site_name: '',
-                name: '',
-                problem_type: '',
-                server_type: '',
-                content: '',
-                source: []
-            };
             $scope.apis = {
+                getSiteOptions: {//获取站点
+                    url: urlPrefix + '/worksheet/sites',
+                    method: 'get',
+                    data: {
+                    }
+                },
+                getAlertOptions: {//获取告警
+                    url: urlPrefix + '/worksheet/alerts',
+                    method: 'get',
+                    data: {
+                    }
+                },
                 createWorkOrder: {
                     url: urlPrefix + '/worksheet/create',
                     method: 'post',
                     data: {
                         alert_id: '',
-                        alert_content: '',
+                        //alert_content: '',
                         site_id: '',
-                        site_name: '',
+                        //site_name: '',
                         name: '',
                         problem_type: '',
                         server_type: '',
                         content: '',
                         source: []
+                    }
+                },
+                upload:{
+                    url: urlPrefix + '/worksheet/uploadfile',
+                    method: 'post',
+                    data: {
                     }
                 }
             };
@@ -43,46 +50,115 @@ angular.module('myappApp')
              */
             $scope.init = function () {
                 $rootScope.pagePath = $location.path();
-                $scope.formData = {};
+                $scope.formData = {
+                    alert_id: '',
+                    alert_content: '',
+                    site_id: '',
+                    site_name: '',
+                    name: '',
+                    problem_type: '',
+                    server_type: '',
+                    content: '',
+                    source: [],
+                    sites: [],
+                    alerts: []
+                };
                 $scope.bindEvent();
+                $scope.selfValid();
+                $scope.getSiteOptions();
+                $scope.getAlertOptions();
             };
+
+            /**
+             * 获取站点列表
+             */
+            $scope.getSiteOptions = function(){
+                var config = $scope.apis.getSiteOptions;
+                var fnSuccess = function (d) {
+                    var data = typeof(d)==='string' ? JSON.parse(d) : d;
+                    $scope.formData.sites = data.data;
+                    $scope.apply();
+                };
+                var fnFail = function (data) {
+
+                };
+                AjaxServer.ajaxInfo(config, fnSuccess ,fnFail);
+            };
+
+            /**
+             * 获取告警列表
+             */
+            $scope.getAlertOptions = function(){
+                var config = $scope.apis.getAlertOptions;
+                var fnSuccess = function (d) {
+                    var data = typeof(d)==='string' ? JSON.parse(d) : d;
+                    $scope.formData.alerts = data.data;
+                    $scope.apply();
+                };
+                var fnFail = function (data) {
+
+                };
+                AjaxServer.ajaxInfo(config, fnSuccess ,fnFail);
+            };
+
             /*
              * 上传文件触发
              */
             $scope.uploadFile = function () {
-                $('#J_uploadFile').click();
+                var curNo = $(".j-file-input").length;
+                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input'>";
+                $("#J_fileInputContainer").append(content);
+                $('#J_workOrder_'+(curNo+1)).click();
             };
+
+            /**
+             * 事件绑定
+             */
             $scope.bindEvent = function () {
-                $('#J_uploadFile').on('change',function (ev) {
-                    for (var i = 0; i < this.files.length; i++) {
-                        var reader = new FileReader();
-                        reader.readAsDataURL(this.files[i]);
-                        reader.onload = function () {
-                            var div = document.createElement('div');
-                            var img = document.createElement('img');
-                            var name = document.createElement('p');
-                            div.style = "width: 80px; float: left;";
-                            img.src = this.result;
-                            img.style = "width: 60px; height: auto; margin: 10px;";
-                            name.innerHTML = ev.currentTarget.value.replace(/C/g,'').replace(/\:/g,'').replace(/\\/g,'').replace(/fakepath/g,'');
-                            name.style = "width: 100%; text-align: center;";
-                            div.appendChild(img);
-                            div.appendChild(name);
-                            $('#thumbnail').append(div);
-                        };
+                $('body').on('change','.j-file-input',function(event){
+                    $scope.formData.source = [];
+                    var inputArr = _getFileInputArr(),
+                        fileName = null;
+                    for(var i=0; i< inputArr.length; i++){
+                        fileName = _getFileName($('#'+inputArr[i]).val());
+                        $scope.formData.source.push(fileName);
                     }
+                    $scope.apply();
                 });
+                // $('#J_uploadFile').on('change',function (ev) {
+                //     for (var i = 0; i < this.files.length; i++) {
+                //         var reader = new FileReader();
+                //         reader.readAsDataURL(this.files[i]);
+                //         reader.onload = function () {
+                //             var div = document.createElement('div');
+                //             var img = document.createElement('img');
+                //             var name = document.createElement('p');
+                //             div.style = "width: 80px; float: left;";
+                //             img.src = this.result;
+                //             img.style = "width: 60px; height: auto; margin: 10px;";
+                //             name.innerHTML = ev.currentTarget.value.replace(/C/g,'').replace(/\:/g,'').replace(/\\/g,'').replace(/fakepath/g,'');
+                //             name.style = "width: 100%; text-align: center;";
+                //             div.appendChild(img);
+                //             div.appendChild(name);
+                //             $('#thumbnail').append(div);
+                //         };
+                //     }
+                // });
             };
+
+            /**
+             * 清空file文本框
+             * @param fileId
+             */
+            $scope.cleanFile = function(){
+                $("#J_fileInputContainer").html("");
+            };
+
             /*
              * 创建工单
              */
-            $scope.createWorkOrder = function (event) {
-                $(event.target).addClass('disabled');
-                if($('#J_uploadFile').val()){
-
-                }else{
-
-                }
+            $scope.createWorkOrder = function (it) {
+                it.addClass('disabled');
                 var config = $scope.apis.createWorkOrder;
                 config.data.site_name = $scope.formData.site_name;
                 config.data.alert_id = $scope.formData.alert_id;
@@ -92,20 +168,247 @@ angular.module('myappApp')
                 config.data.content = $scope.formData.content;
                 config.data.source = $scope.formData.source;
                 var fnSuccess = function (d) {
+                    it.removeClass('disabled');
+                    $scope.cleanFile();
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
-
                     $state.go('main.workOrder.handling');
                 };
                 var fnFail = function (data) {
-                    $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
+                    it.removeClass('disabled');
                     $scope.initData.loading = false;
                     $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
             };
 
-            $scope.importImgAndCommitForm = function () {
+            /**
+             * 获取有效文件输入框
+             * @returns {Array}
+             * @private
+             */
+            function _getFileInputArr(){
+                var fileInputIdArr = [];
+                var fileInputArr = $(".j-file-input");
+                for(var i=0; i < fileInputArr.length; i++){
+                    if(fileInputArr.eq(i).val()){
+                        fileInputIdArr.push(fileInputArr.eq(i).attr("id"));
+                    }
+                }
+                return fileInputIdArr;
+            }
 
+            /**
+             * 获取文件名
+             * @param o
+             * @returns {string}
+             * @private
+             */
+            function _getFileName(o){
+                var pos=o.lastIndexOf("\\");
+                return o.substring(pos+1);
+            }
+
+            /**
+             * 表单验证
+             * @param type: 验证字段
+             * @param whichForm: 添加(workOrder)
+             * @returns {boolean}
+             */
+            $scope.validateForm = function ( type , whichForm ){
+                var validDirtyObj = angular.extend({},validFormatObj,{dirty:true}),
+                    validNotObj = angular.extend({},validDirtyObj,{valid:false,invalid:true});
+                // 表单
+                if(whichForm === 'workOrder') {
+                    // 站点
+                    if (type === 'site_id' || type === 'all') {
+                        $scope.validate.workOrder.site_id = angular.extend({}, validDirtyObj);
+                        if (!$scope.formData.site_id) {
+                            $scope.validate.workOrder.site_id = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: true,
+                                    format: false,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                    // 告警
+                    if (type === 'alert_id' || type === 'all') {
+                        $scope.validate.workOrder.alert_id = angular.extend({}, validDirtyObj);
+                        if (!$scope.formData.alert_id) {
+                            $scope.validate.workOrder.alert_id = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: true,
+                                    format: false,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                    // 工单标题
+                    if (type === 'name' || type === 'all') {
+                        $scope.validate.workOrder.name = angular.extend({}, validDirtyObj);
+                        if (!$scope.formData.name) {
+                            $scope.validate.workOrder.name = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: true,
+                                    format: false,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                        else if (!Validate.validLength($scope.formData.name, {maxLen: 128})) {
+                            $scope.validate.workOrder.name = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: false,
+                                    format: true,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                    // 故障类型
+                    if (type === 'problem_type' || type === 'all') {
+                        $scope.validate.workOrder.problem_type = angular.extend({}, validDirtyObj);
+                        if (!$scope.formData.problem_type) {
+                            $scope.validate.workOrder.problem_type = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: true,
+                                    format: false,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                    // 处理类型
+                    if (type === 'server_type' || type === 'all') {
+                        $scope.validate.workOrder.server_type = angular.extend({}, validDirtyObj);
+                        if (!$scope.formData.server_type) {
+                            $scope.validate.workOrder.server_type = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: true,
+                                    format: false,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                    // 工单记录
+                    if (type === 'content' || type === 'all') {
+                        $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
+                        if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
+                            $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                                error: {
+                                    required: false,
+                                    format: true,
+                                    same: false
+                                }
+                            });
+                            $scope.apply();
+                            return false;
+                        }
+                    }
+                }
+                $scope.apply();
+                return true;
+            };
+
+            var validFormatObj = {
+                dirty:false,
+                valid:true,
+                invalid:false,
+                error:{
+                    required:false,
+                    format:false,
+                    same:false
+                }
+            };
+
+            /**
+             * 自定义验证
+             */
+            $scope.selfValid = function (){
+                $scope.errMsg = '';
+                $scope.validate = {
+                    workOrder:{
+                        site_id:{},
+                        alert_id:{},
+                        name:{},
+                        problem_type:{},
+                        server_type:{},
+                        content:{}
+                    }
+                };
+                angular.forEach($scope.validate,function(v,k){
+                    angular.forEach($scope.validate[k],function(n,i) {
+                        $scope.validate[k][i] = angular.extend({}, validFormatObj);
+                    });
+                });
+            };
+
+            /**
+             * 上传文件
+             */
+            $scope.upLoadFileAndCommitForm = function (ev) {
+                var it = $(ev.target),
+                    inputArr = _getFileInputArr();
+                if($scope.validateForm('all','workOrder')) {
+                    it.addClass('disabled');
+                    if (inputArr.length > 0) {
+                        $.ajaxFileUpload({
+                            url: $scope.apis.upload.url,
+                            secureuri: false,
+                            fileElementId: inputArr,
+                            dataType: "json",
+                            success: function (data, status) {
+                                if (data['errors']) {
+                                    $scope.errorMsg = '附件上传失败,请核对';
+                                    $scope.apply();
+                                    return;
+                                }
+                                $scope.errorMsg = '';
+                                $scope.apply();
+                                //上传成功以后才保存表单
+                                $scope.createWorkOrder(it);
+                            },
+                            error: function (data) {
+                                it.removeClass('disabled');
+                                $scope.errorMsg = '附件上传失败,请核对';
+                                $scope.apply();
+                            }
+                        });
+                    } else {
+                        //保存表单
+                        $scope.createWorkOrder(it);
+                    }
+                }
+            };
+
+            /*
+             * 删除附件
+             */
+            $scope.deleteFile = function (file) {
+                $scope.formData.source.splice($.inArray(file, $scope.formData.source), 1);
+                var inputArr = _getFileInputArr(),
+                    fileName = null;
+                for(var i=0; i< inputArr.length; i++){
+                    fileName = _getFileName($('#'+inputArr[i]).val());
+                    if(fileName === file.name){
+                        $('#'+inputArr[i]).remove();
+                    }
+                }
             };
 
             $scope.apply = function() {

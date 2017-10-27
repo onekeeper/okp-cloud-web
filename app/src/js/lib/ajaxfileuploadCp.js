@@ -36,16 +36,12 @@ jQuery.extend({
 				jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
 			}
 		}
-		 if(typeof(fileElementId) == 'string'){  
-			fileElementId = [fileElementId];  
-		}  
-		for(var i in fileElementId){ 
-			var oldElement = jQuery('#' + fileElementId);
-			var newElement = jQuery(oldElement).clone();
-			jQuery(oldElement).attr('id', fileId);
-			jQuery(oldElement).before(newElement);
-			jQuery(oldElement).appendTo(form);
-		}  
+		var oldElement = jQuery('#' + fileElementId);
+		var newElement = jQuery(oldElement).clone();
+		jQuery(oldElement).attr('id', fileId);
+		jQuery(oldElement).before(newElement);
+		jQuery(oldElement).appendTo(form);
+
 
 
 		//set attributes
