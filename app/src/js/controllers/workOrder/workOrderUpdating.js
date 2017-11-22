@@ -154,7 +154,7 @@ angular.module('myappApp')
                 config.data.user_id = $scope.initData.curRecord.editor;//要退回的目标（占时只有名称，接口中需要id）
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
-                    $('#J_workOrderConfirm').modal('hide');
+                    $('#J_workOrderSendBackConfirm').modal('hide');
                     $scope.getUpdatingList();
                 };
                 var fnFail = function (data) {

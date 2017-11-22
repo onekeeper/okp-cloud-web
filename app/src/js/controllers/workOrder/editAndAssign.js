@@ -423,7 +423,8 @@ angular.module('myappApp')
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
-                    $state.go('main.workOrder.handling');
+                    $("#J_workOrderConfirm").modal('hide');
+                    setTimeout(function(){$state.go('main.workOrder.handling')},1000);
                 };
                 var fnFail = function (data) {
                     it.removeClass('disabled');
@@ -458,8 +459,8 @@ angular.module('myappApp')
                     //todo
                     var fnSuccess = function (d) {
                         it.removeClass('disabled');
-                        var data = typeof(d) === 'string' ? JSON.parse(d) : d;
-                        $state.go('main.workOrder.updating');
+                        $("#J_workOrderAssign").modal('hide');
+                        setTimeout(function(){$state.go('main.workOrder.updating')},1000);
                     };
                     var fnFail = function (data) {
                         it.removeClass('disabled');
@@ -467,6 +468,7 @@ angular.module('myappApp')
                     };
                     AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
                 }
+                it.removeClass('disabled');
             };
 
             /*
@@ -520,7 +522,7 @@ angular.module('myappApp')
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
                     $('#J_workOrderConfirm').modal('hide');
-                    window.history.go(-1);
+                    setTimeout(function(){window.history.go(-1)},1000);
                 };
                 var fnFail = function (data) {
                     it.removeClass('disabled');
