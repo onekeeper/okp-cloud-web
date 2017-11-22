@@ -51,10 +51,10 @@
                             </tr>
                             <tr ng-repeat="item in cache.listArr">
                                 <td><a ui-sref="main.workOrder.edit({id: item.id})">{{item.id}}</a></td>
+                                <td>{{item.site_name}}</td>
                                 <td>{{item.name}}</td>
-                                <td>{{item.editor}}</td>
-                                <td>{{item.creater}}</td>
-                                <td ng-if="!commonFlag">{{item.receiver}}</td>
+                                <td>{{item.creater_name}}</td>
+                                <td ng-if="!commonFlag">{{item.editor_name}}</td>
                                 <td ng-switch="item.server_type">
                                     <span ng-switch-when="1">配置变更</span>
                                     <span ng-switch-when="2">故障处理</span>
@@ -74,7 +74,11 @@
                                 </td>
                                 <td>{{item.duration}}</td>
                                 <td>{{item.idle}}</td>
-                                <td>{{item.status}}</td>
+                                <td ng-switch="item.status">
+                                    <span ng-switch-when="1">处理中</span>
+                                    <span ng-switch-when="2">升级中</span>
+                                    <span ng-switch-when="3">已关闭</span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

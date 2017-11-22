@@ -6,7 +6,7 @@
                 <div class="col-lg-7">
                     <select class="form-control" ng-model="formData.assign_user"
                            ng-change="validateForm('assign_user','assignOrder')"
-                           ng-options = "item.id as item.name for item in formData.usersList">
+                           ng-options = "item.user_id as item.username for item in formData.usersList">
                         <option value="">请选择要指派的用户</option>
                     </select>
                     <div class="validate-container">

@@ -160,8 +160,10 @@ angular.module('myappApp')
             $scope.createWorkOrder = function (it) {
                 it.addClass('disabled');
                 var config = $scope.apis.createWorkOrder;
-                config.data.site_name = $scope.formData.site_name;
-                config.data.alert_id = $scope.formData.alert_id;
+                config.data.site_id = $scope.formData.site_id.site_id
+                config.data.site_name = $scope.formData.site_id.site_name;
+                config.data.alert_id = $scope.formData.alert_id.alert_id;
+                config.data.alert_content = $scope.formData.alert_id.alert_content;
                 config.data.name = $scope.formData.name;
                 config.data.problem_type = $scope.formData.problem_type;
                 config.data.server_type = $scope.formData.server_type;
@@ -245,9 +247,11 @@ angular.module('myappApp')
                                     same: false
                                 }
                             });
+                            $scope.formData.alert_content = '';
                             $scope.apply();
                             return false;
                         }
+                        $scope.formData.alert_content = $scope.formData.alert_id.alert_content;
                     }
                     // 工单标题
                     if (type === 'name' || type === 'all') {
@@ -306,20 +310,20 @@ angular.module('myappApp')
                         }
                     }
                     // 工单记录
-                    if (type === 'content' || type === 'all') {
-                        $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
-                        if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
-                            $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
-                                error: {
-                                    required: false,
-                                    format: true,
-                                    same: false
-                                }
-                            });
-                            $scope.apply();
-                            return false;
-                        }
-                    }
+                    // if (type === 'content' || type === 'all') {
+                    //     $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
+                    //     if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
+                    //         $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                    //             error: {
+                    //                 required: false,
+                    //                 format: true,
+                    //                 same: false
+                    //             }
+                    //         });
+                    //         $scope.apply();
+                    //         return false;
+                    //     }
+                    // }
                 }
                 $scope.apply();
                 return true;

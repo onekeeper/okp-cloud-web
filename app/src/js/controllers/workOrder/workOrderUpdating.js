@@ -28,6 +28,14 @@ angular.module('myappApp')
                     data: {
                         query: ''
                     }
+                },
+                sendBackWorkOrder: { //退回工单
+                    url: urlPrefix + '/worksheet/assign',
+                    method: 'post',
+                    data: {
+                        id: '',
+                        user_id: ''
+                    }
                 }
             };
 

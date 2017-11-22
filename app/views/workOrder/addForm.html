@@ -16,7 +16,7 @@
                                     <label class="control-label pull-left">站点名<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.site_id"
-                                                ng-options = "item as item.name for item in formData.sites"
+                                                ng-options = "item as item.site_name for item in formData.sites"
                                                 ng-change="validateForm('site_id','workOrder');">
                                             <option value="">请选择站点</option>
                                         </select>
@@ -38,7 +38,7 @@
                                     <label class="control-label pull-left">告警编号<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.alert_id"
-                                                ng-options = "item as item.name for item in formData.alerts"
+                                                ng-options = "item as item.alert_id for item in formData.alerts"
                                                 ng-change="validateForm('alert_id','workOrder');">
                                             <option value="">请选择待处理告警</option>
                                         </select>
@@ -52,7 +52,15 @@
                                         <i class="valid-error" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.invalid"></i>
                                         <i class="valid-success" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.valid"></i>
                                     </div>
+                                    <div class="clearfix"></div>
+                                    <label class="control-label pull-left">告警内容：</label>
+                                    <div class="pdl32 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span ng-if="formData.alert_id.length != 0">
+                                            {{formData.alert_content}}
+                                        </span>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <hr>

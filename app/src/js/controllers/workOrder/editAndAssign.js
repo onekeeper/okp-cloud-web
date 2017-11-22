@@ -6,8 +6,8 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderEditAndAssignCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','$stateParams','urlPrefix','AjaxServer','Validate',
-        function ($scope, $rootScope, $window, $location, $state, $stateParams,urlPrefix,AjaxServer,Validate) {
+    .controller('WorkOrderEditAndAssignCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','$stateParams','urlPrefix','AjaxServer','Validate','$sce',
+        function ($scope, $rootScope, $window, $location, $state, $stateParams,urlPrefix,AjaxServer,Validate,$sce) {
             'use strict';
 
             $scope.trans = { // 类型转换
@@ -35,7 +35,7 @@ angular.module('myappApp')
                     }
                 },
                 getAssignUser: {//获取指派用户
-                    url: urlPrefix + '/worksheet/users',
+                    url: urlPrefix + '/partner/dropdown/users',
                     method: 'get',
                     data: {
                     }
@@ -121,8 +121,8 @@ angular.module('myappApp')
                     status: '',
                     name: '' , //工单标题
                     content: '', // 处理记录
-                    handling: true, // 是否处理中的判断
-                    updating: true, //升级中和已关闭的判断
+                    handling: false, // 是否处理中的判断
+                    updating: false, //升级中和已关闭的判断
                     title: '',
                     assign_user: '',
                     source: [],
@@ -137,7 +137,9 @@ angular.module('myappApp')
                 $scope.getRecordList($stateParams.id);
                 $scope.bindEvent();
                 $scope.selfValid();
-                $scope.getAssignUser($stateParams.id);
+                if($scope.commonFlag == false){
+                    $scope.getAssignUser($stateParams.id);
+                }
             };
 
             /*
@@ -286,11 +288,37 @@ angular.module('myappApp')
                 var fnSuccess = function (d) {
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.infoList.recordList = data.data;
+                    for(var x in $scope.infoList.recordList){
+                        $scope.infoList.recordList[x].text = $sce.trustAsHtml($scope.trans($scope.infoList.recordList[x].text));
+                    }
                 };
                 var fnFail = function (data) {
                     console.log(data.message);
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess ,fnFail);
+            };
+
+            /*
+             * 解析操作记录
+             */
+            $scope.trans = function (txt) {
+                var arr1 = [];
+                arr1 = txt.replace(/ZW00001/g,'变更为')
+                        .replace(/ZW00002/g,'创建了')
+                        .replace(/ZW00003/g,'工单')
+                        .replace(/ZW00004/g,'添加了')
+                        .replace(/ZW00005/g,'处理记录')
+                        .replace(/ZW00006/g,'升级了')
+                        .replace(/ZW00007/g,'指派了')
+                        .replace(/ZW00008/g,'关闭了')
+                        .replace(/ZW00009/g,'给')
+                        .split('<ENDLINE>');
+                arr1 = arr1.slice(0,arr1.length - 1);
+                var str = '';
+                for(var x in arr1){
+                    str += arr1[x] + '<br>';
+                }
+                return str;
             };
 
             /**
@@ -426,7 +454,7 @@ angular.module('myappApp')
                 if($scope.validateForm('all','assignOrder')) {
                     var config = $scope.apis.assignWorkOrder;
                     config.data.id = $stateParams.id;
-                    config.data.user_id = null; //待指定
+                    config.data.user_id = $scope.formData.assign_user;
                     //todo
                     var fnSuccess = function (d) {
                         it.removeClass('disabled');
