@@ -10,7 +10,7 @@ angular.module('myappApp')
         function ($scope, $rootScope, $window, $location, $state,urlPrefix, AjaxServer, Validate) {
             'use strict';
 
-            $scope.apis = {
+            var apis = {
                 getSiteOptions: {//获取站点
                     url: urlPrefix + '/worksheet/sites',
                     method: 'get',
@@ -50,6 +50,7 @@ angular.module('myappApp')
              */
             $scope.init = function () {
                 $rootScope.pagePath = $location.path();
+                $scope.apis = $.extend({},apis);
                 $scope.formData = {
                     alert_id: '',
                     alert_content: '',
@@ -66,7 +67,7 @@ angular.module('myappApp')
                 $scope.bindEvent();
                 $scope.selfValid();
                 $scope.getSiteOptions();
-                $scope.getAlertOptions();
+                // $scope.getAlertOptions();
             };
 
             /**
@@ -89,7 +90,9 @@ angular.module('myappApp')
              * 获取告警列表
              */
             $scope.getAlertOptions = function(){
+                $scope.apis.getAlertOptions = $.extend({},apis.getAlertOptions);
                 var config = $scope.apis.getAlertOptions;
+                config.url = $scope.apis.getAlertOptions.url + '?site_id=' + $scope.formData.site_id.site_id;
                 var fnSuccess = function (d) {
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.formData.alerts = data.data;
@@ -160,7 +163,7 @@ angular.module('myappApp')
             $scope.createWorkOrder = function (it) {
                 it.addClass('disabled');
                 var config = $scope.apis.createWorkOrder;
-                config.data.site_id = $scope.formData.site_id.site_id
+                config.data.site_id = $scope.formData.site_id.site_id;
                 config.data.site_name = $scope.formData.site_id.site_name;
                 config.data.alert_id = $scope.formData.alert_id.alert_id;
                 config.data.alert_content = $scope.formData.alert_id.alert_content;
@@ -235,23 +238,27 @@ angular.module('myappApp')
                             $scope.apply();
                             return false;
                         }
+                        $scope.getAlertOptions();
                     }
                     // 告警
                     if (type === 'alert_id' || type === 'all') {
                         $scope.validate.workOrder.alert_id = angular.extend({}, validDirtyObj);
-                        if (!$scope.formData.alert_id) {
-                            $scope.validate.workOrder.alert_id = angular.extend({}, validNotObj, {
-                                error: {
-                                    required: true,
-                                    format: false,
-                                    same: false
-                                }
-                            });
-                            $scope.formData.alert_content = '';
-                            $scope.apply();
-                            return false;
+                        // if (!$scope.formData.alert_id) {
+                        //     $scope.validate.workOrder.alert_id = angular.extend({}, validNotObj, {
+                        //         error: {
+                        //             required: true,
+                        //             format: false,
+                        //             same: false
+                        //         }
+                        //     });
+                        //     $scope.formData.alert_content = '';
+                        //     $scope.apply();
+                        //     return false;
+                        // }
+                        $scope.formData.alert_content = '';
+                        if($scope.formData.alert_id && $scope.formData.alert_id.alert_content){
+                            $scope.formData.alert_content = $scope.formData.alert_id.alert_content;
                         }
-                        $scope.formData.alert_content = $scope.formData.alert_id.alert_content;
                     }
                     // 工单标题
                     if (type === 'name' || type === 'all') {
@@ -310,20 +317,20 @@ angular.module('myappApp')
                         }
                     }
                     // 工单记录
-                    // if (type === 'content' || type === 'all') {
-                    //     $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
-                    //     if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
-                    //         $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
-                    //             error: {
-                    //                 required: false,
-                    //                 format: true,
-                    //                 same: false
-                    //             }
-                    //         });
-                    //         $scope.apply();
-                    //         return false;
-                    //     }
-                    // }
+                    if (type === 'content' || type === 'all') {
+                        $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
+                        // if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
+                        //     $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                        //         error: {
+                        //             required: false,
+                        //             format: true,
+                        //             same: false
+                        //         }
+                        //     });
+                        //     $scope.apply();
+                        //     return false;
+                        // }
+                    }
                 }
                 $scope.apply();
                 return true;

@@ -48,8 +48,8 @@
                                 <td colspan="9" ng-if="initData.getListError!=''">未找到结果</td>
                                 <td colspan="9" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
                             </tr>
-                            <tr ng-repeat="item in cache.listArr">
-                                <td><a ui-sref="main.workOrder.edit({id: item.id})">{{item.id}}</a></td>
+                            <tr ng-repeat="item in cache.listArr" role="button" ng-click="gotoDetails({id:item.id});">
+                                <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.editor}}</td>
                                 <td>{{item.creater}}</td>

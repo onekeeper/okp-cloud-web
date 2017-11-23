@@ -35,7 +35,7 @@ angular.module('myappApp')
                         {'id': '3', 'name': '存储'},{'id': '4', 'name': '虚拟化'},{'id': '5', 'name': '操作系统'},
                         {'id': '6', 'name': '中间件'}, {'id': '7', 'name': '数据库'}],
                     server_type_list: [{'id': '1', 'name': '配置变更'},{'id': '2', 'name': '故障处理'},
-                        {'id': '3', 'name': '性能优化'}]
+                        {'id': '3', 'name': '性能优化'},{'id': '4', 'name': '配件更换'}]
                 };
             };
 

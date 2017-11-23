@@ -10,6 +10,9 @@ angular.module('myappApp')
         function ($scope, $rootScope, $window, $location, $state, $stateParams,urlPrefix,AjaxServer,Validate,$sce) {
             'use strict';
 
+            var modal={
+                tips:''
+            };
             $scope.trans = { // 类型转换
                 worksheet_status_list: [
                     {'status': '1', 'name': '处理中'},
@@ -404,6 +407,7 @@ angular.module('myappApp')
                 $scope.modalTitle = '提示信息';
                 $scope.modalInfo = '确定升级该工单吗？';
                 $scope.init.actionType = 'update';
+                $scope.modal = $.extend({},modal);
                 angular.element('#J_workOrderConfirm').modal();
                 angular.element('#J_workOrderConfirm').draggable({
                     handle: ".modal-header",
@@ -419,7 +423,8 @@ angular.module('myappApp')
             $scope.updateWorkOrder = function (it) {
                 var config = $scope.apis.updateWorkOrder;
                 config.data.id = $stateParams.id;
-                config.data.content = $scope.formData.content;
+                config.data.content = $scope.modal.tips;
+                console.log(config.data);
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
@@ -440,6 +445,7 @@ angular.module('myappApp')
                 $scope.modalTitle = '指派工单';
                 $scope.init.actionType = 'assign';
                 $scope.selfValid();
+                $scope.modal = $.extend({},modal)
                 angular.element('#J_workOrderAssign').modal();
                 angular.element('#J_workOrderAssign').draggable({
                     handle: ".modal-header",
@@ -456,7 +462,7 @@ angular.module('myappApp')
                     var config = $scope.apis.assignWorkOrder;
                     config.data.id = $stateParams.id;
                     config.data.user_id = $scope.formData.assign_user;
-                    //todo
+                    config.data.content = $scope.modal.tips;
                     var fnSuccess = function (d) {
                         it.removeClass('disabled');
                         $("#J_workOrderAssign").modal('hide');
@@ -654,17 +660,17 @@ angular.module('myappApp')
                     // 工单记录
                     if (type === 'content' || type === 'all') {
                         $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
-                        if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
-                            $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
-                                error: {
-                                    required: false,
-                                    format: true,
-                                    same: false
-                                }
-                            });
-                            $scope.apply();
-                            return false;
-                        }
+                        // if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
+                        //     $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                        //         error: {
+                        //             required: false,
+                        //             format: true,
+                        //             same: false
+                        //         }
+                        //     });
+                        //     $scope.apply();
+                        //     return false;
+                        // }
                     }
                 }
                 $scope.apply();

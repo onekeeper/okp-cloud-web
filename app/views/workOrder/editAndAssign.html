@@ -45,7 +45,7 @@
                                     <label class="control-label pull-left">工单标题<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <input type="text" class="form-control input-sm" ng-model="formData.name"
-                                               placeholder="工单标题" ng-disabled="!formData.handling || !commonFlag"
+                                               placeholder="工单标题" ng-disabled="!commonFlag"
                                                ng-change="validateForm('name','workOrder');">
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.name.dirty && validate.workOrder.name.error.required">
@@ -66,7 +66,7 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">故障类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag"
+                                        <select class="form-control input-sm" ng-disabled="!commonFlag"
                                                 ng-options = "item.id as item.name for item in overrallData.problem_type_list"
                                                 ng-model="formData.problem_type"
                                                 ng-change="validateForm('problem_type','workOrder');">
@@ -88,7 +88,7 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">处理类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!formData.handling || !commonFlag"
+                                        <select class="form-control input-sm" ng-disabled="!commonFlag"
                                                 ng-options = "item.id as item.name for item in overrallData.server_type_list"
                                                 ng-model="formData.server_type"
                                                 ng-change="validateForm('server_type','workOrder');">
@@ -107,20 +107,20 @@
                                 </div>
                             </div>
                         </div>
-                        <hr ng-if="commonFlag && formData.handling">
-                        <div class="clearfix" ng-show="commonFlag && formData.handling">
+                        <hr ng-if="commonFlag">
+                        <div class="clearfix" ng-show="commonFlag">
                             <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
                                         <textarea class="form-control input-sm" cols="" rows="4"
                                                   ng-model="formData.content"
-                                                  ng-disabled="!formData.handling || !commonFlag"
+                                                  ng-disabled="!commonFlag"
                                                   placeholder="填写工单处理记录"
                                                   ng-change="validateForm('content','workOrder');"></textarea>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.content.dirty && validate.workOrder.content.error.format">
-                                                详细地址不超过1024个字符,中文不能超过512个字
+                                                详细内容不超过1024个字符,中文不能超过512个字
                                             </span>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                         </div>
                                         <input type="file" id="J_uploadFile_edit" style="display: none;">
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
-                                                ng-disabled="!formData.handling || !commonFlag">附件上传
+                                                ng-disabled="!commonFlag">附件上传
                                         </button>
                                         <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
                                     </div>
@@ -154,8 +154,8 @@
                         </div>
                         <hr>
                         <div class="clearfix form-group text-center">
-                            <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)" ng-if="commonFlag && formData.handling" style="width: 120px;">保存</button>
-                            <button class="btn btn-orange btn-inline" ng-click="cancel()" ng-if="commonFlag && formData.handling" style="width: 120px;">取消</button>
+                            <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)" ng-if="commonFlag" style="width: 120px;">保存</button>
+                            <button class="btn btn-orange btn-inline" ng-click="cancel()" ng-if="commonFlag" style="width: 120px;">取消</button>
                         </div>
                         <div>
                             <ul class="nav nav-tabs">
@@ -194,7 +194,7 @@
 
 <!--关闭工单确认-->
 <div id="J_workOrderConfirm" modal-directive>
-    <div ng-include="'views/public/confirmModal.html'"></div>
+    <div ng-include="'views/workOrder/confirmModal.html'"></div>
 </div>
 
 <!--指派工单-->

@@ -10,6 +10,9 @@ angular.module('myappApp')
         function ($scope, $rootScope, $window, $location, $state, urlPrefix, AjaxServer) {
             'use strict';
 
+            var modal = {
+                tips: ''
+            };
             $scope.pager = {};
             $scope.initData = {
                 getListError: '',
@@ -123,6 +126,7 @@ angular.module('myappApp')
             $scope.clickSendBack = function(item){
                 $scope.modalTitle = '提示信息';
                 $scope.modalInfo = '确定退回此工单吗？';
+                $scope.modal = $.extend({},modal);
                 angular.element('#J_workOrderSendBackConfirm').modal();
                 angular.element('#J_workOrderSendBackConfirm').draggable({
                     handle: ".modal-header",
@@ -152,6 +156,7 @@ angular.module('myappApp')
                 var config = $scope.apis.sendBackWorkOrder;
                 config.data.id = $scope.initData.curRecord.id;
                 config.data.user_id = $scope.initData.curRecord.editor;//要退回的目标（占时只有名称，接口中需要id）
+                config.data.content = $scope.modal.tips;
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
                     $('#J_workOrderSendBackConfirm').modal('hide');

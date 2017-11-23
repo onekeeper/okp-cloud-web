@@ -35,28 +35,23 @@
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <p>告警基本信息：</p>
                                 <div class="col-lg-offset-2">
-                                    <label class="control-label pull-left">告警编号<span class="sign-must">*</span>：</label>
+                                    <label class="control-label pull-left">告警内容：</label>
                                     <div class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.alert_id"
-                                                ng-options = "item as item.alert_id for item in formData.alerts"
+                                                ng-options = "item as item.alert_content for item in formData.alerts"
                                                 ng-change="validateForm('alert_id','workOrder');">
                                             <option value="">请选择待处理告警</option>
                                         </select>
-                                        <div class="validate-container">
-                                            <span ng-if="validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.error.required">
-                                                告警编号不能为空
-                                            </span>
-                                        </div>
                                     </div>
                                     <div class="col-lg-1">
                                         <i class="valid-error" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.invalid"></i>
                                         <i class="valid-success" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.valid"></i>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <label class="control-label pull-left">告警内容：</label>
-                                    <div class="pdl32 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label class="control-label pull-left">告警编号：</label>
+                                    <div class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <span ng-if="formData.alert_id.length != 0">
-                                            {{formData.alert_content}}
+                                            {{formData.alert_id.alert_id}}
                                         </span>
                                     </div>
                                 </div>
@@ -112,9 +107,9 @@
                                     <label class="control-label pull-left">处理类型<span class="sign-must">*</span>：</label>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <select class="form-control input-sm" ng-model="formData.server_type"
+                                                    ng-init="formData.server_type='2'"
                                                     ng-options = "item.id as item.name for item in overrallData.server_type_list"
                                                     ng-change="validateForm('server_type','workOrder');">
-                                                <option value="">请选择处理类型</option>
                                             </select>
                                             <div class="validate-container">
                                                 <span ng-if="validate.workOrder.server_type.dirty && validate.workOrder.server_type.error.required">
@@ -139,7 +134,7 @@
                                                   ng-change="validateForm('content','workOrder');"></textarea>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.content.dirty && validate.workOrder.content.error.format">
-                                                详细地址不超过1024个字符,中文不能超过512个字
+                                                详细内容不超过1024个字符,中文不能超过512个字
                                             </span>
                                         </div>
                                     </div>

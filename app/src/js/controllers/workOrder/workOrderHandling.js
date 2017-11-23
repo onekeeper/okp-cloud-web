@@ -84,6 +84,10 @@ angular.module('myappApp')
                     $scope.cache.listArr = data.data;
                     $scope.pager.total = data.data.total;
                     $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
+                    for(var x in $scope.cache.listArr){
+                        $scope.cache.listArr[x].duration = $scope.minToDHM($scope.cache.listArr[x].duration);
+                        $scope.cache.listArr[x].idle = $scope.minToDHM($scope.cache.listArr[x].idle);
+                    }
                     $scope.apply();
                 };
                 var fnError = function (data) {
@@ -108,6 +112,27 @@ angular.module('myappApp')
             $scope.cleanParameter = function(){
                 $scope.query.queryValue = '';
                 $scope.apply();
+            };
+            /*
+             * 跳转到详情
+             */
+            $scope.gotoDetails = function(obj){
+                $state.go('main.workOrder.edit',obj);
+            };
+            /*
+             * 分钟转天时分
+             */
+            $scope.minToDHM = function(d){
+                var days = Math.floor(d / 1440);
+                var hours = Math.floor(d % 1440 / 60);
+                var mins = d % 1440 % 60;
+                if(!days && !hours){
+                    return mins + '分钟';
+                }else if(!days){
+                    return hours + '小时' + mins + '分钟';
+                }else {
+                    return days + '天' + hours + '小时' + mins + '分钟';
+                }
             };
 
             $scope.apply = function() {
