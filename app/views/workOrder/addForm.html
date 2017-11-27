@@ -17,7 +17,7 @@
                                     <div class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.site_id"
                                                 ng-options = "item as item.site_name for item in formData.sites"
-                                                ng-change="validateForm('site_id','workOrder');">
+                                                ng-change="validateForm('site_id','workOrder');getAlertOptions();">
                                             <option value="">请选择站点</option>
                                         </select>
                                         <div class="validate-container">
@@ -151,7 +151,7 @@
                                             <div ng-repeat="item in formData.source" class="file-img-div">
                                                 <img class="file-img"/>
                                                 <div class="del-file" ng-click="deleteFile(item);"></div>
-                                                <span>{{item}}</span>
+                                                <span>{{item.name}}</span>
                                             </div>
                                         </div>
                                         <div id="J_fileInputContainer" style="display:none;">

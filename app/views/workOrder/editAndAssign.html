@@ -144,7 +144,7 @@
                                         </div>
                                         <input type="file" id="J_uploadFile_edit" style="display: none;">
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
-                                                ng-disabled="!commonFlag">附件上传
+                                                ng-disabled="!(formData.handling || formData.updating)">附件上传
                                         </button>
                                         <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
                                     </div>
@@ -154,8 +154,10 @@
                         </div>
                         <hr>
                         <div class="clearfix form-group text-center">
-                            <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)" ng-if="commonFlag" style="width: 120px;">保存</button>
-                            <button class="btn btn-orange btn-inline" ng-click="cancel()" ng-if="commonFlag" style="width: 120px;">取消</button>
+                            <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)"
+                                    ng-if="formData.handling || formData.updating" style="width: 120px;">保存</button>
+                            <button class="btn btn-orange btn-inline" ng-click="cancel()"
+                                    ng-if="formData.handling || formData.updating" style="width: 120px;">取消</button>
                         </div>
                         <div>
                             <ul class="nav nav-tabs">

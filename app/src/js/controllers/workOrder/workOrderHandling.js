@@ -82,8 +82,8 @@ angular.module('myappApp')
                     $scope.initData.loading = false;
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.cache.listArr = data.data;
-                    $scope.pager.total = data.data.total;
-                    $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
+                    $scope.pager.total = data.total;
+                    $scope.pager.totalPage = Math.ceil( data.total / parseInt($scope.pager.pageSize) );
                     for(var x in $scope.cache.listArr){
                         $scope.cache.listArr[x].duration = $scope.minToDHM($scope.cache.listArr[x].duration);
                         $scope.cache.listArr[x].idle = $scope.minToDHM($scope.cache.listArr[x].idle);

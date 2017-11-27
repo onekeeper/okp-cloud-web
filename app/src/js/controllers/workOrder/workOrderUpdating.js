@@ -92,12 +92,16 @@ angular.module('myappApp')
                     $scope.initData.loading = false;
                     var data = typeof(d) === 'string' ? JSON.parse(d) : d;
                     $scope.cache.listArr = data.data;
-                    $scope.pager.total = data.data.total;
-                    $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
+                    $scope.pager.total = data.total;
+                    $scope.pager.totalPage = Math.ceil( data.total / parseInt($scope.pager.pageSize) );
+                    for(var x in $scope.cache.listArr){
+                        $scope.cache.listArr[x].update_at = justifyTime($scope.cache.listArr[x].update_at);
+                        $scope.cache.listArr[x].create_at = justifyTime($scope.cache.listArr[x].create_at);
+                    }
                     $scope.apply();
                 };
                 var fnError = function (data) {
-                    $scope.initData.getListError = data.errMsg || '网络问题，请刷新页面重试';
+                    $scope.initData.getListError = data.errorMsg || '网络问题，请刷新页面重试';
                     $scope.initData.loading = false;
                     $scope.infoDetail = data.message || '网络问题，请刷新页面重试';
                 };
@@ -164,7 +168,7 @@ angular.module('myappApp')
                 };
                 var fnFail = function (data) {
                     it.removeClass('disabled');
-                    $scope.errMsg = data.message;
+                    $scope.errorMsg = data.message;
                     console.log(data.message);
                 };
                 AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
@@ -176,4 +180,17 @@ angular.module('myappApp')
                     $scope.$apply();
                 }
             };
+
+            function justifyTime(preTime) {
+                var preMS = Date.parse(new Date(preTime));
+                var nowMS = preMS + 8 * 60 * 60 * 1000;
+                var d = new Date(nowMS);
+                var nowTime = d.getFullYear()+'-'+
+                    (d.getMonth()<9?('0'+(d.getMonth()+1)):(d.getMonth()+1))+'-'+
+                    (d.getDate()<10?('0'+d.getDate()):d.getDate())+' '+
+                    (d.getHours()<10?('0'+d.getHours()):d.getHours())+':'+
+                    (d.getMinutes()<10?('0'+d.getMinutes()):d.getMinutes())+':'+
+                    (d.getSeconds()<10?('0'+d.getSeconds()):d.getSeconds());
+                return nowTime;
+            }
     }]);
