@@ -49,10 +49,10 @@
                                 <td colspan="9" ng-if="cache.listArr=='' && initData.getListError==''">未找到结果</td>
                             </tr>
                             <tr ng-repeat="item in cache.listArr">
-                                <td>{{item.editor}}</td>
+                                <td>{{item.editor_name}}</td>
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
-                                <td>{{item.creater}}</td>
+                                <td>{{item.creater_name}}</td>
                                 <td ng-switch="item.server_type">
                                     <span ng-switch-when="1">配置变更</span>
                                     <span ng-switch-when="2">故障处理</span>

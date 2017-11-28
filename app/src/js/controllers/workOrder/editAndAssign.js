@@ -725,17 +725,19 @@ angular.module('myappApp')
                     // 工单记录
                     if (type === 'content' || type === 'all') {
                         $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
-                        // if (!Validate.validLength($scope.formData.content,{maxLen:1024})) {
-                        //     $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
-                        //         error: {
-                        //             required: false,
-                        //             format: true,
-                        //             same: false
-                        //         }
-                        //     });
-                        //     $scope.apply();
-                        //     return false;
-                        // }
+                        if($scope.formData.content) {
+                            if (!Validate.validLength($scope.formData.content, {maxLen: 1024})) {
+                                $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                                    error: {
+                                        required: false,
+                                        format: true,
+                                        same: false
+                                    }
+                                });
+                                $scope.apply();
+                                return false;
+                            }
+                        }
                     }
                 }
                 $scope.apply();

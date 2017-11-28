@@ -1,6 +1,3 @@
 <div class="text-center fs14 pd15">{{modalInfo}}</div>
-<label ng-if="init.actionType != 'close'" class="control-label">备注</label>
-<label ng-if="init.actionType == 'close'" class="control-label">cost</label>
-<textarea ng-if="init.actionType != 'close'"  class="form-control input-sm" cols="" rows="4"
-           ng-model="modal.tips"></textarea>
-<input ng-if="init.actionType == 'close'" type="text" class="form-control input-sm" ng-model="modal.tips"/>
+<label class="control-label">备注</label>
+<textarea  class="form-control input-sm" cols="" rows="4" ng-model="modal.tips"></textarea>

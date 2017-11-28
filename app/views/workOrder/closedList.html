@@ -50,9 +50,9 @@
                             </tr>
                             <tr ng-repeat="item in cache.listArr" role="button" ng-click="gotoDetails({id:item.id});">
                                 <td>{{item.id}}</td>
+                                <td>{{item.site_name}}</td>
                                 <td>{{item.name}}</td>
-                                <td>{{item.editor}}</td>
-                                <td>{{item.creater}}</td>
+                                <td>{{item.creater_name}}</td>
                                 <td ng-switch="item.server_type">
                                     <span ng-switch-when="1">配置变更</span>
                                     <span ng-switch-when="2">故障处理</span>
