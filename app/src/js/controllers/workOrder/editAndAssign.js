@@ -105,7 +105,7 @@ angular.module('myappApp')
                     method: 'post',
                     data:　{
                         id: '',
-                        cost: ''
+                        content: ''
                     }
                 },
                 delteWorkOrderFile:{//删除附件
@@ -151,6 +151,7 @@ angular.module('myappApp')
                 $scope.source = [];
                 $scope.tab = {status: true};
                 $scope.init = {actionType: ''};
+                $scope.modal = $.extend({},modal);
                 $scope.files = $.extend([],files);
                 $scope.getEditInfo($stateParams.id);
                 $scope.getNoteList($stateParams.id);
@@ -589,7 +590,7 @@ angular.module('myappApp')
             $scope.closeWorkOrder = function (it) {
                 var config = $scope.apis.closeWorkOrder;
                 config.data.id = $stateParams.id;
-                config.data.cost = null; //待指定
+                config.data.content = $scope.modal.tips; //待指定
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
                     $('#J_workOrderConfirm').modal('hide');
