@@ -152,11 +152,13 @@ angular.module('myappApp')
                     }
                 }
             };
-
+            var ue = null;
             /*
              * 初始化
              */
             $scope.init = function () {
+                UE.delEditor('container');
+                UE.delEditor('container_add');
                 $rootScope.pagePath = $location.path();
                 $scope.formData = {
                     alert_id: '',
@@ -182,6 +184,16 @@ angular.module('myappApp')
                 $scope.init = {actionType: ''};
                 $scope.modal = $.extend({},modal);
                 $scope.files = [];
+                ue = UE.getEditor('container',{
+                    toolbars: [
+                        ['bold','italic','underline','fontsize','forecolor','backcolor','justifyleft','justifyright','justifycenter','justifyjustify','source','link','unlink']
+                    ],
+                    initialFrameHeight : 150,
+                    maximumWords: 1024,
+                    scaleEnabled: true,
+                    initialFrameWidth: 500,
+                    minFrameWidth: 500
+                });
                 $scope.getEditInfo($stateParams.id);
                 $scope.getNoteList($stateParams.id);
                 $scope.getRecordList($stateParams.id);
@@ -191,19 +203,6 @@ angular.module('myappApp')
                 if($scope.commonFlag == false){
                     $scope.getAssignUser($stateParams.id);
                 }
-                // $('#summernote').summernote({
-                //     toolbar: [
-                //         ['font', ['bold', 'underline']],
-                //         ['color', ['color']],
-                //         ['para', ['paragraph']],
-                //         ['insert', ['link']],
-                //         ['view', [ 'codeview']]
-                //     ],
-                //     placeholder: '填写工单处理记录',
-                //     height: 150,
-                //     minHeight: 150,
-                //     maxHeight: 150
-                // });
                 $scope.initData.loading = false;
             };
 
@@ -429,7 +428,7 @@ angular.module('myappApp')
                 config.data.name = $scope.formData.name;
                 config.data.problem_type = $scope.formData.problem_type;
                 config.data.server_type = $scope.formData.server_type;
-                config.data.content = $scope.formData.content;
+                config.data.content = ue.getContent();
                 config.data.source = $scope.source;
                 var fnSuccess = function (d) {
                     it.removeClass('disabled');
@@ -764,22 +763,22 @@ angular.module('myappApp')
                         }
                     }
                     // 工单记录
-                    if (type === 'content' || type === 'all') {
-                        $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
-                        if($scope.formData.content) {
-                            if (!Validate.validLength($scope.formData.content, {maxLen: 1024})) {
-                                $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
-                                    error: {
-                                        required: false,
-                                        format: true,
-                                        same: false
-                                    }
-                                });
-                                $scope.apply();
-                                return false;
-                            }
-                        }
-                    }
+                    // if (type === 'content' || type === 'all') {
+                    //     $scope.validate.workOrder.content = angular.extend({}, validDirtyObj);
+                    //     if($scope.formData.content) {
+                    //         if (!Validate.validLength($scope.formData.content, {maxLen: 1024})) {
+                    //             $scope.validate.workOrder.content = angular.extend({}, validNotObj, {
+                    //                 error: {
+                    //                     required: false,
+                    //                     format: true,
+                    //                     same: false
+                    //                 }
+                    //             });
+                    //             $scope.apply();
+                    //             return false;
+                    //         }
+                    //     }
+                    // }
                 }
                 $scope.apply();
                 return true;

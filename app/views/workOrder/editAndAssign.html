@@ -121,16 +121,7 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
-                                        <!--<div id="summernote"-->
-                                             <!--ng-model="formData.content"-->
-                                             <!--ng-disabled="!commonFlag || !(formData.handling || formData.updating)"-->
-                                             <!--ng-change="validateForm('content','workOrder');"></div>-->
-                                        <textarea class="form-control input-sm" cols="" rows="4"
-                                                  style="overflow-y: auto;resize: none;"
-                                                  ng-model="formData.content"
-                                                  ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
-                                                  placeholder="填写工单处理记录"
-                                                  ng-change="validateForm('content','workOrder');"></textarea>
+                                        <script id="container" name="content" type="text/plain"></script>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.content.dirty && validate.workOrder.content.error.format">
                                                 详细内容不超过1024个字符,中文不能超过512个字

@@ -6,8 +6,8 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-    .controller('WorkOrderAddCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer','Validate',
-        function ($scope, $rootScope, $window, $location, $state,urlPrefix, AjaxServer, Validate) {
+    .controller('WorkOrderAddCtrl', ['$scope', '$rootScope', '$window', '$location','$stateParams', '$state','urlPrefix','AjaxServer','Validate',
+        function ($scope, $rootScope, $window, $location,$stateParams, $state,urlPrefix, AjaxServer, Validate) {
             'use strict';
 
             var apis = {
@@ -49,10 +49,13 @@ angular.module('myappApp')
                 getListError: '',
                 loading: true
             };
+            var ue = null;
             /*
              * 初始化
              */
             $scope.init = function () {
+                UE.delEditor('container');
+                UE.delEditor('container_add');
                 $rootScope.pagePath = $location.path();
                 $scope.apis = $.extend({},apis);
                 $scope.formData = {
@@ -61,7 +64,10 @@ angular.module('myappApp')
                         alert_content: ''
                     },
                     alert_content: '',
-                    site_id: '',
+                    site_id: {
+                        site_id: '',
+                        site_name: ''
+                    },
                     site_name: '',
                     name: '',
                     problem_type: '',
@@ -73,11 +79,29 @@ angular.module('myappApp')
                 };
                 $scope.source = [];
                 $scope.files = [];
+                $scope.flag = true;
+                ue = UE.getEditor('container_add',{
+                    toolbars: [
+                        ['bold','italic','underline','fontsize','forecolor','backcolor','justifyleft','justifyright','justifycenter','justifyjustify','source','link','unlink']
+                    ],
+                    initialFrameHeight : 150,
+                    maximumWords: 1024,
+                    scaleEnabled: true,
+                    initialFrameWidth: 500,
+                    minFrameWidth: 500
+                });
                 $scope.bindEvent();
                 $scope.selfValid();
-                $scope.getSiteOptions();
-                // $scope.getAlertOptions();
                 $scope.initData.loading = false;
+                if($stateParams.alert_id){
+                    $scope.formData.site_id.site_id = $stateParams.site_id;
+                    $scope.formData.site_id.site_name = $stateParams.site_name;
+                    $scope.formData.alert_id.alert_id = $stateParams.alert_id;
+                    $scope.formData.alert_id.alert_content = $stateParams.alert_content;
+                    $scope.flag = false;
+                }else {
+                    $scope.getSiteOptions();
+                }
             };
 
             /**
@@ -87,12 +111,17 @@ angular.module('myappApp')
                 var config = $scope.apis.getSiteOptions;
                 var fnSuccess = function (d) {
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
-                    $scope.formData.sites = data.data;
+                    for(var x in data.data) {
+                        $scope.formData.sites.push(data.data[x]);
+                    }
                     $scope.apply();
                 };
                 var fnFail = function (data) {
 
                 };
+                if(!$stateParams.alert_id){
+
+                }
                 AjaxServer.ajaxInfo(config, fnSuccess ,fnFail);
             };
 
@@ -100,6 +129,10 @@ angular.module('myappApp')
              * 获取告警列表
              */
             $scope.getAlertOptions = function(){
+                if(!$scope.formData.site_id){
+                    $scope.formData.alerts = [];
+                    return false;
+                }
                 $scope.initData.loading = true;
                 $scope.apis.getAlertOptions = $.extend({},apis.getAlertOptions);
                 var config = $scope.apis.getAlertOptions;
@@ -184,7 +217,7 @@ angular.module('myappApp')
                 config.data.name = $scope.formData.name;
                 config.data.problem_type = $scope.formData.problem_type;
                 config.data.server_type = $scope.formData.server_type;
-                config.data.content = $scope.formData.content;
+                config.data.content = ue.getContent();
                 config.data.source = $scope.source;
                 AjaxServer.ajaxInfo(config, function (d) {
                     it.removeClass('disabled');
@@ -282,18 +315,20 @@ angular.module('myappApp')
                 // 表单
                 if(whichForm === 'workOrder') {
                     // 站点
-                    if (type === 'site_id' || type === 'all') {
-                        $scope.validate.workOrder.site_id = angular.extend({}, validDirtyObj);
-                        if (!$scope.formData.site_id) {
-                            $scope.validate.workOrder.site_id = angular.extend({}, validNotObj, {
-                                error: {
-                                    required: true,
-                                    format: false,
-                                    same: false
-                                }
-                            });
-                            $scope.apply();
-                            return false;
+                    if(!$stateParams.alert_id) {
+                        if (type === 'site_id' || type === 'all') {
+                            $scope.validate.workOrder.site_id = angular.extend({}, validDirtyObj);
+                            if (!$scope.formData.site_id) {
+                                $scope.validate.workOrder.site_id = angular.extend({}, validNotObj, {
+                                    error: {
+                                        required: true,
+                                        format: false,
+                                        same: false
+                                    }
+                                });
+                                $scope.apply();
+                                return false;
+                            }
                         }
                     }
                     // 告警

@@ -19,7 +19,7 @@
                                 <p>站点基本信息：</p>
                                 <div class="col-lg-offset-2">
                                     <label class="control-label pull-left">站点名<span class="sign-must">*</span>：</label>
-                                    <div class="col-lg-6 pdl20">
+                                    <div ng-if="flag" class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.site_id"
                                                 ng-options = "item as item.site_name for item in formData.sites"
                                                 ng-change="validateForm('site_id','workOrder');getAlertOptions();">
@@ -31,6 +31,10 @@
                                             </span>
                                         </div>
                                     </div>
+                                    <div ng-if="!flag" class="col-lg-6 pdl20">
+                                        <input class="form-control input-sm" type="text" ng-model="formData.site_id.site_name"
+                                               disabled>
+                                    </div>
                                     <div class="col-lg-1">
                                         <i class="valid-error" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.invalid"></i>
                                         <i class="valid-success" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.valid"></i>
@@ -41,12 +45,18 @@
                                 <p>告警基本信息：</p>
                                 <div class="col-lg-offset-2">
                                     <label class="control-label pull-left">告警内容：</label>
-                                    <div class="col-lg-6 pdl20">
+                                    <div ng-if="flag" class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.alert_id"
                                                 ng-options = "item as item.alert_content for item in formData.alerts"
-                                                ng-change="validateForm('alert_id','workOrder');">
+                                                ng-change="validateForm('alert_id','workOrder');"
+                                                ng-disabled="!formData.site_id">
                                             <option value="">请选择待处理告警</option>
                                         </select>
+                                    </div>
+                                    <div ng-if="!flag" class="col-lg-6 pdl20">
+                                        <input class="form-control input-sm" type="text"
+                                               ng-model="formData.alert_id.alert_content"
+                                               disabled>
                                     </div>
                                     <div class="col-lg-1">
                                         <i class="valid-error" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.invalid"></i>
@@ -54,13 +64,17 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <label class="control-label pull-left">告警编号：</label>
-                                    <div class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div ng-if="flag" class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                         <span ng-if="formData.alert_id.length != 0">
                                             {{formData.alert_id.alert_id}}
                                         </span>
                                     </div>
+                                    <div ng-if="!flag" class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <span>
+                                            {{formData.alert_id.alert_id}}
+                                        </span>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                         <hr>
@@ -135,9 +149,7 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
-                                        <textarea class="form-control input-sm" cols="" rows="4" ng-model="formData.content" placeholder="填写工单处理记录"
-                                                  style="overflow-y: auto;resize: none;"
-                                                  ng-change="validateForm('content','workOrder');"></textarea>
+                                        <script id="container_add" name="content" type="text/plain"></script>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.content.dirty && validate.workOrder.content.error.format">
                                                 详细内容不超过1024个字符,中文不能超过512个字

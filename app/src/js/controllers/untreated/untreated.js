@@ -43,11 +43,16 @@
         statusList: []
     };
 
+    $scope.init = {
+        actionType: ''
+    };
+
     /*
     *初始化
     */
     $scope.init = function(){
         $rootScope.pagePath = $location.path();
+        $scope.currentObj = {};
         $scope.saveTime = {};
         $scope.queryInfo = {};
         $scope.queryInfo.keyWords = '';
@@ -164,8 +169,6 @@
      * 点击告警状态跳转到创建工单页面
      */
     $scope.gotoCreate = function(item){
-        // $state.go('main.workOrder.add');
-        console.log(item);
         var ajaxConfig = {
             method: 'get',
             url: urlPrefix + '/worksheet/create',
@@ -174,25 +177,23 @@
             }
         };
         AjaxServer.ajaxInfo(ajaxConfig, function (d) {
-            console.log(d);
-            var tips = '';
+            $scope.currentObj = item;
             if(d.data == false){
-                tips = '确定要创建工单吗？';
-                $scope.showModal(tips);
+                $scope.showCreateModal();
             }else{
-                tips = '工单已存在。';
-                $scope.showModal(tips);
+                $scope.showExistModal();
             }
         }, function(d){
             console.log(d);
         })
     };
     /*
-     * 显示弹窗
+     * 显示创建弹窗
      */
-    $scope.showModal = function (tips) {
+    $scope.showCreateModal = function () {
         $scope.modalTitle = '提示信息';
-        $scope.modalInfo = tips;
+        $scope.modalInfo = '确定要创建工单吗？';
+        $scope.init.actionType = 'create';
         angular.element('#J_createConfirm').modal();
         angular.element('#J_createConfirm').draggable({
             handle: ".modal-header",
@@ -200,6 +201,38 @@
             refreshPositions: false
         });
         $scope.apply();
+    };
+         /*
+          * 显示已存在弹窗
+          */
+         $scope.showExistModal = function () {
+             $scope.modalTitle = '提示信息';
+             $scope.modalInfo = '工单已存在。';
+             $scope.init.actionType = 'existed';
+             angular.element('#J_existConfirm').modal();
+             angular.element('#J_existConfirm').draggable({
+                 handle: ".modal-header",
+                 cursor: 'move',
+                 refreshPositions: false
+             });
+             $scope.apply();
+         };
+    $scope.clickOk = function(ev){
+        var type = $scope.init.actionType;
+        switch(type){
+            case 'create':
+                $('#J_createConfirm').modal('hide');
+                setTimeout(function(){$state.go('main.workOrder.add',{
+                    alert_id: $scope.currentObj.alert_id,
+                    alert_content: $scope.currentObj.content,
+                    site_id: $scope.currentObj.site_id,
+                    site_name: $scope.currentObj.site_name
+                })},500);
+                break;
+            case 'existed':
+                $('#J_existConfirm').modal('hide');
+                break;
+        }
     };
 
     /*

@@ -110,7 +110,7 @@ angular.module('myappApp', [
             controller: "WorkOrderClosedCtrl"
         })
         .state("main.workOrder.add", {
-            url: "/addForm",
+            url: "/addForm?alert_id&alert_content&site_id&site_name",
             templateUrl: "views/workOrder/addForm.html",
             controller: "WorkOrderAddCtrl"
         })
