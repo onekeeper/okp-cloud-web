@@ -176,7 +176,7 @@
         AjaxServer.ajaxInfo(ajaxConfig, function (d) {
             console.log(d);
             var tips = '';
-            if(d.data ==true){
+            if(d.data == false){
                 tips = '确定要创建工单吗？';
                 $scope.showModal(tips);
             }else{
