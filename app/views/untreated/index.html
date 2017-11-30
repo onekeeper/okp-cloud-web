@@ -51,7 +51,7 @@
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.severity == 1? '消息' : item.severity == 2 ? '一般' : item.severity == 4 ? '严重' : item.severity == 6 ? '一般，严重' : '消息，一般，严重'}}</td>
-                                    <td>{{item.status == 1 ? '已消除' : item.status == 2 ? '待处理' : '已消除，待处理' }}</td>
+                                    <td><a ng-click="gotoCreate(item)">{{item.status == 1 ? '已消除' : item.status == 2 ? '待处理' : '已消除，待处理'}}</a></td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
@@ -66,5 +66,8 @@
     </div>
     <div id="J_infoDetailUntreated" show-directive>
         <div ng-include="'views/public/infoDetail.html'"></div>
+    </div>
+    <div id="J_createConfirm" modal-directive>
+        <div ng-include="'views/public/confirmModal.html'"></div>
     </div>
 </div>

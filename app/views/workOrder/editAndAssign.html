@@ -13,13 +13,18 @@
         <div class="row box-all">
             <div class="col-lg-12 col-md-12 box-all box-pading">
                 <div class="ds-panel box-all panel-padding">
-                    <form class="form-horizontal clearfix">
+                    <div ng-show="initData.loading">
+                        <div class="tr-loading text-center">
+                            <div class="loading"></div>
+                        </div>
+                    </div>
+                    <form class="form-horizontal clearfix" ng-hide="initData.loading">
                         <div class="clearfix">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <p>站点基本信息：</p>
                                 <div class="col-lg-offset-2 clearfix">
-                                    <label class="control-label pull-left">站点ID：</label>
-                                    <label class="control-label value-label">{{formData.site_id}}</label>
+                                    <label class="control-label pull-left">站点SN：</label>
+                                    <label class="control-label value-label">{{formData.site_sn}}</label>
                                 </div>
                                 <div class="col-lg-offset-2 clearfix">
                                     <label class="control-label pull-left">站点名：</label>
@@ -45,7 +50,8 @@
                                     <label class="control-label pull-left">工单标题<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <input type="text" class="form-control input-sm" ng-model="formData.name"
-                                               placeholder="工单标题" ng-disabled="!commonFlag"
+                                               placeholder="工单标题"
+                                               ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                ng-change="validateForm('name','workOrder');">
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.name.dirty && validate.workOrder.name.error.required">
@@ -66,7 +72,8 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">故障类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!commonFlag"
+                                        <select class="form-control input-sm"
+                                                ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                 ng-options = "item.id as item.name for item in overrallData.problem_type_list"
                                                 ng-model="formData.problem_type"
                                                 ng-change="validateForm('problem_type','workOrder');">
@@ -88,7 +95,8 @@
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">处理类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select class="form-control input-sm" ng-disabled="!commonFlag"
+                                        <select class="form-control input-sm"
+                                                ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                 ng-options = "item.id as item.name for item in overrallData.server_type_list"
                                                 ng-model="formData.server_type"
                                                 ng-change="validateForm('server_type','workOrder');">
@@ -107,15 +115,20 @@
                                 </div>
                             </div>
                         </div>
-                        <hr ng-if="commonFlag">
-                        <div class="clearfix" ng-show="commonFlag">
+                        <hr>
+                        <div class="clearfix">
                             <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
+                                        <!--<div id="summernote"-->
+                                             <!--ng-model="formData.content"-->
+                                             <!--ng-disabled="!commonFlag || !(formData.handling || formData.updating)"-->
+                                             <!--ng-change="validateForm('content','workOrder');"></div>-->
                                         <textarea class="form-control input-sm" cols="" rows="4"
+                                                  style="overflow-y: auto;resize: none;"
                                                   ng-model="formData.content"
-                                                  ng-disabled="!commonFlag"
+                                                  ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                   placeholder="填写工单处理记录"
                                                   ng-change="validateForm('content','workOrder');"></textarea>
                                         <div class="validate-container">
@@ -133,31 +146,34 @@
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdl0">
-                                        <div id="thumbnail" class="clearfix" style="margin: 15px 0;">
-                                            <div ng-repeat="item in formData.source" class="file-img-div">
+                                        <div id="thumbnail" class="clearfix"
+                                             style="margin: 15px 0;width: 500px; max-Height: 120px;overflow-y:auto">
+                                            <div ng-repeat="item in formData.source" class="file-img-div"
+                                                 style="height: 120px;">
                                                 <img class="file-img"/>
                                                 <div class="del-file" ng-click="deleteFile(item);"></div>
-                                                <span>{{item.name}}</span>
+                                                <span style="word-wrap: break-word">{{item.name}}</span>
                                             </div>
                                         </div>
                                         <div id="J_fileInputEditContainer" style="display:none;">
                                         </div>
                                         <input type="file" id="J_uploadFile_edit" style="display: none;">
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
-                                                ng-disabled="!(formData.handling || formData.updating)">附件上传
+                                                ng-disabled="!commonFlag || !(formData.handling || formData.updating)">附件上传
                                         </button>
-                                        <span>上传仅支持：PDF,TXT,DOC,JEPG,JPG......</span>
+                                        <span>上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                         <hr>
+                        <p class="alert-danger text-center">{{errorMsg}}</p>
                         <div class="clearfix form-group text-center">
                             <button class="btn btn-gray btn-inline" ng-click="upLoadFileAndCommitForm($event)"
-                                    ng-if="formData.handling || formData.updating" style="width: 120px;">保存</button>
+                                    ng-if="commonFlag && (formData.handling || formData.updating)" style="width: 120px;">保存</button>
                             <button class="btn btn-orange btn-inline" ng-click="cancel()"
-                                    ng-if="formData.handling || formData.updating" style="width: 120px;">取消</button>
+                                    ng-if="commonFlag && (formData.handling || formData.updating)" style="width: 120px;">取消</button>
                         </div>
                         <div>
                             <ul class="nav nav-tabs">
@@ -170,7 +186,7 @@
                                         <div ng-repeat="item in infoList.noteList" class="clearfix" style="border-bottom: 1px solid #ccc">
                                             <div class="col-lg-6" style="padding: 8px 5px;color: #666;">{{item.user_name}}</div>
                                             <div class="col-lg-6" style="padding: 8px 5px;color: #666;">{{item.create_at}}</div>
-                                            <div class="col-lg-12" style="padding: 8px 5px;color: #666;">{{!item.text?'-':item.text}}</div>
+                                            <div class="col-lg-12" style="padding: 8px 5px;color: #666;" ng-bind-html="item.text"></div>
                                         </div>
                                     </div>
                                     <div ng-if="!tab.status">

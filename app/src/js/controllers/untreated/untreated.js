@@ -160,6 +160,47 @@
         });
         $scope.infoDetail = item.content;
     };
+    /*
+     * 点击告警状态跳转到创建工单页面
+     */
+    $scope.gotoCreate = function(item){
+        // $state.go('main.workOrder.add');
+        console.log(item);
+        var ajaxConfig = {
+            method: 'get',
+            url: urlPrefix + '/worksheet/create',
+            data: {
+                alert_id: item.alert_id
+            }
+        };
+        AjaxServer.ajaxInfo(ajaxConfig, function (d) {
+            console.log(d);
+            var tips = '';
+            if(d.data ==true){
+                tips = '确定要创建工单吗？';
+                $scope.showModal(tips);
+            }else{
+                tips = '工单已存在。';
+                $scope.showModal(tips);
+            }
+        }, function(d){
+            console.log(d);
+        })
+    };
+    /*
+     * 显示弹窗
+     */
+    $scope.showModal = function (tips) {
+        $scope.modalTitle = '提示信息';
+        $scope.modalInfo = tips;
+        angular.element('#J_createConfirm').modal();
+        angular.element('#J_createConfirm').draggable({
+            handle: ".modal-header",
+            cursor: 'move',
+            refreshPositions: false
+        });
+        $scope.apply();
+    };
 
     /*
     *日期减去8小时
