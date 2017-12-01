@@ -318,7 +318,7 @@ angular.module('myappApp')
                     if(!$stateParams.alert_id) {
                         if (type === 'site_id' || type === 'all') {
                             $scope.validate.workOrder.site_id = angular.extend({}, validDirtyObj);
-                            if (!$scope.formData.site_id) {
+                            if (!$scope.formData.site_id.site_id) {
                                 $scope.validate.workOrder.site_id = angular.extend({}, validNotObj, {
                                     error: {
                                         required: true,

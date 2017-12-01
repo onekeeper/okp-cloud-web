@@ -401,13 +401,25 @@ Mock.mock(/\/worksheet\/create/, 'post' ,function (options) {
 Mock.mock(/\/worksheet\/note/, 'get', {
     'code':1,
     'message':'success',
-    'data':{
+    'data':[{
+        'id':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':"<p style='color: red;'>123<i>sfsdf</i></p>"
+    },{
+        'id':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':"<p style='color: red;'>123<i>sfsdf</i></p>"
+    },{
         'id':'1',
         'user_id':'1',
         'user_name':'aaa',
         'create_at':'2017-10-18',
         'text':'thisaaaaaaa'
-    }
+    }]
 });
 /*
  * 查询操作记录
@@ -415,13 +427,28 @@ Mock.mock(/\/worksheet\/note/, 'get', {
 Mock.mock(/\/worksheet\/record/, 'get', {
     'code':1,
     'message':'success',
-    'data':{
+    'data':[{
         'id':'1',
         'order':'1',
         'user_id':'1',
         'user_name':'aaa',
         'create_at':'2017-10-18',
-        'text':'thisaaaaaaa'}
+        'text':'ZW00001<ENDLINE>'
+    },{
+        'id':'1',
+        'order':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':'ZW00001<ENDLINE>'
+    },{
+        'id':'1',
+        'order':'1',
+        'user_id':'1',
+        'user_name':'aaa',
+        'create_at':'2017-10-18',
+        'text':'ZW00001<ENDLINE>'
+    }]
 });
 /*
  * 修订工单（提交修改）

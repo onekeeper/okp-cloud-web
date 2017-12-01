@@ -1,7 +1,7 @@
 <div ng-init="init()">
     <div class="row top-container mgt14">
         <div class="col-lg-6 col-md-6 form-title">
-            <span>{{formData.title}}</span>工单信息
+            <p>{{formData.title}}<span>工单信息</span></p>
         </div>
         <div class="col-lg-6 col-md-6 text-right">
             <button ng-if="commonFlag && formData.handling" class="btn btn-primary btn-sm" ng-click="clickUpdateWorkOrder()">升级工单</button>
@@ -45,6 +45,16 @@
                         </div>
                         <hr>
                         <div class="clearfix">
+                            <div class="form-group clear-mrgb" style="height: 48px;">
+                                <div class="col-lg-offset-1">
+                                    <label class="control-label pull-left">
+                                        工单编号<span class="sign-must" style="visibility: hidden">*</span>：
+                                    </label>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="line-height: 30px;">
+                                        {{formData.id}}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单标题<span class="sign-must">*</span>：</label>
@@ -117,7 +127,7 @@
                         </div>
                         <hr>
                         <div class="clearfix">
-                            <div class="form-group clear-mrgb">
+                            <div ng-show="formData.handling || formData.updating" class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
                                     <label class="control-label pull-left">工单记录：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
@@ -150,9 +160,9 @@
                                         </div>
                                         <input type="file" id="J_uploadFile_edit" style="display: none;">
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
-                                                ng-disabled="!commonFlag || !(formData.handling || formData.updating)">附件上传
+                                                ng-show="formData.handling || formData.updating">附件上传
                                         </button>
-                                        <span>上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
+                                        <span ng-show="formData.handling || formData.updating">上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
                                     </div>
 
                                 </div>

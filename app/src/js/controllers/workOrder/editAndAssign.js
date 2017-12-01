@@ -177,7 +177,8 @@ angular.module('myappApp')
                     source: [],
                     sites: [],
                     alerts: [],
-                    usersList: []
+                    usersList: [],
+                    id:''
                 };
                 $scope.source = [];
                 $scope.tab = {status: true};
@@ -289,6 +290,7 @@ angular.module('myappApp')
                     var data = typeof(d)==='string' ? JSON.parse(d) : d;
                     $scope.formData = data.data;
                     var status = $scope.formData.status;
+                    $scope.formData.id = id;
                     switch(status){
                         case '1':
                             $scope.formData.title = '处理中的';
