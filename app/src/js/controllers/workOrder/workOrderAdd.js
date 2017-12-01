@@ -64,10 +64,7 @@ angular.module('myappApp')
                         alert_content: ''
                     },
                     alert_content: '',
-                    site_id: {
-                        site_id: '',
-                        site_name: ''
-                    },
+                    site_id: '',
                     site_name: '',
                     name: '',
                     problem_type: '',
