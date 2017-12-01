@@ -179,7 +179,12 @@
         AjaxServer.ajaxInfo(ajaxConfig, function (d) {
             $scope.currentObj = item;
             if(d.data == false){
-                $scope.showCreateModal();
+                setTimeout(function(){$state.go('main.workOrder.add',{
+                    alert_id: $scope.currentObj.alert_id,
+                    alert_content: $scope.currentObj.content,
+                    site_id: $scope.currentObj.site_id,
+                    site_name: $scope.currentObj.site_name
+                })},500);
             }else{
                 $scope.showExistModal();
             }
@@ -187,52 +192,29 @@
             console.log(d);
         })
     };
-    /*
-     * 显示创建弹窗
-     */
-    $scope.showCreateModal = function () {
-        $scope.modalTitle = '提示信息';
-        $scope.modalInfo = '确定要创建工单吗？';
-        $scope.init.actionType = 'create';
-        angular.element('#J_createConfirm').modal();
-        angular.element('#J_createConfirm').draggable({
-            handle: ".modal-header",
-            cursor: 'move',
-            refreshPositions: false
-        });
-        $scope.apply();
-    };
-         /*
-          * 显示已存在弹窗
-          */
-         $scope.showExistModal = function () {
-             $scope.modalTitle = '提示信息';
-             $scope.modalInfo = '工单已存在。';
-             $scope.init.actionType = 'existed';
-             angular.element('#J_existConfirm').modal();
-             angular.element('#J_existConfirm').draggable({
-                 handle: ".modal-header",
-                 cursor: 'move',
-                 refreshPositions: false
-             });
-             $scope.apply();
-         };
+     /*
+      * 显示已存在弹窗
+      */
+     $scope.showExistModal = function () {
+         $scope.modalTitle = '提示信息';
+         $scope.modalInfo = '工单已存在，是否创建工单？';
+         $scope.init.actionType = 'existed';
+         angular.element('#J_existConfirm').modal();
+         angular.element('#J_existConfirm').draggable({
+             handle: ".modal-header",
+             cursor: 'move',
+             refreshPositions: false
+         });
+         $scope.apply();
+     };
     $scope.clickOk = function(ev){
-        var type = $scope.init.actionType;
-        switch(type){
-            case 'create':
-                $('#J_createConfirm').modal('hide');
-                setTimeout(function(){$state.go('main.workOrder.add',{
-                    alert_id: $scope.currentObj.alert_id,
-                    alert_content: $scope.currentObj.content,
-                    site_id: $scope.currentObj.site_id,
-                    site_name: $scope.currentObj.site_name
-                })},500);
-                break;
-            case 'existed':
-                $('#J_existConfirm').modal('hide');
-                break;
-        }
+        $('#J_existConfirm').modal('hide');
+        setTimeout(function(){$state.go('main.workOrder.add',{
+            alert_id: $scope.currentObj.alert_id,
+            alert_content: $scope.currentObj.content,
+            site_id: $scope.currentObj.site_id,
+            site_name: $scope.currentObj.site_name
+        })},500);
     };
 
     /*
