@@ -49,7 +49,7 @@
                                         <select class="form-control input-sm" ng-model="formData.alert_id"
                                                 ng-options = "item as item.alert_content for item in formData.alerts"
                                                 ng-change="validateForm('alert_id','workOrder');"
-                                                ng-disabled="!formData.site_id">
+                                                ng-disabled="!formData.site_id.site_id">
                                             <option value="">请选择待处理告警</option>
                                         </select>
                                     </div>
