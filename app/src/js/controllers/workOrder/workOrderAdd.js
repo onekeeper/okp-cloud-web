@@ -154,7 +154,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input").length;
-                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input'>";
+                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input' accept='application/pdf,text/plain,application/msword,image/jpeg'>";
                 $("#J_fileInputContainer").append(content);
                 $('#J_workOrder_'+(curNo+1)).click();
             };
@@ -163,7 +163,7 @@ angular.module('myappApp')
              * 事件绑定
              */
             $scope.bindEvent = function () {
-                $('body').on('change','.j-file-input',function(event){
+                $('body').off('change').on('change','.j-file-input',function(event){
                     var inputArr = _getFileInputArr(),
                         fileName = null;
                     var file = event.target.files[0];

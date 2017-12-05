@@ -198,7 +198,7 @@ angular.module('myappApp')
                 $scope.getEditInfo($stateParams.id);
                 $scope.getNoteList($stateParams.id);
                 $scope.getRecordList($stateParams.id);
-                $scope.selectFile($stateParams.id)
+                $scope.selectFile($stateParams.id);
                 $scope.bindEvent();
                 $scope.selfValid();
                 if($scope.commonFlag == false){
@@ -212,7 +212,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input-edit").length;
-                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit'>";
+                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit' accept='application/pdf,text/plain,application/msword,image/jpeg'>";
                 $("#J_fileInputEditContainer").append(content);
                 $('#J_workOrderEdit_'+(curNo+1)).click();
             };
@@ -248,7 +248,7 @@ angular.module('myappApp')
              * 缩略图
              */
             $scope.bindEvent = function () {
-                $('body').on('change','.j-file-input-edit',function(event){
+                $('body').off('change').on('change','.j-file-input-edit',function(event){
                     var inputArr = _getFileInputArr(),
                         fileName = null;
                     var file = event.target.files[0];
