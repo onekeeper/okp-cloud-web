@@ -27,17 +27,18 @@ angular.module('myappApp')
                 "处理中": "ZW00011",
                 "升级中": "ZW00012",
                 "已关闭": "ZW00013",
-                "网络": "ZW00014",
-                "服务器": "ZW00015",
+                "其他": "ZW00014",
+                "网络": "ZW00015",
                 "存储": "ZW00016",
-                "虚拟化": "ZW00017",
-                "操作系统": "ZW00018",
-                "中间件": "ZW00019",
-                "数据库": "ZW00020",
-                "配置变更": "ZW00021",
+                "服务器": "ZW00017",
+                "中间件": "ZW00018",
+                "数据库": "ZW00019",
+                "操作系统": "ZW00020",
+                "硬件故障": "ZW00021",
                 "故障处理": "ZW00022",
-                "性能优化": "ZW00023",
-                "配件更换": "ZW00024"
+                "配置变更": "ZW00023",
+                "配件更换": "ZW00024",
+                "健康巡检": "ZW00025",
             };
             $scope.trans = { // 类型转换
                 worksheet_status_list: [
@@ -150,6 +151,13 @@ angular.module('myappApp')
                     data:{
 
                     }
+                },
+                download: {
+                    url: urlPrefix + '/worksheet/downloadfile',
+                    method: 'get',
+                    data: {
+
+                    }
                 }
             };
             var ue = null;
@@ -192,7 +200,7 @@ angular.module('myappApp')
                     initialFrameHeight : 150,
                     maximumWords: 1024,
                     scaleEnabled: true,
-                    initialFrameWidth: 500,
+                    initialFrameWidth: '100%',
                     minFrameWidth: 500
                 });
                 $scope.getEditInfo($stateParams.id);
@@ -212,7 +220,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input-edit").length;
-                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit' accept='application/pdf,text/plain,application/msword,image/jpeg'>";
+                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit' accept='application/pdf,text/plain,application/msword,image/jpeg,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
                 $("#J_fileInputEditContainer").append(content);
                 $('#J_workOrderEdit_'+(curNo+1)).click();
             };
@@ -259,6 +267,13 @@ angular.module('myappApp')
                     });
                     $scope.apply();
                 });
+                $('body').off('mouseover').on('mouseover','.file-img-div',function (event) {
+                    // console.log($('.file-img-div').index(this));
+                    $('.del-file')[$('.file-img-div').index(this)].style.visibility = 'visible'
+                })
+                $('body').off('mouseout').on('mouseout','.file-img-div',function (event) {
+                    $('.del-file')[$('.file-img-div').index(this)].style.visibility = 'hidden'
+                })
                 // $('#J_uploadFile_edit').on('change',function (ev) {
                 //     for (var i = 0; i < this.files.length; i++) {
                 //         var reader = new FileReader();
@@ -279,7 +294,6 @@ angular.module('myappApp')
                 //     }
                 // });
             };
-
             /*
              * 获取工单详情
              */
@@ -671,6 +685,21 @@ angular.module('myappApp')
                     AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
                 }
             };
+            /*
+             * 下载附件
+             */
+            $scope.downloadfile = function (ev) {
+                console.log(ev);
+                var ajaxConfig = {
+                    url: $scope.apis.download.url + '?id=' + ev.id,
+                    method: 'get'
+                };
+                AjaxServer.ajaxInfo(ajaxConfig, function (data) {
+                    console.log(data);
+                }, function (error) {
+                    $scope.errorMsg = error;
+                })
+            };
 
             /**
              * 信息切换
@@ -749,7 +778,7 @@ angular.module('myappApp')
                             return false;
                         }
                     }
-                    // 处理类型
+                    // 工单类型
                     if (type === 'server_type' || type === 'all') {
                         $scope.validate.workOrder.server_type = angular.extend({}, validDirtyObj);
                         if (!$scope.formData.server_type) {

@@ -80,18 +80,18 @@
                             </div>
                             <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left">故障类型<span class="sign-must">*</span>：</label>
+                                    <label class="control-label pull-left">事件类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <select class="form-control input-sm"
                                                 ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                 ng-options = "item.id as item.name for item in overrallData.problem_type_list"
                                                 ng-model="formData.problem_type"
                                                 ng-change="validateForm('problem_type','workOrder');">
-                                            <option value="">请选择故障类型</option>
+                                            <option value="">请选择事件类型</option>
                                         </select>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.problem_type.dirty && validate.workOrder.problem_type.error.required">
-                                                故障类型不能为空
+                                                事件类型不能为空
                                             </span>
                                         </div>
                                     </div>
@@ -103,18 +103,18 @@
                             </div>
                             <div class="form-group clear-mrgb">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left">处理类型<span class="sign-must">*</span>：</label>
+                                    <label class="control-label pull-left">工单类型<span class="sign-must">*</span>：</label>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <select class="form-control input-sm"
                                                 ng-disabled="!commonFlag || !(formData.handling || formData.updating)"
                                                 ng-options = "item.id as item.name for item in overrallData.server_type_list"
                                                 ng-model="formData.server_type"
                                                 ng-change="validateForm('server_type','workOrder');">
-                                            <option value="">请选择处理类型</option>
+                                            <option value="">请选择工单类型</option>
                                         </select>
                                         <div class="validate-container">
                                             <span ng-if="validate.workOrder.server_type.dirty && validate.workOrder.server_type.error.required">
-                                                处理类型不能为空
+                                                工单类型不能为空
                                             </span>
                                         </div>
                                     </div>
@@ -146,13 +146,15 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pdl0">
+                                    <label class="control-label pull-left" style="visibility: hidden;">工单记录：</label>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
                                         <div id="thumbnail" class="clearfix"
                                              style="margin: 15px 0;width: 500px; max-Height: 120px;overflow-y:auto">
                                             <div ng-repeat="item in formData.source" class="file-img-div"
                                                  style="height: 120px;">
                                                 <img class="file-img"/>
-                                                <div class="del-file" ng-click="deleteFile(item);"></div>
+                                                <i ng-if="!item.id" class="iconfont del-file" ng-click="deleteFile(item);">&#xe612;</i>
+                                                <i ng-if="item.id" class="iconfont del-file" ng-click="downloadfile(item)">&#xe678;</i>
                                                 <span style="word-wrap: break-word">{{item.name}}</span>
                                             </div>
                                         </div>

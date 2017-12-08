@@ -671,21 +671,20 @@ input.form-control{padding-left:4px;}
 }
 
 .file-img{
-    width: 60px; height: 60px; margin: 10px;
+    width: 80px; height: 80px;
+    border: 10px solid white;
+}
+.file-img:hover{
+    border: 10px solid whitesmoke;
 }
 
 .del-file{
-    position:absolute;
-    top:10px;
-    right:10px;
-    width:12px;
-    height:12px;
-    border:0;
-    cursor:pointer;
-}
-
-.del-file:hover{
-    border:1px solid #ddd;
-    background:url("../images/icons/delImg.png") no-repeat center center;
+    position: absolute;
+    font-size: 40px !important;
+    top: 12px;
+    left: 19px;
+    color: #cccccc;
+    visibility: hidden;
+    cursor: pointer;
 }
 

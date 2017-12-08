@@ -4,7 +4,7 @@
         <div class="col-lg-12 col-md-12 top-right pdl25">
             <form>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 input-custom">
-                    <input type="text" class="form-control" placeholder="请输入查询关键字（工单号/站点名称/工单标题/处理类型）" ng-model="query.queryValue" ng-keyup="queryAsKeyup($event)">
+                    <input type="text" class="form-control" placeholder="请输入查询关键字（工单号/站点名称/工单标题/工单类型）" ng-model="query.queryValue" ng-keyup="queryAsKeyup($event)">
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
                     <a role="button" class="btn btn-default btn-query fs12" ng-click="querySearch(true);">搜索</a>
@@ -31,8 +31,8 @@
                                 <th title="站点名称">站点名称</th>
                                 <th title="工单标题">标题</th>
                                 <th title="创建者">创建者</th>
-                                <th title="处理类型">处理类型</th>
-                                <th title="故障类型">故障类型</th>
+                                <th title="工单类型">工单类型</th>
+                                <th title="事件类型">事件类型</th>
                                 <th title="开始时间">开始时间</th>
                                 <th title="结束时间">结束时间</th>
                                 <th title="持续时间">持续时间</th>
@@ -54,20 +54,21 @@
                                 <td>{{item.name}}</td>
                                 <td>{{item.creater_name}}</td>
                                 <td ng-switch="item.server_type">
-                                    <span ng-switch-when="1">配置变更</span>
-                                    <span ng-switch-when="2">故障处理</span>
-                                    <span ng-switch-when="3">性能优化</span>
-                                    <span ng-switch-when="4">配件更换</span>
+                                    <span ng-switch-when="1">故障处理</span>
+                                    <span ng-switch-when="2">配置变更</span>
+                                    <span ng-switch-when="3">配件更换</span>
+                                    <span ng-switch-when="4">健康巡检</span>
                                     <span ng-switch-default>N/A</span>
                                 </td>
                                 <td ng-switch="item.problem_type">
-                                    <span ng-switch-when="1">网络</span>
-                                    <span ng-switch-when="2">服务器</span>
+                                    <span ng-switch-when="1">其他</span>
+                                    <span ng-switch-when="2">网络</span>
                                     <span ng-switch-when="3">存储</span>
-                                    <span ng-switch-when="4">虚拟化</span>
-                                    <span ng-switch-when="5">操作系统</span>
-                                    <span ng-switch-when="6">中间件</span>
-                                    <span ng-switch-when="7">数据库</span>
+                                    <span ng-switch-when="4">服务器</span>
+                                    <span ng-switch-when="5">中间件</span>
+                                    <span ng-switch-when="6">数据库</span>
+                                    <span ng-switch-when="7">操作系统</span>
+                                    <span ng-switch-when="8">硬件故障</span>
                                     <span ng-switch-default>N/A</span>
                                 </td>
                                 <td>{{item.create_at}}</td>

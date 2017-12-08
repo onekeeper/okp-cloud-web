@@ -87,7 +87,7 @@ angular.module('myappApp')
                     initialFrameHeight : 150,
                     maximumWords: 1024,
                     scaleEnabled: true,
-                    initialFrameWidth: 500,
+                    initialFrameWidth: '100%',
                     minFrameWidth: 500
                 });
                 $scope.bindEvent();
@@ -154,7 +154,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input").length;
-                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input' accept='application/pdf,text/plain,application/msword,image/jpeg'>";
+                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input' accept='application/pdf,text/plain,application/msword,image/jpeg,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
                 $("#J_fileInputContainer").append(content);
                 $('#J_workOrder_'+(curNo+1)).click();
             };
@@ -392,7 +392,7 @@ angular.module('myappApp')
                             return false;
                         }
                     }
-                    // 处理类型
+                    // 工单类型
                     if (type === 'server_type' || type === 'all') {
                         $scope.validate.workOrder.server_type = angular.extend({}, validDirtyObj);
                         if (!$scope.formData.server_type) {
