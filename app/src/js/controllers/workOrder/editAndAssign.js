@@ -268,7 +268,6 @@ angular.module('myappApp')
                     $scope.apply();
                 });
                 $('body').off('mouseover').on('mouseover','.file-img-div',function (event) {
-                    // console.log($('.file-img-div').index(this));
                     $('.del-file')[$('.file-img-div').index(this)].style.visibility = 'visible'
                 })
                 $('body').off('mouseout').on('mouseout','.file-img-div',function (event) {
@@ -689,13 +688,20 @@ angular.module('myappApp')
              * 下载附件
              */
             $scope.downloadfile = function (ev) {
-                console.log(ev);
                 var ajaxConfig = {
                     url: $scope.apis.download.url + '?id=' + ev.id,
-                    method: 'get'
+                    method: 'get',
+                    responseType: 'arraybuffer'
                 };
                 AjaxServer.ajaxInfo(ajaxConfig, function (data) {
-                    console.log(data);
+                    var file = new Blob([data]);
+                    var fileUrl = URL.createObjectURL(file);
+                    var a = document.createElement('a');
+                    a.href = fileUrl;
+                    a.target = '_blank';
+                    a.download = ev.name;
+                    document.body.appendChild(a);
+                    a.click();
                 }, function (error) {
                     $scope.errorMsg = error;
                 })

@@ -31,7 +31,9 @@ angular.module('myappApp')
                     }else{
                         console.log(data);
                     }
-            	}
+            	}else if( fnSuccess ){
+                    fnSuccess(data);
+                }
             }).error(function(data,status,headers,config){
             	data = data || {};
                 if((status == 401 || status == 400) && sessionStore.get('partnerFlag')!='true'){
