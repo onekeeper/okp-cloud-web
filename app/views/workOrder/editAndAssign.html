@@ -146,16 +146,36 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-1">
-                                    <label class="control-label pull-left" style="visibility: hidden;">工单记录：</label>
+                                    <label class="control-label pull-left">已有附件：</label>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
-                                        <div id="thumbnail" class="clearfix"
-                                             style="margin: 15px 0;width: 500px; max-Height: 120px;overflow-y:auto">
-                                            <div ng-repeat="item in formData.source" class="file-img-div"
-                                                 style="height: 120px;">
+                                        <div class="clearfix"
+                                             style="margin: 15px 0;max-Height: 150px;overflow-y:auto">
+                                            <div ng-if="source.indexOf(item.id)==-1"
+                                                 ng-repeat="item in formData.source" class="file-img-div"
+                                                 style="height: 110px;overflow:hidden">
                                                 <img class="file-img"/>
-                                                <i ng-if="!item.id" class="iconfont del-file" ng-click="deleteFile(item);">&#xe612;</i>
-                                                <i ng-if="item.id" class="iconfont del-file" ng-click="downloadfile(item)">&#xe678;</i>
-                                                <span style="word-wrap: break-word">{{item.name}}</span>
+                                                <i ng-if="source.indexOf(item.id)!=-1" class="iconfont del-file" ng-click="deleteFile(item);">&#xe612;</i>
+                                                <i ng-if="source.indexOf(item.id)==-1" class="iconfont del-file" ng-click="downloadfile(item)">&#xe678;</i>
+                                                <span style="word-wrap: break-word;">{{item.nickname}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-lg-offset-1">
+                                    <label class="control-label pull-left">新上传附件：</label>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pdl25">
+                                        <div class="clearfix"
+                                             style="margin: 15px 0;max-Height: 150px;overflow-y:auto">
+                                            <div ng-if="source.indexOf(item.id)!=-1"
+                                                 ng-repeat="item in formData.source" class="file-img-div"
+                                                 style="height: 110px;">
+                                                <img class="file-img"/>
+                                                <i ng-if="source.indexOf(item.id)!=-1" class="iconfont del-file" ng-click="deleteFile(item);">&#xe612;</i>
+                                                <i ng-if="source.indexOf(item.id)==-1" class="iconfont del-file" ng-click="downloadfile(item)">&#xe678;</i>
+                                                <span style="word-wrap: break-word">{{item.nickname}}</span>
                                             </div>
                                         </div>
                                         <div id="J_fileInputEditContainer" style="display:none;">
@@ -166,7 +186,6 @@
                                         </button>
                                         <span ng-show="formData.handling || formData.updating">上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

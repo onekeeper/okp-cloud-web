@@ -186,7 +186,8 @@ angular.module('myappApp')
                     sites: [],
                     alerts: [],
                     usersList: [],
-                    id:''
+                    id:'',
+                    nickname: ''
                 };
                 $scope.source = [];
                 $scope.tab = {status: true};
@@ -392,6 +393,10 @@ angular.module('myappApp')
                 ajaxConfig.data.order_id = id;
                 AjaxServer.ajaxInfo(ajaxConfig, function (data) {
                     $scope.formData.source = data.data;
+                    for(var x in data.data){
+                        $scope.formData.source[x].nickname = strlen(data.data[x].name)
+                    }
+                    console.log($scope.formData.source)
                 }, function (data) {
                     console.log(data);
                 });
@@ -407,16 +412,6 @@ angular.module('myappApp')
                     txt = txt.replace(reg,i);
                 }
                 arr1 = txt.split('<ENDLINE>');
-                // arr1 = txt.replace(/ZW00001/g,'变更为')
-                //         .replace(/ZW00002/g,'创建了')
-                //         .replace(/ZW00003/g,'工单')
-                //         .replace(/ZW00004/g,'添加了')
-                //         .replace(/ZW00005/g,'处理记录')
-                //         .replace(/ZW00006/g,'升级了')
-                //         .replace(/ZW00007/g,'指派了')
-                //         .replace(/ZW00008/g,'关闭了')
-                //         .replace(/ZW00009/g,'给')
-                //         .split('<ENDLINE>');
                 arr1 = arr1.slice(0,arr1.length - 1);
                 var str = '';
                 for(var x in arr1){
@@ -497,7 +492,7 @@ angular.module('myappApp')
                                 return;
                             }
                             $scope.source.push(d.data);
-                            $scope.formData.source.push({"id":"", "name":fileName});
+                            $scope.formData.source.push({"id":d.data, "name":fileName, "nickname": strlen(fileName)});
                             $scope.errorMsg = '';
                             $scope.apply();
                         },
@@ -872,5 +867,24 @@ angular.module('myappApp')
                     (d.getMinutes()<10?('0'+d.getMinutes()):d.getMinutes())+':'+
                     (d.getSeconds()<10?('0'+d.getSeconds()):d.getSeconds());
                 return nowTime;
+            }
+
+            function strlen(str) {
+                var len = 0;
+                for (var i = 0; i < str.length; i++) {
+                    var c = str.charCodeAt(i);
+                    if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                        len++;
+                    }
+                    else {
+                        len += 2;
+                    }
+                    if(len>22){
+                        str = str.slice(0,i) + '...';
+                        return str;
+
+                    }
+                }
+                return str;
             }
         }]);

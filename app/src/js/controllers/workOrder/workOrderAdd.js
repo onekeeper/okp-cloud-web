@@ -38,6 +38,13 @@ angular.module('myappApp')
                         source: []
                     }
                 },
+                delteWorkOrderFile:{//删除附件
+                    url: urlPrefix + '/worksheet/deletefile',
+                    method: 'post',
+                    data:　{
+                        id: ''
+                    }
+                },
                 upload:{
                     url: urlPrefix + '/worksheet/uploadfile',
                     method: 'post',
@@ -174,6 +181,12 @@ angular.module('myappApp')
                     });
                     $scope.apply();
                 });
+                $('body').off('mouseover').on('mouseover','.file-img-div',function (event) {
+                    $('.del-file')[$('.file-img-div').index(this)].style.visibility = 'visible'
+                })
+                $('body').off('mouseout').on('mouseout','.file-img-div',function (event) {
+                    $('.del-file')[$('.file-img-div').index(this)].style.visibility = 'hidden'
+                })
                 // $('#J_uploadFile').on('change',function (ev) {
                 //     for (var i = 0; i < this.files.length; i++) {
                 //         var reader = new FileReader();
@@ -261,7 +274,7 @@ angular.module('myappApp')
                                 return;
                             }
                             $scope.source.push(d.data);
-                            $scope.formData.source.push({"id":"", "name":fileName});
+                            $scope.formData.source.push({"id":d.data, "name":fileName, "nickname": strlen(fileName)});
                             $scope.errorMsg = '';
                             $scope.apply();
                         },
@@ -483,6 +496,19 @@ angular.module('myappApp')
                         $('#'+inputArr[i]).remove();
                     }
                 }
+                if(file.id){
+                    var config = $scope.apis.delteWorkOrderFile;
+                    config.data.id = file.id;
+                    var fnSuccess = function (d) {
+                        if (d.message === 'success') {
+                            console.log("附件删除成功！");
+                        }
+                    };
+                    var fnFail = function (data) {
+
+                    };
+                    AjaxServer.ajaxInfo(config, fnSuccess, fnFail);
+                }
             };
 
             $scope.apply = function() {
@@ -490,4 +516,23 @@ angular.module('myappApp')
                     $scope.$apply();
                 }
             };
+
+            function strlen(str) {
+                var len = 0;
+                for (var i = 0; i < str.length; i++) {
+                    var c = str.charCodeAt(i);
+                    if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                        len++;
+                    }
+                    else {
+                        len += 2;
+                    }
+                    if(len>22){
+                        str = str.slice(0,i) + '...';
+                        return str;
+
+                    }
+                }
+                return str;
+            }
         }]);
