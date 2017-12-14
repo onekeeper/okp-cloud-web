@@ -202,7 +202,9 @@ angular.module('myappApp')
                     maximumWords: 1024,
                     scaleEnabled: true,
                     initialFrameWidth: '100%',
-                    minFrameWidth: 500
+                    minFrameWidth: 500,
+                    elementPathEnabled: false,
+                    wordCount: false
                 });
                 ue.ready(function () {
                     $(".edui-editor-bottomContainer").remove();
@@ -399,7 +401,6 @@ angular.module('myappApp')
                     for(var x in data.data){
                         $scope.formData.source[x].nickname = strlen(data.data[x].name)
                     }
-                    console.log($scope.formData.source)
                 }, function (data) {
                     console.log(data);
                 });
