@@ -166,7 +166,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input").length;
-                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input' accept='application/pdf,text/plain,application/msword,image/jpeg,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
+                var content = "<input type='file' name='file' id='J_workOrder_"+(curNo+1) + "' class='j-file-input' accept='application/pdf,text/plain,application/msword,image/jpeg,image/png,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
                 $("#J_fileInputContainer").append(content);
                 $('#J_workOrder_'+(curNo+1)).click();
             };

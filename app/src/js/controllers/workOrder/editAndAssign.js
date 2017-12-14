@@ -226,7 +226,7 @@ angular.module('myappApp')
              */
             $scope.uploadFile = function () {
                 var curNo = $(".j-file-input-edit").length;
-                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit' accept='application/pdf,text/plain,application/msword,image/jpeg,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
+                var content = "<input type='file' name='file' id='J_workOrderEdit_"+(curNo+1) + "' class='j-file-input-edit' accept='application/pdf,text/plain,application/msword,image/jpeg,image/png,aplication/zip,application/vnd.ms-excel,text/xml, application/xml'>";
                 $("#J_fileInputEditContainer").append(content);
                 $('#J_workOrderEdit_'+(curNo+1)).click();
             };
