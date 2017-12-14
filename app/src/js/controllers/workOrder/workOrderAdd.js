@@ -97,6 +97,9 @@ angular.module('myappApp')
                     initialFrameWidth: '100%',
                     minFrameWidth: 500
                 });
+                ue.ready(function () {
+                    $(".edui-editor-bottomContainer").remove();
+                });
                 $scope.bindEvent();
                 $scope.selfValid();
                 $scope.initData.loading = false;

@@ -204,6 +204,9 @@ angular.module('myappApp')
                     initialFrameWidth: '100%',
                     minFrameWidth: 500
                 });
+                ue.ready(function () {
+                    $(".edui-editor-bottomContainer").remove();
+                });
                 $scope.getEditInfo($stateParams.id);
                 $scope.getNoteList($stateParams.id);
                 $scope.getRecordList($stateParams.id);
@@ -307,17 +310,17 @@ angular.module('myappApp')
                     $scope.formData.id = id;
                     switch(status){
                         case '1':
-                            $scope.formData.title = '处理中的';
+                            $scope.formData.title = '处理中';
                             $scope.formData.handling = true;
                             $scope.formData.updating = false;
                             break;
                         case '2':
-                            $scope.formData.title = '待指派的';
+                            $scope.formData.title = '待指派';
                             $scope.formData.handling = false;
                             $scope.formData.updating = true;
                             break;
                         case '3':
-                            $scope.formData.title = '已关闭的';
+                            $scope.formData.title = '已关闭';
                             $scope.formData.handling = false;
                             $scope.formData.updating = false;
                             break;

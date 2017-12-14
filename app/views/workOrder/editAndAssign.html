@@ -21,25 +21,17 @@
                     <form class="form-horizontal clearfix" ng-hide="initData.loading">
                         <div class="clearfix">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <p>站点基本信息：</p>
                                 <div class="col-lg-offset-2 clearfix">
                                     <label class="control-label pull-left">站点SN：</label>
                                     <label class="control-label value-label">{{formData.site_sn}}</label>
                                 </div>
                                 <div class="col-lg-offset-2 clearfix">
                                     <label class="control-label pull-left">站点名：</label>
-                                    <label class="control-label value-label">{{formData.site_name}}</label>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <p>告警基本信息：</p>
-                                <div class="col-lg-offset-2 clearfix">
-                                    <label class="control-label pull-left">告警编号：</label>
-                                    <label class="control-label value-label">{{formData.alert_id}}</label>
+                                    <label class="control-label value-label" style="padding-left: 34px;">{{formData.site_name}}</label>
                                 </div>
                                 <div class="col-lg-offset-2 clearfix">
                                     <label class="control-label pull-left">告警内容：</label>
-                                    <label class="control-label value-label">{{formData.alert_content}}</label>
+                                    <label class="control-label value-label" style="padding-left: 22px;">{{formData.alert_content}}</label>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +176,6 @@
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();"
                                                 ng-show="formData.handling || formData.updating">附件上传
                                         </button>
-                                        <span ng-show="formData.handling || formData.updating">上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
                                     </div>
                                 </div>
                             </div>

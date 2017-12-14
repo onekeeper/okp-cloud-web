@@ -16,34 +16,30 @@
                     <form class="form-horizontal" ng-hide="initData.loading">
                         <div class="clearfix">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <p>站点基本信息：</p>
                                 <div class="col-lg-offset-2">
-                                    <label class="control-label pull-left">站点名<span class="sign-must">*</span>：</label>
-                                    <div ng-if="flag" class="col-lg-6 pdl20">
-                                        <select class="form-control input-sm" ng-model="formData.site_id"
-                                                ng-options = "item as item.site_name for item in formData.sites"
-                                                ng-change="validateForm('site_id','workOrder');getAlertOptions();">
-                                            <option value="">请选择站点</option>
-                                        </select>
-                                        <div class="validate-container">
-                                            <span ng-if="validate.workOrder.site_id.dirty && validate.workOrder.site_id.error.required">
-                                                站点不能为空
-                                            </span>
+                                    <div class="clearfix">
+                                        <label class="control-label pull-left">站点名<span class="sign-must">*</span>：</label>
+                                        <div ng-if="flag" class="col-lg-6 pdl20">
+                                            <select class="form-control input-sm" ng-model="formData.site_id"
+                                                    ng-options = "item as item.site_name for item in formData.sites"
+                                                    ng-change="validateForm('site_id','workOrder');getAlertOptions();">
+                                                <option value="">请选择站点</option>
+                                            </select>
+                                            <div class="validate-container">
+                                                <span ng-if="validate.workOrder.site_id.dirty && validate.workOrder.site_id.error.required">
+                                                    站点不能为空
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div ng-if="!flag" class="col-lg-6 pdl20 pdb20">
+                                            <input class="form-control input-sm" type="text" ng-model="formData.site_id.site_name"
+                                                   disabled>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <i class="valid-error" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.invalid"></i>
+                                            <i class="valid-success" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.valid"></i>
                                         </div>
                                     </div>
-                                    <div ng-if="!flag" class="col-lg-6 pdl20">
-                                        <input class="form-control input-sm" type="text" ng-model="formData.site_id.site_name"
-                                               disabled>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <i class="valid-error" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.invalid"></i>
-                                        <i class="valid-success" ng-if=" validate.workOrder.site_id.dirty && validate.workOrder.site_id.valid"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <p>告警基本信息：</p>
-                                <div class="col-lg-offset-2">
                                     <label class="control-label pull-left">告警内容：</label>
                                     <div ng-if="flag" class="col-lg-6 pdl20">
                                         <select class="form-control input-sm" ng-model="formData.alert_id"
@@ -57,22 +53,6 @@
                                         <input class="form-control input-sm" type="text"
                                                ng-model="formData.alert_id.alert_content"
                                                disabled>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <i class="valid-error" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.invalid"></i>
-                                        <i class="valid-success" ng-if=" validate.workOrder.alert_id.dirty && validate.workOrder.alert_id.valid"></i>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <label class="control-label pull-left">告警编号：</label>
-                                    <div ng-if="flag" class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                        <span ng-if="formData.alert_id.length != 0">
-                                            {{formData.alert_id.alert_id}}
-                                        </span>
-                                    </div>
-                                    <div ng-if="!flag" class="pdl20 pdt8 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                        <span>
-                                            {{formData.alert_id.alert_id}}
-                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +159,6 @@
                                         </div>
                                         <button class="btn btn-gray btn-import" ng-click="uploadFile();">附件上传
                                         </button>
-                                        <span>上传仅支持：PDF,TXT,DOC,JPEG,JPG......</span>
                                     </div>
                                 </div>
                             </div>

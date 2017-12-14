@@ -31,8 +31,8 @@
                                     <th title="告警时间">告警时间</th>
                                     <th title="告警站点">告警站点</th>
                                     <th title="告警对象">告警对象</th>
-                                    <th title="告警级别" style="width:80px;">告警级别</th>
-                                    <th title="告警状态" style="width:80px;">告警状态</th>
+                                    <th title="告警级别">告警级别</th>
+                                    <th title="工单状态" style="width:80px;">工单状态</th>
                                     <th title="告警内容" class="width-30p">告警内容</th>
                                 </tr>
                             </thead>
@@ -51,7 +51,7 @@
                                     <td><a ng-click="showSite(item.site_id);">{{item.site_name}}</a></td>
                                     <td>{{item.host}}</td>
                                     <td>{{item.severity == 1? '消息' : item.severity == 2 ? '一般' : item.severity == 4 ? '严重' : item.severity == 6 ? '一般，严重' : '消息，一般，严重'}}</td>
-                                    <td><a ng-click="gotoCreate(item)">{{item.status == 1 ? '已消除' : item.status == 2 ? '待处理' : '已消除，待处理'}}</a></td>
+                                    <td><a ng-click="gotoCreate(item)">{{item.status == 1 ? '已消除' : item.status == 2 ? '处理' : '已消除，处理'}}</a></td>
                                     <td><a ng-click="showWarn(item);">{{item.content}}</a></td>
                                 </tr>
                             </tbody>
