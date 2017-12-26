@@ -253,7 +253,7 @@
 					normal: {
 						formatter: '{b}',
 						position: 'right',
-						show: false
+						show: true
 					},
 					emphasis: {
 						show: true
@@ -271,7 +271,7 @@
 				// config_
 				data: convertData(dataMap.sort(function (a, b) {
 					return b.value - a.value;
-				}).slice(0, 100)),
+				}).slice(0, 6)),
 				symbolSize: function (val) {
 					return 10**(val[2]/10 + 1);
 				},
