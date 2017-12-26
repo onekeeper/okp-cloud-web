@@ -469,8 +469,8 @@
 			}
 		},*/
 		bmap: {
-			center: [104.114129, 37.550339],
-			zoom: 5,
+			center: [120.219375,30.259244],
+			zoom: 6,
 			roam: true,  //支持滚轮放大缩小
 			mapStyle: {
 				styleJson: [
