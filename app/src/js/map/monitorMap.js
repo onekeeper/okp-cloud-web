@@ -271,7 +271,7 @@
 				// config_
 				data: convertData(dataMap.sort(function (a, b) {
 					return b.value - a.value;
-				}).slice(0, 6)),
+				}).slice(0, 100)),
 				symbolSize: function (val) {
 					return 10**(val[2]/10 + 1);
 				},
