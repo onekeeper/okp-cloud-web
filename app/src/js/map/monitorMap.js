@@ -69,8 +69,8 @@
 				var itemName = obj.name;
 				var value = obj.value;
 				var str = "<ur style='text-align:left;list-style:none;'><li style='font-weight:bolder;'>" + itemName + "</li>";
-				str = str + "<li>共 " + value[2] + " 台主机</li>";
-				str = str + "<li>故障 <span style='color:#f35d40;'>" + value[3] + "</span> 台</li>";
+				str = str + "<li>共 " + value[2] + " 台OKP主机</li>";
+				str = str + "<li>故障 <span style='color:#f35d40;'>" + value[3] + "</span> 台设备</li>";
 				str = str + "</ul>";
 				return str;
 			}
