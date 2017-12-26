@@ -238,7 +238,7 @@
                   'featureType': 'label',
                   'elementType': 'all',
                   'stylers': {
-                    'visibility': 'off'
+                    'visibility': 'on'
                   }
                 },
 				{
