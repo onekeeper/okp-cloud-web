@@ -200,7 +200,7 @@
 		 {name: '大庆', value: 279, warn: 100}
 	];
 
-	
+
 	var geoCoordMap = {
 		'海门':[121.15,31.89],
 		'鄂尔多斯':[109.781327,39.608266],
@@ -398,13 +398,21 @@
 		var res = [],colorValue;
 		var normalColor = '#34cbff',
 		warnColor = '#f35d40';
+		var blue = '#1E90FF',
+            yellow = '#FFFF00',
+            orange = '#FFA500',
+            red = '#FF4500';
 		for (var i = 0; i < data.length; i++) {
 			var geoCoord = geoCoordMap[data[i].name];
 			if (geoCoord) {
-				if(data[i].warn){
-				   colorValue = warnColor;
-				}else{
-				   colorValue = normalColor;
+				if(data[i].warn && data[i].warn >=1 &&  data[i].warn <= 3){
+				   colorValue = yellow;
+				}else if(data[i].warn && data[i].warn >=4 &&  data[i].warn <= 10){
+                    colorValue = orange;
+                }else if(data[i].warn && data[i].warn >=11){
+                    colorValue = red;
+                }else{
+				   colorValue = blue;
 				}
 				res.push({
 					name: data[i].name,
@@ -418,9 +426,11 @@
 
 	var option = {
 		backgroundColor: '#404a59',
+        animation: true,
 		title: {
 			text: '运维自动化监控',
 			left: 'center',
+            show:false,
 			top:36,
 			textStyle: {
 				color: '#fff',
@@ -590,7 +600,7 @@
                   'featureType': 'label',
                   'elementType': 'all',
                   'stylers': {
-                    'visibility': 'on'
+                    'visibility': 'off'
                   }
                 },
 				{
@@ -608,7 +618,7 @@
 				name: '站点数量',
 				type: 'scatter',
 				coordinateSystem: 'bmap',
-				data: convertData(dataMap),
+				data: [],
 				symbolSize: function (val) {
 					return val[2] / 10;
 				},
@@ -616,7 +626,8 @@
 					normal: {
 						formatter: '{b}',
 						position: 'right',
-						show: false
+                        color: "#fff",
+						show: true
 					},
 					emphasis: {
 						show: true
@@ -631,9 +642,7 @@
 				name: 'Top 5',
 				type: 'effectScatter',
 				coordinateSystem: 'bmap',
-				data: convertData(dataMap.sort(function (a, b) {
-					return b.value - a.value;
-				}).slice(0, 6)),
+				data: [],
 				symbolSize: function (val) {
 					return val[2] / 10;
 				},
@@ -646,6 +655,7 @@
 					normal: {
 						formatter: '{b}',
 						position: 'right',
+                        color: "#fff",
 						show: true
 					}
 				},
@@ -660,6 +670,8 @@
 			}
 		]
 	};
+
+
 
 
 	function getid(id){
@@ -680,21 +692,23 @@
 		$("#J_scroll").mouseover(function(){
 		   clearInterval(timer);
 		}).mouseout(function(){
-		   timer=setInterval(mar,30)
+		   timer=setInterval(mar,30);
 		});
 	})
 
 	var structScrollInfo = function(arrInfo){
 		$("#J_scroll_info").html(" ");
 		clearInterval(timer);
-		if(arrInfo.length==0){
+		if(arrInfo.length === 0){
 		   arrInfo = [
-				"Status of interface \"GigabitEthernet0/0/16\" was abnormal on Core_Switch_12.1.1.2",
-				"\"2017-05-08 15:50:42\" \"sh-db-002\" \"Used space of file system\" /oracle was to high on 11gRAC",
-				"\"2017-05-08 15:50:42\" \"sh-db-002\" \"Used space of file system\" /oracle was to high on 11gRAC",
-				"\"2017-05-08 15:50:42\" \"sh-db-002\" \"Used space of file system\" /oracle was to high on 11gRAC",
-				"\"2017-05-08 15:50:42\" \"sh-db-002\" \"Used space of file system\" /oracle was to high on 11gRAC",
-				"\"2017-05-08 15:50:42\" \"sh-db-002\" \"Used space of file system\" /oracle was to high on 11gRAC"
+				"Status of interface GigabitEthernet0/0/16 was abnormal on Core_Switch_12.1.1.2 Status of interface GigabitEthernet0/0/16 was abnormal on Core_Switch_12.1.1.2",
+				"2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+				"2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+				"2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+				"2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+                "2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+                "2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC",
+				"2017-05-08 15:50:42 sh-db-002 Used space of file system /oracle was to high on 11gRAC"
 		   ];
 		}
 		var ul = $("<ul></ul>");
@@ -703,9 +717,9 @@
 		var divInfo = null;
 		for(var i=0;  i<arrInfo.length;i++){
 			li = $("<li></li>");
-			divInfo = $("<div></div>");
-			divInfo.html(arrInfo[i]);
-			li.append(divInfo);
+			//divInfo = $("<div></div>");
+			li.html(arrInfo[i]);
+			//li.append(divInfo);
 			ul.append(li);
 		}
 		$("#J_scroll_info").append(ul);
@@ -731,7 +745,7 @@
                 console.log("系统程序错误！");
             }
         });
-        setTimeout(getKeyTimmer,18000000)
+        setTimeout(getKeyTimmer,18000000);
     }
 
     //转换后台地图点接口数据
@@ -741,7 +755,7 @@
         for(var i=0; i<data.length; i++){
             objTemp = {};
             objTemp.name = data[i].city_name;
-            objTemp.value = data[i].site_total;
+            objTemp.value = parseInt(data[i].site_total);
             objTemp.warn = 0;
             reArr.push(objTemp);
         }
@@ -784,6 +798,8 @@
     }
 
     var chart = echarts.init( document.getElementById("J_map"));
+    chart.setOption(option, true, true);
+
     function getMapDataTimmer(){
         var tempArr = [];
         $.ajax({
@@ -791,7 +807,6 @@
             dataType: "json",
             url: baseUrl + "/partner/states/allhosts",
             data: {},
-            async: false,
             headers: {
                 'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
             },
@@ -816,7 +831,6 @@
             dataType: "json",
             url: baseUrl + "/partner/map/problemhosts?timedelta="+ rangeTime,
             data: {},
-            async: false,
             headers: {
                 'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
             },
@@ -825,14 +839,18 @@
                     for(var i=0; i<data.data.length; i++){
                         for(var j=0; j<arr.length; j++){
                             if(data.data[i].city_name == arr[j].name){
-                                arr[j].warn = data.data[i].site_total;
+                                arr[j].warn = parseInt(data.data[i].site_total);
                             }
                         }
                     }
                     option.series[1].data = convertData(arr.sort(function (a, b) {
                         return b.value - a.value;
-                    }).slice(0, 6));
-                    chart.setOption(option);
+                    }).slice(0, 5));
+
+                    var objTemp = {
+                        series:option.series
+                    };
+                    chart.setOption(objTemp);
                 }
             },
             error: function () {
@@ -848,7 +866,6 @@
             dataType: "json",
             url: baseUrl + "/partner/map/contents?timedelta=" + rangeTime,
             data: {},
-            async: false,
             headers: {
                 'Authorization': 'Onekeeper ' + sessionStorage.getItem('token')
             },

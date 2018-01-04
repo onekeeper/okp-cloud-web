@@ -4,7 +4,7 @@
 }
 
 .full-map{
-	position:absolute; 
+	position:absolute;
     top: 0px;
     right: 0px;
     left: 0px;
@@ -15,15 +15,15 @@
 .scroll-info{
 	position:absolute;
 	text-align:left;
-	width: 52%;
-	height:20%;
-	left:26%;
+	width: 40%;
+	height:180px;
+	right:20px;
 	bottom:22px;
 	z-index:1002;
 	color:#FFFFFF;
 	font-size:12px;
 	font-weight:normal;
-	font-family: "Microsoft YaHei"; 
+	font-family: "Microsoft YaHei";
 }
 
 .scroll-info-right{
@@ -37,12 +37,15 @@
 	color:#FFFFFF;
 	font-size:12px;
 	font-weight:normal;
-	font-family: "Microsoft YaHei"; 
+	font-family: "Microsoft YaHei";
 }
 
 .scroll-info ul li, .scroll-info-right ul li{
 	list-style:none;
 	height:22px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 #J_scroll_help{
