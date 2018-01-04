@@ -51,6 +51,20 @@ angular.module('myappApp')
                 $scope.query = {};
                 $scope.query.queryValue = '';
                 $scope.getUpdatingList(); //显示列表
+                $scope.advanceSearchFlag = false;//默认高级搜索为关闭状态
+            };
+            
+            /*
+             * 打开关闭高级搜索
+             */
+            $scope.advanceSearch = function(){
+                if($scope.advanceSearchFlag){
+                    $scope.advanceSearchFlag =  false;
+                    // $("#J_advanceSearchPage").hide();
+                }else{
+                    $scope.advanceSearchFlag = true;
+                    // $("#J_advanceSearchPage").show();
+                }
             };
 
             $scope.formatState = function () {

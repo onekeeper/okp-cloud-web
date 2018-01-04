@@ -8,17 +8,14 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
                     <a role="button" class="btn btn-default btn-query fs12" ng-click="querySearch(true);">搜索</a>
-                    <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="querySearch(true);">高级搜索<span class="glyphicon glyphicon-chevron-down  mgl10"></span></a>
+                    <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="advanceSearch();">高级搜索<span ng-class="{true: 'glyphicon-chevron-up', false: 'glyphicon-chevron-down'}[advanceSearchFlag]" class="glyphicon mgl10"></span></a>
                     <a role="button" class="btn btn-default btn-query fs12 mgl10" ng-click="queryClean(true);">重置</a>
                 </div>
             </form>
         </div>
     </div>
     <!-- 高级搜索 -->
-    <div class="row pdbottom15"></div>
-        <div ng-include="'advanceSearch.html'"></div>
-    </div>
-    
+    <div id="J_advanceSearchPage" ng-show="advanceSearchFlag" class="row pdbottom15" ng-include="'views/workOrder/advanceSearch.html'" ng-app="myappApp" ng-controller="AdvanceSearchCtrl"></div>
     <!-- 列表部分 -->
     <div class="layout-container relative pdtop0">
         <div class="row box-all">

@@ -154,3 +154,6 @@
 .bottom-60{
     bottom: -60px;
 }
+.advance-select .btn {
+    padding: 3px 5px;
+}
