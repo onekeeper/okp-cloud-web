@@ -1,8 +1,8 @@
 /**
  * @ngdoc function
- * @name myappApp.controller:WorkClosedCtrl
- * @description
- * WorkClosedCtrl
+ * @name myappApp.controller:AdvanceSearchCtrl
+ * @description 高级搜索
+ * AdvanceSearchCtrl
  * Controller of the myappApp
  */
 angular.module('myappApp')
@@ -82,19 +82,19 @@ angular.module('myappApp')
          */
         $scope.initSelect = function(){
             $('#J_site').selectpicker({//站点
-                'selectedText': '--'
+                'noneSelectedText': '请选择'
             });
             $('#J_author').selectpicker({//工单所有者
-                'selectedText': '--'
+                'noneSelectedText': '请选择'
             });
             $('#J_orderType').selectpicker({//工单类型
-                'selectedText': '--'
+                'noneSelectedText': '请选择'
             });
             $('#J_problemType').selectpicker({//事件类型
-                'selectedText': '--'
+                'noneSelectedText': '请选择'
             });
             $('#J_orderStatus').selectpicker({//工单状态
-                'selectedText': '--'
+                'noneSelectedText': '请选择'
             });
         };
 
@@ -110,15 +110,15 @@ angular.module('myappApp')
                 ishmsVal:false,
                 zIndex:3000,
                 choosefun: function(elem,date){
-                    end.minDate = date;
-                    $scope.saveTime.time_Start = date;
+                    createEnd.minDate = date;
+                    $scope.advanceQuery.createStart = date;
                 },
                 okfun:function (elem,date) {
-                    end.minDate = date;
-                    $scope.saveTime.time_Start = date;
+                    createEnd.minDate = date;
+                    $scope.advanceQuery.createStart = date;
                 },
                 clearfun:function() {
-                    $scope.saveTime.time_Start = "";
+                    $scope.advanceQuery.createStart = "";
                 }
             };
             var createEnd = {
@@ -129,15 +129,15 @@ angular.module('myappApp')
                 ishmsVal:false,
                 zIndex:3000,
                 choosefun: function(elem,date){
-                    start.maxDate = date;
-                    $scope.saveTime.time_End = date;
+                    createStart.maxDate = date;
+                    $scope.advanceQuery.createEnd = date;
                 },
                 okfun:function (elem,date) {
-                    start.maxDate = date;
-                    $scope.saveTime.time_End = date;
+                    createStart.maxDate = date;
+                    $scope.advanceQuery.createEnd = date;
                 },
                 clearfun:function() {
-                    $scope.saveTime.time_End = "";
+                    $scope.advanceQuery.createEnd = "";
                 }
             }; 
             var closeStart = {
@@ -148,15 +148,15 @@ angular.module('myappApp')
                 ishmsVal:false,
                 zIndex:3000,
                 choosefun: function(elem,date){
-                    end.minDate = date;
-                    $scope.saveTime.time_Start = date;
+                    closeEnd.minDate = date;
+                    $scope.advanceQuery.closeStart = date;
                 },
                 okfun:function (elem,date) {
-                    end.minDate = date;
-                    $scope.saveTime.time_Start = date;
+                    closeEnd.minDate = date;
+                    $scope.advanceQuery.closeStart = date;
                 },
                 clearfun:function() {
-                    $scope.saveTime.time_Start = "";
+                    $scope.advanceQuery.closeStart = "";
                 }
             };
             var closeEnd = {
@@ -167,15 +167,15 @@ angular.module('myappApp')
                 ishmsVal:false,
                 zIndex:3000,
                 choosefun: function(elem,date){
-                    start.maxDate = date;
-                    $scope.saveTime.time_End = date;
+                    closeStart.maxDate = date;
+                    $scope.advanceQuery.closeEnd = date;
                 },
                 okfun:function (elem,date) {
-                    start.maxDate = date;
-                    $scope.saveTime.time_End = date;
+                    closeStart.maxDate = date;
+                    $scope.advanceQuery.closeEnd = date;
                 },
                 clearfun:function() {
-                    $scope.saveTime.time_End = "";
+                    $scope.advanceQuery.closeEnd = "";
                 }
             };       
             $("#J_createStartTime").jeDate(createStart);
@@ -197,6 +197,11 @@ angular.module('myappApp')
                 $("#" + id).html(optionString);
                 $("#" + id).selectpicker('refresh');
             }
+        };
+
+        $scope.clearOptions = function(id){
+            document.getElementById(id).options.selectedIndex = -1;
+            $("#"+id).selectpicker('refresh');
         };
 
         /*
@@ -341,11 +346,23 @@ angular.module('myappApp')
         };
 
         $scope.advanceClean = function(flag){
+            $scope.clearOptions('J_site');
+            $scope.clearOptions('J_author');
+            $scope.clearOptions('J_orderType');
+            $scope.clearOptions('J_problemType');
+            $scope.clearOptions('J_orderStatus');
+
             $scope.advanceQuery.siteId = '';
             $scope.advanceQuery.authorId = '';
             $scope.advanceQuery.orderTypeId = '';
             $scope.advanceQuery.problemTypeId = '';
             $scope.advanceQuery.orderStatusId = '';
+
+            $scope.advanceQuery.authorId = '';
+            $scope.advanceQuery.orderTypeId = '';
+            $scope.advanceQuery.problemTypeId = '';
+            $scope.advanceQuery.orderStatusId = '';
+
             $scope.advanceQuery.createStart = '';
             $scope.advanceQuery.createEnd = '';
             $scope.advanceQuery.closeStart = '';
@@ -354,6 +371,12 @@ angular.module('myappApp')
             $scope.advanceQuery.idleDays = '';
             $scope.advanceQuery.durationSymbol = '';
             $scope.advanceQuery.idleSymbol = '';
+
+            $('#J_createStartTime').val('');
+            $('#J_createEndTime').val('');
+            $('#J_closeStartTime').val('');
+            $('#J_closeEndTime').val('');
+
             $scope.apply();
             $scope.getClosedListByAdvanceSearch();
         };
