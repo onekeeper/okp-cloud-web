@@ -15,11 +15,11 @@ angular.module('myappApp')
             getListError: '',
             loading: true,
             durationOptions:[
-                {"id":"<","name":"小于"},
-                {"id":"<=","name":"小于等于"},
-                {"id":"=","name":"等于"},
-                {"id":">","name":"大于"},
-                {"id":">=","name":"大于等于"}
+                {"id":"4","name":"小于"},
+                {"id":"5","name":"小于等于"},
+                {"id":"1","name":"等于"},
+                {"id":"2","name":"大于"},
+                {"id":"3","name":"大于等于"}
             ]
         };
         $scope.cache = {
@@ -29,17 +29,17 @@ angular.module('myappApp')
         };
         $scope.apis = {
             getSiteList: {//站点
-                url: urlPrefix + '/sites',
+                url: urlPrefix + '/worksheet//sites',
                 method: 'get',
                 data: {}
             },
             getAuthorList: {//工单所有者
-                url: urlPrefix + '/users',
+                url: urlPrefix + '/worksheet/users',
                 method: 'get',
                 data: {}
             },
             getAdvanceClosedList: {
-                url: urlPrefix + '/advancedsearch',
+                url: urlPrefix + '/worksheet//advancedsearch',
                 method: 'post',
                 data: {
                     is_paginate:true
@@ -78,23 +78,23 @@ angular.module('myappApp')
         };
 
         /*
-         * 初始化多选下拉列表框 
+         * 初始化多选下拉列表框
          */
         $scope.initSelect = function(){
             $('#J_site').selectpicker({//站点
-                'noneSelectedText': '请选择'
+                'noneSelectedText': '请选择站点'
             });
             $('#J_author').selectpicker({//工单所有者
-                'noneSelectedText': '请选择'
+                'noneSelectedText': '请选择工单所有者'
             });
             $('#J_orderType').selectpicker({//工单类型
-                'noneSelectedText': '请选择'
+                'noneSelectedText': '请选择工单类型'
             });
             $('#J_problemType').selectpicker({//事件类型
-                'noneSelectedText': '请选择'
+                'noneSelectedText': '请选择事件类型'
             });
             $('#J_orderStatus').selectpicker({//工单状态
-                'noneSelectedText': '请选择'
+                'noneSelectedText': '请选择工单状态'
             });
         };
 
@@ -139,7 +139,7 @@ angular.module('myappApp')
                 clearfun:function() {
                     $scope.advanceQuery.createEnd = "";
                 }
-            }; 
+            };
             var closeStart = {
                 skinCell:'jedateblack',
                 format: 'YYYY-MM-DD hh:mm:ss',
@@ -177,7 +177,7 @@ angular.module('myappApp')
                 clearfun:function() {
                     $scope.advanceQuery.closeEnd = "";
                 }
-            };       
+            };
             $("#J_createStartTime").jeDate(createStart);
             $("#J_createEndTime").jeDate(createEnd);
             $("#J_closeStartTime").jeDate(closeStart);
@@ -187,7 +187,7 @@ angular.module('myappApp')
         /*
         * 填充多选下拉列表数据
         */
-        $scope.createOptions = function(id,optionsData){                
+        $scope.createOptions = function(id,optionsData){
             var optionString = "";
             for (var v in optionsData) {
                 optionString += "<option value=\'"+ optionsData[v].id +"\'>" + optionsData[v].name + "</option>";
@@ -205,67 +205,34 @@ angular.module('myappApp')
         };
 
         /*
-         * 初始化站点列表 
+         * 初始化站点列表
          */
         $scope.initSiteList = function(){
-            var data = [
-                {
-                    "site_id": "1",
-                    "site_sn": "1",
-                    "site_name": "测试站点1"
-                },{
-                    "site_id": "2",
-                    "site_sn": "2",
-                    "site_name": "测试站点2"
-                },{
-                    "site_id": "3",
-                    "site_sn": "3",
-                    "site_name": "测试站点3"
-                },{
-                    "site_id": "4",
-                    "site_sn": "4",
-                    "site_name": "测试站点4"
-                },{
-                    "site_id": "5",
-                    "site_sn": "5",
-                    "site_name": "测试站点5"
-                },{
-                    "site_id": "6",
-                    "site_sn": "6",
-                    "site_name": "测试站点6"
+            var config = {
+                url:  $scope.apis.getSiteList.url,
+                method: $scope.apis.getSiteList.method,
+                data: {}
+            },
+            fnSuccess = function (d){
+                var data = typeof(d)==='string' ? JSON.parse(d) : d;
+                if(data && data.data.length > 0){
+                    // $scope.initData.siteOptions = data.data;
+                    var dataTemp = [];
+                    for(var v in data.data){
+                        dataTemp.push({"id":data.data[v].site_id,"name":data.data[v].site_name});
+                    }
+                    $scope.createOptions("J_site",dataTemp);
                 }
-            ];  
-            var dataTemp = [];   
-            for(var v in data){
-                dataTemp.push({"id":data[v].site_id,"name":data[v].site_name});
-            }    
-            $scope.createOptions("J_site",dataTemp);
-
-            // var config = {
-            //     url:  $scope.apis.getSiteList.url,
-            //     method: $scope.apis.getSiteList.method,
-            //     data: {}
-            // },
-            // fnSuccess = function (d){
-            //     var data = typeof(d)==='string' ? JSON.parse(d) : d;
-            //     if(data && data.data.length > 0){
-            //         // $scope.initData.siteOptions = data.data;
-            //         var dataTemp = [];   
-            //         for(var v in data.data){
-            //             dataTemp.push({"id":data.data[v].site_id,"name":data.data[v].site_name});
-            //         } 
-            //         $scope.createOptions("J_site",dataTemp);
-            //     }
-            //     $scope.apply();
-            // },
-            // fnFail = function(data){
-            //     console.log(data.message || '获取列表失败');
-            // };
-            // AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
+                $scope.apply();
+            },
+            fnFail = function(data){
+                console.log(data.message || '获取列表失败');
+            };
+            AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
         };
 
         /*
-         * 初始化工单所有者列表 
+         * 初始化工单所有者列表
          */
         $scope.initAuthorList = function(){
             var config = {
@@ -277,10 +244,10 @@ angular.module('myappApp')
                 var data = typeof(d)==='string' ? JSON.parse(d) : d;
                 if(data && data.data.length > 0){
                     // $scope.initData.siteOptions = data.data;
-                    var dataTemp = [];   
+                    var dataTemp = [];
                     for(var v in data.data){
                         dataTemp.push({"id":data.data[v].user_id,"name":data.data[v].user_name});
-                    } 
+                    }
                     $scope.createOptions("J_author",dataTemp);
                 }
                 $scope.apply();
@@ -292,7 +259,7 @@ angular.module('myappApp')
         };
 
         /*
-         * 初始化工单类型列表 
+         * 初始化工单类型列表
          */
         $scope.initOrderTypeList = function(){
             var data = [
@@ -304,12 +271,12 @@ angular.module('myappApp')
                 {'id': '6', 'name': '数据库'},
                 {'id': '7', 'name': '操作系统'},
                 {'id': '8', 'name': '硬件故障'}
-            ];     
+            ];
             $scope.createOptions("J_orderType",data);
         };
 
         /*
-         * 初始化事件类型列表 
+         * 初始化事件类型列表
          */
         $scope.initProblemTypeList = function(){
             var data = [
@@ -317,20 +284,31 @@ angular.module('myappApp')
                 {'id': '2', 'name': '配置变更'},
                 {'id': '3', 'name': '配件更换'},
                 {'id': '4', 'name': '健康巡检'}
-            ];     
+            ];
             $scope.createOptions("J_problemType",data);
         };
 
         /*
-         * 初始化工单状态列表 
+         * 初始化工单状态列表
          */
         $scope.initOrderStatusList = function(){
             var data = [
                 {'id': '1', 'name': '处理中'},
                 {'id': '2', 'name': '升级中'},
                 {'id': '3', 'name': '已关闭'}
-            ];     
+            ];
+            if( $location.path().indexOf('handlingList') > -1){
+                data = [{'id': '1', 'name': '处理中'}];
+                $scope.advanceQuery.orderTypeId = '1';
+            }else if($location.path().indexOf('updatingList') > -1){
+                data = [{'id': '2', 'name': '升级中'}];
+                $scope.advanceQuery.orderTypeId = '2';
+            }else if($location.path().indexOf('closedList') > -1){
+                data = [{'id': '3', 'name': '已关闭'}];
+                $scope.advanceQuery.orderTypeId = '3';
+            }
             $scope.createOptions("J_orderStatus",data);
+            $scope.apply();
         };
 
         /**
@@ -395,7 +373,7 @@ angular.module('myappApp')
             var idleDays = $scope.advanceQuery.idleDays;
             var durationSymbol = $scope.advanceQuery.durationSymbol;
             var idleSymbol = $scope.advanceQuery.idleSymbol;
-            
+
             var config = $scope.apis.getAdvanceClosedList;
             config.data.page = $scope.pager.curPage || 1;
             config.data.per_page = parseInt($scope.pager.pageSize) || 20;
@@ -412,8 +390,8 @@ angular.module('myappApp')
             config.data.duration_days = durationDays;
             config.data.duration_symbol = durationSymbol;
             config.data.idle_days = idleDays;
-            config.data.idle_symbol = idleSymbol;                
-            
+            config.data.idle_symbol = idleSymbol;
+
             var fnSuccess = function (d) {
                 $scope.initData.loading = false;
                 var data = typeof(d)==='string' ? JSON.parse(d) : d;
@@ -425,6 +403,8 @@ angular.module('myappApp')
                     $scope.cache.listArr[x].close_at = justifyTime($scope.cache.listArr[x].close_at);
                     $scope.cache.listArr[x].create_at = justifyTime($scope.cache.listArr[x].create_at);
                 }
+                $scope.$parent.$parent.cache.listArr =  angular.copy($scope.cache.listArr);
+                $scope.$parent.$parent.pager = angular.copy($scope.pager);
                 $scope.apply();
             };
             var fnError = function (data) {

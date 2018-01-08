@@ -689,3 +689,7 @@ input.form-control{padding-left:4px;}
     cursor: pointer;
 }
 
+.select-placeholder{
+    color:#999;
+}
+
