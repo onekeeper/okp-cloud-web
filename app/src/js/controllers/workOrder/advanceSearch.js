@@ -205,6 +205,17 @@ angular.module('myappApp')
             $("#"+id).selectpicker('refresh');
         };
 
+        /**
+         * 清空值
+         */
+        $scope.clearSymbolValue = function(type){
+            if(type === 'durationDays'){
+                $scope.advanceQuery.durationDays = null;
+            }else if(type == 'idleDays'){
+                $scope.advanceQuery.idleDays = null;
+            }
+        }
+
         /*
          * 初始化站点列表
          */
@@ -328,18 +339,19 @@ angular.module('myappApp')
             $scope.clearOptions('J_author');
             $scope.clearOptions('J_orderType');
             $scope.clearOptions('J_problemType');
-            $scope.clearOptions('J_orderStatus');
-
             $scope.advanceQuery.siteId = '';
             $scope.advanceQuery.authorId = '';
             $scope.advanceQuery.orderTypeId = '';
             $scope.advanceQuery.problemTypeId = '';
-            $scope.advanceQuery.orderStatusId = '';
-
+            if($location.path().indexOf('closedList') > -1 && $rootScope.commonFlag) {
+                //$scope.advanceQuery.orderStatusId = '3';
+            }else {
+                $scope.clearOptions('J_orderStatus');
+                $scope.advanceQuery.orderStatusId = '';
+            }
             $scope.advanceQuery.authorId = '';
             $scope.advanceQuery.orderTypeId = '';
             $scope.advanceQuery.problemTypeId = '';
-            $scope.advanceQuery.orderStatusId = '';
 
             $scope.advanceQuery.createStart = '';
             $scope.advanceQuery.createEnd = '';

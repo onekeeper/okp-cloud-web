@@ -46,7 +46,8 @@
     </div>
     <div class="col-lg-12 col-md-12 top-right pdl0 mgt10">
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            <select class="form-control" ng-model="advanceQuery.durationSymbol" ng-options = "item.id as item.name for item in initData.durationOptions" ng-class="{'select-placeholder': !advanceQuery.durationSymbol}">
+            <select class="form-control" ng-model="advanceQuery.durationSymbol" ng-options = "item.id as item.name for item in initData.durationOptions"
+                    ng-class="{'select-placeholder': !advanceQuery.durationSymbol}" ng-change="clearSymbolValue('durationDays');">
                 <option value="">请选择条件</option>
             </select>
         </div>
@@ -54,7 +55,8 @@
             <input type="text" class="form-control" placeholder="持续天数" ng-model="advanceQuery.durationDays" ng-disabled="!advanceQuery.durationSymbol">
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            <select class="form-control" ng-model="advanceQuery.idleSymbol" ng-options = "item.id as item.name for item in initData.durationOptions" ng-class="{'select-placeholder': !advanceQuery.idleSymbol}">
+            <select class="form-control" ng-model="advanceQuery.idleSymbol" ng-options = "item.id as item.name for item in initData.durationOptions"
+                    ng-class="{'select-placeholder': !advanceQuery.idleSymbol}" ng-change="clearSymbolValue('idleDays');">
                 <option value="">请选择条件</option>
             </select>
         </div>
