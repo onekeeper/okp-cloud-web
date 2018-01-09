@@ -380,8 +380,8 @@ angular.module('myappApp')
             //参数
             config.data.site_name = siteId;
             config.data.editor_name = authorId;
-            config.data.server_type = problemTypeId;
-            config.data.problem_type = orderTypeId;
+            config.data.server_type = orderTypeId;
+            config.data.problem_type = problemTypeId;
             config.data.status = orderStatusId;
             config.data.create_start = createStart;
             config.data.create_end = createEnd;
