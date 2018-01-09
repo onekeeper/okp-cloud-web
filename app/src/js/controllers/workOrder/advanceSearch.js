@@ -39,7 +39,7 @@ angular.module('myappApp')
                 data: {}
             },
             getAdvanceClosedList: {
-                url: urlPrefix + '/worksheet//advancedsearch',
+                url: urlPrefix + '/worksheet/advancedsearch',
                 method: 'post',
                 data: {
                     is_paginate:true
