@@ -6,14 +6,15 @@
  * Controller of the myappApp
  */
 angular.module('myappApp')
-.controller('AdvanceSearchCtrl', ['$scope', '$rootScope', '$window', '$location', '$state','urlPrefix','AjaxServer',
-    function ($scope, $rootScope, $window, $location, $state, urlPrefix, AjaxServer) {
+.controller('AdvanceSearchCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout', '$state','urlPrefix','AjaxServer',
+    function ($scope, $rootScope, $window, $location, $timeout, $state, urlPrefix, AjaxServer) {
         'use strict';
 
         $scope.pager = {};
         $scope.initData = {
             getListError: '',
             loading: true,
+            orderStatusList: [],
             durationOptions:[
                 {"id":"4","name":"小于"},
                 {"id":"5","name":"小于等于"},
@@ -66,7 +67,8 @@ angular.module('myappApp')
                 "durationDays":"",
                 "idleDays":"",
                 "idleSymbol":"",
-                "durationSymbol":""
+                "durationSymbol":"",
+
             };
             $scope.initSelect();//初始化所有的多选下拉列表框
             $scope.getData();//日期插件
@@ -74,7 +76,9 @@ angular.module('myappApp')
             $scope.initAuthorList();//初始化工单所有者
             $scope.initOrderTypeList();//初始化工单类型
             $scope.initProblemTypeList();//初始化事件类型
-            $scope.initOrderStatusList();//初始化工单状态
+            $timeout(function(){
+                $scope.initOrderStatusList();//初始化工单状态
+            }, 100);
         };
 
         /*
@@ -92,9 +96,6 @@ angular.module('myappApp')
             });
             $('#J_problemType').selectpicker({//事件类型
                 'noneSelectedText': '请选择事件类型'
-            });
-            $('#J_orderStatus').selectpicker({//工单状态
-                'noneSelectedText': '请选择工单状态'
             });
         };
 
@@ -297,17 +298,16 @@ angular.module('myappApp')
                 {'id': '2', 'name': '升级中'},
                 {'id': '3', 'name': '已关闭'}
             ];
-            if( $location.path().indexOf('handlingList') > -1){
-                data = [{'id': '1', 'name': '处理中'}];
-                $scope.advanceQuery.orderTypeId = '1';
-            }else if($location.path().indexOf('updatingList') > -1){
-                data = [{'id': '2', 'name': '升级中'}];
-                $scope.advanceQuery.orderTypeId = '2';
-            }else if($location.path().indexOf('closedList') > -1){
+            if($location.path().indexOf('closedList') > -1 && $rootScope.commonFlag){
                 data = [{'id': '3', 'name': '已关闭'}];
-                $scope.advanceQuery.orderTypeId = '3';
+                $scope.advanceQuery.orderStatusId = '3';
+                $scope.initData.orderStatusList = data;
+            }else {
+                $('#J_orderStatus').selectpicker({//工单状态
+                    'noneSelectedText': '请选择工单状态'
+                });
+                $scope.createOptions("J_orderStatus", data);
             }
-            $scope.createOptions("J_orderStatus",data);
             $scope.apply();
         };
 
@@ -380,8 +380,8 @@ angular.module('myappApp')
             //参数
             config.data.site_name = siteId;
             config.data.editor_name = authorId;
-            config.data.server_type = orderTypeId;
-            config.data.problem_type = problemTypeId;
+            config.data.server_type = problemTypeId;
+            config.data.problem_type = orderTypeId;
             config.data.status = orderStatusId;
             config.data.create_start = createStart;
             config.data.create_end = createEnd;
@@ -403,8 +403,8 @@ angular.module('myappApp')
                     $scope.cache.listArr[x].close_at = justifyTime($scope.cache.listArr[x].close_at);
                     $scope.cache.listArr[x].create_at = justifyTime($scope.cache.listArr[x].create_at);
                 }
-                $scope.$parent.$parent.cache.listArr =  angular.copy($scope.cache.listArr);
-                $scope.$parent.$parent.pager = angular.copy($scope.pager);
+                $scope.$parent.cache.listArr =  angular.copy($scope.cache.listArr);
+                $scope.$parent.pager = angular.copy($scope.pager);
                 $scope.apply();
             };
             var fnError = function (data) {
