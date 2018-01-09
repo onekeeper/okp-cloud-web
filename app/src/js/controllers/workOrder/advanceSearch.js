@@ -412,6 +412,9 @@ angular.module('myappApp')
                 $scope.pager.totalPage = Math.ceil( data.total / parseInt($scope.pager.pageSize) );
                 for(var x in $scope.cache.listArr){
                     $scope.cache.listArr[x].duration = $scope.minToDHM($scope.cache.listArr[x].duration);
+                    if($scope.cache.listArr[x].idle) {
+                        $scope.cache.listArr[x].idle = $scope.minToDHM($scope.cache.listArr[x].idle);
+                    }
                     $scope.cache.listArr[x].close_at = justifyTime($scope.cache.listArr[x].close_at);
                     $scope.cache.listArr[x].create_at = justifyTime($scope.cache.listArr[x].create_at);
                 }
