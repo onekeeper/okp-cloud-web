@@ -264,14 +264,10 @@ angular.module('myappApp')
          */
         $scope.initOrderTypeList = function(){
             var data = [
-                {'id': '1', 'name': '其他'},
-                {'id': '2', 'name': '网络'},
-                {'id': '3', 'name': '存储'},
-                {'id': '4', 'name': '服务器'},
-                {'id': '5', 'name': '中间件'},
-                {'id': '6', 'name': '数据库'},
-                {'id': '7', 'name': '操作系统'},
-                {'id': '8', 'name': '硬件故障'}
+                {'id': '1', 'name': '故障处理'},
+                {'id': '2', 'name': '配置变更'},
+                {'id': '3', 'name': '配件更换'},
+                {'id': '4', 'name': '健康巡检'}
             ];
             $scope.createOptions("J_orderType",data);
         };
@@ -281,10 +277,14 @@ angular.module('myappApp')
          */
         $scope.initProblemTypeList = function(){
             var data = [
-                {'id': '1', 'name': '故障处理'},
-                {'id': '2', 'name': '配置变更'},
-                {'id': '3', 'name': '配件更换'},
-                {'id': '4', 'name': '健康巡检'}
+                {'id': '1', 'name': '其他'},
+                {'id': '2', 'name': '网络'},
+                {'id': '3', 'name': '存储'},
+                {'id': '4', 'name': '服务器'},
+                {'id': '5', 'name': '中间件'},
+                {'id': '6', 'name': '数据库'},
+                {'id': '7', 'name': '操作系统'},
+                {'id': '8', 'name': '硬件故障'}
             ];
             $scope.createOptions("J_problemType",data);
         };
