@@ -22,6 +22,7 @@ angular.module('myappApp')
                 loading: true,
                 provinceList:[],
                 cityList:[],
+                districtList:[],
                 modalForm:{
                     license:'',
                     site_name:'',

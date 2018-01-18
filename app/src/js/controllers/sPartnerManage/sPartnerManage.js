@@ -23,6 +23,7 @@ angular.module('myappApp')
             loading: true,
             provinceList:[],
             cityList:[],
+            districtList:[],
             modalForm:{
                 // login_username:'',
                 // partner_name:'',
@@ -182,22 +183,22 @@ angular.module('myappApp')
      * 获取城市列表
      */
     $scope.getCityList = function(){
-        $scope.siteList.init.cityList = [];
+        $scope.partnerList.init.cityList = [];
         var config = {
-                url:  $scope.siteList.apis.getCity.url,
-                method: $scope.siteList.apis.getCity.method,
+                url:  $scope.partnerList.apis.getCity.url,
+                method: $scope.partnerList.apis.getCity.method,
                 data: {province: ''}
             },
             fnSuccess = function (data){
                 if(data){
-                    $scope.siteList.init.cityList = data.data;
+                    $scope.partnerList.init.cityList = data.data;
                 }
                 $scope.apply();
             },
             fnFail = function(data){
                 console.log(data.message);
             };
-        config.data.province =  $scope.siteList.init.modalForm.province_code;
+        config.data.province =  $scope.partnerList.init.modalForm.province_code;
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
 
