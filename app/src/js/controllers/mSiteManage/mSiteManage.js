@@ -27,6 +27,7 @@ angular.module('myappApp')
                     site_name:'',
                     province_code:'',
                     city_code:'',
+                    region: '',
                     address:''
                 }
             },
@@ -82,16 +83,23 @@ angular.module('myappApp')
                     }
                 },
                 getProvince:{
-                    url: urlPrefix + '/partner/dropdown/provinces',
+                    url: urlPrefix + '/common/provinces',
                     method: 'get',
                     data: {
                     }
                 },
                 getCity:{
-                    url: urlPrefix + '/partner/dropdown/citys',
+                    url: urlPrefix + '/common/citys',
                     method: 'get',
                     data: {
                         province:''
+                    }
+                },
+                getDistrict:{
+                    url: urlPrefix + '/common/districts',
+                    method: 'get',
+                    data: {
+                        city:''
                     }
                 }
             }
@@ -197,6 +205,7 @@ angular.module('myappApp')
                     $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
                     $scope.apply();
                     $scope.getProvinceList();//获取省份
+                    $scope.getCityList();//获取城市
                 },
                 fnFail = function(data){
                     $scope.siteList.init.getListError = data.message || '网络问题，请刷新页面重试';
@@ -220,8 +229,9 @@ angular.module('myappApp')
                     data: {
                         license: $scope.siteList.init.modalForm.license || '',
                         site_name: $scope.siteList.init.modalForm.site_name,
-                        province_code: $scope.siteList.init.modalForm.province_code,
-                        city_code: $scope.siteList.init.modalForm.city_code,
+                        //province_code: $scope.siteList.init.modalForm.province_code,
+                        //city_code: $scope.siteList.init.modalForm.city_code,
+                        region: $scope.siteList.init.modalForm.district_code,
                         address: $scope.siteList.init.modalForm.address
                     }
                 },
@@ -229,7 +239,7 @@ angular.module('myappApp')
                     it.removeClass('disabled');
                     if(data){
                         $('#J_addcSite').modal('hide');
-                        $scope.siteList.init.modalForm = {site_name:'',province_code:'',city_code:'',address:'',license:''};
+                        $scope.siteList.init.modalForm = {site_name:'',district_code:'',address:'',license:''};
                         $scope.modalTitle = '';
                         $scope.query(true);
                         //清空上传的file
@@ -327,9 +337,9 @@ angular.module('myappApp')
         };
 
         /**
-         * 获取市列表
+         * 获取城市列表
          */
-        $scope.getCityList = function(index){
+        $scope.getCityList = function(){
             $scope.siteList.init.cityList = [];
             var config = {
                     url:  $scope.siteList.apis.getCity.url,
@@ -339,6 +349,29 @@ angular.module('myappApp')
                 fnSuccess = function (data){
                     if(data){
                         $scope.siteList.init.cityList = data.data;
+                    }
+                    $scope.apply();
+                },
+                fnFail = function(data){
+                    console.log(data.message);
+                };
+            config.data.province =  $scope.siteList.init.modalForm.province_code;
+            AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
+        };
+
+        /**
+         * 获区县列表
+         */
+        $scope.getDistrictList = function(index){
+            $scope.siteList.init.districtList = [];
+            var config = {
+                    url:  $scope.siteList.apis.getDistrict.url,
+                    method: $scope.siteList.apis.getDistrict.method,
+                    data: {city: ''}
+                },
+                fnSuccess = function (data){
+                    if(data){
+                        $scope.siteList.init.districtList = data.data;
                         $scope.apply();
                         /*编辑操作时，获取城市列表成功后弹出表单*/
                         if(index !== undefined && index >= 0) {
@@ -360,9 +393,9 @@ angular.module('myappApp')
                     console.log(data.message);
                 };
             if(index !== undefined && index >= 0){
-                config.data.province = $scope.siteList.init.tdObj[index].province_code;
+                config.data.city = $scope.siteList.init.tdObj[index].city_code;
             }else{
-                config.data.province =  $scope.siteList.init.modalForm.province_code;
+                config.data.city =  $scope.siteList.init.modalForm.city_code;
             }
             AjaxServer.ajaxInfo( config, fnSuccess, fnFail);
         };
@@ -432,7 +465,7 @@ angular.module('myappApp')
          */
         $scope.clickEdit = function(index){
             $scope.modalTitle = '修改站点';
-            $scope.getCityList(index);
+            $scope.getDistrictList(index);
         };
 
         /**
@@ -541,6 +574,16 @@ angular.module('myappApp')
                     }
                 }
 
+                // 区县
+                if(type === 'district' || type === 'all'){
+                    $scope.validate.site.district_code = angular.extend({},validDirtyObj);
+                    if(!$scope.siteList.init.modalForm.district_code){
+                        $scope.validate.site.district_code = angular.extend({},validNotObj,{ error:{required:true,format:false,same:false} });
+                        $scope.apply();
+                        return false;
+                    }
+                }
+
                 // 详细地址
                 if(type === 'address' || type === 'all'){
                     $scope.validate.site.address = angular.extend({},validDirtyObj);
@@ -631,6 +674,7 @@ angular.module('myappApp')
                     license:{},
                     province_code:{},
                     city_code:{},
+                    district_code:{},
                     address:{}
                 }
             };

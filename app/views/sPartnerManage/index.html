@@ -35,26 +35,28 @@
                                     <th>公司名称</th>
                                     <th>登录账号</th>
                                     <th>省份</th>
-                                    <th>城市</th>
+                                    <th>市</th>
+                                    <th>区/县</th>
                                     <th>地址</th>
                                     <th class="col-operate">操作</th>
                                 </tr>
                             </thead>
                             <tbody ng-show="partnerList.init.loading">
                                 <tr class="tr-loading text-center">
-                                    <td colspan="6"><div class="loading"></div></td>
+                                    <td colspan="7"><div class="loading"></div></td>
                                 </tr>
                             </tbody>
                             <tbody ng-hide="partnerList.init.loading">
                                 <tr class="tr-empty text-center" ng-show="partnerList.init.tdObj.length==0">
-                                    <td colspan="6" ng-if="partnerList.init.getListError!=''">{{partnerList.init.getListError}}</td>
-                                    <td colspan="6" ng-if="partnerList.init.getListError==''">数据为空</td>
+                                    <td colspan="7" ng-if="partnerList.init.getListError!=''">{{partnerList.init.getListError}}</td>
+                                    <td colspan="7" ng-if="partnerList.init.getListError==''">数据为空</td>
                                 </tr>
                                 <tr ng-repeat="item in partnerList.init.tdObj">
                                     <td ng-bind="item.partner_name"></td>
                                     <td ng-bind="item.login_username"></td>
-                                    <td ng-bind="item.province_name"></td>
-                                    <td ng-bind="item.city_name"></td>
+                                    <td ng-bind="item.province"></td>
+                                    <td ng-bind="item.city"></td>
+                                    <td ng-bind="item.district"></td>
                                     <td ng-bind="item.address"></td>
                                     <td class="col-operate">
                                         <a role="button" class="icon icon-edit" title="修改"

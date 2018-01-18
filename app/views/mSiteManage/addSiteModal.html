@@ -24,7 +24,7 @@
                 <label class="control-label col-lg-4">省<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
                     <select class="form-control" ng-model="siteList.init.modalForm.province_code"
-                            ng-options = "item.province_code as item.province_name for item in siteList.init.provinceList"
+                            ng-options = "item.province_code as item.province for item in siteList.init.provinceList"
                             ng-change="validateForm('province','site');getCityList();">
                     </select>
                     <div class="validate-container">
@@ -42,8 +42,8 @@
                 <label class="control-label col-lg-4">市<span class="sign-must">*</span></label>
                 <div class="col-lg-7">
                     <select class="form-control" ng-model="siteList.init.modalForm.city_code"
-                            ng-options = "item.city_code as item.city_name for item in siteList.init.cityList"
-                            ng-change="validateForm('city','site');">
+                            ng-options = "item.city_code as item.city for item in siteList.init.cityList"
+                            ng-change="validateForm('city','site');getDistrictList();">
                     </select>
                     <div class="validate-container">
                         <span ng-if="validate.site.city_code.dirty && validate.site.city_code.error.required">
@@ -54,6 +54,24 @@
                 <div class="col-lg-1">
                     <i class="valid-error" ng-if=" validate.site.city_code.dirty && validate.site.city_code.invalid"></i>
                     <i class="valid-success" ng-if=" validate.site.city_code.dirty && validate.site.city_code.valid"></i>
+                </div>
+            </div>
+            <div class="form-group clear-mrgb">
+                <label class="control-label col-lg-4">区/县<span class="sign-must">*</span></label>
+                <div class="col-lg-7">
+                    <select class="form-control" ng-model="siteList.init.modalForm.district_code"
+                            ng-options = "item.district_code as item.district for item in siteList.init.districtList"
+                            ng-change="validateForm('district','site');">
+                    </select>
+                    <div class="validate-container">
+                        <span ng-if="validate.site.district_code.dirty && validate.site.district_code.error.required">
+                            区/县不能为空
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <i class="valid-error" ng-if=" validate.site.district_code.dirty && validate.site.district_code.invalid"></i>
+                    <i class="valid-success" ng-if=" validate.site.district_code.dirty && validate.site.district_code.valid"></i>
                 </div>
             </div>
             <div class="form-group clear-mrgb">

@@ -28,6 +28,7 @@ angular.module('myappApp')
                 // partner_name:'',
                 // province_code:'',
                 // city_code:'',
+                // region: '',
                 // address:''
             }
         },
@@ -36,7 +37,7 @@ angular.module('myappApp')
         },
         apis:{
             getPartnerList: {
-                url: urlPrefix + '/superviser/partner',
+                url: urlPrefix + '/superviser/partners',
                 method: 'get',
                 data: {
                     page: 1,
@@ -77,16 +78,23 @@ angular.module('myappApp')
                 }
             },
             getProvince:{
-                url: urlPrefix + '/partner/dropdown/provinces',
+                url: urlPrefix + '/common/provinces',
                 method: 'get',
                 data: {
                 }
             },
             getCity:{
-                url: urlPrefix + '/partner/dropdown/citys',
+                url: urlPrefix + '/common/citys',
                 method: 'get',
                 data: {
                     province:''
+                }
+            },
+            getDistrict:{
+                url: urlPrefix + '/common/districts',
+                method: 'get',
+                data: {
+                    city:''
                 }
             }
         }
@@ -141,6 +149,7 @@ angular.module('myappApp')
             $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
             $scope.apply();
             $scope.getProvinceList();//获取省份
+            $scope.getCityList();//获取城市
         },
         fnFail = function(data){
             $scope.partnerList.init.getListError = data.message || '网络问题，请刷新页面重试';
@@ -170,18 +179,42 @@ angular.module('myappApp')
     };
 
     /**
-     * 获取市列表
+     * 获取城市列表
      */
-    $scope.getCityList = function(index){
-        $scope.partnerList.init.cityList = [];
+    $scope.getCityList = function(){
+        $scope.siteList.init.cityList = [];
         var config = {
-                url:  $scope.partnerList.apis.getCity.url,
-                method: $scope.partnerList.apis.getCity.method,
+                url:  $scope.siteList.apis.getCity.url,
+                method: $scope.siteList.apis.getCity.method,
                 data: {province: ''}
             },
             fnSuccess = function (data){
                 if(data){
-                    $scope.partnerList.init.cityList = data.data;
+                    $scope.siteList.init.cityList = data.data;
+                }
+                $scope.apply();
+            },
+            fnFail = function(data){
+                console.log(data.message);
+            };
+        config.data.province =  $scope.siteList.init.modalForm.province_code;
+        AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
+    };
+
+
+    /**
+     * 获区县列表
+     */
+    $scope.getDistrictList = function(index){
+        $scope.partnerList.init.districtList = [];
+        var config = {
+                url:  $scope.partnerList.apis.getDistrict.url,
+                method: $scope.partnerList.apis.getDistrict.method,
+                data: {city: ''}
+            },
+            fnSuccess = function (data){
+                if(data){
+                    $scope.partnerList.init.districtList = data.data;
                     $scope.apply();
                     /*编辑操作时，获取城市列表成功后弹出表单*/
                     if(index !== undefined && index >= 0) {
@@ -203,9 +236,9 @@ angular.module('myappApp')
                 console.log(data.message);
             };
         if(index !== undefined && index >= 0){
-            config.data.province = $scope.partnerList.init.tdObj[index].province_code;
+            config.data.city = $scope.partnerList.init.tdObj[index].city_code;
         }else{
-            config.data.province = $scope.partnerList.init.modalForm.province_code;
+            config.data.city = $scope.partnerList.init.modalForm.city_code;
         }
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
@@ -223,8 +256,9 @@ angular.module('myappApp')
             data: {
                 login_username:$scope.partnerList.init.modalForm.login_username,
                 partner_name:$scope.partnerList.init.modalForm.partner_name,
-                province_code:$scope.partnerList.init.modalForm.province_code,
-                city_code:$scope.partnerList.init.modalForm.city_code,
+                //province_code:$scope.partnerList.init.modalForm.province_code,
+                //city_code:$scope.partnerList.init.modalForm.city_code,
+                region: $scope.partnerList.init.modalForm.district_code,
                 address:$scope.partnerList.init.modalForm.address
             }
         },
@@ -232,7 +266,7 @@ angular.module('myappApp')
             it.removeClass('disabled');
             if(data){
                $('#J_addPartner').modal('hide');
-               $scope.partnerList.init.modalForm = {login_username:'',partner_name:'',province_code:'',city_code:'',address:''};
+               $scope.partnerList.init.modalForm = {login_username:'',partner_name:'',district_code:'',address:''};
                $scope.modalTitle = '';
                $scope.query(true);
             }
@@ -360,7 +394,7 @@ angular.module('myappApp')
      */
     $scope.clickEdit = function(index){
          $scope.modalTitle = '修改合作伙伴';
-         $scope.getCityList(index);
+         $scope.getDistrictList(index);
     };
 
     /**
@@ -464,6 +498,16 @@ angular.module('myappApp')
                 }
             }
 
+            // 区县
+            if(type === 'district_code' || type === 'all'){
+                $scope.validate.user.district_code = angular.extend({},validDirtyObj);
+                if(!$scope.partnerList.init.modalForm.district_code){
+                    $scope.validate.user.district_code = angular.extend({},validNotObj,{ error:{required:true,format:false,same:false} });
+                    $scope.apply();
+                    return false;
+                }
+            }
+
             // 详细地址
             if(type === 'address' || type === 'all'){
                 $scope.validate.user.address = angular.extend({},validDirtyObj);
@@ -505,6 +549,7 @@ angular.module('myappApp')
                 partner_name:{},
                 province_code:{},
                 city_code:{},
+                district_code:{},
                 address:{}
             }
         };
