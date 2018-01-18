@@ -150,7 +150,6 @@ angular.module('myappApp')
             $scope.pager.totalPage = Math.ceil( data.data.total / parseInt($scope.pager.pageSize) );
             $scope.apply();
             $scope.getProvinceList();//获取省份
-            $scope.getCityList();//获取城市
         },
         fnFail = function(data){
             $scope.partnerList.init.getListError = data.message || '网络问题，请刷新页面重试';
@@ -182,7 +181,7 @@ angular.module('myappApp')
     /**
      * 获取城市列表
      */
-    $scope.getCityList = function(){
+    $scope.getCityList = function(index){
         $scope.partnerList.init.cityList = [];
         var config = {
                 url:  $scope.partnerList.apis.getCity.url,
@@ -198,7 +197,11 @@ angular.module('myappApp')
             fnFail = function(data){
                 console.log(data.message);
             };
-        config.data.province =  $scope.partnerList.init.modalForm.province_code;
+        if(index !== undefined && index >= 0){
+            config.data.province = $scope.partnerList.init.tdObj[index].province_code;
+        }else {
+            config.data.province = $scope.partnerList.init.modalForm.province_code;
+        }
         AjaxServer.ajaxInfo( config , fnSuccess , fnFail );
     };
 
@@ -395,6 +398,7 @@ angular.module('myappApp')
      */
     $scope.clickEdit = function(index){
          $scope.modalTitle = '修改合作伙伴';
+         $scope.getCityList(index);//获取城市
          $scope.getDistrictList(index);
     };
 
