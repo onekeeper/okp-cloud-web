@@ -30,7 +30,7 @@ angular.module('myappApp')
         };
         $scope.apis = {
             getSiteList: {//站点
-                url: urlPrefix + '/worksheet//sites',
+                url: urlPrefix + '/worksheet/sites',
                 method: 'get',
                 data: {}
             },
