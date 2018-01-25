@@ -34,19 +34,19 @@
                 var obj = params;//JSON.parse(JSON.stringify(params));
                 var address = obj.data.address;
                 var value = obj.value;
-                var str = "<ul style='text-align:left;list-style:none;font-size:16px;'>";
+                var str = "<ul style='padding:4px 80px 4px 8px;list-style:none;font-size:16px;'>";
                 if(obj.data.showType == '3') {
-                    str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#1E90FF'>" + address + "</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#1E90FF'>" + address + "</span></li>";
                     if(value[2] == 0) {
-                        str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FFFFFF;'>运维一体机状态：正常</span></li>";
-                        str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
+                        str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFFFF;'>运维一体机状态：正常</span></li>";
+                        str = str + "<li style='padding-top:4px;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
                     }else {
-                        str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FFFFFF;'>运维一体机状态：<span style='color:#FF4500'>失联</span></span></li>";
+                        str = str + "<li style='padding-top:4px;'><span style='color:#FFFFFF;'>运维一体机状态：<span style='color:#FF4500'>失联</span></span></li>";
                     }
                 }else{
-                    str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FFFFFF;'>正常站点：" + (value[2]-value[3]) + "个</span></li>";
-                    str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FF4500;'>失联站点：" + value[3] + "个</span></li>";
-                    str = str + "<li style='padding-top:4px;padding-bottom:4px;text-align:left;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFFFF;'>正常站点：" + (value[2]-value[3]) + "个</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FF4500;'>失联站点：" + value[3] + "个</span></li>";
+                    str = str + "<li style='padding-top:4px;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
                 }
                 str = str + "</ul>";
                 return str;
