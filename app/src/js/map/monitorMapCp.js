@@ -28,29 +28,13 @@
         },
         tooltip : {
             trigger: 'item',
-            backgroundColor: 'rgba(50,50,50,0.7)',//默认
-            textStyle:{
-              fontSize:18
-            },
-            //position: [10, 10],
             formatter: function (params) {
                 var obj = params;//JSON.parse(JSON.stringify(params));
-                var address = obj.data.address;
+                var itemName = obj.name;
                 var value = obj.value;
-                var str = "<ur style='text-align:left;list-style:none;font-size:20px;'>";
-                if(obj.data.showType == '3') {
-                    str = str + "<li><span style='color:#1E90FF'>" + address + "</span></li>";
-                    if(value[2] == 0) {
-                        str = str + "<li><span style='color:#FFFFFF;'>运维一体机状态：正常</span></li>";
-                        str = str + "<li><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
-                    }else {
-                        str = str + "<li><span style='color:#FFFFFF;'>运维一体机状态：<span style='color:#FF4500'>失联</span></span></li>";
-                    }
-                }else{
-                    str = str + "<li><span style='color:#FFFFFF;'>正常站点：" + (value[2]-value[3]) + "个</span></li>";
-                    str = str + "<li><span style='color:#FF4500;'>失联站点：" + value[3] + "个</span></li>";
-                    str = str + "<li><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
-                }
+                var str = "<ur style='text-align:left;list-style:none;'><li style='font-weight:bolder;'>" + itemName + "</li>";
+                str = str + "<li>共 " + value[2] + " 台OKP主机</li>";
+                str = str + "<li>故障 <span style='color:#f35d40;'>" + value[3] + "</span> 台设备</li>";
                 str = str + "</ul>";
                 return str;
             }
@@ -212,6 +196,7 @@
                     normal: {
                         formatter: '{b}',
                         position: 'right',
+                        color: "#fff",
                         show: false
                     },
                     emphasis: {
@@ -237,13 +222,11 @@
                 },
                 hoverAnimation: true,
                 label: {
-                    normal:{
+                    normal: {
                         formatter: '{b}',
                         position: 'right',
+                        color: "#fff",
                         show: false
-                    },
-                    emphasis: {
-                        show: true
                     }
                 },
                 itemStyle: {
@@ -281,6 +264,8 @@
                     ecModel.eachComponent('bmap', function (bmapModel) {
                         if(bmap == null){
                             bmap = bmapModel.__bmap;
+                            //bmap.setMaxZoom(15);
+                            //bmap.setMinZoom(4);
                             mapZoom = bmap.getZoom();
                             bounds = bmap.getBounds();
                             bssw = bounds.getSouthWest();   //可视区域左下角
@@ -300,9 +285,12 @@
     function initMapListener(){
         bmap.addEventListener("zoomend", function(){
             mapZoom = this.getZoom();
+            //console.log("地图缩放至：" + this.getZoom() + "级");
             bounds = bmap.getBounds();
             bssw = bounds.getSouthWest();   //可视区域左下角
             bsne = bounds.getNorthEast();   //可视区域右上角
+            //console.log(bssw.lat,bssw.lng); //获取左下角的经纬度
+            //console.log(bsne.lat,bsne.lng); //获取右上角的经纬度
             getMapDataTimmer(mapZoom);
         });
     }
@@ -327,10 +315,8 @@
             }
             res.push({
                 name: data[i].name,
-                showType: data[i].type,
-                address: data[i].address,
-                value: data[i].coordinate.concat(data[i].value).concat(data[i].warn).concat(data[i].alerts),
-                itemStyle:{normal:{color:colorValue, label:{textStyle:{fontSize:22,color:'#fff'}}}}
+                value: data[i].coordinate.concat(data[i].value).concat(data[i].warn),
+                itemStyle:{normal:{color:colorValue}}
             });
         }
         return res;
@@ -416,13 +402,10 @@
         var objTemp = null;
         for(var i=0; i<data.length; i++){
             objTemp = {};
-            objTemp.name = data[i].name;
-            objTemp.address = data[i].address;
-            objTemp.type = data[i].type;
+            objTemp.name = data[i].address;
             objTemp.coordinate = [data[i].longitude,data[i].latitude];
             objTemp.value = parseInt(data[i].site_total);
-            objTemp.warn = parseInt(data[i].site_offline_total);
-            objTemp.alerts = parseInt(data[i].alert_untreated_total);
+            objTemp.warn = 0;
             reArr.push(objTemp);
         }
         return reArr;
@@ -487,16 +470,7 @@
                 if(data && data.data) {
                     tempArr = convertInterfaceData(data.data);
                     option.series[0].data = convertData(tempArr);
-                    option.series[1].data = convertData(tempArr.sort(function (a, b) {
-                        return b.value - a.value;
-                    }).slice(0, 5));
-                    var objTemp = {
-                        bmap:{
-                            zoom: zoom
-                        },
-                        series:option.series
-                    };
-                    chart.setOption(objTemp);
+                    getMapWarnDataTimmer(tempArr, zoom);
                 }
             },
             error: function () {
