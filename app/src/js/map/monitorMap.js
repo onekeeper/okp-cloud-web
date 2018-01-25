@@ -29,27 +29,24 @@
         tooltip : {
             trigger: 'item',
             backgroundColor: 'rgba(50,50,50,0.7)',//默认
-            textStyle:{
-              fontSize:18
-            },
             //position: [10, 10],
             formatter: function (params) {
                 var obj = params;//JSON.parse(JSON.stringify(params));
                 var address = obj.data.address;
                 var value = obj.value;
-                var str = "<ur style='text-align:left;list-style:none;font-size:20px;'>";
+                var str = "<ul style='text-align:left;list-style:none;font-size:16px;'>";
                 if(obj.data.showType == '3') {
-                    str = str + "<li><span style='color:#1E90FF'>" + address + "</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#1E90FF'>" + address + "</span></li>";
                     if(value[2] == 0) {
-                        str = str + "<li><span style='color:#FFFFFF;'>运维一体机状态：正常</span></li>";
-                        str = str + "<li><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
+                        str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFFFF;'>运维一体机状态：正常</span></li>";
+                        str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
                     }else {
-                        str = str + "<li><span style='color:#FFFFFF;'>运维一体机状态：<span style='color:#FF4500'>失联</span></span></li>";
+                        str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFFFF;'>运维一体机状态：<span style='color:#FF4500'>失联</span></span></li>";
                     }
                 }else{
-                    str = str + "<li><span style='color:#FFFFFF;'>正常站点：" + (value[2]-value[3]) + "个</span></li>";
-                    str = str + "<li><span style='color:#FF4500;'>失联站点：" + value[3] + "个</span></li>";
-                    str = str + "<li><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFFFF;'>正常站点：" + (value[2]-value[3]) + "个</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FF4500;'>失联站点：" + value[3] + "个</span></li>";
+                    str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#FFFF00;'>待处理告警：" + value[4] + "条</span></li>";
                 }
                 str = str + "</ul>";
                 return str;
@@ -330,7 +327,7 @@
                 showType: data[i].type,
                 address: data[i].address,
                 value: data[i].coordinate.concat(data[i].value).concat(data[i].warn).concat(data[i].alerts),
-                itemStyle:{normal:{color:colorValue, label:{textStyle:{fontSize:22,color:'#fff'}}}}
+                itemStyle:{normal:{color:colorValue, label:{textStyle:{fontSize:18,color:'#fff'}}}}
             });
         }
         return res;
