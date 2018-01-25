@@ -327,7 +327,7 @@
                 showType: data[i].type,
                 address: data[i].address,
                 value: data[i].coordinate.concat(data[i].value).concat(data[i].warn).concat(data[i].alerts),
-                itemStyle:{normal:{color:colorValue, label:{textStyle:{fontSize:18,color:'#fff'}}}}
+                itemStyle:{normal:{color:colorValue, label:{textStyle:{fontSize:22,color:'#fff'}}}}
             });
         }
         return res;
