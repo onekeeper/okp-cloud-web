@@ -34,7 +34,7 @@
                 var obj = params;//JSON.parse(JSON.stringify(params));
                 var address = obj.data.address;
                 var value = obj.value;
-                var str = "<ul style='padding:4px 80px 4px 8px;list-style:none;font-size:14px;font-weight:normal;'>";
+                var str = "<ul style='padding:4px 60px 4px 8px;list-style:none;font-size:14px;font-weight:normal;'>";
                 if(obj.data.showType == '3') {
                     str = str + "<li style='padding-top:4px;padding-bottom:4px;'><span style='color:#1E90FF'>" + address + "</span></li>";
                     if(value[2] == 0) {
