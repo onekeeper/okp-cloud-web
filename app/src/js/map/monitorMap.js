@@ -494,14 +494,15 @@
                         series:option.series
                     };
                     chart.setOption(objTemp);
+                    mapDataTimmer = setTimeout(getMapDataTimmer,20000);
                 }
             },
             error: function () {
+                mapDataTimmer = setTimeout(getMapDataTimmer,20000);
                 //getMapWarnDataTimmer(dataMap);
                 console.log("系统程序错误！");
             }
         });
-        mapDataTimmer = setTimeout(getMapDataTimmer,20000);
     }
 
     function getMapWarnDataTimmer(arr, zoom){
@@ -561,14 +562,15 @@
             success: function (data) {
                 if(data && data.data) {
                     structScrollInfo(convertWarnInfo(data.data));
+                    setTimeout(getScrollDataTimmer,20000);
                 }
             },
             error: function () {
                 structScrollInfo([]);
+                setTimeout(getScrollDataTimmer,20000);
                 console.log("系统程序错误！");
             }
         });
-        setTimeout(getScrollDataTimmer,20000);
     }
 
 
